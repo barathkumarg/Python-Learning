@@ -69,3 +69,87 @@ e.g. Creating the separate class and functions for the website design
 
 - Inheritance: It is a mechanism that allows you to create a hierarchy of classes that share a set of properties and methods by deriving a class from another class.
 
+## 3.Python Oops Implementation
+
+### 3.1 Class and Object
+Program
+```python
+class Car:
+    ''' Class about car '''
+
+    # class attribute
+    car_type = "petrol"
+
+    # Constructor, instance attributes
+    def __init__(self, car_name):
+        self.car_name = car_name
+
+    # Instance Method
+    def get_car_name(self):
+        return self.car_name
+
+    # Instance Method
+    def set_car_name(self, car_name):
+        self.car_name = car_name
+
+    # str Method - textual representation of a object
+    def __str__(self):
+        return f'Car Name: {self.car_name}, Car Type: {Car.car_type}'
+
+car = Car("Maruthi")
+print(car)
+
+# accessing the Class attribute
+print(f'Car Type: {Car.car_type}' )
+```
+
+#### Self Parameter
+When we call a method of this object as myobject.method(arg1, arg2), this is automatically converted by Python into MyClass.method(myobject, arg1, arg2) – this is all the special self is about. 
+
+#### __init__() method
+The __init__ method is similar to constructors in C++ and Java. Constructors are used to initializing the object’s state. Like methods, a constructor also contains a collection of statements(i.e. instructions) that are executed at the time of Object creation. It runs as soon as an object of a class is instantiated.
+
+#### Class and Instance Variables
+
+- Instance variables are for data, unique to each instance and class variables are for attributes and methods shared by all instances of the class.
+
+e.g: car_name
+
+- Class variables are shared by all objects of a class and can be accessed using the class name
+
+e.g: car_type
+
+### 3.1 Inner Class
+
+Program
+```python
+'''
+Explains the python inner class concept
+'''
+
+class Outerclass:
+    ''' Example for Outer - Inner class architecture '''
+
+    def __init__(self):
+        self.name = "Outerclass"
+        self.inner = self.Innerclass() # attribute to the Inner class
+
+    def show(self):
+        print(f'It is: {self.name} ')
+
+    # Inner class
+    class Innerclass:
+        def __init__(self):
+            self.name = "Innerclass"
+        
+        def show(self):
+            print(f'It is: {self.name}')
+
+outerclass = Outerclass()
+outerclass.show()
+innerclass = outerclass.inner
+innerclass.show()
+```
+
+#### Why inner class?
+For the grouping of two or more classes. Suppose we have two classes remote and battery. Every remote needs a battery but a battery without a remote won’t be used. So, we make the Battery an inner class to the Remote. It helps us to save code. With the help of the inner class or nested class, we can hide the inner class from the outside world. Hence, Hiding the code is another good feature of the inner class.
