@@ -153,3 +153,52 @@ innerclass.show()
 
 #### Why inner class?
 For the grouping of two or more classes. Suppose we have two classes remote and battery. Every remote needs a battery but a battery without a remote won’t be used. So, we make the Battery an inner class to the Remote. It helps us to save code. With the help of the inner class or nested class, we can hide the inner class from the outside world. Hence, Hiding the code is another good feature of the inner class.
+
+
+## 4. Inheritance in Python
+
+### 4.1 What is Inheritance?
+Inheritance is a fundamental concept in object-oriented programming (OOP) where a **child class** (subclass) inherits attributes and methods from a **parent class** (superclass). This allows for code reuse, modularity, and the creation of hierarchical relationships between classes.
+
+### 4.2 When is Inheritance Used?
+Inheritance is used in the following scenarios:
+1. **Code Reusability**: To avoid rewriting the same code, a child class can inherit and reuse methods and attributes from a parent class.
+2. **Extensibility**: To extend the functionality of an existing class without modifying it.
+3. **Hierarchical Relationships**: To model real-world relationships where a child class is a specialized version of the parent class.
+4. **Polymorphism**: To enable methods to behave differently based on the object's class.
+
+### 4.3 Types of Inheritance
+Python supports the following types of inheritance:
+
+1. **Single Inheritance**:
+   - A child class inherits from a single parent class.
+   - Example: `ChildClass(ParentClass)`.
+
+2. **Multiple Inheritance**:
+   - A child class inherits from more than one parent class.
+   - Example: `ChildClass(ParentClass1, ParentClass2)`.
+
+3. **Multilevel Inheritance**:
+   - A child class inherits from a parent class, which itself inherits from another parent class.
+   - Example: `GrandChildClass(ChildClass)` where `ChildClass(ParentClass)`.
+
+4. **Hierarchical Inheritance**:
+   - Multiple child classes inherit from a single parent class.
+   - Example: `ChildClass1(ParentClass)` and `ChildClass2(ParentClass)`.
+
+5. **Hybrid Inheritance**:
+   - A combination of multiple and hierarchical inheritance.
+   - Example: A class inherits from multiple classes, and at least one of those classes is part of a hierarchical inheritance structure.
+
+### 4.4 Key Points
+- Inheritance promotes **code reuse** and **modularity**.
+- Python uses the **Method Resolution Order (MRO)** to resolve conflicts in multiple inheritance.
+- Inheritance is a powerful tool but should be used judiciously to avoid overly complex class hierarchies.
+- Python also has a super() function that will make the child class inherit all the methods and properties from its parent. 
+  - For example: 
+    ```python
+        class Student(Person):
+            def __init__(self, fname, lname):
+                super().__init__(fname, lname)
+    ```
+
