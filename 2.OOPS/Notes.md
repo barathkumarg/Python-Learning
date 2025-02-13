@@ -154,6 +154,29 @@ innerclass.show()
 #### Why inner class?
 For the grouping of two or more classes. Suppose we have two classes remote and battery. Every remote needs a battery but a battery without a remote won’t be used. So, we make the Battery an inner class to the Remote. It helps us to save code. With the help of the inner class or nested class, we can hide the inner class from the outside world. Hence, Hiding the code is another good feature of the inner class.
 
+### 3.3 Python Dynamic Class
+
+   A class defines the properties and available actions of its object and also it acts as a factory for object creation. Let’s understand the process by creating a class using type directly. The exact class that is used for class instantiation is called type. Normally, we define a class using a special syntax called the class keyword, but this syntax is a substitute for type class. Let’s illustrate with an example:
+
+
+```python
+def init(self,name):
+    self.name = name
+
+def get_name(self):
+    return self.name
+
+Obj = type('Obj', (object,),
+           {
+               '__init__': init,
+               'get_name': get_name,
+           })
+
+obj = Obj(name="india")
+print(obj.get_name())
+```
+
+
 
 ## 4. Inheritance in Python
 
