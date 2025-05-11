@@ -2,8 +2,8 @@
 
 ## Data Types
 1. [Numeric](https://www.geeksforgeeks.org/python-numbers/?ref=lbp)
-2. [Boolean]
-3. [String]
-4. [List]
-5. [Tuple]
-6. [Dictionary]
+2. [Boolean](https://www.geeksforgeeks.org/boolean-data-type-in-python/)
+3. String
+4. List
+5. Tuple, set
+6. Dictionary
