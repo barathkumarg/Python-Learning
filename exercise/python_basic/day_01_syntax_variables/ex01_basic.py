@@ -26,17 +26,25 @@ def format_username(raw_name: str) -> str:
     """Return normalized username from raw input."""
     # TODO:
     # 1) Strip whitespace
+    raw_name = raw_name.strip()
     # 2) Validate non-empty value after strip
+    if not raw_name:
+        raise ValueError("raw_name must not be empty")
     # 3) Convert to lowercase
+    raw_name=raw_name.lower()
     # 4) Replace spaces with underscores
+    raw_name=raw_name.replace(' ','_')
+    return raw_name
     # Sample: format_username("  Alice Doe  ") -> "alice_doe"
-    raise NotImplementedError("Implement format_username")
 
 
 if __name__ == "__main__":
-    samples = ["  Alice Doe  ", "BOB", "   "]
-    for sample in samples:
-        try:
-            print(f"input={sample!r} output={format_username(sample)!r}")
-        except Exception as exc:  # noqa: BLE001
-            print(f"input={sample!r} error={type(exc).__name__}: {exc}")
+    # Self-check: all asserts must pass before AI evaluation
+    assert format_username("  Alice Doe  ") == "alice_doe", "should trim, lowercase, and underscore"
+    assert format_username("BOB") == "bob", "single word should just lowercase"
+    try:
+        format_username("   ")
+        raise AssertionError("should raise ValueError on blank input")
+    except ValueError:
+        pass  # expected
+    print("ex01: all asserts passed ✓")

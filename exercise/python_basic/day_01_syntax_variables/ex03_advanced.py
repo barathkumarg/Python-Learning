@@ -29,24 +29,31 @@ def build_runtime_banner(app_name: str, env: str, debug: bool, workers: int) -> 
     """Build a startup banner string for logs."""
     # TODO:
     # 1) Validate app_name is not blank
+    if not app_name:
+        raise ValueError("Name was null")
     # 2) Validate workers > 0
+    if workers <=0:
+        raise ValueError("Vlaue less or equal to 0")
     # 3) Uppercase env and compose exact output format
+    env = env.upper()
     # Sample: build_runtime_banner("InventoryAPI", "prod", False, 4)
     # -> "[PROD] app=InventoryAPI debug=False workers=4"
-    raise NotImplementedError("Implement build_runtime_banner")
+    return f'[{env}] app={app_name} debug={debug} workers={workers}'
+    # raise NotImplementedError("Implement build_runtime_banner")
 
 
 if __name__ == "__main__":
-    samples = [
-        ("InventoryAPI", "prod", False, 4),
-        ("Billing", "dev", True, 2),
-        ("", "qa", True, 1),
-    ]
-    for app_name, env, debug, workers in samples:
+    # Self-check: all asserts must pass before AI evaluation
+    assert build_runtime_banner("InventoryAPI", "prod", False, 4) == (
+        "[PROD] app=InventoryAPI debug=False workers=4"
+    ), "standard happy path"
+    assert build_runtime_banner("Billing", "dev", True, 2) == (
+        "[DEV] app=Billing debug=True workers=2"
+    ), "dev env with debug"
+    for args in [("", "prod", False, 4), ("App", "prod", True, 0)]:
         try:
-            output = build_runtime_banner(app_name, env, debug, workers)
-            print(
-                f"input={(app_name, env, debug, workers)!r} output={output!r}",
-            )
-        except Exception as exc:  # noqa: BLE001
-            print(f"input={(app_name, env, debug, workers)!r} error={type(exc).__name__}: {exc}")
+            build_runtime_banner(*args)
+            raise AssertionError(f"should raise ValueError for {args!r}")
+        except ValueError:
+            pass  # expected
+    print("ex03: all asserts passed ✓")

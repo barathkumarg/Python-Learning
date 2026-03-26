@@ -25,16 +25,30 @@ def parse_retry_count(raw: str) -> int:
     """Parse and validate retry count in the range 0..5."""
     # TODO:
     # 1) Convert input string to int
+    try:
+        raw_int = int(raw)
+    except:
+        raise ValueError("Conversion error ")
     # 2) If conversion fails, raise ValueError with message
     # 3) Enforce range 0..5 inclusive
+    if raw_int < 0:
+        raise ValueError("Less than 0 not included")
+    if raw_int > 5:
+        raise ValueError("More than 5 ")
+    return raw_int
     # Sample: parse_retry_count("3") -> 3
-    raise NotImplementedError("Implement parse_retry_count")
+    #raise NotImplementedError("Implement parse_retry_count")
 
 
 if __name__ == "__main__":
-    samples = ["3", "0", "7", "abc"]
-    for sample in samples:
+    # Self-check: all asserts must pass before AI evaluation
+    assert parse_retry_count("3") == 3, "valid mid-range value"
+    assert parse_retry_count("0") == 0, "lower bound inclusive"
+    assert parse_retry_count("5") == 5, "upper bound inclusive"
+    for bad in ["-1", "6", "abc"]:
         try:
-            print(f"input={sample!r} output={parse_retry_count(sample)!r}")
-        except Exception as exc:  # noqa: BLE001
-            print(f"input={sample!r} error={type(exc).__name__}: {exc}")
+            parse_retry_count(bad)
+            raise AssertionError(f"should raise ValueError for {bad!r}")
+        except ValueError:
+            pass  # expected
+    print("ex02: all asserts passed ✓")

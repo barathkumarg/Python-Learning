@@ -21,8 +21,8 @@ src/
   fastapi_track/          # days 71–86
   devops_track/           # days 87–100
   dsa/                    # parallel DSA — see § Parallel DSA
-    week01_big_o_arrays_hashing/
-    week02_arrays_hashing_ii/
+    week_01_big_o_arrays_hashing/
+    week_02_arrays_hashing_ii/
     …
 
 exercise/
@@ -44,18 +44,21 @@ exercise/
 
 | Location | Pattern | Example |
 |----------|---------|---------|
-| `src/` | `day_NN_short_topic` | `src/python_basic/day_08_strings/` |
-| `exercise/` | `day_NN_short_topic` | `exercise/python_basic/day_08_strings/` |
+| `src/` (Python) | `day_NN_short_topic` | `src/python_basic/day_08_strings/` |
+| `exercise/` (Python) | `day_NN_short_topic` | `exercise/python_basic/day_08_strings/` |
+| `src/dsa/` | `week_WW_short_topic` | `src/dsa/week_03_two_pointers/` |
+| `exercise/dsa/` | `week_WW_short_topic` | `exercise/dsa/week_03_two_pointers/` |
 
 **Where files go (avoid misconfiguration):**
 
 | Content | Path |
 |---------|------|
-| Code explanation (theory) | `src/<track>/day_NN_topic/CODE.md` |
+| Code explanation (theory) | `src/<track>/day_NN_topic/CODE.md` (follow [docs/CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md)) |
 | Teaching / reference code | `src/<track>/day_NN_topic/code.py` |
-| Learner tasks + evaluation | `exercise/<track>/day_NN_topic/` (EXERCISE.md + EVALUATION.md + ex files + `test_exercises.py`) |
+| Learner tasks + scoring + practice links | `exercise/<track>/day_NN_topic/EXERCISE.md` |
+| Exercise stubs (with inline assert self-checks) | `exercise/<track>/day_NN_topic/ex01_basic.py` … `ex03_advanced.py` |
 
-Do **not** put `ex01`/`ex02`/`ex03` only under `src/.../` with no tests. Do **not** duplicate an `exercise/` subfolder inside `src/.../dayNN/` for day-to-day work — the canonical learner tree is `exercise/<track>/...` as above.
+Do **not** put `ex01`/`ex02`/`ex03` only under `src/.../` with no verification. Do **not** duplicate an `exercise/` subfolder inside `src/.../dayNN/` for day-to-day work — the canonical learner tree is `exercise/<track>/...` as above.
 
 ---
 
@@ -63,10 +66,12 @@ Do **not** put `ex01`/`ex02`/`ex03` only under `src/.../` with no tests. Do **no
 
 | Addition | Why |
 |----------|-----|
-| [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md) | **Normative** gates, dimension scores, per-exercise 0–100, evaluation prompt template |
-| **`.cursor/rules`** or project rule | Point to `.agent.md` + `docs/EVALUATION_RUBRIC.md` so every chat inherits the bar |
-| **`pyproject.toml`** with `ruff`, `pytest`, optional `mypy` | Same gates as CI in real teams |
-| **`pre-commit`** | Optional; runs `ruff` + `pytest` on commit (see rubric §7) |
+| [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md) | **Normative** gates, dimension scores, per-exercise 0–100 |
+| [docs/CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md) | **Mandatory** structure for all CODE.md files (lean format, DSA diagram guide) |
+| [docs/AI_EVAL_FRAMEWORK.md](docs/AI_EVAL_FRAMEWORK.md) | **AI-based** evaluation protocol replacing pytest |
+| **`.cursor/rules`** | Points to `.agent.md` + all docs so every chat inherits the bar |
+| **`pyproject.toml`** with `ruff`, optional `mypy` | Same gates as CI in real teams |
+| **`pre-commit`** | Optional; runs `ruff` on commit (see rubric §7) |
 
 ---
 
@@ -74,32 +79,33 @@ Do **not** put `ex01`/`ex02`/`ex03` only under `src/.../` with no tests. Do **no
 
 | Issue | Symptom | Fix |
 |-------|---------|-----|
-| Exercises without tests | “Done” is subjective | Require `test_exercises.py` in every generation prompt ([.agent.md](./.agent.md)) |
-| Evaluation rubric missing | Agent forgets weights next time | Use `exercise/.../EVALUATION.md` per day |
+| CODE.md too verbose or inconsistent | Varies across days, hard to scan | Follow [docs/CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md) — ≤80 lines, concepts table |
+| DSA CODE.md without diagrams | Concepts not graspable visually | Must include Visual/Diagram section per [CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md) diagram guide |
 | Reference code = exercise answers | No learning gap | `src/.../code.py` teaches patterns; learner fills `exercise/.../exNN` stubs |
-| Wrong file paths | Import/tests fail | Use `src/<track>/day_NN_topic/code.py` and `exercise/<track>/day_NN_topic/test_exercises.py` |
-| `applyTo: "*.md"` only | Rules may not attach to `.py` | Add Cursor **project rules** or `@.agent` in prompts when you generate code |
-| No `docs/EVALUATION_RUBRIC.md` in prompt | Drift from industrial bar | Paste “Read docs/EVALUATION_RUBRIC.md” in every generation request |
+| Wrong file paths | Import errors | Use `src/<track>/day_NN_topic/code.py` and `exercise/<track>/day_NN_topic/exNN.py` |
+| `applyTo: "*.md"` only | Rules may not attach to `.py` | Use `.cursor/rules` project rule (auto-inherits all docs) |
+| No `docs/EVALUATION_RUBRIC.md` in prompt | Drift from industrial bar | `.cursor/rules` auto-injects; or paste manually |
 
 ---
 
 ## Agentic systems (how you generate code & exercises)
 
-**Ready-made prompts:** [docs/PROMPT_TEMPLATES.md](docs/PROMPT_TEMPLATES.md) (full module, content-only, exercise-only, evaluation).
+**Ready-made prompts:** [docs/PROMPT_TEMPLATES.md](docs/PROMPT_TEMPLATES.md) (full module, DSA week, code-only, exercise-only, evaluation).
 
 Use these **in order** whenever you start a new day or DSA week.
 
-1. **Cursor + [.agent.md](./.agent.md) + [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md)**  
-   The agent must emit: `CODE.md`, `code.py`, `EXERCISE.md`, `EVALUATION.md`, `ex01`–`ex03` (stubs/TODOs only), and `test_exercises.py`. Rubric weights and evaluation steps live in `docs/EVALUATION_RUBRIC.md` — not optional for “industrial” runs.
+1. **Cursor + [.agent.md](./.agent.md) + [docs/CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md) + [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md)**  
+   The agent must emit: `CODE.md` (per CODE_TEMPLATE.md), `code.py`, `EXERCISE.md` (with scoring + suggested practice), and `ex01`–`ex03` (stubs with inline assert runners). **No** `EVALUATION.md`, **no** `test_exercises.py`.
 
 2. **Context bundle (paste at top of your prompt)**  
    ```
-   Repo: Python-Learning. Read README.md, DAILY_STUDY_PLAN.md, and docs/EVALUATION_RUBRIC.md.
+   Repo: Python-Learning.
+   Read: .agent.md, docs/CODE_TEMPLATE.md, docs/EVALUATION_RUBRIC.md, DAILY_STUDY_PLAN.md.
    Day: [NN] — Track: [<track>] — Slug: day_XX_<content>
    Paths:
    - src/<track>/day_XX_<content>/
    - exercise/<track>/day_XX_<content>/
-   Follow .agent.md: CODE.md, code.py, EXERCISE.md, EVALUATION.md, ex01–ex03 stubs, test_exercises.py (pytest).
+   Follow .agent.md: CODE.md (≤80 lines per template), code.py, EXERCISE.md, ex01–ex03 stubs.
    Enforce gates G1–G7 from docs/EVALUATION_RUBRIC.md §1.
    ```
 
@@ -107,25 +113,29 @@ Use these **in order** whenever you start a new day or DSA week.
    ```
    Generate the full module for Day [NN] — [topic] per DAILY_STUDY_PLAN.md.
    Output under:
-   - src/<track>/day_XX_<content>/ (CODE.md + code.py)
-   - exercise/<track>/day_XX_<content>/ (EXERCISE.md + EVALUATION.md + ex01–ex03 stubs + test_exercises.py)
-   Industrial: type hints, ruff-clean, pytest must-pass behaviors.
-   Read docs/EVALUATION_RUBRIC.md and ensure EVALUATION.md matches §§1–3.
+   - src/<track>/day_XX_<content>/ (CODE.md per docs/CODE_TEMPLATE.md + code.py)
+   - exercise/<track>/day_XX_<content>/ (EXERCISE.md with scoring + suggested practice + ex01–ex03 stubs with inline asserts)
+   Industrial: type hints, ruff-clean, inline assert self-checks.
+   Read docs/EVALUATION_RUBRIC.md and ensure EXERCISE.md matches scoring criteria.
    ```
 
 4. **Standard generation prompt (DSA week)**  
    ```
-   Generate DSA week [WW] per DAILY_STUDY_PLAN: Notes.md, src/dsa/weekWW_slug/src/code.py,
-   exercise/dsa/week_WW_slug/ with ex01–ex03, RUBRIC.md, test_exercises.py.
-   Complexity in docstrings; optional LeetCode-style names as practice targets only.
+   Generate DSA Week [WW] — [topic] per DAILY_STUDY_PLAN.md.
+   Output under:
+   - src/dsa/week_WW_<slug>/ (CODE.md with Visual/Diagram section + code.py)
+   - exercise/dsa/week_WW_<slug>/ (EXERCISE.md + ex01–ex03 stubs)
+   CODE.md MUST include ASCII art or Mermaid diagram per docs/CODE_TEMPLATE.md DSA diagram guide.
+   Complexity in docstrings. Suggested Practice in EXERCISE.md linking this week’s LeetCode/NeetCode.
+   Enforce gates G1–G7 (G3 = inline asserts + complexity in docstrings).
    ```
 
 5. **Evaluation pass (same session or next)**  
-   Use the **verbatim template** in [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md) §5.2 — gates, D1–D7, per-file 0–100, top 3 fixes.  
+   Use the **verbatim template** in [docs/AI_EVAL_FRAMEWORK.md §2](docs/AI_EVAL_FRAMEWORK.md) — gates, D1–D7, per-file 0–100, top 3 fixes.  
    Attach paths or paste your solution files.
 
 6. **Git as progress journal**  
-   Commit after each checked day: `study: day 07 python_basic sets`.
+   Commit after each checked day: `study: day 07 python_basic sets weighted 4.1 ex01 88/100 ex02 82/100 ex03 76/100`.
 
 ---
 
@@ -136,7 +146,7 @@ Use these **in order** whenever you start a new day or DSA week.
 | Python weekday | 60–90 min | One checklist “day” below |
 | DSA parallel | 45–90 min | Same calendar week’s DSA § + problems |
 | Sunday | 90–120 min | **Intermediate integrative** lab (below) |
-| Quality | 15 min | `uv run ruff check .`, `uv run pytest`, `uv run mypy` where set up |
+| Quality | 15 min | `uv run ruff check .`, run inline asserts, `uv run mypy` where set up |
 
 ---
 
@@ -144,9 +154,9 @@ Use these **in order** whenever you start a new day or DSA week.
 
 **Track folder:** `src/python_basic/` · `exercise/python_basic/`
 
-- [ ] **Day 01** — Syntax, types, f-strings · `day01_syntax_variables` / `day_01_syntax_variables`  
-  - [ ] Study: README Basic — Syntax & Variables  
-  - [ ] Exercise theme: CLI argv, validation, exit codes  
+- [x] **Day 01** — Syntax, types, f-strings · `day01_syntax_variables` / `day_01_syntax_variables`  
+  - [x] Study: README Basic — Syntax & Variables  
+  - [x] Exercise theme: CLI argv, validation, exit codes  
 
 - [ ] **Day 02** — Control flow, `match` · `day02_control_flow` / `day_02_control_flow`  
   - [ ] Exercise theme: order status state machine  
@@ -456,40 +466,39 @@ Complete **after** the fifth day of each block (e.g. after day 5, 10, …). Thes
 
 ## DSA folder slugs (reference)
 
-| Week | `src/dsa/` folder |
-|------|-------------------|
-| 01 | `week01_big_o_arrays_hashing/` |
-| 02 | `week02_arrays_hashing_ii/` |
-| 03 | `week03_two_pointers/` |
-| 04 | `week04_sliding_window/` |
-| 05 | `week05_stack/` |
-| 06 | `week06_binary_search/` |
-| 07 | `week07_linked_list/` |
-| 08 | `week08_binary_tree/` |
-| 09 | `week09_bst/` |
-| 10 | `week10_heap/` |
-| 11 | `week11_backtracking/` |
-| 12 | `week12_graphs_i/` |
-| 13 | `week13_graphs_ii_topo/` |
-| 14 | `week14_union_find/` |
-| 15 | `week15_greedy/` |
-| 16 | `week16_dp_1d/` |
-| 17 | `week17_dp_2d/` |
-| 18 | `week18_shortest_path/` |
-| 19 | `week19_tries_bits/` |
-| 20 | `week20_mixed_review/` |
-
-Mirror under `exercise/dsa/week_01_big_o_arrays_hashing/` etc.
+| Week | `src/dsa/` and `exercise/dsa/` folder |
+|------|---------------------------------------|
+| 01 | `week_01_big_o_arrays_hashing/` |
+| 02 | `week_02_arrays_hashing_ii/` |
+| 03 | `week_03_two_pointers/` |
+| 04 | `week_04_sliding_window/` |
+| 05 | `week_05_stack/` |
+| 06 | `week_06_binary_search/` |
+| 07 | `week_07_linked_list/` |
+| 08 | `week_08_binary_tree/` |
+| 09 | `week_09_bst/` |
+| 10 | `week_10_heap/` |
+| 11 | `week_11_backtracking/` |
+| 12 | `week_12_graphs_i/` |
+| 13 | `week_13_graphs_ii_topo/` |
+| 14 | `week_14_union_find/` |
+| 15 | `week_15_greedy/` |
+| 16 | `week_16_dp_1d/` |
+| 17 | `week_17_dp_2d/` |
+| 18 | `week_18_shortest_path/` |
+| 19 | `week_19_tries_bits/` |
+| 20 | `week_20_mixed_review/` |
 
 ---
 
 ## Industrial bar (Python + DSA repo work)
 
 - Types on public APIs; docstrings with complexity for DSA.  
-- **`pytest`** + **`RUBRIC.md`** per day; no bare `except:`.  
-- DSA: cite complexity in file header; avoid copying proprietary problem text verbatim—use your own examples in comments.
+- **Inline assert self-checks** + **AI evaluation** per day; no bare `except:`.  
+- DSA: cite complexity in file header; include visual diagrams in CODE.md; avoid copying proprietary problem text verbatim—use your own examples in comments.
 
-**Measurement:** Use [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md) — gates, weighted dimensions, **0–100** per exercise file.
+**Measurement:** Use [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md) — gates, weighted dimensions, **0–100** per exercise file.  
+**Evaluation protocol:** [docs/AI_EVAL_FRAMEWORK.md](docs/AI_EVAL_FRAMEWORK.md).
 
 ---
 

@@ -1,0 +1,15 @@
+Always read these files before generating or evaluating any code in this repo:
+
+1. .agent.md — artifact list, canonical paths, industrial checklist
+2. docs/CODE_TEMPLATE.md — mandatory structure for all CODE.md files (lean format, DSA diagram guide)
+3. docs/AI_EVAL_FRAMEWORK.md — AI-based evaluation protocol (replaces pytest)
+4. docs/EVALUATION_RUBRIC.md — gates G1–G7, dimension weights D1–D7, scoring 0–100
+
+Key rules:
+- Generate exactly 5 files per day: CODE.md, code.py, EXERCISE.md, ex01–ex03 stubs.
+- NO EVALUATION.md (scoring lives in EXERCISE.md).
+- NO test_exercises.py (evaluation is AI-based per docs/AI_EVAL_FRAMEWORK.md).
+- CODE.md must follow docs/CODE_TEMPLATE.md (≤80 lines, concepts table, pitfalls).
+- DSA CODE.md must include a Visual/Diagram section (ASCII or Mermaid) per the diagram guide in docs/CODE_TEMPLATE.md.
+- Exercise stubs must have inline assert checks in __main__ (not pytest).
+- EXERCISE.md must include a "Suggested Practice" section with 1–2 external links.
