@@ -1,6 +1,6 @@
 # CODE.md Template (Golden Reference)
 
-Every `src/<track>/day_NN_topic/CODE.md` (or `src/dsa/week_WW_topic/CODE.md`) **must** follow this structure. Target: **≤80 lines** per day.
+Every `src/<track>/day_NN_topic/CODE.md` (or `src/dsa/week_WW_topic/CODE.md`) **must** follow this structure. Target: **≤120 lines** per day.
 
 ---
 
@@ -17,6 +17,16 @@ Every `src/<track>/day_NN_topic/CODE.md` (or `src/dsa/week_WW_topic/CODE.md`) **
 |---------|-------------|----------------|---------------|
 | `concept_1` | One-line explanation | One-line production relevance | `line NN` or function name |
 | `concept_2` | … | … | … |
+
+## Snippets
+
+Pick 3–5 key concepts from the table above. For each, show a **short** (3–8 line) code block + a 1–2 line explanation. Pull from `code.py` or write a minimal standalone example.
+
+**`concept_name`** — one-line what + why.
+```python
+# minimal focused example (3–8 lines max)
+```
+> One-line takeaway or gotcha.
 
 ## Visual / Diagram *(required for DSA; optional for Python days)*
 
@@ -82,6 +92,44 @@ Use the right visual for each DSA topic so the concept is graspable at a glance:
 | `Final` | Typing hint marking a constant | Signals "don't reassign" to readers and static tools | module-level constants |
 | f-string | Inline variable interpolation in strings | Readable log/output formatting without concatenation | all functions |
 | Type hints | Annotate parameter and return types | Self-documenting signatures; enables mypy checks | all function signatures |
+
+## Snippets
+
+**`strip()` + validation** — clean user input before any logic touches it.
+```python
+cleaned = user_name.strip()
+if not cleaned:
+    raise ValueError("user_name must not be empty")
+```
+> Always strip first, then validate. Skipping this lets `"   "` pass as valid.
+
+**`int()` with safe conversion** — parse string input without crashing.
+```python
+try:
+    count = int(raw_value)
+except ValueError as exc:
+    raise ValueError("must be an integer") from exc
+```
+> Chain with `from exc` so the original traceback isn't lost during debugging.
+
+**`Final` constant** — mark values that should never be reassigned.
+```python
+from typing import Final
+MAX_RETRY: Final[int] = 3
+```
+> `Final` is a hint, not enforced at runtime. `mypy` catches reassignment.
+
+**f-string formatting** — embed variables directly, no concatenation.
+```python
+return f"app={APP_NAME} env={env} debug={debug}"
+```
+> Prefer f-strings over `.format()` or `%` — shorter, faster, and easier to read.
+
+**Type hints** — document what goes in and what comes out.
+```python
+def parse_retry_count(raw_value: str) -> int:
+```
+> Types make function signatures self-documenting. Pair with `mypy` for static checking.
 
 ## Pitfalls
 

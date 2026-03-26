@@ -54,8 +54,8 @@ Read README.md, DAILY_STUDY_PLAN.md (this day's row), and docs/EVALUATION_RUBRIC
 Create exactly these artifacts:
 
 1) src/<track>/day_XX_<content>/CODE.md
-   - Follow docs/CODE_TEMPLATE.md structure exactly (≤80 lines).
-   - TL;DR → Concepts table → Pitfalls → Why this design → Further reading.
+   - Follow docs/CODE_TEMPLATE.md structure exactly (≤120 lines).
+   - TL;DR → Concepts table → Snippets (3–5 key concepts, each: short code block + 1–2 line explanation) → Pitfalls → Why this design → Further reading.
 
 2) src/<track>/day_XX_<content>/code.py
    - Module docstring explaining design choices.
@@ -104,9 +104,10 @@ Read DAILY_STUDY_PLAN.md (this week's section under "Parallel DSA") before writi
 Create exactly these artifacts:
 
 1) src/dsa/week_WW_<content>/CODE.md
-   - Follow docs/CODE_TEMPLATE.md structure (≤80 lines).
+   - Follow docs/CODE_TEMPLATE.md structure (≤120 lines).
    - MUST include a Visual/Diagram section with ASCII art or Mermaid diagram
      showing the data structure and/or algorithm flow.
+   - MUST include Snippets section: 3–5 key operations, each with a short code block + 1–2 line explanation.
    - Use the DSA diagram style guide in docs/CODE_TEMPLATE.md to pick the right visual.
    - Concepts table must include time/space complexity for each operation.
 
