@@ -1,6 +1,60 @@
 # CODE.md Template (Golden Reference)
 
-Every `src/<track>/day_NN_topic/CODE.md` (or `src/dsa/week_WW_topic/CODE.md`) **must** follow this structure. Target: **≤120 lines** per day.
+Every `src/<track>/day_NN_topic/CODE.md` (or `src/dsa/week_WW_topic/CODE.md`) **must** follow this structure. Target: **80–120 lines** per day.
+
+---
+
+## Source-aligned teaching flow (required when a study source is named)
+
+When `README.md` or `DAILY_STUDY_PLAN.md` points to a specific tutorial source, mirror that source's **learning progression** in your own words.
+
+- Use the cited source as the teaching arc, not as copy-paste material.
+- Paraphrase concepts and build fresh examples; do **not** copy proprietary text or long examples verbatim.
+- Cover fundamentals before advanced production patterns. Do not jump straight to edge-case API design if the day is an introductory topic.
+- Keep repo-specific production notes, but layer them **after** the learner has seen the base concept.
+
+Recommended progression for Python basics:
+- What the feature is and why it exists
+- Small base example
+- How it is called or used
+- Return values / outputs
+- Common optional features
+- Pitfalls and readability guidance
+- One small real-world example
+
+Day 03+ output clarity rule:
+- For each concept snippet: include short textual explanation, a compact code example, and expected output (or expected error).
+
+Recommended progression for Day 03 Functions when following the Real Python source:
+- Why functions help
+- `def` and basic calls
+- Parameters vs arguments
+- Return values
+- Default arguments
+- `*args`
+- `**kwargs`
+- Unpacking with `*` / `**`
+- Small, readable `lambda` use
+
+---
+
+## Professional training mode (required)
+
+Treat CODE.md as a **code-first training handout**:
+
+- Cover all core concepts for the day topic (from README + DAILY_STUDY_PLAN row), not just one slice.
+- Keep prose tight: 1-2 lines per concept explanation, 1 line takeaway per snippet.
+- Prefer examples over text: include enough snippets to show base case, edge case, and common pitfall.
+- If a named source exists for the day, order snippets to match that source's progression before adding project-specific patterns.
+- Snippet density target:
+  - Python day: **6-9 snippets**
+  - DSA week: **5-8 snippets** + required visual section
+- Snippet quality target:
+  - Small (3-10 lines), runnable-looking, typed where relevant
+  - Include expected output text for each snippet (or expected exception behavior)
+  - At least one anti-pattern -> corrected pattern snippet
+  - At least one input-validation/error-path snippet
+- Every concept in the table should map to either `code.py` reference code or an explicit snippet in CODE.md.
 
 ---
 
@@ -20,11 +74,19 @@ Every `src/<track>/day_NN_topic/CODE.md` (or `src/dsa/week_WW_topic/CODE.md`) **
 
 ## Snippets
 
-Pick 3–5 key concepts from the table above. For each, show a **short** (3–8 line) code block + a 1–2 line explanation. Pull from `code.py` or write a minimal standalone example.
+Pick key concepts from the table above. For each, show a **short** (3–10 line) code block + a 1-line explanation. Pull from `code.py` or write a minimal standalone example.
+After each code block, include expected output in a plain-text block.
+
+Python days: **6–9 snippets**.  
+DSA weeks: **5–8 snippets** (plus visual section).
 
 **`concept_name`** — one-line what + why.
 ```python
-# minimal focused example (3–8 lines max)
+# minimal focused example (3–10 lines max)
+```
+Expected output:
+```text
+# concrete output line(s) for the snippet
 ```
 > One-line takeaway or gotcha.
 
@@ -46,6 +108,7 @@ Pick 3–5 key concepts from the table above. For each, show a **short** (3–8 
 
 - [Link 1](url) — one-line description
 - [Link 2](url) — one-line description
+- [Link 3](url) — one-line advanced/deeper reference
 ```
 
 ---
@@ -74,7 +137,9 @@ Use the right visual for each DSA topic so the concept is graspable at a glance:
 
 ---
 
-## Filled example — Day 01
+## Filled example — Day 01 (abridged)
+
+Note: this sample is shortened for readability. Real day files must satisfy the snippet-density rules above.
 
 ```markdown
 # Day 01 — Syntax, Types & Variables

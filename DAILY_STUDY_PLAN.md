@@ -1,473 +1,340 @@
-# Daily Python + DSA Study Plan (Checkbox)
+# Daily Python + DSA Study Plan
 
-> **Role:** Professional backend Python + DSA tutor track — industrial exercises, parallel DSA from fundamentals.  
-> **Companions:** [README.md](./README.md) · [.agent.md](./.agent.md) · this file is your **single checklist**.
+> **Role:** Professional backend Python + DSA tutor track with code-first teaching, industrial-style reference code, and graded exercises.  
+> **Companions:** [README.md](./README.md) · [.agent.md](./.agent.md) · [docs/CODE_TEMPLATE.md](./docs/CODE_TEMPLATE.md) · [docs/EVALUATION_RUBRIC.md](./docs/EVALUATION_RUBRIC.md) · [docs/AI_EVAL_FRAMEWORK.md](./docs/AI_EVAL_FRAMEWORK.md) · [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md)
 
 ---
 
-## Repository layout (canonical paths)
+## Purpose
 
-Use **one pair of folders per day** (Python) or **per DSA week** (parallel track). Spelling is **`exercise/`** (not `execise`).
+This file is the curriculum map for the repo.
 
-```
+- Every Python day produces:
+  - `src/<track>/day_NN_topic/CODE.md`
+  - `src/<track>/day_NN_topic/code.py`
+  - `exercise/<track>/day_NN_topic/EXERCISE.md`
+  - `exercise/<track>/day_NN_topic/ex01_basic.py`
+  - `exercise/<track>/day_NN_topic/ex02_intermediate.py`
+  - `exercise/<track>/day_NN_topic/ex03_advanced.py`
+- Every DSA week produces the matching `src/dsa/...` and `exercise/dsa/...` module pair.
+- `CODE.md` teaches the topic, `code.py` shows production-style examples, and `exercise/` holds learner tasks and evaluation.
+
+---
+
+## Canonical Repository Layout
+
+```text
 src/
-  python_basic/           # study days 1–14
-    day_01_syntax_variables/
-    day_02_control_flow/
-    …
-  python_intermediate/    # days 15–34
-  python_concurrency/     # days 35–50
-  python_advanced/        # days 51–70
-  fastapi_track/          # days 71–86
-  devops_track/           # days 87–100
-  dsa/                    # parallel DSA — see § Parallel DSA
-    week_01_big_o_arrays_hashing/
-    week_02_arrays_hashing_ii/
-    …
-
-exercise/
   python_basic/
-    day_01_syntax_variables/
-    day_02_control_flow/
-    …
   python_intermediate/
   python_concurrency/
   python_advanced/
   fastapi_track/
   devops_track/
   dsa/
-    week_01_big_o_arrays_hashing/
-    …
+
+exercise/
+  python_basic/
+  python_intermediate/
+  python_concurrency/
+  python_advanced/
+  fastapi_track/
+  devops_track/
+  dsa/
 ```
 
-**Naming rules**
-
-| Location | Pattern | Example |
-|----------|---------|---------|
-| `src/` (Python) | `day_NN_short_topic` | `src/python_basic/day_08_strings/` |
-| `exercise/` (Python) | `day_NN_short_topic` | `exercise/python_basic/day_08_strings/` |
-| `src/dsa/` | `week_WW_short_topic` | `src/dsa/week_03_two_pointers/` |
-| `exercise/dsa/` | `week_WW_short_topic` | `exercise/dsa/week_03_two_pointers/` |
-
-**Where files go (avoid misconfiguration):**
-
-| Content | Path |
-|---------|------|
-| Code explanation (theory) | `src/<track>/day_NN_topic/CODE.md` (follow [docs/CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md)) |
-| Teaching / reference code | `src/<track>/day_NN_topic/code.py` |
-| Learner tasks + scoring + practice links | `exercise/<track>/day_NN_topic/EXERCISE.md` |
-| Exercise stubs (with inline assert self-checks) | `exercise/<track>/day_NN_topic/ex01_basic.py` … `ex03_advanced.py` |
-
-Do **not** put `ex01`/`ex02`/`ex03` only under `src/.../` with no verification. Do **not** duplicate an `exercise/` subfolder inside `src/.../dayNN/` for day-to-day work — the canonical learner tree is `exercise/<track>/...` as above.
+| Area | Pattern | Example |
+|------|---------|---------|
+| Python study module | `src/<track>/day_NN_topic/` | `src/python_basic/day_07_sets/` |
+| Python exercise module | `exercise/<track>/day_NN_topic/` | `exercise/python_basic/day_07_sets/` |
+| DSA study module | `src/dsa/week_WW_topic/` | `src/dsa/week_03_two_pointers/` |
+| DSA exercise module | `exercise/dsa/week_WW_topic/` | `exercise/dsa/week_03_two_pointers/` |
 
 ---
 
-## Suggested additions (optional but strong)
+## Delivery Standard Per Day
 
-| Addition | Why |
-|----------|-----|
-| [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md) | **Normative** gates, dimension scores, per-exercise 0–100 |
-| [docs/CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md) | **Mandatory** structure for all CODE.md files (lean format, DSA diagram guide) |
-| [docs/AI_EVAL_FRAMEWORK.md](docs/AI_EVAL_FRAMEWORK.md) | **AI-based** evaluation protocol replacing pytest |
-| **`.cursor/rules`** | Points to `.agent.md` + all docs so every chat inherits the bar |
-| **`pyproject.toml`** with `ruff`, optional `mypy` | Same gates as CI in real teams |
-| **`pre-commit`** | Optional; runs `ruff` on commit (see rubric §7) |
-
----
-
-## Misconfiguration analysis (checklist)
-
-| Issue | Symptom | Fix |
-|-------|---------|-----|
-| CODE.md too verbose or inconsistent | Varies across days, hard to scan | Follow [docs/CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md) — ≤80 lines, concepts table |
-| DSA CODE.md without diagrams | Concepts not graspable visually | Must include Visual/Diagram section per [CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md) diagram guide |
-| Reference code = exercise answers | No learning gap | `src/.../code.py` teaches patterns; learner fills `exercise/.../exNN` stubs |
-| Wrong file paths | Import errors | Use `src/<track>/day_NN_topic/code.py` and `exercise/<track>/day_NN_topic/exNN.py` |
-| `applyTo: "*.md"` only | Rules may not attach to `.py` | Use `.cursor/rules` project rule (auto-inherits all docs) |
-| No `docs/EVALUATION_RUBRIC.md` in prompt | Drift from industrial bar | `.cursor/rules` auto-injects; or paste manually |
+| Artifact | Purpose |
+|----------|---------|
+| `CODE.md` | Concise concept map with source-aligned learning flow and short snippets |
+| `code.py` | Production-style reference implementations with type hints and docstrings |
+| `EXERCISE.md` | Learning objectives, skills, must-pass, stretch, failure modes, scoring |
+| `ex01_basic.py` | Foundational exercise |
+| `ex02_intermediate.py` | Applied exercise |
+| `ex03_advanced.py` | Harder design or edge-case exercise |
 
 ---
 
-## Agentic systems (how you generate code & exercises)
+## Daily Generation Workflow
 
-**Ready-made prompts:** [docs/PROMPT_TEMPLATES.md](docs/PROMPT_TEMPLATES.md) (full module, DSA week, code-only, exercise-only, evaluation).
-
-Use these **in order** whenever you start a new day or DSA week.
-
-1. **Cursor + [.agent.md](./.agent.md) + [docs/CODE_TEMPLATE.md](docs/CODE_TEMPLATE.md) + [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md)**  
-   The agent must emit: `CODE.md` (per CODE_TEMPLATE.md), `code.py`, `EXERCISE.md` (with scoring + suggested practice), and `ex01`–`ex03` (stubs with inline assert runners). **No** `EVALUATION.md`, **no** `test_exercises.py`.
-
-2. **Context bundle (paste at top of your prompt)**  
-   ```
-   Repo: Python-Learning.
-   Read: .agent.md, docs/CODE_TEMPLATE.md, docs/EVALUATION_RUBRIC.md, DAILY_STUDY_PLAN.md.
-   Day: [NN] — Track: [<track>] — Slug: day_XX_<content>
-   Paths:
-   - src/<track>/day_XX_<content>/
-   - exercise/<track>/day_XX_<content>/
-   Follow .agent.md: CODE.md (≤80 lines per template), code.py, EXERCISE.md, ex01–ex03 stubs.
-   Enforce gates G1–G7 from docs/EVALUATION_RUBRIC.md §1.
-   ```
-
-3. **Standard generation prompt (Python day)**  
-   ```
-   Generate the full module for Day [NN] — [topic] per DAILY_STUDY_PLAN.md.
-   Output under:
-   - src/<track>/day_XX_<content>/ (CODE.md per docs/CODE_TEMPLATE.md + code.py)
-   - exercise/<track>/day_XX_<content>/ (EXERCISE.md with scoring + suggested practice + ex01–ex03 stubs with inline asserts)
-   Industrial: type hints, ruff-clean, inline assert self-checks.
-   Read docs/EVALUATION_RUBRIC.md and ensure EXERCISE.md matches scoring criteria.
-   ```
-
-4. **Standard generation prompt (DSA week)**  
-   ```
-   Generate DSA Week [WW] — [topic] per DAILY_STUDY_PLAN.md.
-   Output under:
-   - src/dsa/week_WW_<slug>/ (CODE.md with Visual/Diagram section + code.py)
-   - exercise/dsa/week_WW_<slug>/ (EXERCISE.md + ex01–ex03 stubs)
-   CODE.md MUST include ASCII art or Mermaid diagram per docs/CODE_TEMPLATE.md DSA diagram guide.
-   Complexity in docstrings. Suggested Practice in EXERCISE.md linking this week’s LeetCode/NeetCode.
-   Enforce gates G1–G7 (G3 = inline asserts + complexity in docstrings).
-   ```
-
-5. **Evaluation pass (same session or next)**  
-   Use the **verbatim template** in [docs/AI_EVAL_FRAMEWORK.md §2](docs/AI_EVAL_FRAMEWORK.md) — gates, D1–D7, per-file 0–100, top 3 fixes.  
-   Attach paths or paste your solution files.
-
-6. **Git as progress journal**  
-   Commit after each checked day: `study: day 07 python_basic sets weighted 4.1 ex01 88/100 ex02 82/100 ex03 76/100`.
+1. Use this file to choose the day, topic, slug, subtopics, and exercise direction.
+2. Use [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md) to choose teaching-flow sources, production references, and exercise banks.
+3. Generate the 5-file day module using [docs/PROMPT_TEMPLATES.md](./docs/PROMPT_TEMPLATES.md).
+4. Keep output aligned with [docs/CODE_TEMPLATE.md](./docs/CODE_TEMPLATE.md) and [docs/EVALUATION_RUBRIC.md](./docs/EVALUATION_RUBRIC.md).
 
 ---
 
-## Time budget
+## Time Budget
 
 | Block | Time | Notes |
-|-------|------|--------|
-| Python weekday | 60–90 min | One checklist “day” below |
-| DSA parallel | 45–90 min | Same calendar week’s DSA § + problems |
-| Sunday | 90–120 min | **Intermediate integrative** lab (below) |
-| Quality | 15 min | `uv run ruff check .`, run inline asserts, `uv run mypy` where set up |
+|------|------|-------|
+| Python study day | 60–90 min | Generate, read, code, and self-check one day |
+| DSA parallel | 45–90 min | Study one DSA week topic in parallel with Python |
+| Sunday lab | 90–120 min | Integrative build using the latest 5 study days |
+| Quality pass | 15 min | Run inline asserts and `ruff check` |
 
 ---
 
-## Phase 1 — Python basics (days 1–14) · `python_basic/`
+## Phase Overview
 
-**Track folder:** `src/python_basic/` · `exercise/python_basic/`
-
-- [x] **Day 01** — Syntax, types, f-strings · `day01_syntax_variables` / `day_01_syntax_variables`  
-  - [x] Study: README Basic — Syntax & Variables  
-  - [x] Exercise theme: CLI argv, validation, exit codes  
-
-- [ ] **Day 02** — Control flow, `match` · `day02_control_flow` / `day_02_control_flow`  
-  - [ ] Exercise theme: order status state machine  
-
-- [ ] **Day 03** — Functions, `*args`, `**kwargs`, lambda · `day03_functions` / `day_03_functions`  
-  - [ ] Exercise theme: pluggable validators for a form dict  
-
-- [ ] **Day 04** — Lists, sorting · `day04_lists` / `day_04_lists`  
-  - [ ] Exercise theme: leaderboard, tie-break, top-k  
-
-- [ ] **Day 05** — Tuples, `NamedTuple` · `day05_tuples` / `day_05_tuples`  
-  - [ ] Exercise theme: CSV rows as immutable DTOs  
-
-- [ ] **Day 06** — Dicts, comprehensions · `day06_dictionaries` / `day_06_dictionaries`  
-  - [ ] Exercise theme: inverted index word → line numbers  
-
-- [ ] **Day 07** — Sets, frozenset · `day07_sets` / `day_07_sets`  
-  - [ ] Exercise theme: dedupe logs; allow/deny tag sets  
-
-- [ ] **Day 08** — Strings, encoding · `day08_strings` / `day_08_strings`  
-  - [ ] Exercise theme: normalizer, slugify for URLs  
-
-- [ ] **Day 09** — File I/O, `pathlib`, CSV, JSON · `day09_file_io` / `day_09_file_io`  
-  - [ ] Exercise theme: CSV → validate → JSON lines ETL stub  
-
-- [ ] **Day 10** — Exceptions, custom errors · `day10_exceptions` / `day_10_exceptions`  
-  - [ ] Exercise theme: domain errors; retry sketch  
-
-- [ ] **Day 11** — Modules, packages · `day11_modules` / `day_11_modules`  
-  - [ ] Exercise theme: `src` layout, runnable `__main__`  
-
-- [ ] **Day 12** — Built-ins: `enumerate`, `zip`, `map`, `filter` · `day12_builtins` / `day_12_builtins`  
-  - [ ] Exercise theme: parse → map → filter → aggregate pipeline  
-
-- [ ] **Day 13** — Comprehensions + generator preview · `day13_comprehensions` / `day_13_comprehensions`  
-  - [ ] Exercise theme: generator yielding last N lines of a file  
-
-- [ ] **Day 14** — `venv`, `uv`, `pyproject` / deps · `day14_tooling` / `day_14_tooling`  
-  - [ ] Exercise theme: reproducible env + README install snippet  
+| Phase | Days | Track | Outcome |
+|------|------|-------|---------|
+| Phase 1 | 01–14 | `python_basic` | Syntax, built-ins, data structures, I/O, and tooling foundation |
+| Phase 2 | 15–34 | `python_intermediate` | OOP, iterators, decorators, context managers, typing |
+| Phase 3 | 35–50 | `python_concurrency` | Threads, processes, async I/O, testing concurrent code |
+| Phase 4 | 51–70 | `python_advanced` | Internals, profiling, testing depth, patterns, packaging |
+| Phase 5 | 71–86 | `fastapi_track` | API design, auth, DB integration, testing, deployment basics |
+| Phase 6 | 87–100 | `devops_track` | Observability, automation, CI/CD, capstone, review |
+| Parallel track | Weeks 01–20 | `dsa` | Interview-grade DSA progression with repo-native implementations |
 
 ---
 
-## Phase 2 — Intermediate (days 15–34) · `python_intermediate/`
+## High-Value References
 
-- [ ] **Day 15** — Classes, `__init__` · `day15_classes`  
-- [ ] **Day 16** — `__repr__`, `__eq__`, `__hash__` · `day16_dunder_value_objects`  
-- [ ] **Day 17** — `@property`, validation · `day17_properties`  
-- [ ] **Day 18** — Inheritance, MRO · `day18_inheritance`  
-- [ ] **Day 19** — `abc`, abstract classes · `day19_abstract_base`  
-- [ ] **Day 20** — `@dataclass` · `day20_dataclasses`  
-- [ ] **Day 21** — `@classmethod`, `@staticmethod` · `day21_class_static`  
-- [ ] **Day 22** — Iterators · `day22_iterators`  
-- [ ] **Day 23** — Generators, pipelines · `day23_generators`  
-- [ ] **Day 24** — Generator expressions · `day24_generator_expressions`  
-- [ ] **Day 25** — Decorators, `@wraps` · `day25_decorators`  
-- [ ] **Day 26** — Parametric decorators · `day26_decorators_advanced`  
-- [ ] **Day 27** — Context managers · `day27_context_managers`  
-- [ ] **Day 28** — `@contextmanager` · `day28_contextmanager`  
-- [ ] **Day 29** — `functools` · `day29_functools`  
-- [ ] **Day 30** — `itertools` · `day30_itertools`  
-- [ ] **Day 31** — Type hints, `Optional`, `Union` · `day31_typing_basics`  
-- [ ] **Day 32** — `TypedDict`, `Literal` · `day32_typing_advanced`  
-- [ ] **Day 33** — Generics, `TypeVar` · `day33_generics`  
-- [ ] **Day 34** — `mypy` strictness · `day34_mypy`  
-
-*(Mirror each `dayNN_*` under `exercise/python_intermediate/day_NN_*`.)*
+| Phase | Main references |
+|------|------------------|
+| Python basics | [Python Tutorial](https://docs.python.org/3/tutorial/) · [Real Python](https://realpython.com/) |
+| Python intermediate | [typing docs](https://docs.python.org/3/library/typing.html) · [functools docs](https://docs.python.org/3/library/functools.html) |
+| Concurrency | [asyncio docs](https://docs.python.org/3/library/asyncio.html) · [concurrent.futures docs](https://docs.python.org/3/library/concurrent.futures.html) |
+| Advanced Python | [Python data model](https://docs.python.org/3/reference/datamodel.html) · [dis docs](https://docs.python.org/3/library/dis.html) |
+| FastAPI | [FastAPI docs](https://fastapi.tiangolo.com/) · [Pydantic docs](https://docs.pydantic.dev/) |
+| DevOps | [GitHub Actions docs](https://docs.github.com/actions) · [Docker docs](https://docs.docker.com/) |
+| DSA | [NeetCode roadmap](https://neetcode.io/roadmap) · [LeetCode](https://leetcode.com/) |
 
 ---
 
-## Phase 3 — Concurrency (days 35–50) · `python_concurrency/`
+## Phase 1 — Python Basics
 
-- [ ] **Day 35** — Threading, locks · `day35_threading`  
-- [ ] **Day 36** — GIL, CPU vs I/O · `day36_gil`  
-- [ ] **Day 37** — `multiprocessing.Pool` · `day37_multiprocessing`  
-- [ ] **Day 38** — `concurrent.futures` · `day38_futures`  
-- [ ] **Day 39** — `asyncio` basics · `day39_asyncio`  
-- [ ] **Day 40** — `aiohttp` · `day40_aiohttp`  
-- [ ] **Day 41** — Async errors, `gather` · `day41_async_errors`  
-- [ ] **Day 42** — Executors from async · `day42_sync_async_bridge`  
-- [ ] **Day 43** — Service boundaries · `day43_concurrency_design`  
-- [ ] **Day 44** — Consolidate refactor · `day44_refactor`  
-- [ ] **Day 45** — **Milestone** mini-project · `day45_milestone`  
-- [ ] **Day 46** — `pyproject` package split · `day46_packaging`  
-- [ ] **Day 47** — `pytest` concurrency · `day47_pytest_async`  
-- [ ] **Day 48** — Mocking I/O · `day48_mocking`  
-- [ ] **Day 49** — `logging` · `day49_logging`  
-- [ ] **Day 50** — Phase review doc · `day50_review`  
+**Track folders:** `src/python_basic/` and `exercise/python_basic/`
 
----
-
-## Phase 4 — Advanced (days 51–70) · `python_advanced/`
-
-- [ ] **Day 51** — Descriptors · `day51_descriptors`  
-- [ ] **Day 52** — `__slots__` · `day52_slots`  
-- [ ] **Day 53** — Metaclasses (read-heavy) · `day53_metaclasses`  
-- [ ] **Day 54** — `__init_subclass__` · `day54_init_subclass`  
-- [ ] **Day 55** — Bytecode `dis` · `day55_bytecode`  
-- [ ] **Day 56** — Import system · `day56_importlib`  
-- [ ] **Day 57** — `cProfile` · `day57_cprofile`  
-- [ ] **Day 58** — `timeit` · `day58_timeit`  
-- [ ] **Day 59** — `pytest` fixtures · `day59_pytest_fixtures`  
-- [ ] **Day 60** — Coverage · `day60_coverage`  
-- [ ] **Day 61** — `ruff`, `pre-commit` · `day61_ruff_precommit`  
-- [ ] **Day 62** — `bandit` · `day62_bandit`  
-- [ ] **Day 63** — Strategy + Factory · `day63_patterns_creational`  
-- [ ] **Day 64** — Repository + DI · `day64_patterns_architecture`  
-- [ ] **Day 65** — `pyproject` library · `day65_packaging_library`  
-- [ ] **Day 66** — `uv` workflow · `day66_uv`  
-- [ ] **Day 67** — **Milestone** library CI · `day67_milestone`  
-- [ ] **Day 68** — Metaprogramming review · `day68_review_meta`  
-- [ ] **Day 69** — Testing strategy · `day69_review_testing`  
-- [ ] **Day 70** — Retrospective · `day70_retrospective`  
+| Day | Topic | Slug | `CODE.md` and `code.py` subtopics | Exercise direction | Primary source |
+|-----|-------|------|-----------------------------------|--------------------|----------------|
+| 01 | Syntax, types, variables | `day_01_syntax_variables` | naming, literals, type hints, constants, f-strings, input cleanup, explicit validation | CLI-style parsing, username formatting, retry count parsing, runtime banner building | [Python Tutorial — Introduction](https://docs.python.org/3/tutorial/introduction.html) |
+| 02 | Control flow | `day_02_control_flow` | `if`/`elif`/`else`, truthiness, loops, `break`, `continue`, `match`, guard clauses | order-status state machine, shipping rules, menu routing | [Python Tutorial — Control Flow](https://docs.python.org/3/tutorial/controlflow.html) |
+| 03 | Functions | `day_03_functions` | `def`, return values, defaults, keyword args, `*args`, `**kwargs`, unpacking, short `lambda` usage | pluggable validators, function signatures, flexible event formatting | [Real Python — Defining Functions](https://realpython.com/defining-your-own-python-function/) |
+| 04 | Lists and sorting | `day_04_lists` | indexing, slicing, mutation, list methods, sorting keys, stable sort, top-k patterns | leaderboard ranking, tie-breakers, filtered result views | [Real Python — Lists and Tuples](https://realpython.com/python-lists-tuples/) |
+| 05 | Tuples and `NamedTuple` | `day_05_tuples` | tuple immutability, packing/unpacking, multiple returns, `NamedTuple`, DTO-style records | CSV row DTOs, coordinate parsing, report rows | [Real Python — Lists and Tuples](https://realpython.com/python-lists-tuples/) |
+| 06 | Dictionaries | `day_06_dictionaries` | CRUD, `get`, `setdefault`, iteration, dict comprehension, nested dict safety | inverted index, config merge, word-count registry | [Real Python — Dictionaries](https://realpython.com/python-dicts/) |
+| 07 | Sets and `frozenset` | `day_07_sets` | uniqueness, membership, add/remove/update, union, intersection, difference, subset/superset, `frozenset` | dedupe logs, allowlist/denylist, tag matching, permission comparison | [Real Python — Sets](https://realpython.com/python-sets/) |
+| 08 | Strings and encoding | `day_08_strings` | slicing, methods, normalization, raw strings, bytes vs str, encoding basics, formatting | slugify, sanitizer, text normalizer, URL-safe labels | [Real Python — Strings](https://realpython.com/python-strings/) |
+| 09 | File I/O and structured files | `day_09_file_io` | `open`, context managers, `pathlib`, CSV, JSON, newline handling, safe file paths | CSV validate to JSONL ETL, file summary, import/export stubs | [Real Python — File I/O](https://realpython.com/read-write-files-python/) |
+| 10 | Exceptions and custom errors | `day_10_exceptions` | `try`/`except`/`else`/`finally`, raise, custom exception classes, chaining, failure contracts | retry wrapper, domain validation errors, transaction-like flows | [Real Python — Exceptions](https://realpython.com/python-exceptions/) |
+| 11 | Modules and packages | `day_11_modules` | imports, package layout, `__name__`, `__main__`, relative imports, module boundaries | package split, runnable module, helper module reuse | [Real Python — Modules and Packages](https://realpython.com/python-modules-packages/) |
+| 12 | Built-ins in data pipelines | `day_12_builtins` | `enumerate`, `zip`, `sorted`, `map`, `filter`, `any`, `all`, readability tradeoffs | parse-map-filter-aggregate mini pipeline | [Python Docs — Built-in Functions](https://docs.python.org/3/library/functions.html) |
+| 13 | Comprehensions and generator preview | `day_13_comprehensions` | list, dict, set comprehensions, nested filters, generator expressions, readability limits | last-N lines generator, filtered projections, index structures | [Real Python — Comprehensions](https://realpython.com/list-comprehension-python/) |
+| 14 | Tooling and environments | `day_14_tooling` | `venv`, `uv`, `requirements`, `pyproject`, script entrypoints, reproducible setup | environment bootstrap, install README, local task runner | [uv Docs](https://docs.astral.sh/uv/) |
 
 ---
 
-## Phase 5 — FastAPI (days 71–86) · `fastapi_track/`
+## Phase 2 — Python Intermediate
 
-- [ ] **Day 71** — App, routing, OpenAPI · `day71_fastapi_intro`  
-- [ ] **Day 72** — Pydantic v2, bodies · `day72_pydantic`  
-- [ ] **Day 73** — Dependencies · `day73_dependencies`  
-- [ ] **Day 74** — Exception handlers · `day74_errors`  
-- [ ] **Day 75** — OAuth2 + JWT · `day75_security_jwt`  
-- [ ] **Day 76** — Middleware, CORS · `day76_middleware`  
-- [ ] **Day 77** — Background tasks · `day77_background`  
-- [ ] **Day 78** — SQLAlchemy async, Alembic · `day78_db_alembic`  
-- [ ] **Day 79** — Repository in API · `day79_repository`  
-- [ ] **Day 80** — TestClient / AsyncClient · `day80_testing`  
-- [ ] **Day 81** — WebSockets (optional) · `day81_websockets`  
-- [ ] **Day 82** — Docker · `day82_docker`  
-- [ ] **Day 83** — `pydantic-settings` · `day83_settings`  
-- [ ] **Day 84** — **Milestone** service · `day84_milestone`  
-- [ ] **Day 85** — Health / readiness · `day85_probes`  
-- [ ] **Day 86** — API checklist · `day86_review`  
+**Track folders:** `src/python_intermediate/` and `exercise/python_intermediate/`
 
----
-
-## Phase 6 — DevOps + capstone (days 87–100) · `devops_track/`
-
-- [ ] **Day 87** — `pdb` · `day87_pdb`  
-- [ ] **Day 88** — `structlog` · `day88_structlog`  
-- [ ] **Day 89** — OpenTelemetry · `day89_otel`  
-- [ ] **Day 90** — `subprocess` · `day90_subprocess`  
-- [ ] **Day 91** — Boto3 or Docker SDK · `day91_cloud_sdk`  
-- [ ] **Day 92** — GitHub Actions · `day92_actions`  
-- [ ] **Day 93** — Prometheus · `day93_prometheus`  
-- [ ] **Day 94** — **Capstone** deploy · `day94_capstone`  
-- [ ] **Day 95** — Runbook · `day95_runbook`  
-- [ ] **Day 96** — DSA timed practice · `day96_dsa_timed`  
-- [ ] **Day 97** — DSA explain-aloud · `day97_dsa_verbal`  
-- [ ] **Day 98** — Portfolio README · `day98_portfolio`  
-- [ ] **Day 99** — README tracker sync · `day99_full_review`  
-- [ ] **Day 100** — Next 30 days plan · `day100_graduation`  
+| Day | Topic | Slug | `CODE.md` and `code.py` subtopics | Exercise direction | Primary source |
+|-----|-------|------|-----------------------------------|--------------------|----------------|
+| 15 | Classes and object state | `day_15_classes` | `__init__`, instance state, class attributes, methods, validation in constructors | inventory item model, user account state, config object | [Real Python — OOP](https://realpython.com/python3-object-oriented-programming/) |
+| 16 | Value-object dunders | `day_16_dunder_value_objects` | `__repr__`, `__str__`, `__eq__`, `__lt__`, `__hash__`, identity vs equality | value-object comparisons, dedupe in sets, sorted domain entities | [Python Data Model](https://docs.python.org/3/reference/datamodel.html) |
+| 17 | Properties and invariants | `day_17_properties` | `@property`, setters, computed fields, validation gates, encapsulation | bounded score object, email/user profile validator, money amount guard | [Real Python — Properties](https://realpython.com/python-property/) |
+| 18 | Inheritance and MRO | `day_18_inheritance` | `super()`, shared behavior, override patterns, MRO basics, composition vs inheritance | payment providers, transport hierarchy, notification channels | [Real Python — OOP](https://realpython.com/python3-object-oriented-programming/) |
+| 19 | Abstract base classes | `day_19_abstract_base` | `ABC`, `@abstractmethod`, interface contracts, plugin-style design | storage backend interface, parser strategy family | [Python abc docs](https://docs.python.org/3/library/abc.html) |
+| 20 | Dataclasses | `day_20_dataclasses` | `@dataclass`, `field`, defaults, `frozen`, `slots`, `__post_init__` | event records, immutable DTOs, config containers | [Real Python — Dataclasses](https://realpython.com/python-data-classes/) |
+| 21 | Class and static methods | `day_21_class_static` | alternative constructors, utility methods, factory patterns, parsing helpers | parse-from-string constructors, registry helpers, formatter utilities | [Real Python — Class/Static Methods](https://realpython.com/instance-class-and-static-methods-demystified/) |
+| 22 | Iterators | `day_22_iterators` | iterable protocol, `iter`, `next`, `StopIteration`, custom iterator classes | paginated iterator, row streamer, bounded sequence walker | [Real Python — Iterators](https://realpython.com/python-iterators-iterables-iteration/) |
+| 23 | Generators and lazy pipelines | `day_23_generators` | `yield`, generator functions, lazy pipelines, backpressure mindset, `yield from` | ETL stream, lazy log parser, record batching | [Real Python — Generators](https://realpython.com/introduction-to-python-generators/) |
+| 24 | Generator expressions | `day_24_generator_expressions` | streaming transforms, memory savings, `sum`/`any`/`all`, readable one-pass code | rolling metrics, filtered scan, lazy report statistics | [Real Python — Generators](https://realpython.com/introduction-to-python-generators/) |
+| 25 | Decorators | `day_25_decorators` | wrappers, `functools.wraps`, logging/timing decorators, pure-function decoration | call logger, latency tracker, validation decorator | [Real Python — Decorators](https://realpython.com/primer-on-python-decorators/) |
+| 26 | Parametric decorators | `day_26_decorators_advanced` | decorator factories, retries, rate limits, feature flags, configurable wrappers | retry decorator, permission gate, audit tags | [Real Python — Decorators](https://realpython.com/primer-on-python-decorators/) |
+| 27 | Context managers | `day_27_context_managers` | `__enter__`, `__exit__`, resource cleanup, transactional thinking | temp file guard, lock wrapper, reversible state change | [Real Python — Context Managers](https://realpython.com/python-with-statement/) |
+| 28 | `@contextmanager` | `day_28_contextmanager` | generator-based context managers, setup/teardown flow, exception handling | temporary config override, fake connection scope | [Python contextlib docs](https://docs.python.org/3/library/contextlib.html) |
+| 29 | `functools` | `day_29_functools` | `partial`, `lru_cache`, `cache`, `reduce`, `singledispatch`, practical tradeoffs | cached parser, specialized callbacks, command dispatch | [Real Python — functools](https://realpython.com/python-functools/) |
+| 30 | `itertools` | `day_30_itertools` | `chain`, `islice`, `groupby`, `product`, `combinations`, lazy composition | cartesian test data, chunking, grouped report builder | [Real Python — itertools](https://realpython.com/python-itertools/) |
+| 31 | Typing basics | `day_31_typing_basics` | `Optional`, `Union`, aliases, honest signatures, collection types | typed config parsing, API response modeling | [Real Python — Type Checking](https://realpython.com/python-type-checking/) |
+| 32 | Advanced typing helpers | `day_32_typing_advanced` | `TypedDict`, `Literal`, `Final`, `ClassVar`, narrow domain modeling | feature-flag settings, payload schemas, fixed status values | [Python typing docs](https://docs.python.org/3/library/typing.html) |
+| 33 | Generics and `TypeVar` | `day_33_generics` | generic containers, reusable helpers, typed repositories, variance intuition | generic stack, typed cache, reusable loader interface | [Python typing docs — Generics](https://docs.python.org/3/library/typing.html#generics) |
+| 34 | `mypy` and strictness | `day_34_mypy` | strict mode mindset, `Any` control, typed refactors, narrowing patterns | clean a loosely typed module, enforce safer APIs | [mypy cheat sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html) |
 
 ---
 
-## Sunday labs — intermediate (every 5 study days)
+## Phase 3 — Python Concurrency
 
-Complete **after** the fifth day of each block (e.g. after day 5, 10, …). These are **integrative**: combine the week’s topics, industrial quality, tests.
+**Track folders:** `src/python_concurrency/` and `exercise/python_concurrency/`
 
-- [ ] **Sunday 1** (after day 5): Mini service — **config + CLI + CSV leaderboard** using days 1–5 (typed dict rows, sorted output, file error handling).  
-- [ ] **Sunday 2** (after day 10): **Log pipeline** — read mixed logs, dedupe (sets), normalize strings, write JSONL + structured errors.  
-- [ ] **Sunday 3** (after day 14): **Tooling handoff** — package skeleton with `pyproject.toml`, `uv`, one console entrypoint, README “how to run”.  
-- [ ] **Sunday 4** (after day 19): **Plugin system** — ABC storage + two backends + dataclass events + tests.  
-- [ ] **Sunday 5** (after day 24): **Lazy ETL** — generators + iterators; memory-bounded processing from large fixture file.  
-- [ ] **Sunday 6** (after day 29): **Cross-cutting concerns** — decorators for timing + retry; context manager for atomic file; `functools` cache on pure parser.  
-- [ ] **Sunday 7** (after day 34): **Typed library slice** — `mypy` clean module + `pytest` + one `Protocol`.  
-- [ ] **Sunday 8** (after day 39): **Concurrent fetch** — thread pool OR asyncio (pick one) with timeouts; document tradeoff.  
-- [ ] **Sunday 9** (after day 44): **Refactor milestone** — unify async/sync boundaries; add logging.  
-- [ ] **Sunday 10** (after day 50): **Concurrency retrospective** — short design doc + diagram (ASCII ok).  
-- [ ] **Sunday 11** (after day 55): **Profile & fix** — take day 45 code, profile, one evidence-based optimization.  
-- [ ] **Sunday 12** (after day 60): **Quality gate** — `ruff` + `pytest --cov` + `pre-commit` config in repo.  
-- [ ] **Sunday 13** (after day 65): **Patterns** — Strategy + Repository for a fake “billing” module with tests.  
-- [ ] **Sunday 14** (after day 70): **Library release dry-run** — editable install, version bump story, tag in git.  
-- [ ] **Sunday 15** (after day 75): **Auth slice** — JWT issue/verify in isolation + pytest.  
-- [ ] **Sunday 16** (after day 80): **Integration tests** — FastAPI app with dependency overrides + fake DB.  
-- [ ] **Sunday 17** (after day 86): **Docker + API** — one `docker compose` with API + healthcheck.  
-- [ ] **Sunday 18** (after day 91): **Automation script** — safe `subprocess` + structured logs + exit codes.  
-- [ ] **Sunday 19** (after day 96): **DSA + API** — one endpoint that runs a pure DSA routine (e.g. validate parentheses) with unit tests.  
-- [ ] **Sunday 20** (after day 100): **Capstone review** — demo script, architecture notes, backlog of 5 improvements.  
-
-**Folder suggestion for Sundays:** `exercise/sunday_labs/week_01_integrated/` … `week_20_integrated/` (optional `Notes.md` only).
+| Day | Topic | Slug | `CODE.md` and `code.py` subtopics | Exercise direction | Primary source |
+|-----|-------|------|-----------------------------------|--------------------|----------------|
+| 35 | Threading and locks | `day_35_threading` | threads, locks, race conditions, critical sections, thread-safe state | shared counter, worker pool, safe cache mutation | [Real Python — Threading](https://realpython.com/intro-to-python-threading/) |
+| 36 | GIL and workload selection | `day_36_gil` | CPU-bound vs I/O-bound, GIL tradeoffs, choosing thread/process/async | classify workloads, refactor wrong concurrency choices | [Python Glossary — GIL](https://docs.python.org/3/glossary.html#term-global-interpreter-lock) |
+| 37 | Multiprocessing | `day_37_multiprocessing` | process pool, serialization cost, `Pool.map`, fan-out workloads | batch CPU job runner, checksum or transform workers | [Real Python — Multiprocessing](https://realpython.com/python-multiprocessing/) |
+| 38 | `concurrent.futures` | `day_38_futures` | thread pool, process pool, `submit`, `map`, `as_completed`, timeout handling | parallel fetcher, task aggregation, timeout-aware executor | [Python concurrent.futures docs](https://docs.python.org/3/library/concurrent.futures.html) |
+| 39 | `asyncio` basics | `day_39_asyncio` | event loop, coroutines, tasks, `await`, `gather`, cancellation basics | async scheduler, timed tasks, cooperative job runner | [Real Python — Asyncio](https://realpython.com/async-io-python/) |
+| 40 | `aiohttp` | `day_40_aiohttp` | async HTTP clients, session reuse, fan-out requests, response handling | async API fetcher, retry sketch, response summarizer | [aiohttp docs](https://docs.aiohttp.org/en/stable/) |
+| 41 | Async error handling | `day_41_async_errors` | `gather` strategies, cancellation, partial failures, timeout handling | resilient batch fetch, partial-success report builder | [Real Python — Asyncio](https://realpython.com/async-io-python/) |
+| 42 | Sync/async bridge | `day_42_sync_async_bridge` | executors from async, blocking boundaries, adapters, handoff patterns | wrap legacy sync code in async service | [Python asyncio event loop docs](https://docs.python.org/3/library/asyncio-eventloop.html) |
+| 43 | Concurrency design boundaries | `day_43_concurrency_design` | service boundaries, resource ownership, idempotency, queueing choices | redesign a multi-worker ingest service | [Real Python — Asyncio](https://realpython.com/async-io-python/) |
+| 44 | Refactor day | `day_44_refactor` | simplify async/sync split, centralize error handling, improve API boundaries | cleanup pass over earlier concurrent modules | (own earlier modules) |
+| 45 | Concurrency milestone | `day_45_milestone` | mini-project assembly, structured boundaries, observability hooks | concurrent fetch/process/write service skeleton | (own earlier modules) |
+| 46 | Packaging concurrent code | `day_46_packaging` | `pyproject`, package layout, CLI entrypoints, reusable service modules | convert milestone into installable package | [pyproject.toml spec](https://packaging.python.org/en/latest/specifications/pyproject-toml/) |
+| 47 | Testing concurrent code | `day_47_pytest_async` | async tests, timeout assertions, deterministic test shape, fixtures | test concurrent workers and async entrypoints | [Real Python — pytest](https://realpython.com/pytest-python-testing/) |
+| 48 | Mocking I/O | `day_48_mocking` | fake network calls, temp files, patching boundaries, deterministic tests | mocked HTTP pipeline, fake queue or file system | [pytest monkeypatch docs](https://docs.pytest.org/en/stable/how-to/monkeypatch.html) |
+| 49 | Logging in concurrent systems | `day_49_logging` | structured logs, request/task context, correlation IDs, failure summaries | add logs to concurrent service flows | [Real Python — Logging](https://realpython.com/python-logging/) |
+| 50 | Phase review | `day_50_review` | concurrency decision matrix, tradeoff recap, cleanup and retrospective | review exercises, compare thread/process/async versions | (own earlier modules) |
 
 ---
 
-## Parallel DSA — fundamentals → advanced
+## Phase 4 — Python Advanced
 
-**Folders:** `src/dsa/weekNN_slug/` · `exercise/dsa/week_NN_slug/`  
-**External practice:** [NeetCode roadmap](https://neetcode.io/roadmap) + [LeetCode](https://leetcode.com/) (solve **2–3 problems/week** minimum on platform; your repo holds **clean implementations** and **custom exercises**).
+**Track folders:** `src/python_advanced/` and `exercise/python_advanced/`
 
-### Week 01 — Big-O, arrays, hashing basics
-
-- [ ] Theory: Big-O, amortized, why hash maps are O(1) average  
-- [ ] Implement: dynamic array behavior intuition (Python lists), hash map API drills  
-- [ ] `exercise/dsa/week_01_.../`: ex01 two-sum variant, ex02 anagram buckets, ex03 longest without repeat (skeletons + tests)  
-- [ ] Platform: 2 problems — e.g. Two Sum, Contains Duplicate  
-
-### Week 02 — Arrays & hashing II
-
-- [ ] Prefix sum, frequency maps, sorting tie-ins  
-- [ ] Implement: prefix array builder; group-by key  
-- [ ] Exercises: subarray sum equals k (concept), encode/decode lists (design)  
-- [ ] Platform: Group Anagrams, Top K Frequent  
-
-### Week 03 — Two pointers
-
-- [ ] Sorted array pair sums, opposite ends, triplet patterns  
-- [ ] Implement: `pair_sum`, `three_sum` (no duplicates) templates  
-- [ ] Platform: 3Sum, Container With Most Water  
-
-### Week 04 — Sliding window
-
-- [ ] Fixed vs variable window, invariant maintenance  
-- [ ] Implement: min window substring scaffold (tests for small inputs)  
-- [ ] Platform: Longest Repeating Character Replacement, Minimum Window Substring  
-
-### Week 05 — Stack
-
-- [ ] Monotonic stack intuition, parentheses, daily temperatures pattern  
-- [ ] Implement: stack ADT + next greater element  
-- [ ] Platform: Valid Parentheses, Daily Temperatures  
-
-### Week 06 — Binary search
-
-- [ ] Bounds, lower/upper bound, rotated array  
-- [ ] Implement: `bisect` mental model + custom binary search  
-- [ ] Platform: Binary Search, Search in Rotated Sorted Array  
-
-### Week 07 — Linked list
-
-- [ ] Dummy node, fast/slow pointers, reversal  
-- [ ] Implement: singly linked list class + cycle detection  
-- [ ] Platform: Reverse Linked List, Merge Two Sorted Lists  
-
-### Week 08 — Trees I (BT)
-
-- [ ] DFS pre/in/post, BFS level order  
-- [ ] Implement: tree from list (level-order), height, balanced check  
-- [ ] Platform: Maximum Depth, Same Tree  
-
-### Week 09 — Trees II (BST)
-
-- [ ] BST validate, successor, kth smallest  
-- [ ] Platform: Validate BST, Kth Smallest in BST  
-
-### Week 10 — Heap / priority queue
-
-- [ ] `heapq`, top-k, merge k lists concept  
-- [ ] Implement: running median (two heaps) sketch  
-- [ ] Platform: Kth Largest, Merge K Sorted Lists  
-
-### Week 11 — Backtracking
-
-- [ ] Subsets, permutations, pruning  
-- [ ] Implement: subsets with duplicates template  
-- [ ] Platform: Subsets, Combination Sum  
-
-### Week 12 — Graphs I
-
-- [ ] Adjacency list/matrix, BFS/DFS, island count  
-- [ ] Implement: graph class + BFS shortest path unweighted  
-- [ ] Platform: Number of Islands, Clone Graph  
-
-### Week 13 — Graphs II
-
-- [ ] Topo sort (Kahn), cycle detection  
-- [ ] Platform: Course Schedule  
-
-### Week 14 — Union-Find
-
-- [ ] Path compression, union by rank  
-- [ ] Implement: DSU class with tests  
-- [ ] Platform: Redundant Connection, Number of Provinces  
-
-### Week 15 — Greedy
-
-- [ ] Intervals, scheduling, proof sketches  
-- [ ] Platform: Non-overlapping Intervals, Jump Game  
-
-### Week 16 — 1D DP
-
-- [ ] Climbing stairs, house robber, coin change  
-- [ ] Implement: bottom-up + top-down with memo  
-- [ ] Platform: Coin Change, House Robber  
-
-### Week 17 — 2D DP
-
-- [ ] Grid paths, LCS, edit distance (concept)  
-- [ ] Platform: Unique Paths, Longest Common Subsequence  
-
-### Week 18 — Shortest paths
-
-- [ ] Dijkstra (heap), Bellman-Ford awareness  
-- [ ] Implement: Dijkstra on small graph with `heapq`  
-- [ ] Platform: Network Delay Time  
-
-### Week 19 — Advanced topics / review
-
-- [ ] Tries (insert/search), bit tricks intro  
-- [ ] Platform: Implement Trie, Single Number  
-
-### Week 20 — Integration
-
-- [ ] Timed mixed set (3 problems), explain solutions aloud  
-- [ ] NeetCode blind revisit: pick by weak area from README  
+| Day | Topic | Slug | `CODE.md` and `code.py` subtopics | Exercise direction | Primary source |
+|-----|-------|------|-----------------------------------|--------------------|----------------|
+| 51 | Descriptors | `day_51_descriptors` | `__get__`, `__set__`, validation descriptors, reusable field rules | validated model fields, descriptor-backed settings | [Real Python — Descriptors](https://realpython.com/python-descriptors/) |
+| 52 | `__slots__` | `day_52_slots` | memory layout, attribute restrictions, inheritance caveats, fit-for-purpose usage | lightweight DTO comparisons, memory-minded objects | [Python Data Model — __slots__](https://docs.python.org/3/reference/datamodel.html#slots) |
+| 53 | Metaclasses | `day_53_metaclasses` | what metaclasses do, `type`, controlled class creation, limited real-world use | registry metaclass or schema registration sketch | [Real Python — Metaclasses](https://realpython.com/python-metaclasses/) |
+| 54 | `__init_subclass__` | `day_54_init_subclass` | subclass hooks, automatic registration, policy enforcement | plugin registry, subclass naming rules | [PEP 487](https://peps.python.org/pep-0487/) |
+| 55 | Bytecode and `dis` | `day_55_bytecode` | disassembly, compare implementations, stack machine intuition | inspect slow vs clean functions, explain generated ops | [Python dis docs](https://docs.python.org/3/library/dis.html) |
+| 56 | Import system | `day_56_importlib` | import flow, module caching, `importlib`, plugin discovery, lazy import tradeoffs | dynamic loader, plugin discovery helper | [Python importlib docs](https://docs.python.org/3/library/importlib.html) |
+| 57 | `cProfile` | `day_57_cprofile` | whole-program profiling, reading stats, hotspot hunting | profile a data-processing script and summarize hotspots | [Python profiler docs](https://docs.python.org/3/library/profile.html) |
+| 58 | `timeit` and measurement | `day_58_timeit` | micro-benchmarks, warm-up thinking, fair comparisons, bad benchmark habits | compare parser variants, set/list lookup timings | [Python timeit docs](https://docs.python.org/3/library/timeit.html) |
+| 59 | `pytest` fixtures | `day_59_pytest_fixtures` | reusable setup, fixture scopes, temp resources, clean test arrangement | refactor repetitive tests into fixtures | [Real Python — pytest](https://realpython.com/pytest-python-testing/) |
+| 60 | Coverage | `day_60_coverage` | line vs branch coverage, missing paths, test gap analysis | raise coverage on an earlier module intentionally | [coverage docs](https://coverage.readthedocs.io/) |
+| 61 | Ruff and pre-commit | `day_61_ruff_precommit` | linting, formatting, automation, quality gates, rule tuning | add repo quality config, fix lint issues | [ruff docs](https://docs.astral.sh/ruff/) |
+| 62 | Security scanning with Bandit | `day_62_bandit` | unsafe patterns, subprocess risks, path handling, audit basics | harden a risky script and document fixes | [bandit docs](https://bandit.readthedocs.io/) |
+| 63 | Strategy and Factory | `day_63_patterns_creational` | pluggable behavior, object creation control, runtime selection | payment/pricing strategy engine, parser factory | [Real Python — Factory Method](https://realpython.com/factory-method-python/) |
+| 64 | Repository and DI | `day_64_patterns_architecture` | ports and adapters, dependency injection, test seams | repository-backed service with fake and real adapters | [FastAPI Dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/) |
+| 65 | Packaging a library | `day_65_packaging_library` | `pyproject`, version metadata, package exports, editable install | turn a utility module into a small library | [Python Packaging Tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/) |
+| 66 | `uv` workflow | `day_66_uv` | dependency management, scripts, reproducible workflows, local tooling | migrate scripts to `uv` commands | [uv docs](https://docs.astral.sh/uv/) |
+| 67 | Library CI milestone | `day_67_milestone` | lint, test, package checks, release readiness | CI-ready library slice with docs and tests | [GitHub Actions docs](https://docs.github.com/actions) |
+| 68 | Metaprogramming review | `day_68_review_meta` | descriptors vs metaclasses vs subclass hooks, when not to use them | compare patterns in one small system | (own Day 51-54 modules) |
+| 69 | Testing strategy review | `day_69_review_testing` | unit vs integration, fixtures, coverage goals, safety checks | test plan for a small service or library | (own Day 47, 59-60 modules) |
+| 70 | Retrospective and polish | `day_70_retrospective` | cleanup, naming consistency, docs refresh, architecture notes | tighten previous modules before FastAPI phase | (own all modules) |
 
 ---
 
-## DSA folder slugs (reference)
+## Phase 5 — FastAPI Track
 
-| Week | `src/dsa/` and `exercise/dsa/` folder |
-|------|---------------------------------------|
+**Track folders:** `src/fastapi_track/` and `exercise/fastapi_track/`
+
+| Day | Topic | Slug | `CODE.md` and `code.py` subtopics | Exercise direction | Primary source |
+|-----|-------|------|-----------------------------------|--------------------|----------------|
+| 71 | FastAPI app basics | `day_71_fastapi_intro` | app instance, routers, OpenAPI, response models, path/query params | build a small task or inventory API | [FastAPI — First Steps](https://fastapi.tiangolo.com/tutorial/first-steps/) |
+| 72 | Pydantic v2 models | `day_72_pydantic` | body parsing, field validation, model config, serialization, aliases | request/response schemas for CRUD endpoints | [Pydantic — Models](https://docs.pydantic.dev/latest/concepts/models/) |
+| 73 | Dependencies | `day_73_dependencies` | dependency injection, reusable auth/db helpers, request-scoped resources | auth stub, repository dependency, config injection | [FastAPI — Dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/) |
+| 74 | Error handling | `day_74_errors` | HTTP exceptions, custom handlers, validation responses, consistent error shape | domain-to-HTTP error mapping | [FastAPI — Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/) |
+| 75 | OAuth2 and JWT | `day_75_security_jwt` | password flow basics, token issue/verify, claims, secure config | protected routes, login flow, token validation | [FastAPI — OAuth2 with JWT](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/) |
+| 76 | Middleware and CORS | `day_76_middleware` | request logging, timing middleware, CORS config, request IDs | add middleware stack to an API service | [FastAPI — CORS](https://fastapi.tiangolo.com/tutorial/cors/) |
+| 77 | Background tasks | `day_77_background` | delayed work, email/job stubs, async boundaries, task safety | receipt sender or audit log writer | [FastAPI — Background Tasks](https://fastapi.tiangolo.com/tutorial/background-tasks/) |
+| 78 | SQLAlchemy async and Alembic | `day_78_db_alembic` | async sessions, models, migrations, transactional endpoints | database-backed CRUD slice | [SQLAlchemy Async](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html) |
+| 79 | Repository in API services | `day_79_repository` | service layer, repository abstraction, unit-testable route logic | route -> service -> repository design | [FastAPI — Dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/) |
+| 80 | API testing | `day_80_testing` | `TestClient`, `AsyncClient`, dependency overrides, fake DB patterns | test a CRUD API with auth and errors | [FastAPI — Testing](https://fastapi.tiangolo.com/tutorial/testing/) |
+| 81 | WebSockets | `day_81_websockets` | socket endpoints, push updates, connection lifecycle, simple broadcast | chat or event-feed prototype | [FastAPI — WebSockets](https://fastapi.tiangolo.com/advanced/websockets/) |
+| 82 | Docker for FastAPI | `day_82_docker` | Dockerfile, image layers, runtime config, compose basics | containerize the API and run locally | [FastAPI — Docker](https://fastapi.tiangolo.com/deployment/docker/) |
+| 83 | Settings management | `day_83_settings` | `pydantic-settings`, env vars, secrets hygiene, deployment config | settings object and env-driven app boot | [Pydantic Settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/) |
+| 84 | FastAPI milestone | `day_84_milestone` | assemble auth, DB, tests, docker, docs into one service slice | mini production-style API project | (own Day 71-83 modules) |
+| 85 | Health and readiness | `day_85_probes` | health endpoints, dependency checks, graceful startup, readiness semantics | add `/health` and `/ready` checks | [Docker Compose docs](https://docs.docker.com/compose/) |
+| 86 | API review checklist | `day_86_review` | contract review, error consistency, security pass, test and docs audit | full review and hardening of FastAPI module | (own Day 71-85 modules) |
+
+---
+
+## Phase 6 — DevOps and Capstone
+
+**Track folders:** `src/devops_track/` and `exercise/devops_track/`
+
+| Day | Topic | Slug | `CODE.md` and `code.py` subtopics | Exercise direction | Primary source |
+|-----|-------|------|-----------------------------------|--------------------|----------------|
+| 87 | Debugging with `pdb` | `day_87_pdb` | breakpoints, stepping, inspecting state, debugging workflows | debug a failing script and write findings | [Python pdb docs](https://docs.python.org/3/library/pdb.html) |
+| 88 | Structured logging | `day_88_structlog` | event logs, context binding, error fields, readable production logs | migrate prints to structured logs | [structlog docs](https://www.structlog.org/) |
+| 89 | OpenTelemetry | `day_89_otel` | traces, spans, instrumentation concepts, service visibility basics | instrument a small API or worker flow | [OpenTelemetry Python](https://opentelemetry.io/docs/languages/python/) |
+| 90 | Safe `subprocess` | `day_90_subprocess` | argument lists, capture output, timeouts, exit codes, injection safety | CLI wrapper, command runner, safe automation task | [Real Python — subprocess](https://realpython.com/python-subprocess/) |
+| 91 | Cloud or container SDK | `day_91_cloud_sdk` | Boto3 or Docker SDK, auth patterns, client reuse, automation scripting | bucket/image automation or deployment helper | [Boto3 docs](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) |
+| 92 | GitHub Actions | `day_92_actions` | workflows, jobs, matrix basics, lint/test/package CI | CI pipeline for one module or service | [GitHub Actions docs](https://docs.github.com/actions) |
+| 93 | Prometheus metrics | `day_93_prometheus` | counters, histograms, request metrics, alert-friendly labels | expose app metrics and verify key signals | [Prometheus Python guide](https://prometheus.io/docs/guides/python/) |
+| 94 | Capstone deploy slice | `day_94_capstone` | deployment path, config, logs, metrics, smoke checks | deployable mini-service or toolchain slice | (own Day 87-93 modules) |
+| 95 | Runbooks | `day_95_runbook` | incident notes, startup/shutdown, common failure responses, rollback steps | write an operator guide for capstone | (own capstone module) |
+| 96 | Timed DSA practice | `day_96_dsa_timed` | speed strategy, template reuse, error-checking under pressure | timed mixed problem set with notes | [NeetCode Practice](https://neetcode.io/practice) |
+| 97 | Explain-aloud DSA | `day_97_dsa_verbal` | communicating approach, complexity, edge cases, interviewer clarity | record or script spoken solutions | [NeetCode Roadmap](https://neetcode.io/roadmap) |
+| 98 | Portfolio README | `day_98_portfolio` | project framing, outcomes, architecture summaries, proof of skill | polish repo-facing portfolio narrative | (own repo) |
+| 99 | Repo review and sync | `day_99_full_review` | cross-check README, study plan, folder status, consistency audit | final cleanup and documentation sync | (own repo) |
+| 100 | Next 30 days roadmap | `day_100_graduation` | identify gaps, choose specialization path, next project plan | write the follow-up study and build roadmap | [NeetCode Roadmap](https://neetcode.io/roadmap) |
+
+---
+
+## Sunday Labs
+
+Use Sundays as integrative build days after every 5 Python study days.
+
+| Lab | After days | Focus | Build direction |
+|-----|------------|-------|-----------------|
+| 01 | 01–05 | Basics integration | CLI config + CSV leaderboard + typed parsing |
+| 02 | 06–10 | Data structures + errors | log pipeline with sets, strings, JSONL, explicit failures |
+| 03 | 11–14 | Tooling handoff | package skeleton with `pyproject`, `uv`, docs |
+| 04 | 15–19 | OOP integration | plugin system with ABCs, inheritance, dataclass events |
+| 05 | 20–24 | Lazy processing | iterator/generator ETL with bounded memory |
+| 06 | 25–29 | Cross-cutting concerns | decorators, caching, context-managed file safety |
+| 07 | 30–34 | Typed library slice | strict typing, tests, one reusable interface |
+| 08 | 35–39 | Concurrency intro | thread pool or asyncio fetcher with timeouts |
+| 09 | 40–44 | Concurrency design | sync/async boundary cleanup with logging |
+| 10 | 45–50 | Concurrency review | design doc plus code cleanup and measurement |
+| 11 | 51–55 | Internals to evidence | profile then optimize a real module |
+| 12 | 56–60 | Quality gate | fixtures, coverage, linting, quality automation |
+| 13 | 61–65 | Architecture patterns | Strategy + Repository billing or catalog module |
+| 14 | 66–70 | Release dry-run | package build, versioning, install, tag workflow |
+| 15 | 71–75 | Auth slice | token issue/verify with protected endpoints and tests |
+| 16 | 76–80 | Integration tests | FastAPI app with overrides and fake DB |
+| 17 | 81–86 | Containerized API | Dockerized service with health checks |
+| 18 | 87–91 | Automation and ops | subprocess-safe automation with logs |
+| 19 | 92–96 | Delivery plus problem solving | CI plus timed DSA and service maintenance |
+| 20 | 97–100 | Capstone review | demo flow, architecture note, next-steps backlog |
+
+Suggested optional lab path pattern:
+
+| Lab folder | Pattern |
+|-----------|---------|
+| Sunday lab | `exercise/sunday_labs/week_XX_integrated/` |
+
+---
+
+## Parallel DSA Plan
+
+**Track folders:** `src/dsa/` and `exercise/dsa/`
+
+| Week | Topic | Slug | `CODE.md` and `code.py` subtopics | Repo exercise direction | Platform direction | Primary source |
+|------|-------|------|-----------------------------------|-------------------------|-------------------|----------------|
+| 01 | Big-O, arrays, hashing basics | `week_01_big_o_arrays_hashing` | complexity, amortized cost, arrays, hash maps, lookup tradeoffs | two-sum variant, duplicate detection, anagram grouping | Two Sum, Contains Duplicate | [NeetCode — Arrays & Hashing](https://neetcode.io/roadmap) |
+| 02 | Arrays and hashing II | `week_02_arrays_hashing_ii` | prefix sums, frequency maps, grouping, sorting tie-ins | prefix-array builder, group-by task, encode/decode design | Group Anagrams, Top K Frequent | [NeetCode — Arrays & Hashing](https://neetcode.io/roadmap) |
+| 03 | Two pointers | `week_03_two_pointers` | opposite-end scans, sorted pair logic, triplet patterns, dedupe | pair sum, three-sum template, sorted window checks | 3Sum, Container With Most Water | [NeetCode — Two Pointers](https://neetcode.io/roadmap) |
+| 04 | Sliding window | `week_04_sliding_window` | fixed vs variable windows, invariant tracking, frequency windows | max fixed window, variable-window substring tasks | Longest Repeating Character Replacement, Minimum Window Substring | [NeetCode — Sliding Window](https://neetcode.io/roadmap) |
+| 05 | Stack | `week_05_stack` | stack ADT, monotonic stack, bracket matching, next greater pattern | valid brackets, daily temperature style stack tasks | Valid Parentheses, Daily Temperatures | [NeetCode — Stack](https://neetcode.io/roadmap) |
+| 06 | Binary search | `week_06_binary_search` | lower/upper bounds, mid logic, rotated arrays, answer-space search | custom binary search helpers, boundary finders | Binary Search, Search in Rotated Sorted Array | [NeetCode — Binary Search](https://neetcode.io/roadmap) |
+| 07 | Linked list | `week_07_linked_list` | node structure, dummy nodes, reversal, fast/slow pointers | linked-list utilities, reversal, merge, cycle detection | Reverse Linked List, Merge Two Sorted Lists | [NeetCode — Linked List](https://neetcode.io/roadmap) |
+| 08 | Binary trees I | `week_08_binary_tree` | DFS traversals, BFS level order, tree depth, balanced checks | tree-from-list helpers, height and traversal exercises | Maximum Depth, Same Tree | [NeetCode — Trees](https://neetcode.io/roadmap) |
+| 09 | Binary search trees | `week_09_bst` | BST validation, insert/search, kth smallest, successor ideas | validate BST, ordered traversal, nearest value tasks | Validate BST, Kth Smallest in BST | [NeetCode — Trees](https://neetcode.io/roadmap) |
+| 10 | Heap and priority queue | `week_10_heap` | `heapq`, min/max heap patterns, top-k, merge streams | kth largest, running median sketch, prioritized tasks | Kth Largest, Merge K Sorted Lists | [NeetCode — Heap](https://neetcode.io/roadmap) |
+| 11 | Backtracking | `week_11_backtracking` | recursion trees, subsets, permutations, pruning, duplicate handling | subsets, combination builders, controlled search templates | Subsets, Combination Sum | [NeetCode — Backtracking](https://neetcode.io/roadmap) |
+| 12 | Graphs I | `week_12_graphs_i` | adjacency list, BFS, DFS, visited sets, island/count patterns | graph class, connected components, BFS shortest path | Number of Islands, Clone Graph | [NeetCode — Graphs](https://neetcode.io/roadmap) |
+| 13 | Graphs II and topo sort | `week_13_graphs_ii_topo` | directed graphs, indegree, Kahn's algorithm, cycle detection | course scheduling, dependency ordering | Course Schedule | [NeetCode — Graphs](https://neetcode.io/roadmap) |
+| 14 | Union-Find | `week_14_union_find` | DSU structure, path compression, union by rank, connectivity | DSU class, component tracking, merge events | Redundant Connection, Number of Provinces | [NeetCode — Graphs](https://neetcode.io/roadmap) |
+| 15 | Greedy | `week_15_greedy` | interval sorting, local choices, proof intuition, schedule selection | interval merge/select, jump decisions, resource scheduling | Non-overlapping Intervals, Jump Game | [NeetCode — Greedy](https://neetcode.io/roadmap) |
+| 16 | 1D dynamic programming | `week_16_dp_1d` | recurrence design, memoization, tabulation, state compression | climbing stairs, robber, coin-change style tasks | Coin Change, House Robber | [NeetCode — DP](https://neetcode.io/roadmap) |
+| 17 | 2D dynamic programming | `week_17_dp_2d` | grids, table fill order, LCS patterns, path counting | unique paths, edit-distance scaffold, sequence matching | Unique Paths, Longest Common Subsequence | [NeetCode — DP](https://neetcode.io/roadmap) |
+| 18 | Shortest paths | `week_18_shortest_path` | Dijkstra, weighted graphs, priority queues, relaxations | shortest-path helper, weighted route planner | Network Delay Time | [NeetCode — Graphs](https://neetcode.io/roadmap) |
+| 19 | Tries and bit tricks | `week_19_tries_bits` | trie insert/search, prefix checks, bit masks, XOR-style reasoning | trie class, prefix matcher, bit utility drills | Implement Trie, Single Number | [NeetCode — DP / Intervals](https://neetcode.io/roadmap) |
+| 20 | Mixed review | `week_20_mixed_review` | timed review, weak-area diagnosis, template consolidation | mixed set of 3 problems, verbal explanation prompts | NeetCode weak-area revisit | [NeetCode Practice](https://neetcode.io/practice) |
+
+---
+
+## DSA Folder Slugs
+
+| Week | Folder |
+|------|--------|
 | 01 | `week_01_big_o_arrays_hashing/` |
 | 02 | `week_02_arrays_hashing_ii/` |
 | 03 | `week_03_two_pointers/` |
@@ -491,20 +358,21 @@ Complete **after** the fifth day of each block (e.g. after day 5, 10, …). Thes
 
 ---
 
-## Industrial bar (Python + DSA repo work)
+## Industrial Bar
 
-- Types on public APIs; docstrings with complexity for DSA.  
-- **Inline assert self-checks** + **AI evaluation** per day; no bare `except:`.  
-- DSA: cite complexity in file header; include visual diagrams in CODE.md; avoid copying proprietary problem text verbatim—use your own examples in comments.
-
-**Measurement:** Use [docs/EVALUATION_RUBRIC.md](docs/EVALUATION_RUBRIC.md) — gates, weighted dimensions, **0–100** per exercise file.  
-**Evaluation protocol:** [docs/AI_EVAL_FRAMEWORK.md](docs/AI_EVAL_FRAMEWORK.md).
+- Public APIs use type hints.
+- `CODE.md` follows [docs/CODE_TEMPLATE.md](./docs/CODE_TEMPLATE.md).
+- Exercises use the scoring and gate system from [docs/EVALUATION_RUBRIC.md](./docs/EVALUATION_RUBRIC.md).
+- Every exercise file contains inline assert self-checks.
+- DSA `CODE.md` files include a visual or diagram section.
+- Avoid copying proprietary lesson text or challenge text verbatim. Use [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md) and rewrite material into this repo's style.
 
 ---
 
-## Flexibility
+## Scheduling Guidance
 
-- **1:1 calendar mapping:** Treat “DSA Week *n*” as the same calendar week as “Study days 5*n*−4 … 5*n*” if you want strict lockstep; otherwise finish DSA Week *n* within the same **phase** (basics vs intermediate).  
-- **Missed Sunday:** Do the Sunday lab before starting the next phase milestone (day 45, 67, 84, 94).
+- A strict lockstep plan can map DSA Week `n` to Python days `5n-4` through `5n`.
+- A flexible plan can finish DSA Week `n` within the same broad Python phase.
+- Sunday labs are catch-up friendly, but finish each lab before the next major milestone day in that phase.
 
-Your full topic tables and links remain in [README.md](./README.md).
+This file is the planning source of truth for what to generate next.
