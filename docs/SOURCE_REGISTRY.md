@@ -323,25 +323,25 @@ Use this table to immediately find the right source URL for each day. Open the p
 | Week | Topic | LeetCode practice problems | NeetCode section |
 |------|-------|---------------------------|-------------------|
 | 01 | Big-O, arrays, hashing | [Two Sum](https://leetcode.com/problems/two-sum/) · [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | <https://neetcode.io/roadmap> Arrays & Hashing |
-| 02 | Arrays and hashing II | [Group Anagrams](https://leetcode.com/problems/group-anagrams/) · [Top K Frequent](https://leetcode.com/problems/top-k-frequent-elements/) · [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | <https://neetcode.io/roadmap> Arrays & Hashing |
-| 03 | Two pointers | [3Sum](https://leetcode.com/problems/3sum/) · [Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | <https://neetcode.io/roadmap> Two Pointers |
-| 04 | Sliding window | [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) · [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | <https://neetcode.io/roadmap> Sliding Window |
-| 05 | Stack | [Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) · [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | <https://neetcode.io/roadmap> Stack |
-| 06 | Binary search | [Binary Search](https://leetcode.com/problems/binary-search/) · [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | <https://neetcode.io/roadmap> Binary Search |
+| 02 | Arrays, hashing, Kadane basics | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) · [Top K Frequent](https://leetcode.com/problems/top-k-frequent-elements/) · [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | <https://neetcode.io/roadmap> Arrays & Hashing |
+| 03 | Two pointers and 3Sum dedupe | [3Sum](https://leetcode.com/problems/3sum/) · [Container With Most Water](https://leetcode.com/problems/container-with-most-water/) · [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | <https://neetcode.io/roadmap> Two Pointers |
+| 04 | Sliding window and monotonic deque | [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) · [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) · [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | <https://neetcode.io/roadmap> Sliding Window |
+| 05 | Stack and monotonic structures | [Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) · [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) · [Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | <https://neetcode.io/roadmap> Stack |
+| 06 | Binary search | [Binary Search](https://leetcode.com/problems/binary-search/) · [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) · [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/) | <https://neetcode.io/roadmap> Binary Search |
 | 07 | Linked list | [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) · [Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | <https://neetcode.io/roadmap> Linked List |
-| 08 | Binary trees I | [Maximum Depth](https://leetcode.com/problems/maximum-depth-of-binary-tree/) · [Same Tree](https://leetcode.com/problems/same-tree/) | <https://neetcode.io/roadmap> Trees |
-| 09 | BST | [Validate BST](https://leetcode.com/problems/validate-binary-search-tree/) · [Kth Smallest in BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) | <https://neetcode.io/roadmap> Trees |
+| 08 | Binary trees I | [Maximum Depth](https://leetcode.com/problems/maximum-depth-of-binary-tree/) · [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) · [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) · [Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/) | <https://neetcode.io/roadmap> Trees |
+| 09 | BST | [Validate BST](https://leetcode.com/problems/validate-binary-search-tree/) · [Kth Smallest in BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) · [Lowest Common Ancestor of a BST](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) | <https://neetcode.io/roadmap> Trees |
 | 10 | Heap and priority queue | [Kth Largest Element](https://leetcode.com/problems/kth-largest-element-in-a-stream/) · [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) | <https://neetcode.io/roadmap> Heap / Priority Queue |
-| 11 | Backtracking | [Subsets](https://leetcode.com/problems/subsets/) · [Combination Sum](https://leetcode.com/problems/combination-sum/) | <https://neetcode.io/roadmap> Backtracking |
-| 12 | Graphs I | [Number of Islands](https://leetcode.com/problems/number-of-islands/) · [Clone Graph](https://leetcode.com/problems/clone-graph/) | <https://neetcode.io/roadmap> Graphs |
+| 11 | Recursion and backtracking foundations | [Subsets](https://leetcode.com/problems/subsets/) · [Subsets II](https://leetcode.com/problems/subsets-ii/) · [Combination Sum](https://leetcode.com/problems/combination-sum/) | <https://neetcode.io/roadmap> Backtracking |
+| 12 | Graphs I | [Number of Islands](https://leetcode.com/problems/number-of-islands/) · [Clone Graph](https://leetcode.com/problems/clone-graph/) · [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | <https://neetcode.io/roadmap> Graphs |
 | 13 | Graphs II and topo sort | [Course Schedule](https://leetcode.com/problems/course-schedule/) · [Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) | <https://neetcode.io/roadmap> Graphs |
 | 14 | Union-Find | [Redundant Connection](https://leetcode.com/problems/redundant-connection/) · [Number of Provinces](https://leetcode.com/problems/number-of-provinces/) | <https://neetcode.io/roadmap> Graphs |
-| 15 | Greedy | [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) · [Jump Game](https://leetcode.com/problems/jump-game/) | <https://neetcode.io/roadmap> Greedy |
-| 16 | 1D DP | [Coin Change](https://leetcode.com/problems/coin-change/) · [House Robber](https://leetcode.com/problems/house-robber/) | <https://neetcode.io/roadmap> Dynamic Programming |
-| 17 | 2D DP | [Unique Paths](https://leetcode.com/problems/unique-paths/) · [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/) | <https://neetcode.io/roadmap> Dynamic Programming |
+| 15 | Intervals and greedy | [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) · [Merge Intervals](https://leetcode.com/problems/merge-intervals/) · [Jump Game](https://leetcode.com/problems/jump-game/) | <https://neetcode.io/roadmap> Greedy |
+| 16 | 1D DP | [Coin Change](https://leetcode.com/problems/coin-change/) · [House Robber](https://leetcode.com/problems/house-robber/) · [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | <https://neetcode.io/roadmap> Dynamic Programming |
+| 17 | 2D DP | [Unique Paths](https://leetcode.com/problems/unique-paths/) · [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/) · [Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/) | <https://neetcode.io/roadmap> Dynamic Programming |
 | 18 | Shortest paths | [Network Delay Time](https://leetcode.com/problems/network-delay-time/) · [Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) | <https://neetcode.io/roadmap> Graphs |
-| 19 | Tries and bit tricks | [Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/) · [Single Number](https://leetcode.com/problems/single-number/) | <https://neetcode.io/roadmap> 1-D DP / Intervals |
-| 20 | Mixed review | <https://neetcode.io/practice> (weak-area revisit) | <https://neetcode.io/roadmap> |
+| 19 | Tries, string algorithms, and bit tricks | [Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/) · [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) · [Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/) · [Repeated DNA Sequences](https://leetcode.com/problems/repeated-dna-sequences/) · [Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/) · [Single Number](https://leetcode.com/problems/single-number/) | <https://neetcode.io/roadmap> Trie / String / Bit Manipulation |
+| 20 | Mixed review, sorting, and math basics | <https://neetcode.io/practice> (weak-area revisit) · [Sort an Array](https://leetcode.com/problems/sort-an-array/) · [Pow(x, n)](https://leetcode.com/problems/powx-n/) · [Count Primes](https://leetcode.com/problems/count-primes/) | <https://neetcode.io/roadmap> |
 
 ---
 
@@ -355,6 +355,7 @@ Use:
 - Day-scoped tutorials for learning order
 - Real Python for concise, practical examples
 - PEPs for Further reading links
+- `docs/DSA_VISUALS.md` for diagram/GIF formatting rules on DSA weeks
 
 Recommended pattern:
 

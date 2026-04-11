@@ -120,13 +120,13 @@ exercise/
 | Day | Topic | Slug | `CODE.md` and `code.py` subtopics | Exercise direction | Primary source |
 |-----|-------|------|-----------------------------------|--------------------|----------------|
 | 01 | Syntax, types, variables | `day_01_syntax_variables` | naming, literals, type hints, constants, f-strings, input cleanup, explicit validation | CLI-style parsing, username formatting, retry count parsing, runtime banner building | [Python Tutorial — Introduction](https://docs.python.org/3/tutorial/introduction.html) |
-| 02 | Control flow | `day_02_control_flow` | `if`/`elif`/`else`, truthiness, loops, `break`, `continue`, `match`, guard clauses | order-status state machine, shipping rules, menu routing | [Python Tutorial — Control Flow](https://docs.python.org/3/tutorial/controlflow.html) |
+| 02 | Control flow | `day_02_control_flow` | `if`/`elif`/`else`, truthiness, loops, `break`, `continue`, `match`, guard clauses, loop-based pattern printing basics | order-status state machine, shipping rules, menu routing, beginner pattern-printing loops | [Python Tutorial — Control Flow](https://docs.python.org/3/tutorial/controlflow.html) |
 | 03 | Functions | `day_03_functions` | `def`, return values, defaults, keyword args, `*args`, `**kwargs`, unpacking, short `lambda` usage | pluggable validators, function signatures, flexible event formatting | [Real Python — Defining Functions](https://realpython.com/defining-your-own-python-function/) |
 | 04 | Lists and sorting | `day_04_lists` | indexing, slicing, mutation, list methods, sorting keys, stable sort, top-k patterns | leaderboard ranking, tie-breakers, filtered result views | [Real Python — Lists and Tuples](https://realpython.com/python-lists-tuples/) |
 | 05 | Tuples and `NamedTuple` | `day_05_tuples` | tuple immutability, packing/unpacking, multiple returns, `NamedTuple`, DTO-style records | CSV row DTOs, coordinate parsing, report rows | [Real Python — Lists and Tuples](https://realpython.com/python-lists-tuples/) |
 | 06 | Dictionaries | `day_06_dictionaries` | CRUD, `get`, `setdefault`, iteration, dict comprehension, nested dict safety | inverted index, config merge, word-count registry | [Real Python — Dictionaries](https://realpython.com/python-dicts/) |
 | 07 | Sets and `frozenset` | `day_07_sets` | uniqueness, membership, add/remove/update, union, intersection, difference, subset/superset, `frozenset` | dedupe logs, allowlist/denylist, tag matching, permission comparison | [Real Python — Sets](https://realpython.com/python-sets/) |
-| 08 | Strings and encoding | `day_08_strings` | slicing, methods, normalization, raw strings, bytes vs str, encoding basics, formatting | slugify, sanitizer, text normalizer, URL-safe labels | [Real Python — Strings](https://realpython.com/python-strings/) |
+| 08 | Strings and encoding | `day_08_strings` | slicing, methods, normalization, raw strings, bytes vs str, encoding basics, formatting, substring checks, subsequence checks, character-frequency ops, consecutive-string/run-length ops | slugify, sanitizer, text normalizer, URL-safe labels, substring/subsequence utilities, consecutive-string helpers | [Real Python — Strings](https://realpython.com/python-strings/) |
 | 09 | File I/O and structured files | `day_09_file_io` | `open`, context managers, `pathlib`, CSV, JSON, newline handling, safe file paths | CSV validate to JSONL ETL, file summary, import/export stubs | [Real Python — File I/O](https://realpython.com/read-write-files-python/) |
 | 10 | Exceptions and custom errors | `day_10_exceptions` | `try`/`except`/`else`/`finally`, raise, custom exception classes, chaining, failure contracts | retry wrapper, domain validation errors, transaction-like flows | [Real Python — Exceptions](https://realpython.com/python-exceptions/) |
 | 11 | Modules and packages | `day_11_modules` | imports, package layout, `__name__`, `__main__`, relative imports, module boundaries | package split, runnable module, helper module reuse | [Real Python — Modules and Packages](https://realpython.com/python-modules-packages/) |
@@ -308,26 +308,26 @@ Suggested optional lab path pattern:
 
 | Week | Topic | Slug | `CODE.md` and `code.py` subtopics | Repo exercise direction | Platform direction | Primary source |
 |------|-------|------|-----------------------------------|-------------------------|-------------------|----------------|
-| 01 | Big-O, arrays, hashing basics | `week_01_big_o_arrays_hashing` | complexity, amortized cost, arrays, hash maps, lookup tradeoffs | two-sum variant, duplicate detection, anagram grouping | Two Sum, Contains Duplicate | [NeetCode — Arrays & Hashing](https://neetcode.io/roadmap) |
-| 02 | Arrays and hashing II | `week_02_arrays_hashing_ii` | prefix sums, frequency maps, grouping, sorting tie-ins | prefix-array builder, group-by task, encode/decode design | Group Anagrams, Top K Frequent | [NeetCode — Arrays & Hashing](https://neetcode.io/roadmap) |
-| 03 | Two pointers | `week_03_two_pointers` | opposite-end scans, sorted pair logic, triplet patterns, dedupe | pair sum, three-sum template, sorted window checks | 3Sum, Container With Most Water | [NeetCode — Two Pointers](https://neetcode.io/roadmap) |
-| 04 | Sliding window | `week_04_sliding_window` | fixed vs variable windows, invariant tracking, frequency windows | max fixed window, variable-window substring tasks | Longest Repeating Character Replacement, Minimum Window Substring | [NeetCode — Sliding Window](https://neetcode.io/roadmap) |
-| 05 | Stack | `week_05_stack` | stack ADT, monotonic stack, bracket matching, next greater pattern | valid brackets, daily temperature style stack tasks | Valid Parentheses, Daily Temperatures | [NeetCode — Stack](https://neetcode.io/roadmap) |
-| 06 | Binary search | `week_06_binary_search` | lower/upper bounds, mid logic, rotated arrays, answer-space search | custom binary search helpers, boundary finders | Binary Search, Search in Rotated Sorted Array | [NeetCode — Binary Search](https://neetcode.io/roadmap) |
+| 01 | Big-O, arrays, hashing basics | `week_01_big_o_arrays_hashing` | complexity, amortized cost, **what Big-O is used for**, arrays, hash maps, lookup tradeoffs | two-sum variant, duplicate detection, anagram grouping | Two Sum, Contains Duplicate | [NeetCode — Arrays & Hashing](https://neetcode.io/roadmap) |
+| 02 | Arrays, hashing, Kadane basics | `week_02_arrays_hashing_ii` | prefix sums, frequency maps, grouping, Kadane's algorithm, string ops warm-up, subsequence-sum intro | prefix-array builder, max-subarray (Kadane), group-by task, subsequence-sum checks | Maximum Subarray, Top K Frequent | [NeetCode — Arrays & Hashing](https://neetcode.io/roadmap) |
+| 03 | Two pointers and 3Sum dedupe | `week_03_two_pointers` | opposite-end scans, sorted pair/triplet logic, 3Sum deduplication rules, palindrome two-pointer scans | pair sum, 3Sum template with dedupe, palindrome pointer checks | 3Sum, Container With Most Water, Valid Palindrome | [NeetCode — Two Pointers](https://neetcode.io/roadmap) |
+| 04 | Sliding window and monotonic deque | `week_04_sliding_window` | fixed vs variable windows, invariant tracking, substring frequency windows, monotonic deque for window max | max fixed window, variable-window substring tasks, sliding-window maximum | Longest Repeating Character Replacement, Minimum Window Substring, Sliding Window Maximum | [NeetCode — Sliding Window](https://neetcode.io/roadmap) |
+| 05 | Stack and monotonic structures | `week_05_stack` | stack ADT, monotonic stack, bracket matching, next greater pattern, stack-vs-deque choice | valid brackets, daily temperature style stack tasks, histogram-area pattern | Valid Parentheses, Daily Temperatures, Largest Rectangle in Histogram | [NeetCode — Stack](https://neetcode.io/roadmap) |
+| 06 | Binary search | `week_06_binary_search` | lower/upper bounds, mid logic, rotated arrays, answer-space search, matrix binary search | custom binary search helpers, boundary finders, matrix search helpers | Binary Search, Search in Rotated Sorted Array, Search a 2D Matrix | [NeetCode — Binary Search](https://neetcode.io/roadmap) |
 | 07 | Linked list | `week_07_linked_list` | node structure, dummy nodes, reversal, fast/slow pointers | linked-list utilities, reversal, merge, cycle detection | Reverse Linked List, Merge Two Sorted Lists | [NeetCode — Linked List](https://neetcode.io/roadmap) |
-| 08 | Binary trees I | `week_08_binary_tree` | DFS traversals, BFS level order, tree depth, balanced checks | tree-from-list helpers, height and traversal exercises | Maximum Depth, Same Tree | [NeetCode — Trees](https://neetcode.io/roadmap) |
-| 09 | Binary search trees | `week_09_bst` | BST validation, insert/search, kth smallest, successor ideas | validate BST, ordered traversal, nearest value tasks | Validate BST, Kth Smallest in BST | [NeetCode — Trees](https://neetcode.io/roadmap) |
+| 08 | Binary trees I | `week_08_binary_tree` | tree construction from list/array, DFS traversals, BFS level order, path-sum style problems, LCA, diameter, vertical/zigzag traversal patterns | tree-from-list helpers, path and LCA helpers, diameter and traversal exercises | Maximum Depth, Binary Tree Level Order Traversal, Lowest Common Ancestor of a Binary Tree, Diameter of Binary Tree | [NeetCode — Trees](https://neetcode.io/roadmap) |
+| 09 | Binary search trees | `week_09_bst` | BST validation, insert/search, kth smallest, successor/predecessor, BST LCA | validate BST, ordered traversal, nearest value tasks, BST LCA | Validate BST, Kth Smallest in BST, Lowest Common Ancestor of a BST | [NeetCode — Trees](https://neetcode.io/roadmap) |
 | 10 | Heap and priority queue | `week_10_heap` | `heapq`, min/max heap patterns, top-k, merge streams | kth largest, running median sketch, prioritized tasks | Kth Largest, Merge K Sorted Lists | [NeetCode — Heap](https://neetcode.io/roadmap) |
-| 11 | Backtracking | `week_11_backtracking` | recursion trees, subsets, permutations, pruning, duplicate handling | subsets, combination builders, controlled search templates | Subsets, Combination Sum | [NeetCode — Backtracking](https://neetcode.io/roadmap) |
-| 12 | Graphs I | `week_12_graphs_i` | adjacency list, BFS, DFS, visited sets, island/count patterns | graph class, connected components, BFS shortest path | Number of Islands, Clone Graph | [NeetCode — Graphs](https://neetcode.io/roadmap) |
+| 11 | Recursion and backtracking foundations | `week_11_backtracking` | base/recursive case design, processed/unprocessed pattern, include/exclude recursion tree, subsequence by character, subsequence-sum and subset-sum patterns, pruning, recursion-based pattern printing | recursion warm-ups, pattern printing via recursion, subsequence generators, subset/combination sum templates | Subsets, Subsets II, Combination Sum | [NeetCode — Backtracking](https://neetcode.io/roadmap) |
+| 12 | Graphs I | `week_12_graphs_i` | adjacency list, BFS, DFS, visited sets, island/count patterns, grid/matrix traversal (4-direction BFS/DFS) | graph class, connected components, BFS shortest path, matrix flood-fill tasks | Number of Islands, Clone Graph, Rotting Oranges | [NeetCode — Graphs](https://neetcode.io/roadmap) |
 | 13 | Graphs II and topo sort | `week_13_graphs_ii_topo` | directed graphs, indegree, Kahn's algorithm, cycle detection | course scheduling, dependency ordering | Course Schedule | [NeetCode — Graphs](https://neetcode.io/roadmap) |
 | 14 | Union-Find | `week_14_union_find` | DSU structure, path compression, union by rank, connectivity | DSU class, component tracking, merge events | Redundant Connection, Number of Provinces | [NeetCode — Graphs](https://neetcode.io/roadmap) |
-| 15 | Greedy | `week_15_greedy` | interval sorting, local choices, proof intuition, schedule selection | interval merge/select, jump decisions, resource scheduling | Non-overlapping Intervals, Jump Game | [NeetCode — Greedy](https://neetcode.io/roadmap) |
-| 16 | 1D dynamic programming | `week_16_dp_1d` | recurrence design, memoization, tabulation, state compression | climbing stairs, robber, coin-change style tasks | Coin Change, House Robber | [NeetCode — DP](https://neetcode.io/roadmap) |
-| 17 | 2D dynamic programming | `week_17_dp_2d` | grids, table fill order, LCS patterns, path counting | unique paths, edit-distance scaffold, sequence matching | Unique Paths, Longest Common Subsequence | [NeetCode — DP](https://neetcode.io/roadmap) |
+| 15 | Intervals and greedy | `week_15_greedy` | interval sorting/merging, overlap detection, local choices, proof intuition, schedule selection | interval merge/select, jump decisions, resource scheduling | Non-overlapping Intervals, Merge Intervals, Jump Game | [NeetCode — Greedy](https://neetcode.io/roadmap) |
+| 16 | 1D dynamic programming | `week_16_dp_1d` | recurrence design, memoization, tabulation, state compression, max-subarray as DP intuition | climbing stairs, robber, coin-change style tasks, Kadane reinforcement | Coin Change, House Robber, Maximum Subarray | [NeetCode — DP](https://neetcode.io/roadmap) |
+| 17 | 2D dynamic programming | `week_17_dp_2d` | grids, table fill order, matrix traversal patterns (row/col/spiral mindset), LCS patterns, path counting | unique paths, edit-distance scaffold, sequence matching, matrix traversal drills | Unique Paths, Longest Common Subsequence, Set Matrix Zeroes | [NeetCode — DP](https://neetcode.io/roadmap) |
 | 18 | Shortest paths | `week_18_shortest_path` | Dijkstra, weighted graphs, priority queues, relaxations | shortest-path helper, weighted route planner | Network Delay Time | [NeetCode — Graphs](https://neetcode.io/roadmap) |
-| 19 | Tries and bit tricks | `week_19_tries_bits` | trie insert/search, prefix checks, bit masks, XOR-style reasoning | trie class, prefix matcher, bit utility drills | Implement Trie, Single Number | [NeetCode — DP / Intervals](https://neetcode.io/roadmap) |
-| 20 | Mixed review | `week_20_mixed_review` | timed review, weak-area diagnosis, template consolidation | mixed set of 3 problems, verbal explanation prompts | NeetCode weak-area revisit | [NeetCode Practice](https://neetcode.io/practice) |
+| 19 | Tries, string algorithms, and bit tricks | `week_19_tries_bits` | trie insert/search, core string operations, substring search, consecutive-string patterns, palindrome expansion, Rabin-Karp rolling hash idea, KMP prefix map (`k-map`/LPS) intuition, bit masks, XOR-style reasoning | trie class, prefix matcher, substring/rabin-karp helper, kmp-prefix-map helper, bit utility drills | Implement Trie, Longest Palindromic Substring, Find the Index of the First Occurrence in a String, Repeated DNA Sequences | [NeetCode — Roadmap](https://neetcode.io/roadmap) |
+| 20 | Mixed review, sorting, and math basics | `week_20_mixed_review` | timed review, weak-area diagnosis, sorting algorithms (merge/quick/heap/counting tradeoffs), math/number theory basics (gcd, primes, fast power, modular arithmetic), template consolidation | mixed set of 3 problems, verbal explanation prompts, sorting warm-up drills, math warm-up drills | NeetCode weak-area revisit, Sort an Array, Pow(x, n), Count Primes | [NeetCode Practice](https://neetcode.io/practice) |
 
 ---
 
@@ -358,13 +358,44 @@ Suggested optional lab path pattern:
 
 ---
 
+## MAANG Depth Coverage Checklist (DSA)
+
+These concepts must be explicitly covered by generated week artifacts (`CODE.md`, `code.py`, `EXERCISE.md`, `exNN_*.py`) in the mapped weeks:
+
+| Concept | Week mapping |
+|---------|--------------|
+| Kadane's algorithm | Week 02, reinforced in Week 16 |
+| 3Sum triplet dedupe logic | Week 03 |
+| Recursion as a standalone foundation | Week 11 |
+| Processed vs unprocessed recursion state | Week 11 |
+| Subsequence character generation | Week 11 |
+| Subsequence sum / subset-sum (`subsum`) | Week 11 and Week 16 |
+| Pattern printing (loop + recursion styles) | Day 02 and Week 11 |
+| Binary tree construction, path problems, LCA, diameter, zigzag/vertical traversals | Week 08 |
+| Monotonic deque patterns | Week 04 (and Week 05 comparisons) |
+| Intervals as dedicated study area | Week 15 |
+| String algorithms (palindromes, KMP idea, substring handling) | Week 03, Week 04, Week 19 |
+| String operations (normalization/search/compare) | Day 08 and Week 19 |
+| Substring and consecutive-string patterns | Week 04 and Week 19 |
+| Rabin-Karp rolling hash pattern matching | Week 19 |
+| KMP prefix map (`k-map` / LPS table) | Week 19 |
+| Sorting algorithms (merge, quick, heap, counting) | Week 20 |
+| Matrix traversal patterns | Week 12 and Week 17 |
+| Math/number theory basics | Week 20 |
+
+---
+
 ## Industrial Bar
 
 - Public APIs use type hints.
 - `CODE.md` follows [docs/CODE_TEMPLATE.md](./docs/CODE_TEMPLATE.md).
 - Exercises use the scoring and gate system from [docs/EVALUATION_RUBRIC.md](./docs/EVALUATION_RUBRIC.md).
 - Every exercise file contains inline assert self-checks.
-- DSA `CODE.md` files include a visual or diagram section.
+- DSA `CODE.md` files include visual/diagram coverage for the core algorithm flow.
+- Every DSA snippet/example in `CODE.md` includes a traversal visual block (ASCII/Mermaid step flow).
+- DSA visuals may optionally include GIFs (with caption + source attribution), but must still include ASCII/Mermaid fallback for portability.
+- DSA Week 01 explicitly explains what Big-O notation is used for in choosing solution approaches.
+- DSA `.md` and `.py` files include time and space complexity for each discussed problem.
 - Avoid copying proprietary lesson text or challenge text verbatim. Use [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md) and rewrite material into this repo's style.
 
 ---

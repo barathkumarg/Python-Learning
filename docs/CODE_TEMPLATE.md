@@ -58,6 +58,19 @@ Treat CODE.md as a **code-first training handout**:
 
 ---
 
+## DSA-specific must-haves
+
+For `src/dsa/week_WW_*/CODE.md`, these are mandatory:
+
+- Include a short **Big-O in practice** explanation. Week 01 must explicitly answer: what Big-O notation measures and why we use it before implementation.
+- Use a concepts table that includes **Time / Space** complexity for every discussed operation/problem.
+- For each DSA snippet, include explicit complexity notes (`Time: ...`, `Space: ...`) in either the snippet explanation or takeaway line.
+- For each DSA snippet/example, include a **Traversal (graphical)** block right after expected output (ASCII step trace preferred; Mermaid optional).
+- Add visuals that cover the main algorithm flow (use one or more diagrams so each core algorithm/topic in the week is represented).
+- Cover every subtopic explicitly listed in that week's row in `DAILY_STUDY_PLAN.md` (including advanced tags such as Kadane, 3Sum dedupe, recursion processed/unprocessed state, interval patterns, string operations, substring/consecutive-string patterns, Rabin-Karp, KMP `k-map`, sorting algorithms, matrix traversal, and math basics).
+
+---
+
 ## Template
 
 ```markdown
@@ -71,6 +84,19 @@ Treat CODE.md as a **code-first training handout**:
 |---------|-------------|----------------|---------------|
 | `concept_1` | One-line explanation | One-line production relevance | `line NN` or function name |
 | `concept_2` | … | … | … |
+
+For DSA weeks, use this concepts table variant:
+
+| Concept | What it does | Why it matters | Time / Space | `code.py` ref |
+|---------|--------------|----------------|--------------|---------------|
+| `concept_1` | One-line explanation | One-line production relevance | `O(?) / O(?)` | function name |
+| `concept_2` | … | … | … | … |
+
+## Big-O in Practice *(required for DSA Week 01; recommended for all DSA weeks)*
+
+- What Big-O measures (growth with input size, not wall-clock on one machine)
+- Why we use it (choose scalable approach before coding)
+- One concrete tradeoff example for this week's topic (e.g., nested loops vs hash lookup)
 
 ## Snippets
 
@@ -89,10 +115,21 @@ Expected output:
 # concrete output line(s) for the snippet
 ```
 > One-line takeaway or gotcha.
+> DSA complexity note: `Time O(?)`, `Space O(?)`.
+Traversal (graphical):
+```text
+# step-by-step state transition for this snippet
+```
 
 ## Visual / Diagram *(required for DSA; optional for Python days)*
 
 <!-- ASCII art, Mermaid diagram, or table showing the data structure / algorithm flow -->
+
+For DSA, optional GIF support (when useful):
+- You may embed one GIF to show dynamic behavior (pointer movement, window shift, traversal order).
+- Still include ASCII or Mermaid fallback so the file remains readable in plain markdown viewers.
+- Add a one-line caption: what to observe in the animation.
+- Prefer repo-local assets when available (for example, `docs/assets/dsa_gifs/...`), otherwise use a stable source URL.
 
 ## Pitfalls
 
@@ -134,6 +171,7 @@ Use the right visual for each DSA topic so the concept is graspable at a glance:
 | Binary Search | Midpoint narrowing on sorted array | `[lo ... mid ... hi]` per iteration |
 | Backtracking | Decision tree (Mermaid or ASCII) | branch + prune markers |
 | Greedy / Intervals | Timeline ASCII with interval bars | `|---| |--|  |-----|` |
+| Any dynamic pointer/traversal flow | Optional GIF (+ required fallback) | GIF for intuition, plus ASCII/Mermaid retained in file |
 
 ---
 

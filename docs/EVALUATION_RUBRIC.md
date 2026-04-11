@@ -70,6 +70,16 @@ Every exercise maps to one or more **skills** from this canonical list. Any AI a
 | DSA-14 | Dynamic programming (1D, 2D) | 16–17 |
 | DSA-15 | Shortest paths | 18 |
 | DSA-16 | Tries & bit manipulation | 19 |
+| DSA-17 | Recursion fundamentals (base case, processed/unprocessed) | 11 |
+| DSA-18 | Monotonic deque patterns | 4–5 |
+| DSA-19 | Intervals (merge, overlap, scheduling) | 15 |
+| DSA-20 | String operations & algorithms (substring/consecutive string, KMP `k-map` idea, Rabin-Karp) | 4, 19 |
+| DSA-21 | Matrix traversal patterns (grid BFS/DFS, row/col scans) | 12, 17 |
+| DSA-22 | Math & number theory basics | 20 |
+| DSA-23 | Kadane / max-subarray reasoning | 2, 16 |
+| DSA-24 | Subsequence and subset-sum reasoning | 11, 16 |
+| DSA-25 | Pattern printing (loop + recursion warm-up) | Prep, 11 |
+| DSA-26 | Sorting algorithms (merge/quick/heap/counting) | 20 |
 
 **Usage:** Every `EXERCISE.md` must list which skill IDs each exercise targets. Evaluation reports must echo these IDs so progress is trackable across agents and sessions.
 
@@ -88,7 +98,7 @@ When you ask the agent to generate **Day N**, the output must satisfy **all** of
 | G6 | **Security** — no secrets in code; validate external paths/inputs | Review |
 | G7 | **Observability** (where relevant: CLI, services) — structured logging or clear exit codes | Review |
 
-**DSA weeks:** G3 includes complexity stated in docstrings; G7 may be N/A for pure algorithms.
+**DSA weeks:** G3 includes complexity coverage in `CODE.md`, `EXERCISE.md`, and DSA function docstrings (`code.py` and `exNN_*.py`); G7 may be N/A for pure algorithms.
 
 ---
 
@@ -120,7 +130,7 @@ Each exercise file should declare **in module docstring** or in **`EXERCISE.md`*
 | **Learning objectives** | 2–4 bullet outcomes |
 | **Must pass** | List of behaviors (given/when/then style ok) |
 | **Stretch** | Optional harder behaviors |
-| **Time/space** | For DSA: big-O; for Python I/O: streaming vs load-all |
+| **Time/space** | For DSA: explicit big-O per problem in `EXERCISE.md` and exercise docstrings; for Python I/O: streaming vs load-all |
 | **Failure modes** | What must not happen (e.g. crash on empty input) |
 
 **Scoring per file (ex01_basic, ex02_intermediate, ex03_advanced):**
@@ -182,6 +192,11 @@ After the agent suggests changes, re-run inline asserts and `ruff check`; only t
 | Agent skips industrial checklist | Paste §1 table into every generation prompt until habit forms |
 | No numeric score | Use §2 + §3 every time |
 | DSA CODE.md without diagrams | Must include Visual/Diagram section per [docs/CODE_TEMPLATE.md](./CODE_TEMPLATE.md) diagram guide |
+| DSA content missing Big-O usage explanation | Week 01 and other Big-O intros must explain what Big-O is used for in approach selection |
+| DSA files missing time/space complexity | Add explicit complexity for each discussed problem in DSA `.md` and `.py` files |
+| DSA week misses row-listed advanced subtopics | Read `DAILY_STUDY_PLAN.md` week row and ensure every listed subtopic appears in CODE.md or exercise specs |
+| GIF included without fallback | If using GIF in DSA docs, keep ASCII/Mermaid fallback for plain markdown viewers |
+| DSA snippets missing traversal visuals | Add a mini traversal block under each snippet/example expected output |
 
 ---
 

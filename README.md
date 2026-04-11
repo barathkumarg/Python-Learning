@@ -427,7 +427,8 @@ Big-O Cheat Sheet: https://www.bigocheatsheet.com
 | Topic | Key Patterns | Resource |
 |-------|-------------|----------|
 | Arrays | sliding window, prefix sum, Kadane's | [NeetCode](https://neetcode.io/roadmap) · [LeetCode Arrays](https://leetcode.com/tag/array/) |
-| Strings | two pointers, sliding window, KMP | [NeetCode](https://neetcode.io/roadmap) · [LeetCode Strings](https://leetcode.com/tag/string/) |
+| Strings | string operations, substring search, consecutive-string patterns, KMP (`k-map`/LPS), Rabin-Karp idea | [NeetCode](https://neetcode.io/roadmap) · [LeetCode Strings](https://leetcode.com/tag/string/) |
+| Sorting Algorithms | merge sort, quick sort, heap sort, counting/radix tradeoffs | [NeetCode](https://neetcode.io/roadmap) · [LeetCode Sorting](https://leetcode.com/tag/sorting/) |
 | Hash Maps & Sets | frequency count, two-sum variants, group anagrams | [NeetCode](https://neetcode.io/roadmap) · [LeetCode Hash](https://leetcode.com/tag/hash-table/) |
 | Stack (Monotonic) | next greater element, daily temperatures, largest rectangle | [NeetCode](https://neetcode.io/roadmap) · [LeetCode Stack](https://leetcode.com/tag/stack/) |
 | Queue & Deque | sliding window maximum, BFS, LRU cache | [Python Docs — collections.deque](https://docs.python.org/3/library/collections.html#collections.deque) |
@@ -440,6 +441,7 @@ Big-O Cheat Sheet: https://www.bigocheatsheet.com
 |-------|-------------|----------|
 | Two Pointers | 3Sum, container with water, trapping rain | [NeetCode](https://neetcode.io/roadmap) · [LeetCode 2P](https://leetcode.com/tag/two-pointers/) |
 | Sliding Window | variable/fixed, min window substring | [NeetCode](https://neetcode.io/roadmap) |
+| String Pattern Matching | Rabin-Karp rolling hash, KMP prefix map (`k-map`/LPS), exact substring search | [CP Algorithms — Prefix Function](https://cp-algorithms.com/string/prefix-function.html) · [CP Algorithms — String Hashing](https://cp-algorithms.com/string/string-hashing.html) |
 | Binary Trees | DFS pre/in/post, BFS level order, LCA, diameter | [NeetCode](https://neetcode.io/roadmap) · [VisuAlgo BST](https://visualgo.net/en/bst) |
 | Binary Search Tree | insert/delete/validate, kth smallest, BST iterator | [LeetCode BST](https://leetcode.com/tag/binary-search-tree/) |
 | Heaps | K largest/smallest, merge K sorted, median stream | [Python heapq](https://docs.python.org/3/library/heapq.html) |

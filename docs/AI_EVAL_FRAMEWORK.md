@@ -37,6 +37,8 @@ My solution files:
 Deliver exactly:
 1) Gate table: G1–G7 — pass/fail with one-line evidence each.
    (G3 = inline asserts pass + AI behavioral review, NOT pytest.)
+   For DSA submissions, include evidence that time/space complexity is present in `CODE.md`, `EXERCISE.md`, and DSA function docstrings.
+   For DSA submissions, also confirm the week's advanced subtopics from `DAILY_STUDY_PLAN.md` are actually covered.
 2) Dimension scores D1–D7 (1–5) + weighted total per docs/EVALUATION_RUBRIC.md §2.
 3) Per-file scores for ex01, ex02, ex03 (0–100) with breakdown per EXERCISE.md scoring section.
 4) Skills assessed: list each Skill ID from EXERCISE.md, rate proficiency (learning / developing / proficient / strong).
@@ -64,6 +66,12 @@ The evaluating agent must produce:
 | G5 Docstrings | ✅/❌ | one-line proof |
 | G6 Security | ✅/❌ | one-line proof |
 | G7 Observability | ✅/❌ | one-line proof or N/A |
+
+For DSA evaluations, G3 evidence must also confirm:
+- complexity is stated for each discussed problem in `EXERCISE.md`
+- complexity is present in DSA function docstrings (`code.py` and `exNN_*.py`)
+- row-listed weekly DSA subtopics are not skipped in generated artifacts
+- snippet-level traversal visuals are present for DSA `CODE.md` examples
 
 ### 3b. Dimension scores
 

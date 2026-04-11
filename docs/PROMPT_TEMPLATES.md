@@ -4,6 +4,7 @@ Your **copy-paste playbook** for daily workflow. Normative references:
 
 - [.agent.md](../.agent.md) — what to generate
 - [docs/CODE_TEMPLATE.md](./CODE_TEMPLATE.md) — CODE.md structure
+- [docs/DSA_VISUALS.md](./DSA_VISUALS.md) — DSA diagrams and optional GIF rules
 - [docs/EVALUATION_RUBRIC.md](./EVALUATION_RUBRIC.md) — gates G1–G7, scoring
 - [docs/AI_EVAL_FRAMEWORK.md](./AI_EVAL_FRAMEWORK.md) — evaluation protocol
 - [docs/SOURCE_REGISTRY.md](./SOURCE_REGISTRY.md) — curated external sources with per-day URLs
@@ -47,11 +48,14 @@ Mirror that source's concept progression. Include expected outputs in CODE.md sn
 
 **Generate a DSA week:**
 ```
-@.agent.md @docs/CODE_TEMPLATE.md @docs/EVALUATION_RUBRIC.md @docs/SOURCE_REGISTRY.md @DAILY_STUDY_PLAN.md
+@.agent.md @docs/CODE_TEMPLATE.md @docs/DSA_VISUALS.md @docs/EVALUATION_RUBRIC.md @docs/SOURCE_REGISTRY.md @DAILY_STUDY_PLAN.md
 Generate DSA Week [WW] — [topic] (dsa, week_WW_<slug>).
 Primary source: [copy the "Primary source" URL from DAILY_STUDY_PLAN.md for this week].
 LeetCode problems: [copy from SOURCE_REGISTRY.md DSA table].
-Include ASCII/Mermaid diagrams in CODE.md.
+Include ASCII/Mermaid diagrams in CODE.md (cover each core algorithm/topic discussed).
+Include Big-O usage explanation and time/space complexity for every discussed problem in DSA `.md` and `.py` files.
+Include a traversal visual block for every snippet/example in DSA `CODE.md`.
+Ensure all subtopics listed in the week's `DAILY_STUDY_PLAN.md` row are explicitly covered (do not skip advanced tags).
 ```
 
 **Evaluate your solution:**
@@ -125,7 +129,7 @@ End with: file list and self-check commands:
 Use when starting a **new DSA week**. Generates all 5 files with mandatory visual diagrams.
 
 ````
-You are following .agent.md, docs/CODE_TEMPLATE.md, docs/EVALUATION_RUBRIC.md, and docs/SOURCE_REGISTRY.md for this repo.
+You are following .agent.md, docs/CODE_TEMPLATE.md, docs/DSA_VISUALS.md, docs/EVALUATION_RUBRIC.md, and docs/SOURCE_REGISTRY.md for this repo.
 
 Generate the complete DSA module for:
 - Week: [WW]
@@ -141,10 +145,15 @@ Create exactly these artifacts:
 1) src/dsa/week_WW_<content>/CODE.md
    - Follow docs/CODE_TEMPLATE.md structure (target 80–120 lines).
    - MUST include a Visual/Diagram section with ASCII art or Mermaid diagram
-     showing the data structure and/or algorithm flow.
+     showing the data structure and/or algorithm flow for each core algorithm/topic discussed.
+   - MUST include a short "Big-O in practice" subsection (what Big-O is used for and how it guides approach selection).
    - MUST include Snippets section: 5–8 key operations, each with short text explanation + short code block + expected output/behavior.
+   - For each snippet/example, add a mini **Traversal (graphical)** block directly below expected output (ASCII steps or Mermaid).
    - Use the DSA diagram style guide in docs/CODE_TEMPLATE.md to pick the right visual.
+   - Optional: include one GIF for dynamic intuition, but always keep ASCII/Mermaid fallback in the file.
    - Concepts table must include time/space complexity for each operation.
+   - Every discussed problem/operation in CODE.md must explicitly state time/space complexity.
+   - MUST explicitly cover all subtopics named in this week's `DAILY_STUDY_PLAN.md` row (examples: Kadane, 3Sum dedupe, recursion processed/unprocessed state, interval patterns, string operations, substring/consecutive-string patterns, Rabin-Karp, KMP `k-map`, sorting algorithms, matrix traversal, math basics).
 
 2) src/dsa/week_WW_<content>/code.py
    - Reference implementations with complexity stated in every docstring.
@@ -154,17 +163,20 @@ Create exactly these artifacts:
    - Learning objectives with complexity awareness.
    - Skills assessed: list Skill IDs from docs/EVALUATION_RUBRIC.md §0 (DSA section) with exercise mapping.
    - Per-exercise specs: must-pass, stretch, failure modes, expected big-O.
+   - Include explicit expected time/space complexity for ex01, ex02, ex03.
+   - Include a tiny traversal snapshot for each exercise's main example.
    - Scoring section: 0–100 breakdown per file + dimension weights.
    - Suggested Practice: link the specific LeetCode problems listed above (use full URLs from SOURCE_REGISTRY.md).
 
 4) exercise/dsa/week_WW_<content>/ex01_basic.py
 5) exercise/dsa/week_WW_<content>/ex02_intermediate.py
 6) exercise/dsa/week_WW_<content>/ex03_advanced.py
-   - Stubs with TODO comments including expected complexity.
+   - Stubs with TODO comments including expected time and space complexity.
    - Module docstring with problem statement, signature, constraints, 2+ examples with expected outputs.
+   - Function docstring in each exercise file must include target time/space complexity.
    - if __name__ == "__main__": block with 2–3 inline assert statements and expected-output comments near sample calls.
 
-Enforce gates G1–G7 (G3 = inline asserts + complexity in docstrings).
+Enforce gates G1–G7 (G3 = inline asserts + complexity coverage in DSA CODE.md, EXERCISE.md, and DSA docstrings).
 
 End with: file list and self-check commands.
 ````
@@ -189,7 +201,7 @@ Use docs/SOURCE_REGISTRY.md to separate teaching-flow sources from production-co
 Use the secondary source URL from SOURCE_REGISTRY.md for API truth in code.py.
 For Day 03+, include expected outputs in CODE.md snippets and expected-output comments in code.py `__main__`.
 
-For DSA: include Visual/Diagram section in CODE.md with ASCII/Mermaid per the diagram style guide.
+For DSA: include Visual/Diagram section in CODE.md with ASCII/Mermaid per the diagram style guide, plus a short Big-O usage explanation and explicit time/space complexity for each discussed problem/operation. Optional GIF is allowed only with ASCII/Mermaid fallback.
 Do NOT create exercise/ files in this pass.
 ```
 
