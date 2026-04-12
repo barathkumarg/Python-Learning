@@ -26,7 +26,14 @@ def two_sum_indices(nums: list[int], target: int) -> tuple[int, int] | None:
     # TODO: Scan once and store value -> index in a dict.
     # TODO: For each value, check if `target - value` is already seen.
     # Sample: two_sum_indices([2, 7, 11, 15], 9) -> (0, 1)
-    raise NotImplementedError("implement two_sum_indices")
+    seek : dict[int, int] = {} # num : index
+    for index, num in enumerate(nums):
+        value = target - num
+        if value in seek:
+            return (seek.get(value), index)
+        seek[num] = index
+    return None
+    #raise NotImplementedError("implement two_sum_indices")
 
 
 if __name__ == "__main__":

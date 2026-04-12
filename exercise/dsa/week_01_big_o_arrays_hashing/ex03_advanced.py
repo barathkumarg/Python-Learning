@@ -20,6 +20,13 @@ Examples:
 from __future__ import annotations
 
 
+def anagram_signature(word: str) -> list[int]:
+    sign = [0] * 26
+    for char in word:
+        sign[ord('a') - ord(char)] +=1
+    return tuple(sign)
+
+
 def group_anagrams(words: list[str]) -> list[list[str]]:
     """Return deterministic anagram groups.
 
@@ -33,6 +40,14 @@ def group_anagrams(words: list[str]) -> list[list[str]]:
     # Sample expected output:
     # group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
     # -> [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]]
+    results : dict[tuple[int], list[str]] = {}
+    for word in words:
+        signature = anagram_signature(word)
+        results.setdefault(signature,[]).append(word)
+    final = [sorted(result) for result in results.values()]
+    return sorted(final, key = lambda result: (len(result), result[0]))
+
+
     raise NotImplementedError("implement group_anagrams")
 
 

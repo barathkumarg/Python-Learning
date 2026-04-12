@@ -25,6 +25,12 @@ def contains_duplicate(nums: list[int]) -> bool:
 
     # TODO: Use a set to track seen values.
     # Sample: contains_duplicate([1, 2, 3, 1]) -> True
+    seek : list[int] = []
+    for num in nums:
+        if num in seek:
+            return True
+        seek.append(num)
+    return False 
     raise NotImplementedError("implement contains_duplicate")
 
 

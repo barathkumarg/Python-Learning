@@ -87,13 +87,13 @@ def group_anagrams(words: list[str]) -> list[list[str]]:
 
 
 if __name__ == "__main__":
-    print(contains_duplicate([1, 2, 3, 1]))  # Expected output: True
-    print(contains_duplicate([1, 2, 3, 4]))  # Expected output: False
+    # print(contains_duplicate([1, 2, 3, 1]))  # Expected output: True
+    # print(contains_duplicate([1, 2, 3, 4]))  # Expected output: False
 
-    print(two_sum_indices([2, 7, 11, 15], 9))  # Expected output: (0, 1)
-    print(two_sum_indices([1, 2, 3], 99))  # Expected output: None
+    # print(two_sum_indices([2, 7, 11, 15], 9))  # Expected output: (0, 1)
+    # print(two_sum_indices([1, 2, 3], 99))  # Expected output: None
 
-    print(frequency_map(["api", "db", "api", "cache"]))  # Expected output: {'api': 2, 'db': 1, 'cache': 1}
+    # print(frequency_map(["api", "db", "api", "cache"]))  # Expected output: {'api': 2, 'db': 1, 'cache': 1}
 
     print(anagram_signature("tea") == anagram_signature("eat"))  # Expected output: True
 
