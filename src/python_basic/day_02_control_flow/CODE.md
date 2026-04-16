@@ -22,6 +22,11 @@ normalized = raw_status.strip().lower()
 if normalized not in {"created", "paid", "shipped", "cancelled"}:
     raise ValueError(f"unsupported status: {raw_status}")
 ```
+Expected output:
+```text
+normalize_status("PAID")    -> "paid"
+normalize_status("unknown") -> raises ValueError
+```
 > Guard clauses cut off invalid states before branching, reducing cognitive load.
 
 **`match` as a state machine** — explicit transitions per event.
@@ -31,10 +36,16 @@ match current, action:
         return "paid"
     case "paid", "ship":
         return "shipped"
-    case "paid", "cancel":
+    case "created" | "paid", "cancel":
         return "cancelled"
     case _:
         raise ValueError("illegal transition")
+```
+Expected output:
+```text
+transition("created", "pay")    -> "paid"
+transition("paid", "cancel")    -> "cancelled"
+transition("shipped", "cancel") -> raises ValueError
 ```
 > `match` makes legal paths obvious and rejects everything else via the catch-all.
 
@@ -46,6 +57,11 @@ for order in orders:
         continue
     selected.append(order["id"])
 ```
+Expected output:
+```text
+orders = [{"id": "A1", "total": 120}, {"id": "B2", "total": 40}]
+threshold = 100 -> ["A1"]
+```
 > `continue` removes the need for nested `if` blocks when skipping items.
 
 **Typed inputs/outputs** — accept streams and mockable pollers.
@@ -55,6 +71,11 @@ def collect_high_value_orders(orders: Iterable[dict[str, object]], threshold: fl
 
 def wait_for_terminal_status(poll: Callable[[], str], max_checks: int = 5) -> str:
     ...
+```
+Expected output:
+```text
+collect_high_value_orders([...], 100) -> ["A1", "C3"]
+wait_for_terminal_status(poller, 3)   -> "shipped"
 ```
 > `Iterable[...]` handles lists or generators; `Callable[[], str]` pins the poller contract for tests.
 
@@ -69,7 +90,39 @@ while attempts < max_checks:
 else:
     raise TimeoutError("status not reached in time")
 ```
+Expected output:
+```text
+poll returns ["created", "paid", "shipped"]
+wait_for_terminal_status(poll, 3) -> "shipped"
+poll returns ["created", "created", ...]
+wait_for_terminal_status(poll, 3) -> raises TimeoutError
+```
 > The `else` block runs only when the loop never hit `break`, making timeouts explicit.
+
+**Anti-pattern → corrected pattern** — avoid implicit fallthrough in status checks.
+```python
+# Anti-pattern: long if/elif chain with no default
+def bad_transition(current: str, action: str) -> str:
+    if current == "created" and action == "pay":
+        return "paid"
+    elif current == "paid" and action == "ship":
+        return "shipped"
+    # BUG: missing cancel + missing default = silent None return
+
+# Corrected: match with catch-all
+def good_transition(current: str, action: str) -> str:
+    match (current, action):
+        case ("created", "pay"): return "paid"
+        case ("paid", "ship"): return "shipped"
+        case ("created" | "paid", "cancel"): return "cancelled"
+        case _: raise ValueError(f"illegal: {current} + {action}")
+```
+Expected output:
+```text
+bad_transition("paid", "cancel")  -> None (silent bug!)
+good_transition("paid", "cancel") -> "cancelled"
+```
+> `match` with `case _` ensures every unhandled path raises explicitly.
 
 ## Visual / Diagram
 

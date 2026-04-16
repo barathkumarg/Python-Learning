@@ -40,12 +40,24 @@ When using any external source:
 
 ## Source buckets
 
-| Bucket | Best use | Avoid using it for |
-|--------|----------|--------------------|
-| Tutorial progression | `CODE.md` learning order and beginner examples | Copy-pasting long prose |
-| Production examples | `code.py` reference implementations and style cues | Full exercise specs without adaptation |
-| Exercise bank | `EXERCISE.md` must-pass/stretch ideas | Direct solution copying |
-| DSA problem archive | DSA practice links, stretch prompts, complexity framing | Production Python API design |
+| Bucket | Best use | Avoid using it for | Quality Tier |
+|--------|----------|--------------------|-------------|
+| Tutorial progression | `CODE.md` learning order and beginner examples | Copy-pasting long prose | T2 — Curated tutorial |
+| Production examples | `code.py` reference implementations and style cues | Full exercise specs without adaptation | T1 — Official docs |
+| Exercise bank | `EXERCISE.md` must-pass/stretch ideas | Direct solution copying | T3 — Community exercise |
+| DSA problem archive | DSA practice links, stretch prompts, complexity framing | Production Python API design | T2 — Curated tutorial |
+| Video resources | Concept reinforcement, visual walkthroughs | Primary teaching source (use docs first) | T2 — Curated tutorial |
+| Interactive tools | Live code visualization, playground experimentation | Formal reference (use docs for that) | T3 — Community exercise |
+| Books | Deep conceptual understanding, chapter-mapped study | Quick reference (use cheat sheets for that) | T1 — Authoritative |
+| Cheat sheets | Quick lookup during generation, complexity tables | In-depth learning (use tutorials for that) | T3 — Quick reference |
+
+### Quality Tier Legend
+
+| Tier | Meaning | When to use |
+|------|---------|-------------|
+| T1 — Official/Authoritative | Official docs, language specs, published books | Ground truth for API behavior, complexity proofs |
+| T2 — Curated tutorial | Vetted articles, established YouTube channels, maintained repos | Concept ordering, practical examples, video walkthroughs |
+| T3 — Community/Quick-ref | Exercise banks, cheat sheets, playground tools | Exercise inspiration, quick lookup, interactive exploration |
 
 ---
 
@@ -181,6 +193,56 @@ When using any external source:
 | coverage — Official docs | <https://coverage.readthedocs.io/> | Coverage measurement for Day 60 | Branch coverage, configuration, reporting. |
 | bandit — Official docs | <https://bandit.readthedocs.io/> | Security scanning for Day 62 | Rule set, configuration, severity levels. |
 | pyproject.toml spec | <https://packaging.python.org/en/latest/specifications/pyproject-toml/> | Packaging metadata for Days 14, 65 | Project metadata, build systems, tool config. |
+
+### Video resources (T2)
+
+| Source | URL | Best use in this repo | Coverage |
+|--------|-----|-----------------------|----------|
+| Corey Schafer — Python | <https://www.youtube.com/@coreyms> | Visual walkthroughs for Python basics through intermediate (OOP, generators, decorators, file I/O) | Days 01–30 |
+| ArjanCodes | <https://www.youtube.com/@ArjanCodes> | Design patterns, typing, testing, software architecture in Python | Days 15–70 |
+| mCoding (James Murphy) | <https://www.youtube.com/@mCoding> | Advanced Python internals, metaclasses, performance, bytecode | Days 51–70 |
+| sentdex | <https://www.youtube.com/@sentdex> | Practical Python projects, data manipulation, web scraping | General reinforcement |
+| Tech With Tim | <https://www.youtube.com/@TechWithTim> | FastAPI tutorials, project-based learning | Days 71–86 |
+| NeetCode — YouTube | <https://www.youtube.com/@NeetCode> | Algorithm pattern explanations, step-by-step DSA walkthroughs | DSA Weeks 01–20 |
+| Abdul Bari — Algorithms | <https://www.youtube.com/@abdul_bari> | Theory-heavy algorithm explanations (DP, graphs, sorting) | DSA Weeks 06–20 |
+| William Fiset — Data Structures | <https://www.youtube.com/@WilliamFiset-videos> | Detailed data structure implementations (trees, graphs, union-find) | DSA Weeks 07–14, 18 |
+| Back To Back SWE | <https://www.youtube.com/@BackToBackSWE> | Interview-style DSA explanations with visual diagrams | DSA Weeks 01–20 |
+| Reducible | <https://www.youtube.com/@Reducible> | Animated algorithm visualizations (sorting, graphs, DP) | DSA Weeks 12–20 |
+
+### Interactive tools and playgrounds (T3)
+
+| Source | URL | Best use in this repo | Notes |
+|--------|-----|-----------------------|-------|
+| Python Tutor | <https://pythontutor.com/> | Step-by-step execution visualization for Python code | Excellent for understanding recursion, closures, and variable scoping |
+| LeetCode Playground | <https://leetcode.com/playground/> | Quick DSA code testing without local setup | Use for verifying exercise solutions and edge cases |
+| Replit | <https://replit.com/languages/python3> | Shareable Python environments for practice | Use for sandbox experimentation |
+| Visualgo | <https://visualgo.net/en> | Algorithm and data structure animations | Primary visual reference for DSA diagrams and traversal understanding |
+| Algorithm Visualizer | <https://algorithm-visualizer.org/> | Interactive step-through of sorting, searching, graph algorithms | Supplement for DSA Weeks 01–20 |
+| Python Playground (W3Schools) | <https://www.w3schools.com/python/trypython.asp?filename=demo_default> | Quick Python syntax testing | For Days 01–14 basics verification |
+
+### Cheat sheets and quick references (T3)
+
+| Source | URL | Best use in this repo | Notes |
+|--------|-----|-----------------------|-------|
+| Big-O Cheat Sheet | <https://www.bigocheatsheet.com/> | Complexity reference for `CODE.md` concepts tables | Link in DSA Further reading sections |
+| Python Cheat Sheet (gto76) | <https://github.com/gto76/python-cheatsheet> | Comprehensive Python syntax quick-ref | Quick lookup during generation |
+| Python `collections` Quick-Ref | <https://docs.python.org/3/library/collections.html> | Counter, defaultdict, deque, namedtuple | Days 05–07, DSA Weeks 04–05 |
+| Type Hints Cheat Sheet (mypy) | <https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html> | Quick type annotation reference | Days 01, 31–34 |
+| Sorting Algorithm Comparison | <https://www.toptal.com/developers/sorting-algorithms> | Visual sorting comparison with animations | DSA Week 20 |
+| Python Built-in Functions | <https://docs.python.org/3/library/functions.html> | Quick lookup for map, filter, zip, sorted, etc. | Day 12 |
+| FastAPI Cheat Sheet | <https://fastapi.tiangolo.com/tutorial/> | Quick API pattern reference | Days 71–86 |
+
+### Book references (T1)
+
+| Book | Author | Best use in this repo | Chapter mapping |
+|------|--------|-----------------------|-----------------|
+| Fluent Python (2nd ed.) | Luciano Ramalho | Deep Python understanding — data model, iterators, generators, decorators, metaclasses | Ch 1–4: Days 01–14, Ch 5–7: Days 15–21, Ch 14–17: Days 22–30, Ch 22–24: Days 51–55 |
+| Grokking Algorithms | Aditya Bhargava | Visual algorithm explanations — ideal for DSA concept intros | Ch 1: Week 01, Ch 4: Week 06, Ch 6: Weeks 12–13, Ch 7: Week 18, Ch 9: Weeks 16–17 |
+| Python Cookbook (3rd ed.) | David Beazley & Brian K. Jones | Production Python patterns and recipes | Recipes per topic: data structures, strings, iterators, concurrency |
+| Introduction to Algorithms (CLRS) | Cormen et al. | Formal algorithm proofs and complexity analysis | Ch 1–4: Week 01, Ch 6–9: Week 20, Ch 15: Weeks 16–17, Ch 22–26: Weeks 12–14, 18 |
+| Effective Python (2nd ed.) | Brett Slatkin | Pythonic patterns, best practices, industrial style | 90 items mapped across all Python phases |
+| Architecture Patterns with Python | Harry Percival & Bob Gregory | Repository pattern, DI, event-driven design | Days 63–64, 79 |
+| Python Testing with pytest | Brian Okken | Testing patterns and fixtures | Days 47, 59–60 |
 
 ---
 
@@ -371,7 +433,7 @@ Use:
 
 - Official docs for exact behavior
 - Real Python materials for code shape
-- Repo conventions from `docs/CODE_TEMPLATE.md` and `docs/EVALUATION_RUBRIC.md`
+- Repo conventions from `.agent.md` and `docs/RUBRIC.md`
 
 Required bar:
 
@@ -394,7 +456,7 @@ Required transformation:
 
 - Convert generic challenge text into repo-specific learning objectives
 - Add must-pass, stretch, and failure modes
-- Map each exercise to Skill IDs from `docs/EVALUATION_RUBRIC.md`
+- Map each exercise to Skill IDs from `docs/RUBRIC.md`
 - Add scoring and self-check sections
 - Keep learner tasks distinct from `src/.../code.py`
 - Include 1-2 Suggested Practice links from this registry
@@ -447,7 +509,7 @@ Before generating a new day or week, confirm:
 - The source role is clear: progression, production style, or exercise bank.
 - You opened the primary source URL from the per-day table before writing.
 - `CODE.md` follows the source order without copying.
-- `code.py` meets the industrial checklist in `docs/EVALUATION_RUBRIC.md`.
+- `code.py` meets gates G1–G7 in `.agent.md §2`.
 - `EXERCISE.md` and `ex01` to `ex03` are original repo-shaped tasks, not copied challenge text.
 - `EXERCISE.md` Suggested Practice links come from this registry's LeetCode/NeetCode table.
 

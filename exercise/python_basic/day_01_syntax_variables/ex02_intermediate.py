@@ -23,21 +23,17 @@ Examples:
 
 def parse_retry_count(raw: str) -> int:
     """Parse and validate retry count in the range 0..5."""
-    # TODO:
     # 1) Convert input string to int
     try:
-        raw_int = int(raw)
-    except:
-        raise ValueError("Conversion error ")
-    # 2) If conversion fails, raise ValueError with message
-    # 3) Enforce range 0..5 inclusive
-    if raw_int < 0:
-        raise ValueError("Less than 0 not included")
-    if raw_int > 5:
-        raise ValueError("More than 5 ")
-    return raw_int
-    # Sample: parse_retry_count("3") -> 3
-    #raise NotImplementedError("Implement parse_retry_count")
+        count = int(raw)
+    except ValueError as exc:
+        raise ValueError(f"retry count must be an integer, got {raw!r}") from exc
+    # 2) Enforce range 0..5 inclusive
+    if count < 0:
+        raise ValueError(f"retry count must be >= 0, got {count}")
+    if count > 5:
+        raise ValueError(f"retry count must be <= 5, got {count}")
+    return count
 
 
 if __name__ == "__main__":

@@ -1,340 +1,93 @@
-# Prompt Templates — Generate → Study → Solve → Evaluate
+# Prompt Templates — Copy-Paste Playbook
 
-Your **copy-paste playbook** for daily workflow. Normative references:
-
-- [.agent.md](../.agent.md) — what to generate
-- [docs/CODE_TEMPLATE.md](./CODE_TEMPLATE.md) — CODE.md structure
-- [docs/DSA_VISUALS.md](./DSA_VISUALS.md) — DSA diagrams and optional GIF rules
-- [docs/EVALUATION_RUBRIC.md](./EVALUATION_RUBRIC.md) — gates G1–G7, scoring
-- [docs/AI_EVAL_FRAMEWORK.md](./AI_EVAL_FRAMEWORK.md) — evaluation protocol
-- [docs/SOURCE_REGISTRY.md](./SOURCE_REGISTRY.md) — curated external sources with per-day URLs
-- [DAILY_STUDY_PLAN.md](../DAILY_STUDY_PLAN.md) — day/week + track + slugs + primary sources
-
-**Fill in:** `[NN]`, `[topic]`, `<track>`, `day_XX_<slug>` from your study plan.
+> **Required files:** `.agent.md` (generation rules) · `docs/RUBRIC.md` (scoring & evaluation).
+> **Look up first:** `DAILY_STUDY_PLAN.md` → day/week, slug, subtopics, primary source URL.
 
 ---
 
-## §0 Efficient generation workflow (read this first)
+## Generate a Python day
 
-Before using any prompt below, follow this 3-step workflow for maximum speed and quality:
-
-1. **Look up the day in DAILY_STUDY_PLAN.md.** Note the slug, subtopics, and primary source column.
-2. **Open the primary source URL** from `docs/SOURCE_REGISTRY.md` per-day mapping table. Skim its headings and concept order. This takes 2 minutes and saves 20 minutes of aimless generation.
-3. **Use the right prompt template below.** Pick the one that matches what you need:
-   - Generating a full day? → §2
-   - Generating a full DSA week? → §3
-   - Generating just the study content (CODE.md + code.py)? → §4
-   - Generating just exercises? → §5
-   - Evaluating your solution? → §7
-
-**Key efficiency rules:**
-- Always include `@docs/SOURCE_REGISTRY.md` when generating — it contains the exact URL to use for each day.
-- Never generate without reading the primary source first. Mirror its progression, don't invent one.
-- Validate gates G1-G7 as you generate, not after. Type hints, explicit errors, docstrings — add them in the first pass.
-
----
-
-## §1 Quick-fire one-liners (daily use — copy and go)
-
-These are the prompts you'll fire most often. Copy, fill in the blanks, paste into your AI agent.
-
-**Generate a Python day:**
 ```
-@.agent.md @docs/CODE_TEMPLATE.md @docs/EVALUATION_RUBRIC.md @docs/SOURCE_REGISTRY.md @DAILY_STUDY_PLAN.md
+@.agent.md @docs/RUBRIC.md @DAILY_STUDY_PLAN.md @docs/SOURCE_REGISTRY.md
+
 Generate Day [NN] — [topic] (<track>, day_XX_<slug>).
-Primary source: [copy the "Primary source" URL from DAILY_STUDY_PLAN.md for this day].
-Mirror that source's concept progression. Include expected outputs in CODE.md snippets, code.py `__main__` comments, and exercise examples. 5-file output.
+Primary source: [URL from DAILY_STUDY_PLAN.md].
+Create 5 files per .agent.md §3. Mirror the source's concept order.
+Pass gates G1–G7. End with file list + self-check commands.
 ```
 
-**Generate a DSA week:**
+---
+
+## Generate a DSA week
+
 ```
-@.agent.md @docs/CODE_TEMPLATE.md @docs/DSA_VISUALS.md @docs/EVALUATION_RUBRIC.md @docs/SOURCE_REGISTRY.md @DAILY_STUDY_PLAN.md
+@.agent.md @docs/RUBRIC.md @DAILY_STUDY_PLAN.md @docs/SOURCE_REGISTRY.md
+
 Generate DSA Week [WW] — [topic] (dsa, week_WW_<slug>).
-Primary source: [copy the "Primary source" URL from DAILY_STUDY_PLAN.md for this week].
-LeetCode problems: [copy from SOURCE_REGISTRY.md DSA table].
-Include ASCII/Mermaid diagrams in CODE.md (cover each core algorithm/topic discussed).
-Include Big-O usage explanation and time/space complexity for every discussed problem in DSA `.md` and `.py` files.
-Include a traversal visual block for every snippet/example in DSA `CODE.md`.
-Ensure all subtopics listed in the week's `DAILY_STUDY_PLAN.md` row are explicitly covered (do not skip advanced tags).
-```
-
-**Evaluate your solution:**
-```
-@docs/AI_EVAL_FRAMEWORK.md @docs/EVALUATION_RUBRIC.md
-Grade my Day [NN] at exercise/<track>/day_XX_<slug>/.
+Primary source: [URL]. LeetCode: [URLs from SOURCE_REGISTRY.md].
+Create 5 files per .agent.md §3 + §4 (DSA extras).
+Include Visual/Diagram section, traversal blocks, Big-O section.
+Cover all subtopics from DAILY_STUDY_PLAN.md row.
+Pass gates G1–G7. End with file list + self-check commands.
 ```
 
 ---
 
-## §2 Full Day module — Python
-
-Use when starting a **new Python day**. Generates all 5 files.
-
-````
-You are following .agent.md, docs/CODE_TEMPLATE.md, docs/EVALUATION_RUBRIC.md, and docs/SOURCE_REGISTRY.md for this repo.
-
-Generate the complete module for:
-- Day: [NN]
-- Topic: [topic]
-- Track: <track>
-- Slug: day_XX_<content>
-- Primary source: [URL from SOURCE_REGISTRY.md per-day table for this day]
-
-Read README.md, DAILY_STUDY_PLAN.md (this day's row), docs/EVALUATION_RUBRIC.md, and docs/SOURCE_REGISTRY.md before writing.
-Open the primary source URL and mirror its concept progression for CODE.md. Do not copy its wording or examples verbatim — paraphrase and create fresh production-style examples.
-Use docs/SOURCE_REGISTRY.md to decide which sources are best for `CODE.md`, `code.py`, and `EXERCISE.md`.
-
-Create exactly these artifacts:
-
-1) src/<track>/day_XX_<content>/CODE.md
-   - Follow docs/CODE_TEMPLATE.md structure exactly (target 80–120 lines).
-   - TL;DR → Concepts table → Snippets (6–9 key concepts, each: short textual explanation + short code block + expected output) → Pitfalls → Why this design → Further reading.
-   - Keep it code-first, concise, and complete: cover all core concepts for the day topic.
-   - Mirror the primary source's concept order, then add repo-specific production notes.
-
-2) src/<track>/day_XX_<content>/code.py
-   - Module docstring explaining design choices.
-   - 3–5 production-quality reference examples with type hints and docstrings.
-   - In `if __name__ == "__main__":`, add expected-output comments for each demo call.
-   - Use official docs (URL from SOURCE_REGISTRY.md) for API truth.
-
-3) exercise/<track>/day_XX_<content>/EXERCISE.md
-   - Learning objectives (2–4 bullets).
-   - Skills assessed: list Skill IDs from docs/EVALUATION_RUBRIC.md §0 with exercise mapping.
-   - Per-exercise specs: must-pass, stretch, failure modes.
-   - Scoring section: 0–100 breakdown per file + dimension weights from docs/EVALUATION_RUBRIC.md.
-   - Suggested Practice section: 1–2 external links from SOURCE_REGISTRY.md per-day table.
-
-4) exercise/<track>/day_XX_<content>/ex01_basic.py
-5) exercise/<track>/day_XX_<content>/ex02_intermediate.py
-6) exercise/<track>/day_XX_<content>/ex03_advanced.py
-   - Starter stubs: function/class skeletons + TODO comments.
-   - Do NOT provide full implementations.
-   - Module docstring with: problem statement, signature, constraints, 2+ examples with expected outputs.
-   - Each TODO includes sample input → expected output.
-   - if __name__ == "__main__": block with 2–3 inline assert statements for self-check and expected-output comments near sample calls.
-   - Use raise NotImplementedError() for unimplemented bodies.
-
-Industrial checklist: enforce docs/EVALUATION_RUBRIC.md §1 gates G1–G7.
-
-End with: file list and self-check commands:
-  python ex01_basic.py && python ex02_intermediate.py && python ex03_advanced.py
-  ruff check exercise/<track>/day_XX_<content>/
-````
-
----
-
-## §3 Full DSA week module
-
-Use when starting a **new DSA week**. Generates all 5 files with mandatory visual diagrams.
-
-````
-You are following .agent.md, docs/CODE_TEMPLATE.md, docs/DSA_VISUALS.md, docs/EVALUATION_RUBRIC.md, and docs/SOURCE_REGISTRY.md for this repo.
-
-Generate the complete DSA module for:
-- Week: [WW]
-- Topic: [topic]
-- Slug: week_WW_<content>
-- Primary source: [NeetCode roadmap URL from SOURCE_REGISTRY.md]
-- LeetCode problems: [copy URLs from SOURCE_REGISTRY.md DSA per-week table]
-
-Read DAILY_STUDY_PLAN.md (this week's section under "Parallel DSA") before writing.
-
-Create exactly these artifacts:
-
-1) src/dsa/week_WW_<content>/CODE.md
-   - Follow docs/CODE_TEMPLATE.md structure (target 80–120 lines).
-   - MUST include a Visual/Diagram section with ASCII art or Mermaid diagram
-     showing the data structure and/or algorithm flow for each core algorithm/topic discussed.
-   - MUST include a short "Big-O in practice" subsection (what Big-O is used for and how it guides approach selection).
-   - MUST include Snippets section: 5–8 key operations, each with short text explanation + short code block + expected output/behavior.
-   - For each snippet/example, add a mini **Traversal (graphical)** block directly below expected output (ASCII steps or Mermaid).
-   - Use the DSA diagram style guide in docs/CODE_TEMPLATE.md to pick the right visual.
-   - Optional: include one GIF for dynamic intuition, but always keep ASCII/Mermaid fallback in the file.
-   - Concepts table must include time/space complexity for each operation.
-   - Every discussed problem/operation in CODE.md must explicitly state time/space complexity.
-   - MUST explicitly cover all subtopics named in this week's `DAILY_STUDY_PLAN.md` row (examples: Kadane, 3Sum dedupe, recursion processed/unprocessed state, interval patterns, string operations, substring/consecutive-string patterns, Rabin-Karp, KMP `k-map`, sorting algorithms, matrix traversal, math basics).
-
-2) src/dsa/week_WW_<content>/code.py
-   - Reference implementations with complexity stated in every docstring.
-   - Use your own examples — do NOT copy proprietary problem text verbatim.
-
-3) exercise/dsa/week_WW_<content>/EXERCISE.md
-   - Learning objectives with complexity awareness.
-   - Skills assessed: list Skill IDs from docs/EVALUATION_RUBRIC.md §0 (DSA section) with exercise mapping.
-   - Per-exercise specs: must-pass, stretch, failure modes, expected big-O.
-   - Include explicit expected time/space complexity for ex01, ex02, ex03.
-   - Include a tiny traversal snapshot for each exercise's main example.
-   - Scoring section: 0–100 breakdown per file + dimension weights.
-   - Suggested Practice: link the specific LeetCode problems listed above (use full URLs from SOURCE_REGISTRY.md).
-
-4) exercise/dsa/week_WW_<content>/ex01_basic.py
-5) exercise/dsa/week_WW_<content>/ex02_intermediate.py
-6) exercise/dsa/week_WW_<content>/ex03_advanced.py
-   - Stubs with TODO comments including expected time and space complexity.
-   - Module docstring with problem statement, signature, constraints, 2+ examples with expected outputs.
-   - Function docstring in each exercise file must include target time/space complexity.
-   - if __name__ == "__main__": block with 2–3 inline assert statements and expected-output comments near sample calls.
-
-Enforce gates G1–G7 (G3 = inline asserts + complexity coverage in DSA CODE.md, EXERCISE.md, and DSA docstrings).
-
-End with: file list and self-check commands.
-````
-
----
-
-## §4 Generate only CODE (study first, exercise later)
-
-Use when you want to study the topic before creating exercises.
+## Generate only CODE (study first)
 
 ```
-@.agent.md @docs/CODE_TEMPLATE.md @docs/SOURCE_REGISTRY.md @DAILY_STUDY_PLAN.md
-Generate ONLY:
-- src/<track>/day_XX_<content>/CODE.md  (follow docs/CODE_TEMPLATE.md)
-- src/<track>/day_XX_<content>/code.py
+@.agent.md @DAILY_STUDY_PLAN.md @docs/SOURCE_REGISTRY.md
 
-Day: [NN] — [topic] (<track>, day_XX_<slug>)
-Primary source: [URL from SOURCE_REGISTRY.md per-day table]
-
-Mirror that source's conceptual order in your own words. Example for Day 03 Functions: define -> call -> return -> defaults -> `*args` -> `**kwargs` -> unpacking -> `lambda`.
-Use docs/SOURCE_REGISTRY.md to separate teaching-flow sources from production-code sources.
-Use the secondary source URL from SOURCE_REGISTRY.md for API truth in code.py.
-For Day 03+, include expected outputs in CODE.md snippets and expected-output comments in code.py `__main__`.
-
-For DSA: include Visual/Diagram section in CODE.md with ASCII/Mermaid per the diagram style guide, plus a short Big-O usage explanation and explicit time/space complexity for each discussed problem/operation. Optional GIF is allowed only with ASCII/Mermaid fallback.
-Do NOT create exercise/ files in this pass.
+Generate ONLY src/<track>/day_XX_<slug>/CODE.md + code.py.
+Day [NN] — [topic]. Primary source: [URL].
+Mirror source order. Do NOT create exercise files.
 ```
 
 ---
 
-## §5 Generate only exercises (after CODE is done)
-
-Use after you've studied the CODE.md and code.py content.
+## Generate only exercises
 
 ```
-@.agent.md @docs/EVALUATION_RUBRIC.md @docs/SOURCE_REGISTRY.md @DAILY_STUDY_PLAN.md
-Generate ONLY under exercise/<track>/day_XX_<content>/:
+@.agent.md @docs/RUBRIC.md @DAILY_STUDY_PLAN.md @docs/SOURCE_REGISTRY.md
 
-- EXERCISE.md (objectives, per-exercise specs, scoring 0–100, suggested practice links from SOURCE_REGISTRY.md)
-- ex01_basic.py, ex02_intermediate.py, ex03_advanced.py
-  (stubs with TODOs, inline assert runners in __main__, expected-output examples/comments, no full implementations)
-
-Day: [NN] — [topic] (<track>, day_XX_<slug>)
-Exercise bank source: [URL from SOURCE_REGISTRY.md per-day table]
-
-Use docs/SOURCE_REGISTRY.md to pull exercise ideas from exercise banks without copying challenge text verbatim.
-Include Suggested Practice links from SOURCE_REGISTRY.md per-day table.
-
-Do NOT create CODE.md, code.py, EVALUATION.md, or test_exercises.py.
+Generate ONLY exercise/<track>/day_XX_<slug>/ (EXERCISE.md + ex01–ex03).
+Day [NN] — [topic]. Do NOT create CODE.md or code.py.
 ```
 
 ---
 
-## §6 Self-check (after implementing exercises)
+## Evaluate your solution
 
-Run before requesting AI evaluation:
-
-```bash
-# Lint
-ruff check exercise/<track>/day_XX_<content>/
-
-# Inline assert checks
-python exercise/<track>/day_XX_<content>/ex01_basic.py
-python exercise/<track>/day_XX_<content>/ex02_intermediate.py
-python exercise/<track>/day_XX_<content>/ex03_advanced.py
 ```
+@.agent.md @docs/RUBRIC.md
 
-All 3 scripts must exit cleanly. Then score locally using `EXERCISE.md` scoring section.
+Grade Day [NN] at exercise/<track>/day_XX_<slug>/.
+Follow docs/RUBRIC.md §4 evaluation protocol exactly.
+```
 
 ---
 
-## §7 Agent evaluation (after your solution is implemented)
-
-Use the full template from [docs/AI_EVAL_FRAMEWORK.md §2](./AI_EVAL_FRAMEWORK.md):
+## Batch generation
 
 ```
-@docs/AI_EVAL_FRAMEWORK.md @docs/EVALUATION_RUBRIC.md
+@.agent.md @docs/RUBRIC.md @DAILY_STUDY_PLAN.md @docs/SOURCE_REGISTRY.md
 
-Grade my solution for:
-- Day: [NN]
-- Topic: [topic]
-- Track: <track>
-- Folder: exercise/<track>/day_XX_<content>/
-
-Read the EXERCISE.md in that folder for must-pass, stretch, and scoring criteria.
-
-My solution files:
-- ex01_basic.py: [attach or path]
-- ex02_intermediate.py: [attach or path]
-- ex03_advanced.py: [attach or path]
-
-Deliver exactly:
-1) Gate table: G1–G7 — pass/fail with one-line evidence each.
-2) Dimension scores D1–D7 (1–5) + weighted total.
-3) Per-file scores for ex01, ex02, ex03 (0–100) with breakdown.
-4) Skills assessed: list each Skill ID from EXERCISE.md, rate proficiency (learning/developing/proficient/strong).
-5) Top 3 concrete improvements (code-level, with file:line references).
-6) One rewritten snippet fixing the worst issue found.
-7) Verdict: PASS (≥75 all files) or REWORK (which file + criterion to fix).
+Generate these days as a batch (5 files each, per .agent.md §3):
+- Day [NN] — [topic] (<track>, day_XX_<slug>) — Source: [URL]
+- Day [NN+1] — [topic] (<track>, day_XX_<slug>) — Source: [URL]
+Validate G1–G7 per day. End with combined self-check commands.
 ```
-
-Feedback loop (from [AI_EVAL_FRAMEWORK.md §4](./AI_EVAL_FRAMEWORK.md)):
-- **< 75** → fix weakest criterion and re-evaluate.
-- **≥ 75** → pass, proceed to next day.
-- **≥ 90** → strong pass, skip stretch if desired.
 
 ---
 
-## §8 Batch generation (multiple days at once)
-
-Use when you want to generate several days in one session (e.g., a full week).
+## Rework (after evaluation fails)
 
 ```
-@.agent.md @docs/CODE_TEMPLATE.md @docs/EVALUATION_RUBRIC.md @docs/SOURCE_REGISTRY.md @DAILY_STUDY_PLAN.md
+@.agent.md @docs/RUBRIC.md
 
-Generate the following days as a batch. For each day, create the full 5-file module
-following the same rules as §2.
-
-Days to generate:
-- Day [NN] — [topic] (<track>, day_XX_<slug>) — Primary source: [URL]
-- Day [NN+1] — [topic] (<track>, day_XX_<slug>) — Primary source: [URL]
-- Day [NN+2] — [topic] (<track>, day_XX_<slug>) — Primary source: [URL]
-
-For each day:
-1. Open the primary source URL from docs/SOURCE_REGISTRY.md.
-2. Mirror the source's concept progression.
-3. Generate CODE.md, code.py, EXERCISE.md, ex01-ex03.
-4. Validate G1–G7 gates before moving to the next day.
-
-End with a combined self-check command block for all days.
-```
-
-**Note:** Batch generation works best for days that are closely related (e.g., Days 04-05 Lists and Tuples). Avoid batching unrelated topics.
-
----
-
-## §9 Rework prompt (after evaluation fails)
-
-Use when an evaluation returns REWORK with specific issues.
-
-```
-@docs/AI_EVAL_FRAMEWORK.md @docs/EVALUATION_RUBRIC.md @docs/SOURCE_REGISTRY.md
-
-Fix the following issues identified in the evaluation of Day [NN]:
-
-Issues to fix:
-1. [paste issue from evaluation]
-2. [paste issue from evaluation]
-3. [paste issue from evaluation]
-
-Files affected:
-- exercise/<track>/day_XX_<slug>/exNN_*.py
-
-Rules:
-- Fix only the identified issues. Do not change passing code.
-- Maintain G1–G7 gate compliance.
-- Run `ruff check` after fixing.
-- Run inline asserts after fixing.
-
-After fixing, re-evaluate the affected files only.
+Fix these issues from Day [NN] evaluation:
+1. [paste issue]
+2. [paste issue]
+Files: exercise/<track>/day_XX_<slug>/exNN_*.py
+Fix only listed issues. Maintain G1–G7. Re-run ruff + asserts.
 ```

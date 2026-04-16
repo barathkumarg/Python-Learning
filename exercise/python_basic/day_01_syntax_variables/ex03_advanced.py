@@ -27,19 +27,15 @@ Examples:
 
 def build_runtime_banner(app_name: str, env: str, debug: bool, workers: int) -> str:
     """Build a startup banner string for logs."""
-    # TODO:
     # 1) Validate app_name is not blank
-    if not app_name:
-        raise ValueError("Name was null")
+    if not app_name.strip():
+        raise ValueError("app_name must not be empty")
     # 2) Validate workers > 0
-    if workers <=0:
-        raise ValueError("Vlaue less or equal to 0")
+    if workers <= 0:
+        raise ValueError(f"workers must be > 0, got {workers}")
     # 3) Uppercase env and compose exact output format
     env = env.upper()
-    # Sample: build_runtime_banner("InventoryAPI", "prod", False, 4)
-    # -> "[PROD] app=InventoryAPI debug=False workers=4"
     return f'[{env}] app={app_name} debug={debug} workers={workers}'
-    # raise NotImplementedError("Implement build_runtime_banner")
 
 
 if __name__ == "__main__":

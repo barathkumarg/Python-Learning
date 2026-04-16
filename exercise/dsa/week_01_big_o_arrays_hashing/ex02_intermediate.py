@@ -33,7 +33,6 @@ def two_sum_indices(nums: list[int], target: int) -> tuple[int, int] | None:
             return (seek.get(value), index)
         seek[num] = index
     return None
-    #raise NotImplementedError("implement two_sum_indices")
 
 
 if __name__ == "__main__":

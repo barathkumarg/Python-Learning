@@ -24,24 +24,33 @@ def next_status(current: str, action: str) -> str:
     # return "paid" when current="created" and action="pay"
     # return "shipped" when current="paid" and action="ship"
     # return "cancelled" when current in {"created", "paid"} and action="cancel"
+    current = current.strip().lower()
+    action = action.strip().lower()
     match (current, action):
         case ("created", "pay"):
             return "paid"
         case ("paid", "ship"):
             return "shipped"
-        case ("created", "paid"):
+        case ("created" | "paid", "cancel"):
             return "cancelled"
         case _:
-            raise ValueError("Value not accepted")
+            raise ValueError(
+                f"illegal transition: {current!r} + {action!r}"
+            )
 
 
 if __name__ == "__main__":
+    # Expected output: paid
     assert next_status("created", "pay") == "paid"
+    # Expected output: shipped
     assert next_status("paid", "ship") == "shipped"
+    # Expected output: cancelled
+    assert next_status("created", "cancel") == "cancelled"
+    assert next_status("paid", "cancel") == "cancelled"
     try:
         next_status("shipped", "pay")
     except ValueError:
-        pass
+        pass  # expected
     else:
         raise AssertionError("expected ValueError for illegal transition")
-    print("ex01: all asserts passed ✓")
+    print("ex01_basic: all asserts passed ✓")

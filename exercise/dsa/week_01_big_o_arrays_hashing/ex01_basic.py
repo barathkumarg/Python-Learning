@@ -23,15 +23,14 @@ def contains_duplicate(nums: list[int]) -> bool:
         Time O(n), Space O(n)
     """
 
-    # TODO: Use a set to track seen values.
+    # Use a set to track seen values — O(1) average membership check.
     # Sample: contains_duplicate([1, 2, 3, 1]) -> True
-    seek : list[int] = []
+    seen: set[int] = set()
     for num in nums:
-        if num in seek:
+        if num in seen:
             return True
-        seek.append(num)
-    return False 
-    raise NotImplementedError("implement contains_duplicate")
+        seen.add(num)
+    return False
 
 
 if __name__ == "__main__":

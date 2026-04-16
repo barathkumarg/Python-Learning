@@ -20,10 +20,11 @@ Examples:
 from __future__ import annotations
 
 
-def anagram_signature(word: str) -> list[int]:
+def anagram_signature(word: str) -> tuple[int, ...]:
+    """Return a 26-element frequency tuple keyed by character position."""
     sign = [0] * 26
     for char in word:
-        sign[ord('a') - ord(char)] +=1
+        sign[ord(char) - ord('a')] += 1
     return tuple(sign)
 
 
@@ -40,15 +41,12 @@ def group_anagrams(words: list[str]) -> list[list[str]]:
     # Sample expected output:
     # group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
     # -> [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]]
-    results : dict[tuple[int], list[str]] = {}
+    results: dict[tuple[int, ...], list[str]] = {}
     for word in words:
         signature = anagram_signature(word)
         results.setdefault(signature,[]).append(word)
     final = [sorted(result) for result in results.values()]
-    return sorted(final, key = lambda result: (len(result), result[0]))
-
-
-    raise NotImplementedError("implement group_anagrams")
+    return sorted(final, key=lambda result: (len(result), result[0]))
 
 
 if __name__ == "__main__":

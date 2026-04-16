@@ -104,7 +104,7 @@ sort each group, then sort outer list
 
 Pass target: >= 75 per file.
 
-## Dimension weights (from docs/EVALUATION_RUBRIC.md)
+## Dimension weights (from docs/RUBRIC.md)
 
 | Dimension | Weight |
 |-----------|--------|

@@ -1,7 +1,7 @@
 # Daily Python + DSA Study Plan
 
 > **Role:** Professional backend Python + DSA tutor track with code-first teaching, industrial-style reference code, and graded exercises.  
-> **Companions:** [README.md](./README.md) · [.agent.md](./.agent.md) · [docs/CODE_TEMPLATE.md](./docs/CODE_TEMPLATE.md) · [docs/EVALUATION_RUBRIC.md](./docs/EVALUATION_RUBRIC.md) · [docs/AI_EVAL_FRAMEWORK.md](./docs/AI_EVAL_FRAMEWORK.md) · [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md)
+> **Companions:** [README.md](./README.md) · [.agent.md](./.agent.md) · [docs/RUBRIC.md](./docs/RUBRIC.md) · [docs/PROMPT_TEMPLATES.md](./docs/PROMPT_TEMPLATES.md) · [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md) · [docs/SCORE_TRACKER.md](./docs/SCORE_TRACKER.md) · [docs/DSA_VISUALS.md](./docs/DSA_VISUALS.md)
 
 ---
 
@@ -70,7 +70,7 @@ exercise/
 1. Use this file to choose the day, topic, slug, subtopics, and exercise direction.
 2. Use [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md) to choose teaching-flow sources, production references, and exercise banks.
 3. Generate the 5-file day module using [docs/PROMPT_TEMPLATES.md](./docs/PROMPT_TEMPLATES.md).
-4. Keep output aligned with [docs/CODE_TEMPLATE.md](./docs/CODE_TEMPLATE.md) and [docs/EVALUATION_RUBRIC.md](./docs/EVALUATION_RUBRIC.md).
+4. Keep output aligned with [.agent.md](./.agent.md) and [docs/RUBRIC.md](./docs/RUBRIC.md).
 
 ---
 
@@ -388,8 +388,8 @@ These concepts must be explicitly covered by generated week artifacts (`CODE.md`
 ## Industrial Bar
 
 - Public APIs use type hints.
-- `CODE.md` follows [docs/CODE_TEMPLATE.md](./docs/CODE_TEMPLATE.md).
-- Exercises use the scoring and gate system from [docs/EVALUATION_RUBRIC.md](./docs/EVALUATION_RUBRIC.md).
+- `CODE.md` follows [.agent.md](./.agent.md) §3.
+- Exercises use the scoring and gate system from [docs/RUBRIC.md](./docs/RUBRIC.md).
 - Every exercise file contains inline assert self-checks.
 - DSA `CODE.md` files include visual/diagram coverage for the core algorithm flow.
 - Every DSA snippet/example in `CODE.md` includes a traversal visual block (ASCII/Mermaid step flow).
@@ -407,3 +407,89 @@ These concepts must be explicitly covered by generated week artifacts (`CODE.md`
 - Sunday labs are catch-up friendly, but finish each lab before the next major milestone day in that phase.
 
 This file is the planning source of truth for what to generate next.
+
+---
+
+## Generation Priority Matrix
+
+Use this matrix to decide **what to generate next** in optimal order. Priority is based on: foundation dependency (earlier topics unblock later ones), MAANG coverage checkpoints, and balanced Python + DSA progression.
+
+### Priority Tier 1 — Immediate (Complete Phase 1 foundation)
+
+| Order | Module | Snippet Target | Key Topics | MAANG Checkpoint |
+|-------|--------|---------------|------------|------------------|
+| 1 | Day 04 — Lists and sorting | 7 snippets | indexing, slicing, mutation, sort keys, stable sort, top-k | — |
+| 2 | Day 05 — Tuples and NamedTuple | 6 snippets | immutability, packing/unpacking, multiple returns, DTO records | — |
+| 3 | Day 06 — Dictionaries | 7 snippets | CRUD, get, setdefault, iteration, comprehension, nesting | — |
+| 4 | Day 07 — Sets and frozenset | 6 snippets | uniqueness, set math, membership, frozenset | — |
+| 5 | DSA Week 02 — Kadane, prefix sums | 6 snippets + visuals | prefix sums, frequency maps, Kadane's algorithm | ✅ Kadane's algorithm |
+| 6 | Day 08 — Strings and encoding | 8 snippets | slicing, methods, normalization, bytes vs str, frequency ops | — |
+| 7 | Day 09 — File I/O | 7 snippets | open, context managers, pathlib, CSV, JSON | — |
+| 8 | Day 10 — Exceptions | 7 snippets | try/except/else/finally, custom errors, chaining | — |
+| 9 | DSA Week 03 — Two pointers | 6 snippets + visuals | opposite-end scans, 3Sum dedupe, palindrome | ✅ 3Sum triplet dedupe |
+| 10 | Day 11 — Modules | 6 snippets | imports, package layout, __name__, __main__ | — |
+| 11 | Day 12 — Built-ins | 7 snippets | enumerate, zip, sorted, map, filter, any, all | — |
+| 12 | Day 13 — Comprehensions | 7 snippets | list/dict/set comprehensions, generator expressions | — |
+| 13 | Day 14 — Tooling | 6 snippets | venv, uv, pyproject, script entrypoints | — |
+| 14 | DSA Week 04 — Sliding window | 6 snippets + visuals | fixed/variable windows, monotonic deque | ✅ Monotonic deque patterns |
+| 15 | DSA Week 05 — Stack | 6 snippets + visuals | monotonic stack, bracket matching, next-greater | — |
+
+**MAANG Checkpoint after Tier 1:** Kadane ✅ · 3Sum dedupe ✅ · Monotonic deque ✅ · Pattern printing (Day 02 ✅)
+
+### Priority Tier 2 — Phase 2 + DSA Weeks 06–10
+
+| Order | Module | Snippet Target | MAANG Checkpoint |
+|-------|--------|---------------|------------------|
+| 16–35 | Days 15–34 (Python Intermediate) | 6–8 per day | — |
+| ∥ | DSA Week 06 — Binary search | 6 + visuals | — |
+| ∥ | DSA Week 07 — Linked list | 6 + visuals | — |
+| ∥ | DSA Week 08 — Binary trees | 7 + visuals | ✅ Tree construction, LCA, diameter, zigzag |
+| ∥ | DSA Week 09 — BST | 6 + visuals | — |
+| ∥ | DSA Week 10 — Heap | 6 + visuals | — |
+
+**MAANG Checkpoint after Tier 2:** Binary tree problems ✅ · String operations (Day 08 ✅)
+
+### Priority Tier 3 — Phase 3 + DSA Weeks 11–14
+
+| Order | Module | Snippet Target | MAANG Checkpoint |
+|-------|--------|---------------|------------------|
+| 36–51 | Days 35–50 (Concurrency) | 6–8 per day | — |
+| ∥ | DSA Week 11 — Backtracking | 7 + visuals | ✅ Recursion foundation, processed/unprocessed, subsequence |
+| ∥ | DSA Week 12 — Graphs I | 6 + visuals | ✅ Matrix traversal (grid BFS/DFS) |
+| ∥ | DSA Week 13 — Graphs II | 6 + visuals | — |
+| ∥ | DSA Week 14 — Union-Find | 5 + visuals | — |
+
+**MAANG Checkpoint after Tier 3:** Recursion ✅ · Processed/unprocessed ✅ · Subsequence ✅ · Matrix traversal ✅
+
+### Priority Tier 4 — Phase 4–6 + DSA Weeks 15–20
+
+| Order | Module | Snippet Target | MAANG Checkpoint |
+|-------|--------|---------------|------------------|
+| 52–86 | Days 51–86 (Advanced + FastAPI) | 6–8 per day | — |
+| ∥ | DSA Week 15 — Greedy/Intervals | 6 + visuals | ✅ Intervals |
+| ∥ | DSA Week 16 — 1D DP | 7 + visuals | ✅ Kadane reinforcement, subsequence-sum |
+| ∥ | DSA Week 17 — 2D DP | 6 + visuals | ✅ Matrix traversal reinforcement |
+| ∥ | DSA Week 18 — Shortest paths | 6 + visuals | — |
+| ∥ | DSA Week 19 — Tries/Strings/Bits | 8 + visuals | ✅ KMP, Rabin-Karp, string algorithms |
+| ∥ | DSA Week 20 — Mixed review | 6 + visuals | ✅ Sorting algorithms, math basics |
+| 87–100 | Days 87–100 (DevOps + Capstone) | 6–8 per day | — |
+
+**MAANG Checkpoint after Tier 4:** All 18 MAANG concepts covered ✅
+
+---
+
+## Pre-Generation Snippet Targets (Phase 1 Remaining)
+
+| Day | Topic | Min Snippets | Must-Include Topics |
+|-----|-------|-------------|---------------------|
+| 04 | Lists | 7 | creation, indexing, slicing, mutation, list methods, sort with key, anti-pattern (mutation during iteration) |
+| 05 | Tuples | 6 | creation, immutability, packing/unpacking, multiple returns, NamedTuple, anti-pattern (mutable default in tuple) |
+| 06 | Dicts | 7 | creation, CRUD, get/setdefault, iteration, comprehension, nested, anti-pattern (KeyError without get) |
+| 07 | Sets | 6 | creation, add/remove, set math (union/intersection/difference), frozenset, membership, anti-pattern (unhashable in set) |
+| 08 | Strings | 8 | slicing, methods, normalization, raw strings, bytes/str, f-string advanced, encoding, anti-pattern (str + bytes) |
+| 09 | File I/O | 7 | open, read/write, context manager, pathlib, CSV, JSON, anti-pattern (forgetting close) |
+| 10 | Exceptions | 7 | try/except, else/finally, raise, custom errors, chaining, reraise, anti-pattern (bare except) |
+| 11 | Modules | 6 | import, from-import, __name__, package layout, relative imports, anti-pattern (circular import) |
+| 12 | Built-ins | 7 | enumerate, zip, sorted, map, filter, any/all, anti-pattern (list(map()) vs comprehension) |
+| 13 | Comprehensions | 7 | list, dict, set, nested, generator expr, readability limits, anti-pattern (over-nested comprehension) |
+| 14 | Tooling | 6 | venv, uv, requirements, pyproject, entrypoints, anti-pattern (global pip install) |

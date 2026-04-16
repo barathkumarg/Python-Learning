@@ -22,32 +22,63 @@
 ## How to Use This Repo
 
 ```
-python-mastery/
-├── README.md                  ← you are here
-├── basics/                    ← one script per basic topic
-├── intermediate/              ← OOP, generators, decorators ...
-├── advanced/                  ← metaclasses, async, internals ...
-├── fastapi/                   ← complete API project
-│   ├── app/
-│   │   ├── main.py
-│   │   ├── routers/
-│   │   ├── models/
-│   │   ├── schemas/
-│   │   └── dependencies/
-│   ├── tests/
-│   └── Dockerfile
-├── devops/                    ← automation scripts
-└── dsa/                       ← one folder per topic
-    ├── arrays/
-    ├── trees/
-    ├── graphs/
-    └── dp/
+Python-Learning/
+├── README.md                        ← you are here
+├── DAILY_STUDY_PLAN.md              ← curriculum map (what to generate next)
+├── requirements.txt                 ← project dependencies (ruff, pytest)
+├── .agent.md                        ← AI agent generation instructions
+│
+├── docs/                            ← framework documentation
+│   ├── RUBRIC.md                    ← gates, scoring, skills, evaluation protocol
+│   ├── PROMPT_TEMPLATES.md          ← copy-paste generation prompts
+│   ├── SOURCE_REGISTRY.md           ← curated sources with per-day URLs
+│   ├── DSA_VISUALS.md               ← Mermaid templates per DSA week (reference lookup)
+│   └── SCORE_TRACKER.md             ← unified evaluation dashboard
+│
+├── src/                             ← teaching reference code
+│   ├── python_basic/                ← Phase 1: Days 01–14
+│   │   ├── day_01_syntax_variables/
+│   │   │   ├── CODE.md              ← concept map with snippets
+│   │   │   └── code.py              ← production-style reference
+│   │   ├── day_02_control_flow/
+│   │   ├── day_03_functions/
+│   │   └── ...day_04 through day_14
+│   ├── python_intermediate/         ← Phase 2: Days 15–34
+│   ├── python_concurrency/          ← Phase 3: Days 35–50
+│   ├── python_advanced/             ← Phase 4: Days 51–70
+│   ├── fastapi_track/               ← Phase 5: Days 71–86
+│   ├── devops_track/                ← Phase 6: Days 87–100
+│   └── dsa/                         ← DSA Weeks 01–20 (parallel track)
+│       ├── week_01_big_o_arrays_hashing/
+│       │   ├── CODE.md
+│       │   └── code.py
+│       └── ...week_02 through week_20
+│
+├── exercise/                        ← learner exercises and evaluations
+│   ├── python_basic/
+│   │   ├── day_01_syntax_variables/
+│   │   │   ├── EXERCISE.md          ← specs, skills, scoring, eval report
+│   │   │   ├── ex01_basic.py        ← foundational exercise
+│   │   │   ├── ex02_intermediate.py ← applied exercise
+│   │   │   └── ex03_advanced.py     ← harder design exercise
+│   │   └── ...
+│   ├── python_intermediate/
+│   ├── python_concurrency/
+│   ├── python_advanced/
+│   ├── fastapi_track/
+│   ├── devops_track/
+│   ├── dsa/
+│   │   ├── week_01_big_o_arrays_hashing/
+│   │   └── ...
+│   └── sunday_labs/                 ← integrative build days
+│       └── week_XX_integrated/
 ```
 
 **Study strategy:**
 - Run DSA practice in parallel with Python learning — 2 hrs/day DSA + 1.5 hrs/day Python
 - Write code for every topic — reading alone does not build skill
 - Commit every practice file; use git log as your progress journal
+- See [DAILY_STUDY_PLAN.md](DAILY_STUDY_PLAN.md) for the full curriculum map and generation priority
 
 ---
 

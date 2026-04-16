@@ -171,30 +171,97 @@ each step = compute need -> map lookup -> insert
 
 ## Visual / Diagram
 
+### 1. Which data structure should I pick?
+
+Read top-to-bottom. Ask yourself **one question at a time**.
+
 ```text
-Array indices:    0   1   2   3
-nums:            [2,  7, 11, 15]
-need target=9
-
-Step i=0, value=2
-hash map: {2: 0}
-
-Step i=1, value=7
-needed = 9 - 7 = 2
-2 found in hash map -> pair indices (0, 1)
+What do I need to do?
+│
+├─ "Check if X exists" ──────► use a SET    (avg O(1) lookup)
+│
+├─ "Count how many of X" ────► use a DICT   (avg O(1) update)
+│
+├─ "Find a pair that sums to target"
+│   ├─ input sorted? ────────► Two Pointers (O(n), no extra space)
+│   └─ input unsorted? ─────► DICT storing complement (avg O(n))
+│
+└─ "Group items by property" ► DICT with computed key (O(n·m))
 ```
 
 ```mermaid
-graph LR
-A[Read value] --> B{In hash map?}
-B -- Yes --> C[Use stored index]
-B -- No --> D[Store value -> index]
-D --> A
+flowchart TD
+    Q["What do I need?"]
+    Q --> M{Check existence?}
+    M -- Yes --> S["SET — O❨1❩ avg"]
+    Q --> C{Count items?}
+    C -- Yes --> D["DICT — O❨1❩ avg"]
+    Q --> P{Find a pair?}
+    P --> SO{Input sorted?}
+    SO -- Yes --> TP["Two Pointers — O❨n❩"]
+    SO -- No --> CM["DICT complement — O❨n❩"]
+    Q --> G{Group items?}
+    G -- Yes --> GK["DICT + computed key — O❨n·m❩"]
+
+    style S fill:#2d6,stroke:#333,color:#fff
+    style D fill:#2d6,stroke:#333,color:#fff
+    style TP fill:#26d,stroke:#333,color:#fff
+    style CM fill:#2d6,stroke:#333,color:#fff
+    style GK fill:#2d6,stroke:#333,color:#fff
 ```
 
-Optional GIF note:
-- If a GIF asset is available, embed it below this section and keep the ASCII/Mermaid diagrams above as fallback.
-- Suggested caption: "Observe how each scan step checks `needed = target - value` before inserting into the map."
+### 2. Two-Sum — step-by-step walkthrough
+
+Goal: find two indices whose values sum to `target = 9`.
+
+```text
+nums = [2, 7, 11, 15]
+map  = {}                      (empty hash map: value → index)
+
+Step 0: value=2, need=9−2=7    7 not in map → store {2:0}
+Step 1: value=7, need=9−7=2    2 IS in map  → return (map[2], 1) = (0, 1) ✓
+```
+
+```mermaid
+flowchart LR
+    A[Read next value] --> B{need in map?}
+    B -- Yes --> C["Return map❨need❩, i"]
+    B -- No  --> D["Store value:i in map"]
+    D --> E{More values?}
+    E -- Yes --> A
+    E -- No  --> F[Return None]
+
+    style C fill:#2d6,stroke:#333,color:#fff
+    style F fill:#d44,stroke:#333,color:#fff
+```
+
+### 3. Anagram grouping — how words get bucketed
+
+```text
+Input: ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+Step 1 — compute a signature for each word (letter frequency → tuple):
+  eat → (1,0,0,0,1,…,1,0,…)   ← 'a':1, 'e':1, 't':1
+  tea → same tuple as eat       ← same letters!
+  tan → (1,0,0,0,0,…,1,0,…,1) ← 'a':1, 'n':1, 't':1 (different)
+
+Step 2 — group by signature key:
+  key_1 → [eat, tea, ate]       (all have same letter counts)
+  key_2 → [tan, nat]
+  key_3 → [bat]
+
+Step 3 — sort each group, then sort the list of groups:
+  → [["bat"], ["nat","tan"], ["ate","eat","tea"]]
+```
+
+### 4. Complexity comparison
+
+| Problem | Brute force | Optimal | Key insight |
+|---------|-------------|---------|-------------|
+| Contains Duplicate | O(n²) nested loop | **O(n)** set | Set membership is O(1) avg |
+| Two Sum | O(n²) all pairs | **O(n)** dict | Store complement, check in one pass |
+| Frequency Count | O(n²) manual compare | **O(n)** dict | `dict.get(k, 0) + 1` in one pass |
+| Anagram Grouping | O(n·m·log m) sort key | **O(n·m)** freq key | Frequency tuple avoids sorting each word |
 
 ## Pitfalls
 

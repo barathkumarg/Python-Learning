@@ -146,7 +146,9 @@ if __name__ == "__main__":
         {"id": "C3", "total": 220.0},
     ]
 
+    # Expected output: next status: paid
     print("next status:", transition_order_status("created", "pay"))
+    # Expected output: high value: ['A1', 'C3']
     print("high value:", collect_high_value_orders(sample_orders, threshold=100))
 
     def mock_poll_factory(statuses: list[str]) -> Callable[[], str]:
@@ -156,5 +158,7 @@ if __name__ == "__main__":
         return poll
 
     poller = mock_poll_factory(["created", "paid", "shipped"])
+    # Expected output: terminal status: shipped
     print("terminal status:", wait_for_terminal_status(poller, max_checks=3))
+    # Expected output: first paid order: O2
     print("first paid order:", first_paid_order([("O1", "created"), ("O2", "paid")]))

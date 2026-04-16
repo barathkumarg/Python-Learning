@@ -100,7 +100,7 @@ Implementation note (Day 03+):
 
 **Pass:** >= 75 per file and gates G1-G4 satisfied.
 
-## Dimension weights (from docs/EVALUATION_RUBRIC.md)
+## Dimension weights (from docs/RUBRIC.md)
 
 | Dimension | Weight |
 |-----------|--------|
