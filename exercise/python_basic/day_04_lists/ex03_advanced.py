@@ -23,8 +23,9 @@ Examples:
 
 from __future__ import annotations
 
+from typing import Tuple
 
-LeaderboardEntry = tuple[str, int, int]
+LeaderboardEntry = Tuple[str, int, int]
 
 
 def top_k_by_min_score(

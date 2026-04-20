@@ -21,8 +21,9 @@ Examples:
 
 from __future__ import annotations
 
+from typing import Tuple
 
-LeaderboardEntry = tuple[str, int, int]
+LeaderboardEntry = Tuple[str, int, int]
 
 
 def sort_leaderboard(entries: list[LeaderboardEntry]) -> list[LeaderboardEntry]:
