@@ -509,8 +509,9 @@ Before generating a new day or week, confirm:
 - The source role is clear: progression, production style, or exercise bank.
 - You opened the primary source URL from the per-day table before writing.
 - `CODE.md` follows the source order without copying.
-- `code.py` meets gates G1–G7 in `.agent.md §2`.
+- `code.py` meets gates G1–G8 in `.agent.md §2`.
 - `EXERCISE.md` and `ex01` to `ex03` are original repo-shaped tasks, not copied challenge text.
 - `EXERCISE.md` Suggested Practice links come from this registry's LeetCode/NeetCode table.
 
 If a source is helpful but missing, add it here first.
+

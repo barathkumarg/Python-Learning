@@ -106,7 +106,22 @@
 | Style (types, ruff, docstrings) | 20 |
 | **Total** | **100** |
 
-**Pass:** ≥ 75 per file + gates G1–G4.
+**Pass:** ≥ 75 per file + gates G1–G4 (G8 also required for generation quality).
+
+---
+
+## §4a Gate G8 — Concept Completeness
+
+> **G8** applies to all generated artifacts (Day 06+, all DSA weeks).
+
+**Definition:** Every item in the day/week's **A-Z Concept Checklist** (from `study_plan/<track>.md`) must be:
+
+1. Present as a row in the `CODE.md` **Concepts table**.
+2. Covered in **at least one** of: `CODE.md` snippet, `code.py` function, or exercise function stub.
+
+**Fail criteria:** Any checklist item absent from all three locations = G8 fail.
+
+**Verification:** After generation, compare the checklist count against the Concepts table row count. They must match.
 
 ---
 
@@ -127,7 +142,7 @@ Grade my solution for Day [NN] — [topic] at exercise/<track>/day_XX_<slug>/.
 Read EXERCISE.md for specs and scoring.
 
 Deliver exactly:
-1. Gate table G1–G7 — pass/fail + one-line evidence.
+1. Gate table G1–G8 — pass/fail + one-line evidence.
 2. Dimension scores D1–D7 (1–5) + weighted total.
 3. Per-file scores ex01/ex02/ex03 (0–100) with criterion breakdown.
 4. Skills assessed — Skill ID + proficiency (learning/developing/proficient/strong).
