@@ -20,7 +20,7 @@ Examples:
 """
 
 from __future__ import annotations
-
+import copy
 
 def merge_configs(
     defaults: dict[str, object],
@@ -42,7 +42,11 @@ def merge_configs(
     # TODO: create a new dict from defaults (use {**defaults} or .copy())
     # TODO: update with overrides using update() or |
     # TODO: return the merged dict — verify originals are unchanged
-    raise NotImplementedError()
+    if not isinstance(defaults,dict) and not isinstance(overrides, dict):
+        return TypeError("Either of the dictionary is not empty")
+    merged = defaults | overrides
+    print(merged)
+    return merged
 
 
 def deep_merge(base: dict[str, object], patch: dict[str, object]) -> dict[str, object]:
@@ -67,7 +71,20 @@ def deep_merge(base: dict[str, object], patch: dict[str, object]) -> dict[str, o
     #   - if key exists in result AND both values are dicts → recurse
     #   - otherwise → result[key] = patch[key]
     # TODO: return result
-    raise NotImplementedError()
+    # if not isinstance(base,dict) and not isinstance(patch, dict):
+    #     return TypeError("Either of the dictionary is not empty")
+
+    result = copy.deepcopy(base)
+    for outer_key, outer_value in patch.items():
+        if isinstance(outer_value,dict):
+            for inner_key, inner_value in outer_value.items():
+                result[outer_key][inner_key] = patch[outer_key][inner_key]
+        else:
+            result[outer_key] = patch[outer_key]
+    
+    print(result)
+
+    return result
 
 
 if __name__ == "__main__":

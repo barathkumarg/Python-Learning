@@ -48,8 +48,18 @@ def build_inverted_index(
     #   - track seen words per doc to avoid duplicates
     # TODO: sort each word's doc list
     # TODO: return the index (optionally sort by key for deterministic output)
-    raise NotImplementedError()
-
+    if not isinstance(documents,dict):
+        raise TypeError("Documents was not a dictionary")
+    
+    result :dict[str,list[str]] = {}
+    for index, sentence in documents.items():
+        seen_words : set[str] = set()
+        for words in sentence.split():
+            if words not in seen_words:
+                result.setdefault(words, []).append(index)
+                seen_words.add(words)
+    print(result)
+    return result
 
 def search_index(
     index: dict[str, list[str]],
@@ -71,7 +81,26 @@ def search_index(
     # TODO: for each term, get the set of doc IDs from the index (empty set if missing)
     # TODO: intersect all sets
     # TODO: return sorted list of the intersection
-    raise NotImplementedError()
+    if not isinstance(index, dict) and not isinstance(terms, str):
+        raise TypeError("Not in the correct type - provided values")
+    if len(terms) <=0:
+        raise ValueError("No terms passed")
+    result : list[str] = index.get(terms[0], [])
+    print(result)
+
+    # for topic, sentence in index.items():
+    #     print(sentence)
+    #     word_list = sentence.split(' ')
+    #     for term in terms:
+    #         if term not in word_list:
+    #             continue
+    #         result.append(topic)
+    for term in terms:
+        list_item = index.get(term,[])
+        result = list(set(result) & set(list_item))
+    return sorted(result)
+     
+
 
 
 if __name__ == "__main__":

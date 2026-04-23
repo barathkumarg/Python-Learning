@@ -22,7 +22,9 @@
 | Day 01 | python_basic | Syntax, types, variables | 81 | 79 | 79 | 3.80 | ✅ PASS | 2026-03-26 | First pass |
 | Day 02 | python_basic | Control flow | 95 | 95 | 96 | 4.10 | 🔁 REWORK | 2026-03-28 | G4 ruff not run, order-id validation gap |
 | Day 03 | python_basic | Functions | — | — | — | — | ⏳ PENDING | — | Exercises done, awaiting evaluation |
-| Week 01 | dsa | Big-O, arrays, hashing | — | — | — | — | ⏳ PENDING | — | Exercises done, awaiting evaluation |
+| Day 06 | python_basic | Dictionaries | 74 | 85 | 89 | 3.50 | 🔁 REWORK | 2026-04-23 | ex01 < 75: missing TypeError, no lowercase; merge_configs and/or guard broken |
+| Day 07 | python_basic | Sets and frozenset | 96 | 100 | 100 | 4.90 | 🌟 STRONG | 2026-04-23 | Clean solutions; minor: leftover comments in ex01 |
+| Week 01 | dsa | Big-O, arrays, hashing | 86 | 82 | 90 | 4.10 | ✅ PASS | 2026-04-23 | Clean solutions, needs more edge-case asserts + full docstrings |
 
 ### Legend
 

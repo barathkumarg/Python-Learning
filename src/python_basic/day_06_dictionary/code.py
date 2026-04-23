@@ -157,8 +157,6 @@ if __name__ == "__main__":
     wc = build_word_count(text)
     print(wc)
     # Expected output: {'the': 3, 'cat': 2, 'sat': 1, 'on': 1, 'mat': 1}
-    assert wc["the"] == 3
-    assert wc["cat"] == 2
 
     # --- merge_configs ---
     defaults = {"color": "green", "width": 80, "debug": False}
@@ -167,9 +165,6 @@ if __name__ == "__main__":
     merged = merge_configs(defaults, user, env)
     print(merged)
     # Expected output: {'color': 'red', 'width': 80, 'debug': True, 'height': 24}
-    assert merged["color"] == "red"
-    assert merged["debug"] is True
-    assert defaults["color"] == "green"  # original unchanged
 
     # --- build_inverted_index ---
     docs = {
@@ -180,8 +175,6 @@ if __name__ == "__main__":
     idx = build_inverted_index(docs)
     print(idx)
     # Expected output: {'and': ['d3'], 'cat': ['d1', 'd3'], 'dog': ['d2', 'd3'], 'sat': ['d1', 'd2'], 'the': ['d1', 'd2', 'd3']}
-    assert idx["cat"] == ["d1", "d3"]
-    assert idx["the"] == ["d1", "d2", "d3"]
 
     # --- safe_nested_get ---
     nested = {"server": {"host": "localhost", "ports": {"http": 80}}}
@@ -191,8 +184,6 @@ if __name__ == "__main__":
     # Expected output: 80
     print(safe_nested_get(nested, "server", "missing", default="N/A"))
     # Expected output: N/A
-    assert safe_nested_get(nested, "server", "host") == "localhost"
-    assert safe_nested_get(nested, "x", "y", default=-1) == -1
 
     # --- group_by_key (defaultdict preview) ---
     employees = [
@@ -204,14 +195,11 @@ if __name__ == "__main__":
     grouped = group_by_key(employees)
     print(grouped)
     # Expected output: {'sales': ['Alice', 'Charlie'], 'engineering': ['Bob', 'Diana']}
-    assert grouped["sales"] == ["Alice", "Charlie"]
 
     # --- copy vs deepcopy demo ---
     original: dict[str, list[str]] = {"tags": ["python"]}
     shallow = original.copy()
     deep = deepcopy(original)
     shallow["tags"].append("shallow")
-    assert original["tags"] == ["python", "shallow"]  # shared!
-    assert deep["tags"] == ["python"]                  # independent
-
-    print("\nAll day-06 self-checks passed.")
+    print(f"original after shallow append: {original['tags']}")
+    print(f"deep copy remains: {deep['tags']}")

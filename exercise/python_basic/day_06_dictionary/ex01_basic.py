@@ -39,7 +39,15 @@ def word_frequency(text: str) -> dict[str, int]:
     # TODO: lowercase each word
     # TODO: count occurrences using dict.get(word, 0) + 1
     # TODO: return the counts dict
-    raise NotImplementedError()
+    if not text or len(text) <= 0:
+        return {}
+    
+    frequency : dict[str:int] = {}
+    text_list = text.split() 
+    for text in text_list:
+        frequency[text] = frequency.get(text,0) + 1
+    print(frequency)
+    return frequency
 
 
 def top_n_words(freq: dict[str, int], n: int = 3) -> list[tuple[str, int]]:
@@ -58,7 +66,13 @@ def top_n_words(freq: dict[str, int], n: int = 3) -> list[tuple[str, int]]:
     # TODO: validate n > 0
     # TODO: sort freq.items() by (-count, word) using sorted() + lambda
     # TODO: return first n items
-    raise NotImplementedError()
+    if n <= 0:
+        raise ValueError(f"n must be positive, got {n}")
+    
+    sorted_frequency = [(k, v) for k, v in sorted(freq.items(), key=lambda item: item[1], reverse=True) ]
+    print(sorted_frequency)
+    return sorted_frequency[:n]
+        
 
 
 if __name__ == "__main__":
@@ -76,7 +90,7 @@ if __name__ == "__main__":
         # TypeError on non-string
         try:
             word_frequency(123)  # type: ignore[arg-type]
-            raise AssertionError("should have raised TypeError")
+            raise AssertionError("should have raised TypeError  ")
         except TypeError:
             pass
 
