@@ -44,7 +44,11 @@ def validate_age(age: object) -> int:
     # 1. if not isinstance(age, int) or isinstance(age, bool): raise TypeError
     # 2. if age < 0 or age > 150: raise ValueError with the value
     # 3. return age
-    raise NotImplementedError()
+    if not isinstance(age, int):
+        raise TypeError(f"The age is not, got {type(age)}")
+    if age < 0 or age > 150:
+        raise ValueError(f"Provided value was not in the range 0 to 150, got {age}")
+    return age
 
 
 def log_and_reraise(func: object, *args: object) -> object:
@@ -70,7 +74,11 @@ def log_and_reraise(func: object, *args: object) -> object:
     # TODO: Implement this function
     # 1. try: return func(*args)
     # 2. except Exception as exc: print(f"Error: {exc}"), then bare `raise`
-    raise NotImplementedError()
+    try:
+        return func(*args)
+    except Exception as exception:
+        print(f"Error: {exception}")
+        raise 
 
 
 def convert_config_value(raw: str) -> int:
@@ -99,7 +107,10 @@ def convert_config_value(raw: str) -> int:
     # 1. try: return int(raw)
     # 2. except ValueError as exc:
     #        raise RuntimeError(f"invalid config value: {raw!r}") from exc
-    raise NotImplementedError()
+    try:
+        return int(raw)
+    except Exception as exception:
+        raise RuntimeError(f"invalid config value: {raw!r}") from exception
 
 
 def classify_exception(exc: BaseException) -> str:
@@ -130,7 +141,15 @@ def classify_exception(exc: BaseException) -> str:
     # 1. isinstance checks: ValueError → "value", OSError → "os",
     #    Exception → "other", BaseException → "base"
     # IMPORTANT: check more specific types FIRST
-    raise NotImplementedError()
+    if isinstance(exc, ValueError):
+        return "value"
+    if isinstance(exc, FileNotFoundError):
+        return "os"
+    if isinstance(exc, KeyboardInterrupt):
+        return "base"
+    if isinstance(exc, RuntimeError):
+        return "other"
+    
 
 
 class InsufficientFundsError(Exception):
@@ -159,7 +178,17 @@ class InsufficientFundsError(Exception):
     # 1. __init__(self, balance: float, amount: float) → store fields, call super().__init__(msg)
     # 2. @property deficit → self.amount - self.balance
     # 3. __str__ → descriptive message with balance, amount, deficit
-    ...
+    def __init__(self, balance: float, amount: float):
+        super().__init__(f"{balance}, {amount}")
+        self.balance = balance
+        self.amount = amount
+    @property
+    def deficit(self):
+        return self.amount - self.balance
+    
+    def __str__(self):
+        return f"amount: {self.amount}, balance: {self.balance} & deficit: {self.deficit}"
+
 
 
 def withdraw(balance: float, amount: float) -> float:
@@ -190,7 +219,11 @@ def withdraw(balance: float, amount: float) -> float:
     # 1. Validate amount > 0, else raise ValueError
     # 2. If amount > balance: raise InsufficientFundsError(balance, amount)
     # 3. return balance - amount
-    raise NotImplementedError()
+    if amount < 0:
+        raise ValueError("Insufficient amount")
+    if amount > balance:
+        raise InsufficientFundsError(balance=balance, amount=amount)
+    return balance - amount
 
 
 if __name__ == "__main__":
