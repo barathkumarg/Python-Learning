@@ -26,6 +26,8 @@
 | Day 07 | python_basic | Sets and frozenset | 96 | 100 | 100 | 4.90 | 🌟 STRONG | 2026-04-23 | Clean solutions; minor: leftover comments in ex01 |
 | Day 08 | python_basic | Strings and encoding | 73 | 84 | 84 | 3.05 | 🔁 REWORK | 2026-04-28 | G2 fail: no ValueError guards; safe_replace_char logic bug; debug prints left in |
 | Day 09 | python_basic | File I/O | 89 | 87 | 86 | 3.95 | ✅ PASS | 2026-04-30 | JSONL format semantically wrong (writes list not per-line); inconsistent error types; missing newline="" in CSV read |
+| Day 10 | python_basic | Exceptions | 74 | 82 | 88 | 3.45 | 🔁 REWORK | 2026-05-11 | G3 fail (7 ruff errors); ex01 < 75; weighted 3.45 < 3.5; describe_error format bug; classify_exception incomplete; read_first_line missing finally |
+| Day 11 | python_basic | Modules and packages | 82 | — | — | 3.80 | ✅ PASS | 2026-05-13 | Single-file format; classify_import_statement logic bug (. vs from .); unnecessary print in check_name_guard |
 | Week 01 | dsa | Big-O, arrays, hashing | 86 | 82 | 90 | 4.10 | ✅ PASS | 2026-04-23 | Clean solutions, needs more edge-case asserts + full docstrings |
 
 ### Legend
@@ -84,8 +86,8 @@ Track which skills have been tested and passed across all evaluated modules.
 | PY-09 | Sets and frozenset | 1 | — | — | — |
 | PY-10 | Strings and encoding | 1 | ✅ | 🔁 | Day 08 |
 | PY-11 | File I/O | 1 | ✅ | ✅ | Day 09 |
-| PY-12 | Exceptions and custom errors | 1 | — | — | — |
-| PY-13 | Modules and packages | 1 | — | — | — |
+| PY-12 | Exceptions and custom errors | 1 | ✅ | 🔁 | Day 10 |
+| PY-13 | Modules and packages | 1 | ✅ | ✅ | Day 11 |
 | PY-14 | Built-ins (map, filter, zip) | 1 | — | — | — |
 | PY-15 | Comprehensions | 1 | — | — | — |
 | PY-16 | OOP (classes, inheritance) | 2 | — | — | — |
@@ -147,6 +149,7 @@ Track rework cycles per day/week. Max 3 cycles per the RUBRIC.md §4 rule.
 |----------|-------|---------|-------------|------------|------|
 | Day 02 | 1 | G4 ruff not run, order-id validation gap | Run `ruff check`, add strict `id` format validation | ⏳ Open | 2026-03-28 |
 | Day 08 | 1 | G2 fail (no ValueError), ex01 < 75, weighted 3.05 | Add ValueError guards to all fns; fix safe_replace_char slicing; remove debug prints; fix normalize_and_compare | ⏳ Open | 2026-04-28 |
+| Day 10 | 1 | G3 fail (7 ruff), ex01 < 75, weighted 3.45 | Fix 7 ruff errors (unused `as` aliases, E701, F821); fix describe_error space; add finally to read_first_line; complete classify_exception hierarchy; fix withdraw amount<=0 | ⏳ Open | 2026-05-11 |
 
 ### Rework Rules (from RUBRIC.md §4)
 
@@ -161,16 +164,16 @@ Track rework cycles per day/week. Max 3 cycles per the RUBRIC.md §4 rule.
 
 Aggregate gate pass/fail across all evaluated modules for systemic pattern detection.
 
-| Gate | Description | Day 01 | Day 02 | Day 03 | Day 08 | Day 09 | W01 | Pass Rate |
-|------|-------------|--------|--------|--------|--------|--------|-----|-----------|
-| G1 | Type hints on public APIs | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | 4/4 |
-| G2 | Explicit errors (no bare except) | ⚠️ | ✅ | ⏳ | ❌ | ⚠️ | ⏳ | 1/4 |
-| G3 | Behavioral verification (asserts + AI) | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | 4/4 |
-| G4 | Lint clean (`ruff check`) | ✅ | ❌ | ⏳ | ✅ | ✅ | ⏳ | 3/4 |
-| G5 | Docstrings on public functions | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | 4/4 |
-| G6 | Security (no hardcoded secrets) | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | 4/4 |
-| G7 | Observability (clear error messages) | ⚠️ | ⚠️ | ⏳ | ❌ | ⚠️ | ⏳ | 0/4 |
-| G8 | Concept completeness (A-Z checklist) | — | — | ⏳ | ✅ | ✅ | ⏳ | 2/2 |
+| Gate | Description | Day 01 | Day 02 | Day 03 | Day 08 | Day 09 | Day 10 | Day 11 | W01 | Pass Rate |
+|------|-------------|--------|--------|--------|--------|--------|--------|--------|-----|-----------|
+| G1 | Type hints on public APIs | ✅ | ✅ | ⏳ | ✅ | ✅ | ✅ | ✅ | ⏳ | 6/6 |
+| G2 | Explicit errors (no bare except) | ⚠️ | ✅ | ⏳ | ❌ | ⚠️ | ⚠️ | ✅ | ⏳ | 2/6 |
+| G3 | Behavioral verification (asserts + AI) | ✅ | ✅ | ⏳ | ✅ | ✅ | ✅ | ✅ | ⏳ | 6/6 |
+| G4 | Lint clean (`ruff check`) | ✅ | ❌ | ⏳ | ✅ | ✅ | ❌ | ✅ | ⏳ | 4/6 |
+| G5 | Docstrings on public functions | ✅ | ✅ | ⏳ | ✅ | ✅ | ✅ | ✅ | ⏳ | 6/6 |
+| G6 | Security (no hardcoded secrets) | ✅ | ✅ | ⏳ | ✅ | ✅ | ✅ | ✅ | ⏳ | 6/6 |
+| G7 | Observability (clear error messages) | ⚠️ | ⚠️ | ⏳ | ❌ | ⚠️ | ⚠️ | ✅ | ⏳ | 1/6 |
+| G8 | Concept completeness (A-Z checklist) | — | — | ⏳ | ✅ | ✅ | ⚠️ | ✅ | ⏳ | 3/4 |
 
 ### Systemic Patterns
 
@@ -185,15 +188,15 @@ Aggregate gate pass/fail across all evaluated modules for systemic pattern detec
 
 | Phase | Total Days | Generated | Evaluated | Passed | Remaining |
 |-------|-----------|-----------|-----------|--------|-----------|
-| Phase 1 — Python Basics | 14 | 4 | 4 | 2 | 10 |
+| Phase 1 — Python Basics | 14 | 6 | 6 | 3 | 8 |
 | Phase 2 — Python Intermediate | 20 | 0 | 0 | 0 | 20 |
 | Phase 3 — Python Concurrency | 16 | 0 | 0 | 0 | 16 |
 | Phase 4 — Python Advanced | 20 | 0 | 0 | 0 | 20 |
 | Phase 5 — FastAPI Track | 16 | 0 | 0 | 0 | 16 |
 | Phase 6 — DevOps & Capstone | 14 | 0 | 0 | 0 | 14 |
-| **Python Total** | **100** | **4** | **4** | **2** | **96** |
+| **Python Total** | **100** | **6** | **6** | **3** | **94** |
 | DSA Weeks | 20 | 1 | 0 | 0 | 19 |
-| **Grand Total** | **120** | **5** | **4** | **2** | **115** |
+| **Grand Total** | **120** | **7** | **6** | **3** | **113** |
 
 ---
 

@@ -82,11 +82,17 @@ Follow the Exercise Structure Template. Map exercises to checklist concept range
 ## Evaluate your solution
 
 ```
-@.agent.md @docs/RUBRIC.md
+@.agent.md @docs/RUBRIC.md @docs/SCORE_TRACKER.md
 
 Grade Day [NN] at exercise/<track>/day_XX_<slug>/.
 Follow docs/RUBRIC.md §4 evaluation protocol exactly.
 Include G8 (concept completeness) in the gate table.
+
+After grading, update docs/SCORE_TRACKER.md per §6 Agent Update Protocol:
+- §1 Master Progress Table — add/update the row for this day.
+- §2 Skills Heatmap — mark tested skill IDs.
+- §4 Gate Compliance Summary — add column for this day.
+- §5 Completion Dashboard — update counts.
 ```
 
 ---
