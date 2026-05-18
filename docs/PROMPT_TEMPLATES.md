@@ -22,6 +22,8 @@ CRITICAL — A-Z Coverage:
 Follow the CODE.md Structure Template, code.py Structure Template,
 and Exercise Structure Template from this file.
 Create 5 files per .agent.md §3.
+Exercise TODO hints MUST be plain-English steps only — no executable code lines
+(no `return ...`, comprehensions, `next(...)`, `dict(zip(...))`, etc.).
 Pass gates G1–G8. End with file list + self-check commands.
 ```
 
@@ -75,6 +77,9 @@ Day [NN] — [topic]. Do NOT create CODE.md or code.py.
 
 CRITICAL: Cover ALL items from the A-Z Concept Checklist for this day.
 Follow the Exercise Structure Template. Map exercises to checklist concept ranges.
+TODO hints MUST be plain-English steps only — no executable code lines
+(no `return ...`, comprehensions, `next(...)`, `dict(zip(...))`, etc.).
+See "TODO hint policy" in this file.
 ```
 
 ---
@@ -485,3 +490,41 @@ if __name__ == "__main__":
 - Exercises collectively cover **every A-Z checklist concept** (verified via Concept Coverage Map)
 - ex01 = creation/access/basics, ex02 = mutation/patterns/iteration, ex03 = industrial/advanced/anti-pattern fixes
 - **Difficulty ladder**: ex01 exercises solvable in 5–10 min each, ex02 in 10–15 min, ex03 in 15–25 min
+
+### TODO hint policy (no code leaks)
+
+> Applies to **every** stub in ex01/ex02/ex03. Hints exist to guide thinking, not to be copy-pasted.
+
+**Allowed in TODO comments:**
+- Numbered plain-English steps describing the algorithm.
+- Names of built-ins / methods to consider (e.g. "use `enumerate`", "use `divmod`") — name only, no full call.
+- Validation rules ("reject negative `start`", "raise `ValueError` when key missing").
+- Sample input → expected output as prose.
+- Edge-case reminders ("remember `all([])` is `True`").
+
+**Forbidden in TODO comments:**
+- Any executable Python line a learner could uncomment and ship: `return ...`, `result = [...]`, `return next((...) ...)`, `return dict(zip(...))`, `return map(...)`, etc.
+- Full comprehensions, lambdas, or chained calls written in syntactically valid form.
+- The function body in disguise (e.g. a one-line "hint" that happens to be the solution).
+
+**Examples:**
+
+```python
+# ✅ GOOD
+def number_lines(lines: list[str], start: int = 1) -> list[str]:
+    """..."""
+    # TODO:
+    # 1. Reject `start < 0` with ValueError (include the bad value in the message).
+    # 2. Walk `lines` with an index that begins at `start`.
+    # 3. Build "<index>. <line>" strings; return them as a list.
+    # Sample: number_lines(["a","b"]) -> ["1. a", "2. b"].
+    raise NotImplementedError("Implement number_lines")
+
+# ❌ BAD — solution leaks via the hint
+def number_lines(lines: list[str], start: int = 1) -> list[str]:
+    """..."""
+    # TODO: return [f"{i}. {line}" for i, line in enumerate(lines, start=start)]
+    raise NotImplementedError("Implement number_lines")
+```
+
+Reviewers must reject any generated exercise file whose TODO hints contain executable expressions matching the function's expected return.
