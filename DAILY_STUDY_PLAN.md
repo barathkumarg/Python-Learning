@@ -1,44 +1,82 @@
-# Daily Python + DSA Study Plan
+# Daily Study Plan
 
-> **Role:** Professional backend Python + DSA tutor track.  
-> **Companions:** [README.md](./README.md) · [.agent.md](./.agent.md) · [docs/RUBRIC.md](./docs/RUBRIC.md) · [docs/PROMPT_TEMPLATES.md](./docs/PROMPT_TEMPLATES.md) · [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md)
-
----
-
-## Purpose
-
-This file is the **master index**. Detailed day tables, concept checklists, and exercise directions live in the track files under `study_plan/`.
+> **This is the single entry point.** It answers one question: *what do I do each day?*
+> Everything else is reference — see **Where things live** below.
 
 ---
 
-## Artifacts Per Day
+## The Daily Loop (4 steps)
 
-| Artifact | Purpose |
-|----------|---------|
-| `CODE.md` | Concept map + snippets + anti-patterns + industrial practices |
-| `code.py` | Production-style reference with type hints and asserts |
-| `EXERCISE.md` | Objectives, scoring, failure modes |
-| `ex01_basic.py` | Foundational stubs |
-| `ex02_intermediate.py` | Applied stubs |
-| `ex03_advanced.py` | Design / edge-case stubs |
+Do these in order. Study before you practise. Practise closed-book.
+
+### 1. Generate
+
+- Open the day in the track file → `study_plan/<track>.md`.
+  Read its **Prerequisites, Real-world use, Production example, Sources**, and the
+  A-Z **Concept Checklist**.
+- Run the **generate prompt** from [docs/PROMPT_TEMPLATES.md](./docs/PROMPT_TEMPLATES.md).
+- Output: 6 files —
+  `src/<track>/<unit>/{CODE.md, code.py}` and
+  `exercise/<track>/<unit>/{EXERCISE.md, ex01_basic.py, ex02_intermediate.py, ex03_advanced.py}`.
+
+### 2. Study
+
+- Read `src/<track>/<unit>/CODE.md`, then `code.py`.
+- Run it and confirm output matches the `# Expected output:` comments:
+  ```bash
+  python src/<track>/<unit>/code.py
+  ```
+
+### 3. Practise
+
+- Solve `ex01 → ex02 → ex03` **closed-book** (don't peek at `code.py`).
+- Each file must pass its inline asserts and lint before you move on:
+  ```bash
+  ruff check exercise/<track>/<unit>/
+  python exercise/<track>/<unit>/ex01_basic.py
+  python exercise/<track>/<unit>/ex02_intermediate.py
+  python exercise/<track>/<unit>/ex03_advanced.py
+  ```
+
+### 4. Evaluate & Record
+
+- Run the **evaluate prompt** from [docs/RUBRIC.md §4](./docs/RUBRIC.md). It grades
+  against gates G1–G8 and dimensions D1–D7, appends an evaluation report to
+  `EXERCISE.md`, and updates [docs/SCORE_TRACKER.md](./docs/SCORE_TRACKER.md).
+- **Gate:** `< 75` on any file or any gate fail → **rework** (max 3 cycles).
+  `≥ 75` on all → advance to the next day.
 
 ---
 
-## Repository Layout
+## Where things live
 
-```text
-src/<track>/day_NN_topic/     → CODE.md + code.py
-exercise/<track>/day_NN_topic/ → EXERCISE.md + ex01/02/03
-src/dsa/week_WW_topic/        → CODE.md + code.py
-exercise/dsa/week_WW_topic/   → EXERCISE.md + ex01/02/03
-study_plan/                    → Track files with concept checklists
-```
+| Question | File |
+|----------|------|
+| What do I do each day? | **this file** |
+| What / how deep to learn per topic? | `study_plan/<track>.md` (checklists, prereqs, production example, sources) |
+| Prompts to generate & evaluate | [docs/PROMPT_TEMPLATES.md](./docs/PROMPT_TEMPLATES.md) |
+| Where content comes from (source URLs) | [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md) |
+| How content is generated (rules) | [.agent.md](./.agent.md) |
+| How it's graded — gates G1–G8, scoring | [docs/RUBRIC.md](./docs/RUBRIC.md) *(single source)* |
+| My recorded progress | [docs/SCORE_TRACKER.md](./docs/SCORE_TRACKER.md) |
+| DSA diagram templates | [docs/DSA_VISUALS.md](./docs/DSA_VISUALS.md) |
 
 ---
 
-## Phase Overview
+## Industrial learning bar
 
-| Phase | Days | Track | Study Plan |
+- **Study before practise** — read the reference, then solve from memory.
+- **Closed-book practice** — active recall; don't copy `code.py`.
+- **Everything runs green** — every file passes `ruff` + asserts before evaluation.
+- **Grade to advance** — `≥ 75` all files, all gates; rework weak days (3-cycle cap).
+- **Production-anchored** — each day builds the topic's real-world Production
+  example, not toy snippets.
+
+---
+
+## Phases & tracks
+
+| Phase | Days | Track | Study plan |
 |-------|------|-------|------------|
 | 1 | 01–14 | `python_basic` | [study_plan/python_basic.md](./study_plan/python_basic.md) |
 | 2 | 15–34 | `python_intermediate` | [study_plan/python_intermediate.md](./study_plan/python_intermediate.md) |
@@ -48,54 +86,19 @@ study_plan/                    → Track files with concept checklists
 | 6 | 87–100 | `devops_track` | [study_plan/devops_track.md](./study_plan/devops_track.md) |
 | DSA | Weeks 01–20 | `dsa` | [study_plan/dsa.md](./study_plan/dsa.md) |
 
----
-
-## Generation Workflow
-
-1. Open the track file for the day/week you're generating.
-2. Use [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md) for teaching sources.
-3. Generate using [docs/PROMPT_TEMPLATES.md](./docs/PROMPT_TEMPLATES.md).
-4. Validate with [.agent.md](./.agent.md) gates G1–G8 and [docs/RUBRIC.md](./docs/RUBRIC.md).
+**Layout:** `src/<track>/day_NN_slug/` (reference) · `exercise/<track>/day_NN_slug/`
+(practice). DSA uses `week_WW_slug/`.
 
 ---
 
-## Time Budget
+## Time budget & scheduling
 
 | Block | Time |
 |-------|------|
 | Python day | 60–90 min |
 | DSA week | 45–90 min |
 | Sunday lab | 90–120 min |
-| Quality pass | 15 min |
+| Quality pass (ruff + asserts) | 15 min |
 
----
-
-## High-Value References
-
-| Area | Sources |
-|------|---------|
-| Python | [Python Tutorial](https://docs.python.org/3/tutorial/) · [Real Python](https://realpython.com/) |
-| Typing | [typing docs](https://docs.python.org/3/library/typing.html) |
-| Async | [asyncio docs](https://docs.python.org/3/library/asyncio.html) |
-| FastAPI | [FastAPI docs](https://fastapi.tiangolo.com/) · [Pydantic docs](https://docs.pydantic.dev/) |
-| DevOps | [GitHub Actions](https://docs.github.com/actions) · [Docker](https://docs.docker.com/) |
-| DSA | [NeetCode](https://neetcode.io/roadmap) · [LeetCode](https://leetcode.com/) |
-
----
-
-## Industrial Bar
-
-- Type hints on all public APIs.
-- `CODE.md` follows [.agent.md](./.agent.md) §3.
-- Exercises use [docs/RUBRIC.md](./docs/RUBRIC.md) scoring and gate system (G1–G8).
-- Every exercise file contains inline assert self-checks.
-- DSA files include visuals + time/space complexity.
-- Never copy proprietary text. Rewrite in repo style per [docs/SOURCE_REGISTRY.md](./docs/SOURCE_REGISTRY.md).
-
----
-
-## Scheduling
-
-- DSA Week `n` maps to Python days `5n-4` through `5n` (strict) or same phase (flexible).
-- Sunday labs: finish before next phase milestone.
-- This file is the planning source of truth.
+- **DSA scheduling:** Week `n` runs parallel to Python days `5n-4` … `5n`.
+- **Sunday labs:** finish before the next phase milestone.

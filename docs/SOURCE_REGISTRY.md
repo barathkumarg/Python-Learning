@@ -273,112 +273,112 @@ Use this table to immediately find the right source URL for each day. Open the p
 
 | Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
 |-----|-------|--------------------|----------------------|-------------------|
-| 15 | Classes and object state | <https://realpython.com/python3-object-oriented-programming/> | <https://docs.python.org/3/tutorial/classes.html> | <https://exercism.org/tracks/python> |
-| 16 | Value-object dunders | <https://docs.python.org/3/reference/datamodel.html> | <https://realpython.com/python3-object-oriented-programming/> | <https://exercism.org/tracks/python> |
-| 17 | Properties and invariants | <https://realpython.com/python-property/> | <https://docs.python.org/3/library/functions.html#property> | <https://exercism.org/tracks/python> |
-| 18 | Inheritance and MRO | <https://realpython.com/python3-object-oriented-programming/> | <https://docs.python.org/3/tutorial/classes.html#inheritance> | <https://exercism.org/tracks/python> |
-| 19 | Abstract base classes | <https://docs.python.org/3/library/abc.html> | <https://realpython.com/python3-object-oriented-programming/> | <https://exercism.org/tracks/python> |
-| 20 | Dataclasses | <https://realpython.com/python-data-classes/> | <https://docs.python.org/3/library/dataclasses.html> | <https://exercism.org/tracks/python> |
-| 21 | Class and static methods | <https://realpython.com/instance-class-and-static-methods-demystified/> | <https://docs.python.org/3/library/functions.html#classmethod> | <https://exercism.org/tracks/python> |
-| 22 | Iterators | <https://realpython.com/python-iterators-iterables-iteration/> | <https://docs.python.org/3/library/stdtypes.html#iterator-types> | <https://exercism.org/tracks/python> |
-| 23 | Generators and lazy pipelines | <https://realpython.com/introduction-to-python-generators/> | <https://docs.python.org/3/tutorial/classes.html#generators> | <https://exercism.org/tracks/python> |
-| 24 | Generator expressions | <https://realpython.com/introduction-to-python-generators/> | <https://docs.python.org/3/howto/functional.html> | <https://exercism.org/tracks/python> |
-| 25 | Decorators | <https://realpython.com/primer-on-python-decorators/> | <https://peps.python.org/pep-0318/> | <https://exercism.org/tracks/python> |
-| 26 | Parametric decorators | <https://realpython.com/primer-on-python-decorators/> | <https://docs.python.org/3/library/functools.html> | <https://exercism.org/tracks/python> |
-| 27 | Context managers | <https://realpython.com/python-with-statement/> | <https://docs.python.org/3/library/contextlib.html> | <https://exercism.org/tracks/python> |
-| 28 | @contextmanager | <https://realpython.com/python-with-statement/> | <https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager> | <https://exercism.org/tracks/python> |
+| 15 | OOP: Classes, `__init__`, Attributes | <https://realpython.com/python3-object-oriented-programming/> | <https://docs.python.org/3/tutorial/classes.html> | <https://exercism.org/tracks/python> |
+| 16 | Inheritance, `super()` | <https://realpython.com/python3-object-oriented-programming/> | <https://docs.python.org/3/tutorial/classes.html#inheritance> | <https://exercism.org/tracks/python> |
+| 17 | Dunder Methods | <https://docs.python.org/3/reference/datamodel.html> | <https://realpython.com/python3-object-oriented-programming/> | <https://exercism.org/tracks/python> |
+| 18 | Class/Static Methods | <https://realpython.com/instance-class-and-static-methods-demystified/> | <https://docs.python.org/3/library/functions.html#classmethod> | <https://exercism.org/tracks/python> |
+| 19 | Dataclasses | <https://realpython.com/python-data-classes/> | <https://docs.python.org/3/library/dataclasses.html> | <https://exercism.org/tracks/python> |
+| 20 | Protocols and ABCs | <https://docs.python.org/3/library/abc.html> | <https://docs.python.org/3/library/typing.html#typing.Protocol> | <https://exercism.org/tracks/python> |
+| 21 | Decorators | <https://realpython.com/primer-on-python-decorators/> | <https://peps.python.org/pep-0318/> | <https://exercism.org/tracks/python> |
+| 22 | Context Managers | <https://realpython.com/python-with-statement/> | <https://docs.python.org/3/library/contextlib.html> | <https://exercism.org/tracks/python> |
+| 23 | itertools | <https://realpython.com/python-itertools/> | <https://docs.python.org/3/library/itertools.html> | <https://exercism.org/tracks/python> |
+| 24 | Advanced Typing | <https://realpython.com/python-type-checking/> | <https://docs.python.org/3/library/typing.html> | <https://exercism.org/tracks/python> |
+| 25 | Enum and Constants | <https://docs.python.org/3/library/enum.html> | <https://realpython.com/python-enum/> | <https://exercism.org/tracks/python> |
+| 26 | Regex | <https://docs.python.org/3/library/re.html> | <https://realpython.com/regex-python/> | <https://exercism.org/tracks/python> |
+| 27 | Dates and Times | <https://docs.python.org/3/library/datetime.html> | <https://realpython.com/python-datetime/> | <https://exercism.org/tracks/python> |
+| 28 | Collections Deep-dive | <https://docs.python.org/3/library/collections.html> | <https://realpython.com/python-collections-module/> | <https://exercism.org/tracks/python> |
 | 29 | functools | <https://realpython.com/python-functools/> | <https://docs.python.org/3/library/functools.html> | <https://exercism.org/tracks/python> |
-| 30 | itertools | <https://realpython.com/python-itertools/> | <https://docs.python.org/3/library/itertools.html> | <https://exercism.org/tracks/python> |
-| 31 | Typing basics | <https://realpython.com/python-type-checking/> | <https://docs.python.org/3/library/typing.html> | <https://exercism.org/tracks/python> |
-| 32 | Advanced typing helpers | <https://realpython.com/python-type-checking/> | <https://docs.python.org/3/library/typing.html> | <https://exercism.org/tracks/python> |
-| 33 | Generics and TypeVar | <https://realpython.com/python-type-checking/> | <https://docs.python.org/3/library/typing.html#generics> | <https://exercism.org/tracks/python> |
-| 34 | mypy and strictness | <https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html> | <https://docs.python.org/3/library/typing.html> | <https://exercism.org/tracks/python> |
+| 30 | Testing: pytest Basics | <https://realpython.com/pytest-python-testing/> | <https://docs.pytest.org/> | <https://exercism.org/tracks/python> |
+| 31 | Testing: Mocking | <https://docs.python.org/3/library/unittest.mock.html> | <https://realpython.com/pytest-python-testing/> | <https://exercism.org/tracks/python> |
+| 32 | Logging | <https://realpython.com/python-logging/> | <https://docs.python.org/3/library/logging.html> | <https://exercism.org/tracks/python> |
+| 33 | CLI: argparse / click | <https://docs.python.org/3/library/argparse.html> | <https://click.palletsprojects.com/> | <https://exercism.org/tracks/python> |
+| 34 | Packaging and Distribution | <https://packaging.python.org/en/latest/tutorials/packaging-projects/> | <https://packaging.python.org/en/latest/specifications/pyproject-toml/> | <https://exercism.org/tracks/python> |
 
 ### Phase 3 — Python Concurrency
 
 | Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
 |-----|-------|--------------------|----------------------|-------------------|
-| 35 | Threading and locks | <https://realpython.com/intro-to-python-threading/> | <https://docs.python.org/3/library/threading.html> | — |
-| 36 | GIL and workload selection | <https://realpython.com/intro-to-python-threading/> | <https://docs.python.org/3/glossary.html#term-global-interpreter-lock> | — |
-| 37 | Multiprocessing | <https://realpython.com/python-multiprocessing/> | <https://docs.python.org/3/library/multiprocessing.html> | — |
-| 38 | concurrent.futures | <https://docs.python.org/3/library/concurrent.futures.html> | <https://realpython.com/intro-to-python-threading/> | — |
-| 39 | asyncio basics | <https://realpython.com/async-io-python/> | <https://docs.python.org/3/library/asyncio.html> | — |
-| 40 | aiohttp | <https://docs.aiohttp.org/en/stable/> | <https://realpython.com/async-io-python/> | — |
-| 41 | Async error handling | <https://realpython.com/async-io-python/> | <https://docs.python.org/3/library/asyncio-task.html> | — |
-| 42 | Sync/async bridge | <https://docs.python.org/3/library/asyncio-eventloop.html> | <https://realpython.com/async-io-python/> | — |
-| 43 | Concurrency design boundaries | <https://realpython.com/async-io-python/> | <https://docs.python.org/3/library/asyncio.html> | — |
-| 44 | Refactor day | (own earlier modules) | — | — |
-| 45 | Concurrency milestone | (own earlier modules) | — | — |
-| 46 | Packaging concurrent code | <https://packaging.python.org/en/latest/specifications/pyproject-toml/> | <https://docs.astral.sh/uv/> | — |
-| 47 | Testing concurrent code | <https://realpython.com/pytest-python-testing/> | <https://docs.pytest.org/> | — |
-| 48 | Mocking I/O | <https://docs.pytest.org/en/stable/how-to/monkeypatch.html> | <https://realpython.com/pytest-python-testing/> | — |
-| 49 | Logging in concurrent systems | <https://realpython.com/python-logging/> | <https://docs.python.org/3/library/logging.html> | — |
-| 50 | Phase review | (own earlier modules) | — | — |
+| 35 | Generators Deep-dive | <https://realpython.com/introduction-to-python-generators/> | <https://docs.python.org/3/howto/functional.html> | — |
+| 36 | Generator Pipelines | <https://realpython.com/introduction-to-python-generators/> | <https://docs.python.org/3/library/itertools.html> | — |
+| 37 | asyncio Basics | <https://realpython.com/async-io-python/> | <https://docs.python.org/3/library/asyncio.html> | — |
+| 38 | asyncio Tasks & Gather | <https://docs.python.org/3/library/asyncio-task.html> | <https://realpython.com/async-io-python/> | — |
+| 39 | Async I/O Patterns | <https://realpython.com/async-io-python/> | <https://docs.python.org/3/library/asyncio.html> | — |
+| 40 | Async Generators & Advanced | <https://docs.python.org/3/library/asyncio.html> | <https://docs.python.org/3/howto/functional.html> | — |
+| 41 | Threading | <https://realpython.com/intro-to-python-threading/> | <https://docs.python.org/3/library/threading.html> | — |
+| 42 | Thread Safety | <https://docs.python.org/3/library/threading.html> | <https://realpython.com/intro-to-python-threading/> | — |
+| 43 | Multiprocessing | <https://realpython.com/python-multiprocessing/> | <https://docs.python.org/3/library/multiprocessing.html> | — |
+| 44 | concurrent.futures | <https://docs.python.org/3/library/concurrent.futures.html> | <https://realpython.com/intro-to-python-threading/> | — |
+| 45 | subprocess | <https://realpython.com/python-subprocess/> | <https://docs.python.org/3/library/subprocess.html> | — |
+| 46 | Memory Management | <https://docs.python.org/3/library/gc.html> | <https://docs.python.org/3/library/weakref.html> | — |
+| 47 | Profiling | <https://docs.python.org/3/library/profile.html> | <https://docs.python.org/3/library/timeit.html> | — |
+| 48 | Performance Patterns | <https://docs.python.org/3/library/functools.html> | <https://docs.python.org/3/library/profile.html> | — |
+| 49 | struct / array / memoryview | <https://docs.python.org/3/library/struct.html> | <https://docs.python.org/3/library/array.html> | — |
+| 50 | Concurrency Project | (own Day 35-49 modules) | — | — |
 
 ### Phase 4 — Python Advanced
 
 | Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
 |-----|-------|--------------------|----------------------|-------------------|
 | 51 | Descriptors | <https://realpython.com/python-descriptors/> | <https://docs.python.org/3/reference/datamodel.html#descriptors> | — |
-| 52 | __slots__ | <https://docs.python.org/3/reference/datamodel.html#slots> | <https://realpython.com/python-data-classes/> | — |
-| 53 | Metaclasses | <https://realpython.com/python-metaclasses/> | <https://docs.python.org/3/reference/datamodel.html#metaclasses> | — |
-| 54 | __init_subclass__ | <https://docs.python.org/3/reference/datamodel.html#object.__init_subclass__> | <https://peps.python.org/pep-0487/> | — |
-| 55 | Bytecode and dis | <https://docs.python.org/3/library/dis.html> | <https://docs.python.org/3/reference/datamodel.html> | — |
-| 56 | Import system | <https://docs.python.org/3/library/importlib.html> | <https://realpython.com/python-modules-packages/> | — |
-| 57 | cProfile | <https://docs.python.org/3/library/profile.html> | <https://realpython.com/python-profiling/> | — |
-| 58 | timeit and measurement | <https://docs.python.org/3/library/timeit.html> | <https://realpython.com/python-profiling/> | — |
-| 59 | pytest fixtures | <https://realpython.com/pytest-python-testing/> | <https://docs.pytest.org/> | — |
-| 60 | Coverage | <https://coverage.readthedocs.io/> | <https://docs.pytest.org/> | — |
-| 61 | Ruff and pre-commit | <https://docs.astral.sh/ruff/> | <https://pre-commit.com/> | — |
-| 62 | Security scanning with Bandit | <https://bandit.readthedocs.io/> | <https://docs.python.org/3/library/subprocess.html> | — |
-| 63 | Strategy and Factory | <https://realpython.com/factory-method-python/> | <https://docs.python.org/3/library/abc.html> | — |
-| 64 | Repository and DI | <https://realpython.com/python-dependency-injection/> | <https://fastapi.tiangolo.com/tutorial/dependencies/> | — |
-| 65 | Packaging a library | <https://packaging.python.org/en/latest/tutorials/packaging-projects/> | <https://docs.astral.sh/uv/> | — |
-| 66 | uv workflow | <https://docs.astral.sh/uv/> | <https://packaging.python.org/en/latest/specifications/pyproject-toml/> | — |
-| 67 | Library CI milestone | <https://docs.github.com/actions> | <https://docs.astral.sh/ruff/> | — |
-| 68 | Metaprogramming review | (own Day 51-54 modules) | — | — |
-| 69 | Testing strategy review | (own Day 47, 59-60 modules) | — | — |
-| 70 | Retrospective and polish | (own all modules) | — | — |
+| 52 | Metaclasses | <https://realpython.com/python-metaclasses/> | <https://docs.python.org/3/reference/datamodel.html#metaclasses> | — |
+| 53 | `__init_subclass__` & Class Hooks | <https://docs.python.org/3/reference/datamodel.html#object.__init_subclass__> | <https://peps.python.org/pep-0487/> | — |
+| 54 | Dynamic Attributes | <https://docs.python.org/3/reference/datamodel.html#customizing-attribute-access> | <https://docs.python.org/3/library/functions.html#getattr> | — |
+| 55 | Abstract Syntax Trees | <https://docs.python.org/3/library/ast.html> | <https://greentreesnakes.readthedocs.io/en/latest/> | — |
+| 56 | inspect Module | <https://docs.python.org/3/library/inspect.html> | <https://peps.python.org/pep-0362/> | — |
+| 57 | C Extensions / ctypes / cffi | <https://docs.python.org/3/library/ctypes.html> | <https://cffi.readthedocs.io/en/stable/> | — |
+| 58 | Design Patterns: Creational | <https://realpython.com/factory-method-python/> | <https://refactoring.guru/design-patterns/creational-patterns> | — |
+| 59 | Design Patterns: Structural | <https://refactoring.guru/design-patterns/structural-patterns> | <https://docs.python.org/3/reference/datamodel.html#special-method-names> | — |
+| 60 | Design Patterns: Behavioral | <https://refactoring.guru/design-patterns/behavioral-patterns> | <https://docs.python.org/3/library/stdtypes.html#iterator-types> | — |
+| 61 | Dependency Injection | <https://realpython.com/python-dependency-injection/> | <https://fastapi.tiangolo.com/tutorial/dependencies/> | — |
+| 62 | SOLID Principles | <https://realpython.com/solid-principles-python/> | <https://www.cosmicpython.com/> | — |
+| 63 | Clean Code Practices | <https://peps.python.org/pep-0008/> | <https://realpython.com/python-code-quality/> | — |
+| 64 | Security: Input Validation | <https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html> | <https://bandit.readthedocs.io/en/latest/> | — |
+| 65 | Security: Crypto & Hashing | <https://docs.python.org/3/library/hashlib.html> | <https://docs.python.org/3/library/secrets.html> | — |
+| 66 | Security: Auth Patterns | <https://pyjwt.readthedocs.io/en/stable/> | <https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html> | — |
+| 67 | Database: SQLite + SQLAlchemy | <https://docs.python.org/3/library/sqlite3.html> | <https://docs.sqlalchemy.org/en/20/orm/> | — |
+| 68 | Database: Migrations & Patterns | <https://alembic.sqlalchemy.org/en/latest/tutorial.html> | <https://www.cosmicpython.com/book/chapter_02_repository.html> | — |
+| 69 | Networking: Sockets | <https://docs.python.org/3/library/socket.html> | <https://docs.python.org/3/howto/sockets.html> | — |
+| 70 | Advanced Project | (own Day 51-69 modules) | — | — |
 
 ### Phase 5 — FastAPI Track
 
 | Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
 |-----|-------|--------------------|----------------------|-------------------|
-| 71 | FastAPI app basics | <https://fastapi.tiangolo.com/tutorial/first-steps/> | <https://fastapi.tiangolo.com/tutorial/path-params/> | — |
-| 72 | Pydantic v2 models | <https://docs.pydantic.dev/latest/concepts/models/> | <https://fastapi.tiangolo.com/tutorial/body/> | — |
-| 73 | Dependencies | <https://fastapi.tiangolo.com/tutorial/dependencies/> | <https://fastapi.tiangolo.com/tutorial/dependency-injection-in-fastapi/> | — |
-| 74 | Error handling | <https://fastapi.tiangolo.com/tutorial/handling-errors/> | <https://docs.pydantic.dev/latest/concepts/models/#model-validation> | — |
-| 75 | OAuth2 and JWT | <https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/> | <https://fastapi.tiangolo.com/tutorial/security/> | — |
-| 76 | Middleware and CORS | <https://fastapi.tiangolo.com/tutorial/cors/> | <https://fastapi.tiangolo.com/advanced/middleware/> | — |
-| 77 | Background tasks | <https://fastapi.tiangolo.com/tutorial/background-tasks/> | <https://docs.python.org/3/library/asyncio-task.html> | — |
-| 78 | SQLAlchemy async and Alembic | <https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html> | <https://alembic.sqlalchemy.org/en/latest/tutorial.html> | — |
-| 79 | Repository in API services | <https://fastapi.tiangolo.com/tutorial/dependencies/> | <https://docs.sqlalchemy.org/en/20/orm/queryguide/> | — |
-| 80 | API testing | <https://fastapi.tiangolo.com/tutorial/testing/> | <https://docs.pytest.org/> | — |
+| 71 | FastAPI Basics | <https://fastapi.tiangolo.com/tutorial/first-steps/> | <https://fastapi.tiangolo.com/tutorial/path-params/> | — |
+| 72 | Request & Response Models | <https://docs.pydantic.dev/latest/concepts/models/> | <https://fastapi.tiangolo.com/tutorial/body/> | — |
+| 73 | Path, Query, Body Params | <https://fastapi.tiangolo.com/tutorial/path-params/> | <https://fastapi.tiangolo.com/tutorial/body/> | — |
+| 74 | Dependency Injection | <https://fastapi.tiangolo.com/tutorial/dependencies/> | <https://fastapi.tiangolo.com/tutorial/dependency-injection-in-fastapi/> | — |
+| 75 | Database Integration | <https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html> | <https://alembic.sqlalchemy.org/en/latest/tutorial.html> | — |
+| 76 | Authentication & JWT | <https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/> | <https://fastapi.tiangolo.com/tutorial/security/> | — |
+| 77 | Middleware & CORS | <https://fastapi.tiangolo.com/tutorial/cors/> | <https://fastapi.tiangolo.com/advanced/middleware/> | — |
+| 78 | Error Handling | <https://fastapi.tiangolo.com/tutorial/handling-errors/> | <https://docs.pydantic.dev/latest/concepts/models/#model-validation> | — |
+| 79 | Background Tasks | <https://fastapi.tiangolo.com/tutorial/background-tasks/> | <https://docs.python.org/3/library/asyncio-task.html> | — |
+| 80 | File Upload & Streaming | <https://fastapi.tiangolo.com/tutorial/request-files/> | <https://www.starlette.io/> | — |
 | 81 | WebSockets | <https://fastapi.tiangolo.com/advanced/websockets/> | <https://www.starlette.io/websockets/> | — |
-| 82 | Docker for FastAPI | <https://fastapi.tiangolo.com/deployment/docker/> | <https://docs.docker.com/> | — |
-| 83 | Settings management | <https://docs.pydantic.dev/latest/concepts/pydantic_settings/> | <https://fastapi.tiangolo.com/advanced/settings/> | — |
-| 84 | FastAPI milestone | (own Day 71-83 modules) | — | — |
-| 85 | Health and readiness | <https://fastapi.tiangolo.com/advanced/advanced-user-guide/> | <https://docs.docker.com/compose/> | — |
-| 86 | API review checklist | (own Day 71-85 modules) | <https://fastapi.tiangolo.com/tutorial/> | — |
+| 82 | Testing FastAPI | <https://fastapi.tiangolo.com/tutorial/testing/> | <https://docs.pytest.org/> | — |
+| 83 | OpenAPI & Docs | <https://fastapi.tiangolo.com/> | <https://docs.pydantic.dev/latest/concepts/models/> | — |
+| 84 | Performance & Caching | <https://fastapi.tiangolo.com/> | <https://www.uvicorn.org/> | — |
+| 85 | Docker & Deployment | <https://fastapi.tiangolo.com/deployment/docker/> | <https://docs.docker.com/> | — |
+| 86 | FastAPI Project | (own Day 71-85 modules) | <https://fastapi.tiangolo.com/tutorial/> | — |
 
 ### Phase 6 — DevOps and Capstone
 
 | Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
 |-----|-------|--------------------|----------------------|-------------------|
-| 87 | Debugging with pdb | <https://docs.python.org/3/library/pdb.html> | <https://realpython.com/python-debugging-pdb/> | — |
-| 88 | Structured logging | <https://www.structlog.org/> | <https://realpython.com/python-logging/> | — |
-| 89 | OpenTelemetry | <https://opentelemetry.io/docs/languages/python/> | <https://opentelemetry.io/docs/concepts/signals/traces/> | — |
-| 90 | Safe subprocess | <https://realpython.com/python-subprocess/> | <https://docs.python.org/3/library/subprocess.html> | — |
-| 91 | Cloud or container SDK | <https://boto3.amazonaws.com/v1/documentation/api/latest/index.html> | <https://docs.docker.com/engine/api/> | — |
-| 92 | GitHub Actions | <https://docs.github.com/actions> | <https://docs.github.com/actions/quickstart> | — |
-| 93 | Prometheus metrics | <https://prometheus.io/docs/guides/python/> | <https://prometheus.io/docs/concepts/data-model/> | — |
-| 94 | Capstone deploy slice | (own Day 87-93 modules) | <https://docs.docker.com/> | — |
-| 95 | Runbooks | <https://docs.github.com/actions> | (own capstone module) | — |
-| 96 | Timed DSA practice | <https://neetcode.io/practice> | <https://leetcode.com/> | — |
-| 97 | Explain-aloud DSA | <https://neetcode.io/roadmap> | (own DSA modules) | — |
-| 98 | Portfolio README | (own repo) | — | — |
-| 99 | Repo review and sync | (own repo) | — | — |
-| 100 | Next 30 days roadmap | <https://neetcode.io/roadmap> | <https://realpython.com/> | — |
+| 87 | Docker Fundamentals | <https://docs.docker.com/> | <https://fastapi.tiangolo.com/deployment/docker/> | — |
+| 88 | Docker Compose | <https://docs.docker.com/compose/> | <https://docs.docker.com/> | — |
+| 89 | CI/CD: GitHub Actions | <https://docs.github.com/actions> | <https://docs.github.com/actions/quickstart> | — |
+| 90 | CI/CD: Advanced Pipelines | <https://docs.github.com/actions> | <https://docs.docker.com/> | — |
+| 91 | Environment Management | <https://docs.pydantic.dev/latest/concepts/pydantic_settings/> | <https://fastapi.tiangolo.com/advanced/settings/> | — |
+| 92 | Monitoring: Logging & Metrics | <https://prometheus.io/docs/guides/python/> | <https://www.structlog.org/> | — |
+| 93 | Monitoring: Alerting & Dashboards | <https://opentelemetry.io/docs/languages/python/> | <https://opentelemetry.io/docs/concepts/signals/traces/> | — |
+| 94 | Infrastructure as Code | <https://boto3.amazonaws.com/v1/documentation/api/latest/index.html> | <https://docs.docker.com/engine/api/> | — |
+| 95 | Cloud Basics | <https://boto3.amazonaws.com/v1/documentation/api/latest/index.html> | <https://docs.docker.com/> | — |
+| 96 | Capstone: Design | <https://fastapi.tiangolo.com/tutorial/> | (own earlier modules) | — |
+| 97 | Capstone: Core Logic | <https://realpython.com/python3-object-oriented-programming/> | (own earlier modules) | — |
+| 98 | Capstone: API Layer | <https://fastapi.tiangolo.com/> | <https://fastapi.tiangolo.com/tutorial/testing/> | — |
+| 99 | Capstone: Deployment | <https://fastapi.tiangolo.com/deployment/docker/> | <https://docs.github.com/actions> | — |
+| 100 | Capstone: Polish & Review | <https://neetcode.io/roadmap> | (own earlier modules) | — |
 
 ### Parallel DSA — LeetCode problem URLs per week
 

@@ -27,7 +27,12 @@
 
 ## Concept Checklists
 
-### Day 71 — FastAPI Basics (22)
+### Day 71 — FastAPI Basics (26)
+
+**Prerequisites:** Day 14 (tooling/venv), Day 39 (async/await), Day 03 (functions).
+**Real-world use:** every backend service starts here — declaring typed routes, auto-validated params, and self-documenting JSON endpoints served by an ASGI server.
+**Production example (code.py):** a versioned health + resource service — `APIRouter(prefix="/api/v1")` mounting `GET /health` (liveness) and `GET /items/{item_id}` with a typed path param, wired through a lifespan that opens/closes a shared resource, with request logic delegated to a service layer.
+**Sources:** [FastAPI — First Steps](https://fastapi.tiangolo.com/tutorial/first-steps/) · [FastAPI — Path Parameters](https://fastapi.tiangolo.com/tutorial/path-params/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -53,8 +58,17 @@
 | 20 | Anti-pattern: logic in routes | Use service layer |
 | 21 | Anti-pattern: no validation | Always type params |
 | 22 | Industrial: project structure | Router + service + model |
+| 23 | Enum path parameters | `class Name(str, Enum)` predefined values |
+| 24 | `fastapi` CLI | `fastapi dev main.py`, `fastapi run` |
+| 25 | Path operation order | Fixed paths before `{param}` routes |
+| 26 | Response classes | `HTMLResponse`, `PlainTextResponse`, `RedirectResponse` |
 
-### Day 72 — Request & Response Models (20)
+### Day 72 — Request & Response Models (30)
+
+**Prerequisites:** Day 71 (routes/response), Day 20 (dataclasses), Day 31 (typing basics).
+**Real-world use:** every request/response crosses a validation boundary — Pydantic v2 models parse, coerce, and validate untrusted JSON and shape exactly what the API returns.
+**Production example (code.py):** an order API with separated schemas — `OrderCreate` (input) validated with `@field_validator` + constrained types, `OrderResponse` (output, `from_attributes=True`) with a `@computed_field` total, and a reusable `Money` value type used across nested line items.
+**Sources:** [Pydantic — Models](https://docs.pydantic.dev/latest/concepts/models/) · [FastAPI — Request Body](https://fastapi.tiangolo.com/tutorial/body/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -78,8 +92,23 @@
 | 18 | Anti-pattern: dict everywhere | Use models |
 | 19 | Anti-pattern: one model for all | Separate in/out |
 | 20 | Industrial: schema versioning | V1/V2 models |
+| 21 | `Annotated` field style | `Annotated[int, Field(ge=0)]` |
+| 22 | `Field(default_factory=...)` | Safe mutable defaults |
+| 23 | Field aliases | `alias=`, `populate_by_name`, `by_alias` |
+| 24 | Special types | `EmailStr`, `HttpUrl`, `UUID`, `datetime` |
+| 25 | Constrained types | `PositiveInt`, `conint`, `constr` |
+| 26 | `@computed_field` | Derived/read-only properties |
+| 27 | `@field_serializer` / `@model_serializer` | Custom serialization |
+| 28 | Discriminated unions | `Field(discriminator="type")` |
+| 29 | `ValidationError.errors()` | Inspect field-level failures |
+| 30 | Strict vs lax mode | Coercion control, `Strict` types |
 
-### Day 73 — Path, Query, Body Params (20)
+### Day 73 — Path, Query, Body Params (27)
+
+**Prerequisites:** Day 72 (Pydantic models), Day 71 (routing), Day 31 (typing).
+**Real-world use:** correct parameter typing and constraints are the first line of defense — they reject bad input at the edge with a 422 before any handler code runs.
+**Production example (code.py):** a paginated, filterable `GET /products` — `Annotated` query params with `min_length`/numeric bounds, a `sort` enum, a list-valued `tags` filter, and a validated `{product_id}` path param, returning a typed page envelope.
+**Sources:** [FastAPI — Path Parameters](https://fastapi.tiangolo.com/tutorial/path-params/) · [FastAPI — Request Body](https://fastapi.tiangolo.com/tutorial/body/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -103,8 +132,20 @@
 | 18 | Anti-pattern: no validation | Always constrain |
 | 19 | Industrial: pagination | `skip`, `limit` params |
 | 20 | Industrial: filtering | Query params for search |
+| 21 | `Annotated` param style | `Annotated[int, Path(ge=1)]` |
+| 22 | Query list / multiple values | `list[str] = Query()` |
+| 23 | Query param alias | `Query(alias="item-query")` |
+| 24 | Numeric constraints | `gt`, `ge`, `lt`, `le` |
+| 25 | String constraints | `min_length`, `max_length`, `pattern` |
+| 26 | Enum params | Predefined choices |
+| 27 | Pydantic model as query params | `Annotated[Filters, Query()]` |
 
-### Day 74 — Dependency Injection (20)
+### Day 74 — Dependency Injection (24)
+
+**Prerequisites:** Day 71 (routes), Day 27 (context managers/yield), Day 64 (DI/repository).
+**Real-world use:** dependency injection wires DB sessions, current-user, settings, and shared services into routes — testable, reusable, and cleaned up per request.
+**Production example (code.py):** a request-scoped dependency stack — a `yield` DB-session dependency, a `get_current_user` auth dependency layered on it, and a settings dependency, all exposed as reusable `Annotated` aliases and overridable in tests.
+**Sources:** [FastAPI — Dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/) · [FastAPI — Dependency Injection](https://fastapi.tiangolo.com/tutorial/dependency-injection-in-fastapi/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -128,8 +169,17 @@
 | 18 | Industrial: service injection | Business logic layer |
 | 19 | Industrial: config injection | Settings dependency |
 | 20 | Industrial: multi-tenant | Tenant from header |
+| 21 | `Annotated` dependency style | `Annotated[Session, Depends(get_db)]` |
+| 22 | Path-operation `dependencies=` | `@app.get(dependencies=[Depends(verify)])` |
+| 23 | Dependency type aliases | Reusable `Annotated` alias |
+| 24 | `yield` dep exception handling | Cleanup runs on error too |
 
-### Day 75 — Database Integration (20)
+### Day 75 — Database Integration (27)
+
+**Prerequisites:** Day 74 (DB dependency), Day 39 (async), Day 64 (repository pattern).
+**Real-world use:** real APIs persist state — async SQLAlchemy 2.0 models, sessions, and Alembic migrations back every CRUD endpoint without blocking the event loop.
+**Production example (code.py):** an async CRUD service for a resource — `DeclarativeBase`/`Mapped` models, an `AsyncSession` dependency, 2.0-style `select()` with `selectinload` for relationships, transactional writes, and an Alembic migration for the schema.
+**Sources:** [SQLAlchemy — Async ORM](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html) · [Alembic — Tutorial](https://alembic.sqlalchemy.org/en/latest/tutorial.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -153,8 +203,20 @@
 | 18 | Anti-pattern: N+1 queries | Eager loading |
 | 19 | Industrial: repository pattern | Abstract DB access |
 | 20 | Industrial: service layer | Business logic separation |
+| 21 | Alembic migrations | `revision --autogenerate`, `upgrade head` |
+| 22 | `AsyncSession` dependency | `async_sessionmaker` + `yield` |
+| 23 | 2.0-style `select()` | `select(Model).where(...)` |
+| 24 | `scalars()` / `scalar_one_or_none()` | Result extraction |
+| 25 | Eager loading | `selectinload`, `joinedload` |
+| 26 | `DeclarativeBase` + `Mapped` | Typed ORM models, `mapped_column` |
+| 27 | Transaction block | `async with session.begin():` |
 
-### Day 76 — Authentication & JWT (20)
+### Day 76 — Authentication & JWT (24)
+
+**Prerequisites:** Day 75 (user table/DB), Day 74 (auth dependency), Day 10 (exceptions).
+**Real-world use:** authentication and authorization gate every non-public endpoint — hashed passwords, signed JWTs, and role checks protect user data.
+**Production example (code.py):** an OAuth2 password-flow auth module — `POST /token` verifying a `CryptContext`-hashed password and issuing a JWT with `exp`, plus a `get_current_active_user` dependency that decodes the bearer token and enforces role/scope on protected routes.
+**Sources:** [FastAPI — OAuth2 with JWT](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/) · [FastAPI — Security](https://fastapi.tiangolo.com/tutorial/security/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -178,8 +240,17 @@
 | 18 | Industrial: auth service | Separate auth module |
 | 19 | Industrial: middleware auth | Verify before route |
 | 20 | Testing auth | Override auth dependency |
+| 21 | `CryptContext` | `passlib` hash + verify |
+| 22 | `WWW-Authenticate` header | `Bearer` on 401 responses |
+| 23 | Active user check | Reject disabled accounts |
+| 24 | `Token` response model | `access_token` + `token_type` |
 
-### Day 77 — Middleware & CORS (20)
+### Day 77 — Middleware & CORS (24)
+
+**Prerequisites:** Day 71 (Request/Response), Day 49 (logging), Day 76 (security context).
+**Real-world use:** cross-cutting concerns — CORS, request IDs, timing, compression, and security headers — belong in middleware, applied uniformly to every request.
+**Production example (code.py):** an observability + security middleware stack — a custom timing/request-ID/logging middleware, `CORSMiddleware` restricted to configured origins with credentials, `GZipMiddleware`, and injected security headers (HSTS/CSP).
+**Sources:** [FastAPI — CORS](https://fastapi.tiangolo.com/tutorial/cors/) · [FastAPI — Advanced Middleware](https://fastapi.tiangolo.com/advanced/middleware/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -203,8 +274,17 @@
 | 18 | Anti-pattern: CORS `*` in prod | Restrict origins |
 | 19 | Industrial: observability middleware | Timing + logging + tracing |
 | 20 | Industrial: security headers | CSP, HSTS |
+| 21 | `BaseHTTPMiddleware` class | Reusable class-based middleware |
+| 22 | CORS credentials | `allow_credentials=True` |
+| 23 | CORS preflight | `OPTIONS`, `max_age`, `expose_headers` |
+| 24 | Pure ASGI middleware | Wrap the ASGI app directly |
 
-### Day 78 — Error Handling (20)
+### Day 78 — Error Handling (24)
+
+**Prerequisites:** Day 10 (exceptions/domain errors), Day 72 (models), Day 71 (responses).
+**Real-world use:** consistent, safe error responses — mapping domain exceptions to HTTP status codes with machine-readable bodies and no leaked stack traces.
+**Production example (code.py):** a uniform error layer — domain exceptions (`NotFoundError`, `ConflictError`) mapped via `@app.exception_handler` to an RFC 7807-style JSON body, a `RequestValidationError` handler surfacing field errors, and structured logging of 5xx.
+**Sources:** [FastAPI — Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/) · [Pydantic — Model Validation](https://docs.pydantic.dev/latest/concepts/models/#model-validation)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -228,8 +308,17 @@
 | 18 | Industrial: error catalog | Documented error codes |
 | 19 | Industrial: error monitoring | Sentry integration |
 | 20 | Testing error responses | Assert status + body |
+| 21 | `status` constants | `status.HTTP_404_NOT_FOUND` |
+| 22 | Override default handlers | `@app.exception_handler(HTTPException)` |
+| 23 | `RequestValidationError.errors()` | Access invalid fields |
+| 24 | Handler returns `JSONResponse` | Custom body + status code |
 
-### Day 79 — Background Tasks (20)
+### Day 79 — Background Tasks (22)
+
+**Prerequisites:** Day 71 (endpoints), Day 39 (async), Day 74 (dependencies).
+**Real-world use:** offload slow, non-critical work (emails, audit logs, cleanup) so the response returns fast, escalating to Celery/arq when durability is needed.
+**Production example (code.py):** a signup endpoint that returns 201 immediately and schedules background work — a `BackgroundTasks` welcome-email send plus an audit-log write, with a documented threshold for graduating to a distributed queue.
+**Sources:** [FastAPI — Background Tasks](https://fastapi.tiangolo.com/tutorial/background-tasks/) · [asyncio — Tasks](https://docs.python.org/3/library/asyncio-task.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -253,8 +342,15 @@
 | 18 | Industrial: webhook delivery | Retry + timeout |
 | 19 | Industrial: report generation | Async + notify |
 | 20 | Testing background tasks | Sync execution in tests |
+| 21 | `BackgroundTask` (Starlette) | Single task attached to a `Response` |
+| 22 | Runs after response sent | Ordering guarantee, not for critical work |
 
-### Day 80 — File Upload & Streaming (20)
+### Day 80 — File Upload & Streaming (23)
+
+**Prerequisites:** Day 09 (file I/O), Day 40 (async I/O), Day 71 (responses).
+**Real-world use:** APIs ingest and serve files — validated uploads and memory-safe streaming for large downloads and generated exports.
+**Production example (code.py):** an upload/download service — `UploadFile` validated for size and MIME, streamed to disk (or proxied to object storage) in chunks, and a `StreamingResponse` that generates a CSV export lazily with a `Content-Disposition` header.
+**Sources:** [FastAPI — Request Files](https://fastapi.tiangolo.com/tutorial/request-files/) · [Starlette](https://www.starlette.io/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -278,8 +374,16 @@
 | 18 | Industrial: S3 upload | Proxy to cloud storage |
 | 19 | Industrial: image processing | Upload → resize → store |
 | 20 | Testing uploads | `TestClient` with files |
+| 21 | `UploadFile` async I/O | `await file.read()`, `.seek()`, `.close()` |
+| 22 | `Content-Disposition` | `attachment; filename=` for downloads |
+| 23 | `media_type` on responses | Correct MIME on stream/file responses |
 
-### Day 81 — WebSockets (20)
+### Day 81 — WebSockets (22)
+
+**Prerequisites:** Day 39 (async), Day 74 (dependencies), Day 76 (auth).
+**Real-world use:** WebSockets power real-time features — chat, live dashboards, notifications — over a persistent bidirectional connection.
+**Production example (code.py):** a chat server — a `ConnectionManager` tracking active sockets per room, token-authenticated `accept()`, JSON message broadcast, and clean `WebSocketDisconnect` handling that removes dead connections.
+**Sources:** [FastAPI — WebSockets](https://fastapi.tiangolo.com/advanced/websockets/) · [Starlette — WebSockets](https://www.starlette.io/websockets/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -303,8 +407,15 @@
 | 18 | Industrial: chat server | Rooms + broadcast |
 | 19 | Industrial: live dashboard | Push updates |
 | 20 | Testing WebSockets | `TestClient.websocket_connect()` |
+| 21 | Dependencies in WebSocket | `Depends()` in a `websocket` route |
+| 22 | Close codes | `websocket.close(code=1008)` |
 
-### Day 82 — Testing FastAPI (20)
+### Day 82 — Testing FastAPI (23)
+
+**Prerequisites:** Day 59 (pytest fixtures), Day 74 (dependency overrides), Day 47 (testing async).
+**Real-world use:** every endpoint needs automated tests — `TestClient`/async clients with dependency overrides and a test DB make the suite fast and deterministic.
+**Production example (code.py):** an API test suite — pytest fixtures building a `TestClient` with `app.dependency_overrides` swapping in a transactional test DB and a fake current-user, covering happy-path, 422, and auth-failure cases.
+**Sources:** [FastAPI — Testing](https://fastapi.tiangolo.com/tutorial/testing/) · [pytest — Docs](https://docs.pytest.org/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -328,8 +439,16 @@
 | 18 | Anti-pattern: shared state | Isolate tests |
 | 19 | Industrial: CI test suite | Automated testing |
 | 20 | Industrial: contract tests | Schema validation |
+| 21 | Lifespan in tests | `with TestClient(app) as client:` |
+| 22 | `httpx.ASGITransport` | Wire async client to the app |
+| 23 | `@pytest.mark.parametrize` | Table-driven request cases |
 
-### Day 83 — OpenAPI & Docs (20)
+### Day 83 — OpenAPI & Docs (23)
+
+**Prerequisites:** Day 72 (models/schema), Day 71 (routes), Day 76 (security schemes).
+**Real-world use:** the OpenAPI schema is the API contract — accurate tags, descriptions, examples, and response models drive client SDKs and interactive docs.
+**Production example (code.py):** a fully documented router — `summary`/`description`/`tags`, `responses=` documenting error codes, model `examples`, and app metadata (`title`, `version`, `openapi_tags`) producing a clean `/docs` and an exportable `/openapi.json`.
+**Sources:** [FastAPI — Official docs](https://fastapi.tiangolo.com/) · [Pydantic — Models](https://docs.pydantic.dev/latest/concepts/models/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -353,8 +472,16 @@
 | 18 | Industrial: API portal | Host interactive docs |
 | 19 | Industrial: client SDK | Generate from spec |
 | 20 | Industrial: API governance | Schema review process |
+| 21 | App metadata | `title`, `version`, `description`, `openapi_tags` |
+| 22 | `examples=` (OpenAPI 3.1) | Multiple named examples |
+| 23 | Disable / relocate docs | `docs_url=None`, `openapi_url` |
 
-### Day 84 — Performance & Caching (20)
+### Day 84 — Performance & Caching (23)
+
+**Prerequisites:** Day 39 (async), Day 75 (DB/pooling), Day 30 (itertools/streaming).
+**Real-world use:** latency and throughput matter — response caching, connection pooling, and non-blocking I/O keep an API fast under load.
+**Production example (code.py):** a read-through cache layer — a Redis-backed cache dependency with TTL and invalidation-on-write around a hot `GET` endpoint, an `ORJSONResponse` default, and cursor pagination to bound query cost.
+**Sources:** [FastAPI — Official docs](https://fastapi.tiangolo.com/) · [Uvicorn](https://www.uvicorn.org/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -378,8 +505,16 @@
 | 18 | Industrial: Redis cache layer | Read-through cache |
 | 19 | Industrial: CDN integration | Static + API caching |
 | 20 | Industrial: APM | Application monitoring |
+| 21 | `ORJSONResponse` | Faster JSON serialization |
+| 22 | Async DB drivers | `asyncpg` / `aiomysql` non-blocking I/O |
+| 23 | Cache stampede protection | Lock / single-flight on miss |
 
-### Day 85 — Docker & Deployment (20)
+### Day 85 — Docker & Deployment (24)
+
+**Prerequisites:** Day 14 (tooling/deps), Day 71 (uvicorn), Day 83 (settings preview).
+**Real-world use:** shipping to production means a small, secure, reproducible container image and a correct ASGI process model behind a proxy.
+**Production example (code.py):** a production container — a multi-stage `Dockerfile` on `python:3.12-slim` running as a non-root user, dependency-layer caching, a `/health` endpoint, `--proxy-headers` for a reverse proxy, and a Compose file wiring app + DB.
+**Sources:** [FastAPI — Docker Deployment](https://fastapi.tiangolo.com/deployment/docker/) · [Docker — Official docs](https://docs.docker.com/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -403,8 +538,17 @@
 | 18 | Industrial: CI/CD pipeline | Build → test → deploy |
 | 19 | Industrial: Kubernetes basics | Deployment + service |
 | 20 | Industrial: cloud deployment | AWS/GCP/Azure overview |
+| 21 | Layer caching | Copy deps before source code |
+| 22 | `WORKDIR` / `EXPOSE` | Image conventions |
+| 23 | Behind a proxy | `--proxy-headers`, `root_path` |
+| 24 | Reverse proxy | nginx / Traefik TLS termination |
 
-### Day 86 — FastAPI Project (20)
+### Day 86 — FastAPI Project (23)
+
+**Prerequisites:** Days 71–85 (entire FastAPI track), Day 65 (packaging), Day 67 (CI).
+**Real-world use:** a portfolio-grade REST API that ties every prior day together — the artifact you show in interviews and deploy for real.
+**Production example (code.py):** a complete multi-resource REST API — layered `app/routers/services/models`, JWT auth, async SQLAlchemy + Alembic, Pydantic schemas, custom error handlers, middleware, one background task, tests, Docker, and CI.
+**Sources:** Builds on Days 71–85 `fastapi_track` modules · [FastAPI — Tutorial](https://fastapi.tiangolo.com/tutorial/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -428,6 +572,9 @@
 | 18 | Anti-pattern: no tests | Minimum 80% coverage |
 | 19 | Industrial: production checklist | Security + monitoring |
 | 20 | Code review | Final quality pass |
+| 21 | Alembic migrations | Schema versioning committed to repo |
+| 22 | Pagination & filtering | Consistent list endpoints |
+| 23 | Rate limiting & security headers | Production hardening |
 
 ---
 

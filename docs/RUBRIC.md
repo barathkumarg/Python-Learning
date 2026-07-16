@@ -1,6 +1,27 @@
 # Rubric — Gates, Scoring, Skills & Evaluation Protocol
 
-> Single source of truth for grading. Referenced by `.agent.md` and `docs/PROMPT_TEMPLATES.md`.
+> Single source of truth for grading **and** the gate definitions. Referenced by
+> `.agent.md`, `docs/PROMPT_TEMPLATES.md`, and `docs/SCORE_TRACKER.md`.
+
+---
+
+## §0 Gates G1–G8 (single source of truth)
+
+Every generated module and every graded solution must pass all 8 gates.
+
+| Gate | Rule |
+|------|------|
+| G1 | Type hints on all public functions |
+| G2 | Explicit errors — no bare `except:`, descriptive messages with the invalid value |
+| G3 | Behavioral verification — inline `assert` self-checks in exercise `__main__` + AI behavioral review |
+| G4 | Ruff-clean (`ruff check`) |
+| G5 | Docstrings — Google style on public APIs |
+| G6 | Security — no secrets, validate inputs |
+| G7 | Observability — clear error messages, exit codes where relevant |
+| G8 | Concept completeness — every item in the day's A-Z Concept Checklist (from `study_plan/<track>.md`) is present in `CODE.md` concepts table AND covered in at least one of: snippet, `code.py` function, or exercise function (see §4a) |
+
+> Generation-time application of these gates lives in `.agent.md`; grading-time
+> application lives in §4 below. The definitions here are authoritative.
 
 ---
 

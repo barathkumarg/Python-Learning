@@ -40,30 +40,11 @@
 | ⏳ PENDING | Exercises completed but not yet evaluated |
 | — | Not yet generated |
 
-### Score Formulas (from RUBRIC.md §2–§3)
+### Score Formulas
 
-**Per-file score (0–100):**
-
-| Component | Weight | What it measures |
-|-----------|--------|------------------|
-| Must-pass requirements | 40 | Core logic, correct return type, handles specified inputs |
-| Stretch goals | 15 | Optional enhancements attempted and correct |
-| Inline asserts + AI-verified behavior | 25 | Self-check coverage and behavioral correctness |
-| Style (type hints, naming, docstrings, lint) | 20 | Industrial code quality |
-
-**Weighted dimension average (1–5):**
-
-| Dimension | Weight | Key criteria |
-|-----------|--------|-------------|
-| D1 — Correctness | 0.30 | Handles all specified cases, edge cases |
-| D2 — Reliability | 0.15 | Explicit errors, no silent failures |
-| D3 — Maintainability | 0.15 | Naming, structure, readability |
-| D4 — API & typing | 0.10 | Type hints, signatures, contracts |
-| D5 — Performance | 0.10 | Appropriate complexity, no wasteful patterns |
-| D6 — Security | 0.10 | No injection, no hardcoded secrets, safe defaults |
-| D7 — Code quality | 0.10 | Lint-clean, consistent style, docstrings |
-
-**Pass thresholds:** Per-file ≥ 75 · Weighted avg ≥ 3.5 · No dimension below 2.
+Gates (G1–G8), per-file scoring (40/15/25/20), dimensions (D1–D7), and pass
+thresholds are defined once in **[RUBRIC.md](./RUBRIC.md)** (§0, §2, §3). This
+tracker only records the resulting scores — see RUBRIC for how they're computed.
 
 ---
 

@@ -1,6 +1,12 @@
 # Phase 1 — Python Basics (Days 01–14)
 
 > Track: `python_basic` · Outcome: syntax, built-ins, data structures, I/O, tooling
+>
+> **How to read this file:** each day has a knowledge-base block
+> (Prerequisites · Real-world use · Production example · Sources) followed by its
+> A-Z **Concept Checklist**. The checklist is the Gate G8 contract — every concept
+> must appear in `CODE.md` + at least one of snippet / `code.py` function /
+> exercise stub. The **Production example** is what `code.py` must implement.
 
 ## Day Plan
 
@@ -27,7 +33,12 @@
 
 > Gate G8: every concept must appear in CODE.md table + at least one of: snippet, code.py function, or exercise stub.
 
-### Day 01 — Syntax, Types, Variables (20)
+### Day 01 — Syntax, Types, Variables (26)
+
+**Prerequisites:** none — this is the entry point.
+**Real-world use:** every script and service reads raw input (CLI args, env vars, config), validates it, coerces types, and formats output.
+**Production example (code.py):** a typed input reader that parses raw strings into `int`/`float`/`bool`, validates a retry-count is in range, and returns a formatted summary line (never `print`s from the logic).
+**Sources:** [Python Tutorial — Introduction](https://docs.python.org/3/tutorial/introduction.html) · [Real Python — Variables](https://realpython.com/python-variables/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -48,11 +59,22 @@
 | 15 | Augmented assignment | `x += 1`, `x *= 2` |
 | 16 | Identity vs equality | `is` vs `==`, `id()` |
 | 17 | `round()` | `round(3.14159, 2)` |
-| 18 | Explicit validation | `if not x: raise ValueError(...)` |
-| 19 | Anti-pattern: bare except | Catches everything — use specific |
-| 20 | Anti-pattern: print vs return | Return for testability |
+| 18 | Arithmetic operators | `+ - * / // % **`, `divmod()` |
+| 19 | Comparison operators | `== != < <= > >=` |
+| 20 | Logical operators | `and`, `or`, `not` (short-circuit) |
+| 21 | Chained comparison | `0 <= x < 10` |
+| 22 | Operator precedence | `**` > `*//%` > `+-`; use parens for clarity |
+| 23 | Comments & module docstring | `#`, `"""module summary"""` |
+| 24 | Explicit validation | `if not x: raise ValueError(...)` |
+| 25 | Anti-pattern: bare except | Catches everything — use specific |
+| 26 | Anti-pattern: print vs return | Return for testability |
 
-### Day 02 — Control Flow (22)
+### Day 02 — Control Flow (25)
+
+**Prerequisites:** Day 01 (types, truthy values, comparison/logical operators).
+**Real-world use:** routing requests, applying business rules, retry/timeout loops, and workflow state transitions.
+**Production example (code.py):** an order-shipping rules engine — `match`/guard-clause dispatch over order state that returns the next action, with a bounded retry loop for transient states.
+**Sources:** [Python Tutorial — Control Flow](https://docs.python.org/3/tutorial/controlflow.html) · [PEP 636 — match/case](https://peps.python.org/pep-0636/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -71,15 +93,23 @@
 | 13 | Guard clauses | Early return to reduce nesting |
 | 14 | `match` / `case` (3.10+) | Structural pattern matching |
 | 15 | `match` with sequences | `case (x, y):` |
-| 16 | Walrus `:=` | `if (n := len(x)) > 10:` |
-| 17 | Bounded while | Max iterations to prevent infinite |
-| 18 | `enumerate` in loops | `for i, v in enumerate(items):` |
-| 19 | `zip` in loops | `for a, b in zip(xs, ys):` |
-| 20 | Anti-pattern: deep nesting | Flatten with guard clauses |
-| 21 | Anti-pattern: infinite loop | Always have exit condition |
-| 22 | Industrial: state machine | `match` for workflow states |
+| 16 | `match` with mapping/class | `case {"k": v}:`, `case Point(x=0):` |
+| 17 | `match` guard | `case n if n > 0:` |
+| 18 | Walrus `:=` | `if (n := len(x)) > 10:` |
+| 19 | Bounded while | Max iterations to prevent infinite |
+| 20 | `enumerate` in loops | `for i, v in enumerate(items):` |
+| 21 | `zip` in loops | `for a, b in zip(xs, ys):` |
+| 22 | Loop over `dict.items()` | `for k, v in d.items():` |
+| 23 | Anti-pattern: deep nesting | Flatten with guard clauses |
+| 24 | Anti-pattern: infinite loop | Always have exit condition |
+| 25 | Industrial: state machine | `match` for workflow states |
 
-### Day 03 — Functions (22)
+### Day 03 — Functions (24)
+
+**Prerequisites:** Day 01 (types, type hints), Day 02 (control flow, guard clauses).
+**Real-world use:** every reusable unit — validators, formatters, handlers, strategy callbacks — is a well-typed function with a clear contract.
+**Production example (code.py):** a pluggable validation pipeline — small typed validator functions passed as strategies, composed by a runner that applies `*args`/`**kwargs` and returns structured results.
+**Sources:** [Real Python — Defining Functions](https://realpython.com/defining-your-own-python-function/) · [Python Tutorial — Defining Functions](https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -99,41 +129,58 @@
 | 14 | Scope: local/global/nonlocal | `global x`, `nonlocal y` |
 | 15 | Mutable default pitfall | `def f(items=None):` fix |
 | 16 | First-class functions | Functions as arguments |
-| 17 | Closures (basic) | Inner captures outer variable |
-| 18 | Recursion basics | Base case + recursive case |
-| 19 | Anti-pattern: print vs return | Return for testability |
-| 20 | Anti-pattern: too many params | Refactor to smaller functions |
-| 21 | Industrial: pluggable validators | Function as strategy |
-| 22 | Industrial: flexible formatting | `*args`/`**kwargs` patterns |
+| 17 | Returning functions | Factory returning a callable |
+| 18 | Closures (basic) | Inner captures outer variable |
+| 19 | Recursion basics | Base case + recursive case |
+| 20 | Callable typing | `Callable[[int], str]` |
+| 21 | Anti-pattern: print vs return | Return for testability |
+| 22 | Anti-pattern: too many params | Refactor to smaller functions |
+| 23 | Industrial: pluggable validators | Function as strategy |
+| 24 | Industrial: flexible formatting | `*args`/`**kwargs` patterns |
 
-### Day 04 — Lists and Sorting (22)
+### Day 04 — Lists and Sorting (27)
+
+**Prerequisites:** Day 01 (types), Day 02 (loops), Day 03 (lambda for `key=`).
+**Real-world use:** ordering API results, leaderboards, batch record processing, and maintaining sorted collections.
+**Production example (code.py):** a stable multi-key leaderboard — rank records by score desc then name asc (tie-breakers), select top-k, and insert new entries into an already-sorted list with `bisect.insort`.
+**Sources:** [Real Python — Lists and Tuples](https://realpython.com/python-lists-tuples/) · [Python Tutorial — Data Structures](https://docs.python.org/3/tutorial/datastructures.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
 | 1 | List creation | `[]`, `list()`, `[0]*n` |
 | 2 | Indexing | `lst[0]`, `lst[-1]` |
 | 3 | Slicing | `lst[1:3]`, `lst[::-1]` |
-| 4 | `len()` | `len(lst)` |
-| 5 | `append()` / `extend()` | Add single / multiple |
-| 6 | `insert()` | `lst.insert(i, val)` |
-| 7 | `remove()` / `pop()` / `del` | Delete by value / index |
-| 8 | `index()` / `count()` | Search and count |
-| 9 | `in` membership | `val in lst` — O(n) |
-| 10 | `sort()` vs `sorted()` | In-place vs new list |
-| 11 | `key=` parameter | `sorted(lst, key=lambda x: x[1])` |
-| 12 | `reverse=True` | Descending sort |
-| 13 | Stable sort | Equal elements keep order |
-| 14 | Multi-key sorting | Tuple keys or multiple passes |
-| 15 | Top-k pattern | `sorted(lst)[:k]` |
-| 16 | `reverse()` / `reversed()` | In-place / lazy iterator |
-| 17 | `copy()` / shallow vs deep | `.copy()`, `deepcopy()` |
-| 18 | `enumerate()` with lists | `for i, v in enumerate(lst):` |
-| 19 | Nested lists | `matrix = [[1,2],[3,4]]` |
-| 20 | List comprehension preview | `[x*2 for x in lst]` |
-| 21 | Anti-pattern: mutate during iteration | Build new list instead |
-| 22 | Anti-pattern: alias `lst2 = lst` | Use `.copy()` |
+| 4 | Slice assignment | `lst[1:3] = [x, y]` |
+| 5 | `del` on index/slice | `del lst[0]`, `del lst[1:3]` |
+| 6 | `len()` | `len(lst)` |
+| 7 | `append()` / `extend()` | Add single / multiple |
+| 8 | `insert()` | `lst.insert(i, val)` |
+| 9 | `remove()` / `pop()` / `del` | Delete by value / index |
+| 10 | `index()` / `count()` | Search and count |
+| 11 | `in` membership | `val in lst` — O(n) |
+| 12 | `sort()` vs `sorted()` | In-place vs new list |
+| 13 | `key=` parameter | `sorted(lst, key=lambda x: x[1])` |
+| 14 | `reverse=True` | Descending sort |
+| 15 | Stable sort | Equal elements keep order |
+| 16 | Multi-key sorting | Tuple keys or multiple passes |
+| 17 | Top-k pattern | `sorted(lst)[:k]` |
+| 18 | `bisect` / `insort` | Keep a list sorted, O(log n) find |
+| 19 | `reverse()` / `reversed()` | In-place / lazy iterator |
+| 20 | `min` / `max` / `sum` / `any` / `all` | Aggregation over lists |
+| 21 | Star-unpacking in literals | `[*a, *b]`, `first, *rest = lst` |
+| 22 | `copy()` / shallow vs deep | `.copy()`, `deepcopy()` |
+| 23 | `enumerate()` with lists | `for i, v in enumerate(lst):` |
+| 24 | Nested lists | `matrix = [[1,2],[3,4]]` |
+| 25 | List comprehension preview | `[x*2 for x in lst]` |
+| 26 | Anti-pattern: mutate during iteration | Build new list instead |
+| 27 | Anti-pattern: alias `lst2 = lst` / shared nested refs | Use `.copy()` / `deepcopy` |
 
-### Day 05 — Tuples and NamedTuple (20)
+### Day 05 — Tuples and NamedTuple (21)
+
+**Prerequisites:** Day 04 (sequences, indexing/slicing), Day 01 (type hints).
+**Real-world use:** immutable records/DTOs — CSV rows, coordinates, DB result rows, dictionary keys.
+**Production example (code.py):** parse CSV rows into typed `NamedTuple` DTOs, use `_asdict()` for serialization, and use `(lat, lon)` tuples as hashable cache keys.
+**Sources:** [Real Python — Lists and Tuples](https://realpython.com/python-lists-tuples/) · [collections.namedtuple](https://docs.python.org/3/library/collections.html#collections.namedtuple)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -143,22 +190,28 @@
 | 4 | Indexing / slicing | Same as lists |
 | 5 | Packing / unpacking | `a, b = (1, 2)` |
 | 6 | Extended unpacking | `first, *rest = (1,2,3,4)` |
-| 7 | Multiple return values | `return x, y` |
-| 8 | Tuple as dict key | Hashable → usable as key |
-| 9 | Tuple comparison | Lexicographic: `(1,2) < (1,3)` |
-| 10 | `len()`, `count()`, `index()` | Tuple methods |
-| 11 | `in` membership | `x in t` |
-| 12 | Iteration | `for item in t:` |
-| 13 | `typing.NamedTuple` | `class Point(NamedTuple): x: int` |
-| 14 | `collections.namedtuple` | `Point = namedtuple('Point', ['x','y'])` |
-| 15 | `_make()` / `_asdict()` | NamedTuple helpers |
-| 16 | NamedTuple as DTO | Typed records for data rows |
-| 17 | Mutable inside tuple | `([1,2],)` — list is mutable |
-| 18 | Tuple vs list choice | Immutable → tuple |
-| 19 | Anti-pattern: plain tuple for records | Use NamedTuple |
-| 20 | Industrial: CSV/report DTOs | NamedTuple for structured rows |
+| 7 | Swap via tuples | `a, b = b, a` |
+| 8 | Multiple return values | `return x, y` |
+| 9 | Tuple as dict key | Hashable → usable as key |
+| 10 | Tuple comparison | Lexicographic: `(1,2) < (1,3)` |
+| 11 | `len()`, `count()`, `index()` | Tuple methods |
+| 12 | `in` membership | `x in t` |
+| 13 | Iteration | `for item in t:` |
+| 14 | `typing.NamedTuple` | `class Point(NamedTuple): x: int` |
+| 15 | `collections.namedtuple` | `Point = namedtuple('Point', ['x','y'])` |
+| 16 | `_make()` / `_asdict()` / `_replace()` | NamedTuple helpers |
+| 17 | NamedTuple defaults | `defaults=` / field defaults |
+| 18 | Mutable inside tuple | `([1,2],)` — list is mutable |
+| 19 | Tuple vs list choice | Immutable → tuple |
+| 20 | Anti-pattern: plain tuple for records | Use NamedTuple |
+| 21 | Industrial: CSV/report DTOs | NamedTuple for structured rows |
 
-### Day 06 — Dictionaries (24)
+### Day 06 — Dictionaries (26)
+
+**Prerequisites:** Day 04 (iteration), Day 05 (hashable keys), Day 03 (functions).
+**Real-world use:** configuration, lookups, grouping/counting, in-memory indexes, JSON payloads.
+**Production example (code.py):** a config merger + inverted index — deep-merge layered config dicts with `|`, and build a `defaultdict(list)` inverted index (term → doc ids) with a word-count `Counter`.
+**Sources:** [Real Python — Dictionaries](https://realpython.com/python-dicts/) · [Python Tutorial — Dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -175,19 +228,26 @@
 | 11 | `pop()` / `popitem()` | `d.pop("k", default)` |
 | 12 | `clear()` | `d.clear()` |
 | 13 | `.keys()` / `.values()` / `.items()` | View objects |
-| 14 | Dict comprehension | `{k: f(v) for k, v in items}` |
-| 15 | `in` membership | `"key" in d` |
-| 16 | Nested dict access | `d["a"]["b"]`, chained `.get()` |
-| 17 | `copy()` vs `deepcopy` | Shallow copy pitfall |
-| 18 | Dict unpacking `**` | `{**d1, **d2}` |
-| 19 | Insertion-order guarantee | Python 3.7+ |
-| 20 | Hashability rules | Keys must be immutable |
-| 21 | `KeyError` handling | `try/except` vs `get()` |
-| 22 | `defaultdict` preview | `defaultdict(list)` |
-| 23 | Anti-pattern: bare `[]` access | Use `get()` or `in` |
-| 24 | Industrial: config merge, inverted index | `setdefault` / `|` patterns |
+| 14 | Iterate keys / values / items | `for k, v in d.items():` |
+| 15 | Dict comprehension | `{k: f(v) for k, v in items}` |
+| 16 | `in` membership | `"key" in d` |
+| 17 | Nested dict access | `d["a"]["b"]`, chained `.get()` |
+| 18 | `copy()` vs `deepcopy` | Shallow copy pitfall |
+| 19 | Dict unpacking `**` | `{**d1, **d2}` |
+| 20 | Insertion-order guarantee | Python 3.7+ |
+| 21 | Hashability rules | Keys must be immutable |
+| 22 | `KeyError` handling | `try/except` vs `get()` |
+| 23 | `Counter` | Frequency counting |
+| 24 | `defaultdict` | `defaultdict(list)` grouping |
+| 25 | Anti-pattern: bare `[]` access | Use `get()` or `in` |
+| 26 | Industrial: config merge, inverted index | `setdefault` / `|` patterns |
 
 ### Day 07 — Sets and frozenset (22)
+
+**Prerequisites:** Day 05 (hashability), Day 06 (dicts), Day 04 (iteration).
+**Real-world use:** deduplication, membership tests, allow/deny lists, permission (RBAC) comparisons.
+**Production example (code.py):** a log deduplicator + RBAC checker — dedupe events with `set()`, and compute granted/denied permissions via `&`, `-`, `<=` with a `frozenset` role key.
+**Sources:** [Real Python — Sets](https://realpython.com/python-sets/) · [set / frozenset](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -201,77 +261,95 @@
 | 8 | Intersection `&` | Common elements |
 | 9 | Difference `-` | In first, not second |
 | 10 | Symmetric difference `^` | In either, not both |
-| 11 | Subset `<=` / superset `>=` | `s1.issubset(s2)` |
-| 12 | `isdisjoint()` | No common elements |
-| 13 | `in` membership | O(1) average |
-| 14 | Iteration | Unordered |
-| 15 | Set comprehension | `{expr for x in iterable}` |
-| 16 | `frozenset` | `frozenset(iterable)` |
-| 17 | `frozenset` as dict key | Hashable, immutable |
-| 18 | Hashability requirement | No lists/dicts in sets |
-| 19 | Built-in aggregation | `len()`, `min()`, `max()`, `sum()` |
-| 20 | Anti-pattern: unhashable in set | `{[1,2]}` → TypeError |
-| 21 | Industrial: dedupe, allowlist | `set()` for O(1) checks |
-| 22 | Industrial: permission comparison | Intersection/difference for RBAC |
+| 11 | In-place set ops | `&=`, `-=`, `^=` |
+| 12 | Subset `<=` / superset `>=` | `s1.issubset(s2)` |
+| 13 | `isdisjoint()` | No common elements |
+| 14 | `in` membership | O(1) average |
+| 15 | Iteration | Unordered |
+| 16 | Set comprehension | `{expr for x in iterable}` |
+| 17 | `frozenset` | `frozenset(iterable)` |
+| 18 | `frozenset` as dict key | Hashable, immutable |
+| 19 | Hashability requirement | No lists/dicts in sets |
+| 20 | Built-in aggregation | `len()`, `min()`, `max()`, `sum()` |
+| 21 | Anti-pattern: unhashable in set | `{[1,2]}` → TypeError |
+| 22 | Industrial: dedupe, allowlist, RBAC | `set()` O(1) checks, intersection/difference |
 
-### Day 08 — Strings and Encoding (25)
+### Day 08 — Strings and Encoding (26)
+
+**Prerequisites:** Day 01 (string literals, f-strings), Day 04 (slicing), Day 06 (Counter preview).
+**Real-world use:** input sanitization, slugs/identifiers, parsing, and correct text/bytes handling across encodings.
+**Production example (code.py):** a slugify + sanitizer utility — normalize Unicode (`NFKD`), casefold, strip/replace unsafe chars via `translate`, and encode/decode safely to UTF-8 bytes.
+**Sources:** [Real Python — Strings](https://realpython.com/python-strings/) · [Text Sequence Type — str](https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
 | 1 | String creation | `'...'`, `"..."`, `'''...'''` |
 | 2 | Raw strings | `r"no\nescape"` |
-| 3 | Indexing / negative | `s[0]`, `s[-1]` |
-| 4 | Slicing | `s[1:5]`, `s[::-1]` |
-| 5 | Immutability | Cannot assign `s[0] = 'x'` |
-| 6 | `len()` | Character count |
-| 7 | Case methods | `.upper()`, `.lower()`, `.casefold()` |
-| 8 | Search methods | `.find()`, `.index()`, `.rfind()` |
-| 9 | Boolean checks | `.startswith()`, `.isdigit()`, `.isalpha()` |
-| 10 | Strip | `.strip()`, `.lstrip()`, `.rstrip()` |
-| 11 | Split / join | `.split(sep)`, `sep.join(iter)` |
-| 12 | Replace | `.replace(old, new)` |
-| 13 | f-strings advanced | `f"{val:.2f}"`, `f"{x = }"` |
-| 14 | Legacy formatting | `.format()`, `%` |
-| 15 | Concatenation / repetition | `+`, `*` |
-| 16 | `in` substring check | `"sub" in s` |
-| 17 | Character frequency | `Counter(s)` |
-| 18 | `bytes` vs `str` | `.encode()`, `.decode()` |
-| 19 | `bytearray` | Mutable bytes |
-| 20 | Unicode normalization | `unicodedata.normalize()` |
-| 21 | Regex preview | `re.search()`, `re.sub()` |
-| 22 | Multi-line / textwrap | Triple quotes, `dedent()` |
-| 23 | `translate()` / `maketrans()` | Character mapping |
-| 24 | Anti-pattern: str + bytes | Always encode/decode |
-| 25 | Industrial: slugify, sanitizer | Strip, lower, replace |
+| 3 | Escape sequences | `\n`, `\t`, `\\`, `\uXXXX` |
+| 4 | Indexing / negative | `s[0]`, `s[-1]` |
+| 5 | Slicing | `s[1:5]`, `s[::-1]` |
+| 6 | Immutability | Cannot assign `s[0] = 'x'` |
+| 7 | `len()` | Character count |
+| 8 | Case methods | `.upper()`, `.lower()`, `.casefold()`, `.title()` |
+| 9 | Search methods | `.find()`, `.index()`, `.rfind()`, `.count()` |
+| 10 | Boolean checks | `.startswith()`, `.isdigit()`, `.isalpha()`, `.isspace()` |
+| 11 | Strip | `.strip()`, `.lstrip()`, `.rstrip()` |
+| 12 | Split / rsplit / splitlines | `.split(sep)`, `.splitlines()` |
+| 13 | Join | `sep.join(iter)` |
+| 14 | Replace | `.replace(old, new)` |
+| 15 | Padding / alignment | `.zfill()`, `.ljust()`, `.center()` |
+| 16 | f-strings advanced | `f"{val:.2f}"`, `f"{x = }"`, `f"{v:>10}"` |
+| 17 | Legacy formatting | `.format()`, `%` |
+| 18 | Concatenation / repetition | `+`, `*` |
+| 19 | `in` substring check | `"sub" in s` |
+| 20 | Character frequency | `Counter(s)` |
+| 21 | `bytes` vs `str` | `.encode()`, `.decode()` |
+| 22 | `bytearray` | Mutable bytes |
+| 23 | Unicode normalization | `unicodedata.normalize()` |
+| 24 | `translate()` / `maketrans()` | Character mapping |
+| 25 | Anti-pattern: str + bytes / no encoding | Always encode/decode explicitly |
+| 26 | Industrial: slugify, sanitizer | Strip, casefold, normalize, translate |
 
-### Day 09 — File I/O (22)
+### Day 09 — File I/O (24)
+
+**Prerequisites:** Day 08 (strings/encoding), Day 06 (dicts for JSON), Day 05 (rows), Day 10 preview (errors).
+**Real-world use:** reading/writing config and data files, ETL pipelines, logs, and structured exports (CSV/JSON/JSONL).
+**Production example (code.py):** a CSV→JSONL ETL — read a CSV with `DictReader`, validate/transform rows, write one JSON object per line, all under `with` + `pathlib`, with a run summary.
+**Sources:** [Real Python — Reading & Writing Files](https://realpython.com/read-write-files-python/) · [pathlib](https://docs.python.org/3/library/pathlib.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
 | 1 | `open()` | `open(path, mode, encoding="utf-8")` |
 | 2 | `with` context manager | Guaranteed close |
 | 3 | Read methods | `.read()`, `.readline()`, `.readlines()` |
-| 4 | Write methods | `.write()`, `.writelines()` |
-| 5 | File modes | `r`, `w`, `a`, `x`, `r+`, `b` |
-| 6 | Newline handling | `newline=""` for CSV |
-| 7 | Encoding parameter | Always specify |
-| 8 | `pathlib.Path` basics | `.exists()`, `.is_file()` |
-| 9 | `pathlib` read/write | `.read_text()`, `.write_text()` |
-| 10 | `pathlib` navigation | `.parent`, `.name`, `.suffix`, `.glob()` |
-| 11 | `pathlib` construction | `/` operator, `.resolve()` |
-| 12 | CSV reading | `csv.reader()`, `DictReader()` |
-| 13 | CSV writing | `csv.writer()`, `DictWriter()` |
-| 14 | JSON reading | `json.load()`, `json.loads()` |
-| 15 | JSON writing | `json.dump()`, `indent=` |
-| 16 | JSONL | One JSON per line |
-| 17 | `tempfile` | `NamedTemporaryFile()`, `mkdtemp()` |
-| 18 | Safe paths | Validate extensions, no traversal |
-| 19 | Binary I/O | `"rb"`, `"wb"` |
-| 20 | Anti-pattern: no `with` | File handle leak |
-| 21 | Anti-pattern: no encoding | Platform-dependent default |
-| 22 | Industrial: CSV→JSONL ETL | File pipeline pattern |
+| 4 | Iterate a file object | `for line in f:` (streaming) |
+| 5 | Write methods | `.write()`, `.writelines()` |
+| 6 | File modes | `r`, `w`, `a`, `x`, `r+`, `b` |
+| 7 | Newline handling | `newline=""` for CSV |
+| 8 | Encoding parameter | Always specify |
+| 9 | `seek()` / `tell()` | Position within a file |
+| 10 | `pathlib.Path` basics | `.exists()`, `.is_file()` |
+| 11 | `pathlib` read/write | `.read_text()`, `.write_text()` |
+| 12 | `pathlib` navigation | `.parent`, `.name`, `.suffix`, `.stem`, `.glob()` |
+| 13 | `pathlib` construction | `/` operator, `.resolve()` |
+| 14 | CSV reading | `csv.reader()`, `DictReader()` |
+| 15 | CSV writing | `csv.writer()`, `DictWriter()` |
+| 16 | JSON reading | `json.load()`, `json.loads()` |
+| 17 | JSON writing | `json.dump()`, `indent=` |
+| 18 | JSONL | One JSON per line |
+| 19 | `tempfile` | `NamedTemporaryFile()`, `mkdtemp()` |
+| 20 | Safe paths | Validate extensions, no traversal |
+| 21 | Binary I/O | `"rb"`, `"wb"` |
+| 22 | Anti-pattern: no `with` | File handle leak |
+| 23 | Anti-pattern: no encoding | Platform-dependent default |
+| 24 | Industrial: CSV→JSONL ETL | File pipeline pattern |
 
-### Day 10 — Exceptions (23)
+### Day 10 — Exceptions (24)
+
+**Prerequisites:** Day 03 (functions), Day 09 (file/OS errors), Day 02 (control flow).
+**Real-world use:** resilient services — typed domain errors, retry/backoff on transient failures, cleanup, and clear diagnostics.
+**Production example (code.py):** a retry wrapper + domain error hierarchy — retry a flaky operation with bounded attempts on `TransientError`, raise a typed `DomainError` with context, chain the original with `from`.
+**Sources:** [Real Python — Exceptions](https://realpython.com/python-exceptions/) · [Python Tutorial — Errors](https://docs.python.org/3/tutorial/errors.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -290,16 +368,22 @@
 | 13 | `assert` | Dev checks only |
 | 14 | LBYL vs EAFP | Two styles |
 | 15 | `traceback` module | `traceback.format_exc()` |
-| 16 | `warnings` module | `warnings.warn()` |
-| 17 | OS errors | `FileNotFoundError`, `PermissionError` |
-| 18 | Context manager exc handling | `__exit__` receives exc |
-| 19 | `contextlib.suppress` | `with suppress(Error):` |
-| 20 | Anti-pattern: bare `except:` | Catches SystemExit |
-| 21 | Anti-pattern: silent `pass` | Hides bugs |
-| 22 | Industrial: retry wrapper | Backoff on transient errors |
-| 23 | Industrial: domain errors | Typed hierarchy for APIs |
+| 16 | `logging.exception` | Log with traceback |
+| 17 | `warnings` module | `warnings.warn()` |
+| 18 | OS errors | `FileNotFoundError`, `PermissionError` |
+| 19 | Context manager exc handling | `__exit__` receives exc |
+| 20 | `contextlib.suppress` | `with suppress(Error):` |
+| 21 | Anti-pattern: bare `except:` | Catches SystemExit |
+| 22 | Anti-pattern: silent `pass` | Hides bugs |
+| 23 | Industrial: retry wrapper | Backoff on transient errors |
+| 24 | Industrial: domain errors | Typed hierarchy for APIs |
 
-### Day 11 — Modules and Packages (20)
+### Day 11 — Modules and Packages (21)
+
+**Prerequisites:** Day 03 (functions), Day 10 (imports appear everywhere).
+**Real-world use:** organizing a growing codebase into importable, testable, runnable packages.
+**Production example (code.py):** a small package split into modules with `__init__.py` re-exports, an `__all__`, and a `__main__.py` so it runs as `python -m pkg`.
+**Sources:** [Real Python — Modules & Packages](https://realpython.com/python-modules-packages/) · [Python Tutorial — Modules](https://docs.python.org/3/tutorial/modules.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -311,20 +395,26 @@
 | 6 | Package structure | `__init__.py`, nested packages |
 | 7 | `__init__.py` role | Marker, re-exports |
 | 8 | Relative imports | `from . import sibling` |
-| 9 | `__all__` | Controls `import *` |
-| 10 | `sys.path` | Module search path |
-| 11 | Module caching | `sys.modules` |
-| 12 | `importlib.reload()` | Dev-only reload |
-| 13 | Standard library tour | `os`, `sys`, `pathlib`, `json` |
-| 14 | Third-party packages | `pip install`, `uv add` |
-| 15 | Namespace packages | PEP 420 |
-| 16 | `dir()` / `help()` | Inspect contents |
-| 17 | Anti-pattern: circular imports | A ↔ B |
-| 18 | Anti-pattern: `import *` | Namespace pollution |
-| 19 | Industrial: package split | Organize growing codebase |
-| 20 | Industrial: runnable module | `python -m mypackage` |
+| 9 | Absolute vs relative | When to use each |
+| 10 | `__all__` | Controls `import *` |
+| 11 | `sys.path` | Module search path |
+| 12 | Module caching | `sys.modules` |
+| 13 | Module-level `__doc__` / attributes | Introspecting a module |
+| 14 | `importlib.reload()` | Dev-only reload |
+| 15 | Standard library tour | `os`, `sys`, `pathlib`, `json` |
+| 16 | Third-party packages | `pip install`, `uv add` |
+| 17 | Namespace packages | PEP 420 |
+| 18 | `dir()` / `help()` | Inspect contents |
+| 19 | Anti-pattern: circular imports | A ↔ B |
+| 20 | Anti-pattern: `import *` | Namespace pollution |
+| 21 | Industrial: runnable package | `python -m mypackage` with `__main__` |
 
-### Day 12 — Built-ins in Pipelines (22)
+### Day 12 — Built-ins in Pipelines (23)
+
+**Prerequisites:** Day 03 (lambda), Day 04 (iterables), Day 13 preview (comprehensions).
+**Real-world use:** data transformation pipelines — parse → transform → filter → aggregate without heavyweight libraries.
+**Production example (code.py):** a records pipeline — parse raw rows, `map` a typed transform, `filter` invalid rows, then aggregate with `sum`/`min`/`max`/`sorted(key=)` into a report.
+**Sources:** [Built-in Functions](https://docs.python.org/3/library/functions.html) · [Real Python — map/filter/reduce](https://realpython.com/python-map-filter-reduce/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -335,23 +425,29 @@
 | 5 | `reversed()` | Lazy reverse |
 | 6 | `map()` | Lazy transform |
 | 7 | `filter()` | Lazy selection |
-| 8 | `any()` | Short-circuit True |
-| 9 | `all()` | Short-circuit False |
-| 10 | `sum()` | `sum(iter, start=0)` |
-| 11 | `min()` / `max()` | `key=`, `default=` |
-| 12 | `abs()` / `round()` / `divmod()` | Numeric |
-| 13 | `len()` / `range()` | Sizing, sequences |
-| 14 | `isinstance()` | Type checking |
-| 15 | `type()` / `id()` / `hash()` | Introspection |
-| 16 | `input()` / `print()` | `print(sep=, end=)` |
-| 17 | `iter()` / `next()` | Manual iteration |
-| 18 | `callable()` | Check if callable |
-| 19 | `map`+`filter` vs comprehension | Readability tradeoffs |
-| 20 | Chaining built-ins | Pipeline pattern |
-| 21 | Anti-pattern: `list(map())` | Prefer comprehension |
-| 22 | Industrial: data pipeline | Parse→map→filter→aggregate |
+| 8 | `functools.reduce()` | Fold to single value |
+| 9 | `any()` | Short-circuit True |
+| 10 | `all()` | Short-circuit False |
+| 11 | `sum()` | `sum(iter, start=0)` |
+| 12 | `min()` / `max()` | `key=`, `default=` |
+| 13 | `abs()` / `round()` / `divmod()` | Numeric |
+| 14 | `len()` / `range()` | Sizing, sequences |
+| 15 | `isinstance()` | Type checking |
+| 16 | `type()` / `id()` / `hash()` | Introspection |
+| 17 | `input()` / `print()` | `print(sep=, end=)` |
+| 18 | `iter()` / `next()` | Manual iteration |
+| 19 | `callable()` | Check if callable |
+| 20 | `map`+`filter` vs comprehension | Readability tradeoffs |
+| 21 | Chaining built-ins | Pipeline pattern |
+| 22 | Anti-pattern: `list(map())` for side effects | Prefer comprehension / loop |
+| 23 | Industrial: data pipeline | Parse→map→filter→aggregate |
 
-### Day 13 — Comprehensions (21)
+### Day 13 — Comprehensions (22)
+
+**Prerequisites:** Day 04 (lists), Day 06 (dicts), Day 07 (sets), Day 12 (built-ins).
+**Real-world use:** concise projections/filters, building lookup structures, and memory-efficient streaming via generators.
+**Production example (code.py):** filtered projections + a lookup index — build a `{id: record}` dict comprehension and a lazy generator pipeline that streams and filters large input without materializing it.
+**Sources:** [Real Python — List Comprehensions](https://realpython.com/list-comprehension-python/) · [Python Tutorial — List Comprehensions](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -359,25 +455,31 @@
 | 2 | With `if` filter | `[x for x in lst if x > 0]` |
 | 3 | With `if/else` | `[x if cond else y for ...]` |
 | 4 | Nested comprehension | `[x for row in m for x in row]` |
-| 5 | Dict comprehension | `{k: v for k, v in items}` |
-| 6 | Dict with filter | `{k: v for ... if v > 0}` |
-| 7 | Set comprehension | `{expr for x in iter}` |
-| 8 | Generator expression | `(expr for x in iter)` |
-| 9 | Generator in calls | `sum(x*x for x in range(n))` |
-| 10 | Memory: list vs generator | `getsizeof()` comparison |
-| 11 | `yield` preview | `def gen(): yield x` |
-| 12 | `next()` on generator | Manual stepping |
-| 13 | `StopIteration` | End signal |
-| 14 | Comprehension scoping | No leaking in 3.x |
-| 15 | Walrus `:=` | `[y for x in d if (y := f(x))]` |
-| 16 | Readability limits | Max 2 nesting levels |
-| 17 | Performance | Faster than for+append |
-| 18 | `itertools` connection | When to graduate |
-| 19 | Anti-pattern: over-nested | 3+ levels → function |
-| 20 | Industrial: filtered projections | Extract fields |
-| 21 | Industrial: index structures | Build lookup dicts |
+| 5 | Nested data build | `[[..] for .. ]` matrices |
+| 6 | Dict comprehension | `{k: v for k, v in items}` |
+| 7 | Dict with filter | `{k: v for ... if v > 0}` |
+| 8 | Set comprehension | `{expr for x in iter}` |
+| 9 | Generator expression | `(expr for x in iter)` |
+| 10 | Generator in calls | `sum(x*x for x in range(n))` |
+| 11 | Memory: list vs generator | `getsizeof()` comparison |
+| 12 | `yield` preview | `def gen(): yield x` |
+| 13 | `next()` on generator | Manual stepping |
+| 14 | `StopIteration` | End signal |
+| 15 | Comprehension scoping | No leaking in 3.x |
+| 16 | Walrus `:=` in comprehension | `[y for x in d if (y := f(x))]` |
+| 17 | Conditional key/value in dict comp | Branching inside |
+| 18 | Readability limits | Max 2 nesting levels |
+| 19 | Performance | Faster than for+append |
+| 20 | `itertools` connection | When to graduate |
+| 21 | Anti-pattern: over-nested | 3+ levels → function |
+| 22 | Industrial: filtered projections, index structures | Extract fields, build lookups |
 
-### Day 14 — Tooling (20)
+### Day 14 — Tooling (22)
+
+**Prerequisites:** Day 11 (packages), Day 09 (files), Day 01 (running scripts).
+**Real-world use:** reproducible environments, dependency locking, linting/formatting/type-checking — the baseline every professional repo enforces in CI.
+**Production example (code.py):** a project bootstrap/task-runner script — create a venv, sync deps from `pyproject.toml`/lockfile, and run `ruff check` + `mypy` as a single reproducible command.
+**Sources:** [uv docs](https://docs.astral.sh/uv/) · [pyproject.toml spec](https://packaging.python.org/en/latest/specifications/pyproject-toml/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -397,10 +499,12 @@
 | 14 | `ruff` linter | `ruff check .`, `ruff format .` |
 | 15 | `ruff` config | `[tool.ruff]` in pyproject |
 | 16 | `mypy` basics | `mypy .` |
-| 17 | `.gitignore` | `.venv/`, `__pycache__/` |
-| 18 | Editable installs | `pip install -e .` |
-| 19 | Anti-pattern: global pip | Always use venv |
-| 20 | Industrial: reproducible bootstrap | Clone → sync → run |
+| 17 | pre-commit hooks | `.pre-commit-config.yaml` |
+| 18 | `.gitignore` | `.venv/`, `__pycache__/` |
+| 19 | Editable installs | `pip install -e .` |
+| 20 | `python -m` module run | Run tools & packages consistently |
+| 21 | Anti-pattern: global pip | Always use venv |
+| 22 | Industrial: reproducible bootstrap | Clone → sync → run |
 
 ---
 

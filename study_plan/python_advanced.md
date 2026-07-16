@@ -31,7 +31,12 @@
 
 ## Concept Checklists
 
-### Day 51 — Descriptors (20)
+### Day 51 — Descriptors (23)
+
+**Prerequisites:** Day 15 (classes, `__dict__`), Day 17 (properties), Day 21 (class/static methods).
+**Real-world use:** reusable, validated, typed attributes — the machinery behind ORM columns, settings fields, and framework field types.
+**Production example (code.py):** a reusable typed-field library — `Positive`, `NonEmpty`, `Typed` data descriptors with `__set_name__` that validate on assignment and back a small config/ORM-style model class.
+**Sources:** [Real Python — Descriptors](https://realpython.com/python-descriptors/) · [Data Model — Implementing Descriptors](https://docs.python.org/3/reference/datamodel.html#descriptors)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -55,8 +60,16 @@
 | 18 | Industrial: ORM field | SQLAlchemy Column concept |
 | 19 | Industrial: validated config | Typed fields with checks |
 | 20 | Testing descriptors | Access via class and instance |
+| 21 | `functools.cached_property` | Stdlib lazy non-data descriptor |
+| 22 | Instance storage strategies | Per-instance dict vs `WeakKeyDictionary` (avoid leaks) |
+| 23 | Descriptor invocation | Dispatched by `type.__getattribute__` |
 
-### Day 52 — Metaclasses (20)
+### Day 52 — Metaclasses (23)
+
+**Prerequisites:** Day 51 (descriptors), Day 18 (inheritance/MRO), Day 19 (ABCs).
+**Real-world use:** framework-level control of class creation — ORM model registries, plugin auto-registration, API schema enforcement.
+**Production example (code.py):** a model-registry metaclass — validate required class attributes at creation, auto-register each subclass into a `name → class` registry, and inject a generated `__repr__`, mirroring an ORM base.
+**Sources:** [Real Python — Metaclasses](https://realpython.com/python-metaclasses/) · [Data Model — Metaclasses](https://docs.python.org/3/reference/datamodel.html#metaclasses)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -80,8 +93,16 @@
 | 18 | Anti-pattern: complex metaclass | Hard to debug |
 | 19 | Industrial: ORM model metaclass | Django Model concept |
 | 20 | Industrial: API schema | Auto-validate fields |
+| 21 | Metaclass `__call__` | Intercept `Cls(...)` instantiation |
+| 22 | Most-derived metaclass rule | Bases' metaclasses must be compatible |
+| 23 | Class kwargs to metaclass | `class C(metaclass=M, x=1)` → `__new__(..., **kw)` |
 
-### Day 53 — `__init_subclass__` & Class Hooks (20)
+### Day 53 — `__init_subclass__` & Class Hooks (23)
+
+**Prerequisites:** Day 52 (metaclasses), Day 51 (`__set_name__`), Day 19 (ABCs).
+**Real-world use:** lightweight class customization without a metaclass — plugin discovery, serializer registries, subclass validation.
+**Production example (code.py):** a plugin framework — a base class whose `__init_subclass__` validates required methods and registers each plugin by a `name=` class keyword into a discovery registry.
+**Sources:** [Data Model — `__init_subclass__`](https://docs.python.org/3/reference/datamodel.html#object.__init_subclass__) · [PEP 487 — Simpler customisation of class creation](https://peps.python.org/pep-0487/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -105,8 +126,16 @@
 | 18 | Industrial: serializer registry | Format → handler mapping |
 | 19 | Testing class hooks | Subclass in test |
 | 20 | Combine with Protocol | Type-safe plugins |
+| 21 | Implicit classmethod | No `@classmethod` needed on `__init_subclass__` |
+| 22 | Consume kwargs before `super()` | Pop keys or `object.__init_subclass__` errors |
+| 23 | PEP 487 mechanism | Hooks replace many metaclass use cases |
 
-### Day 54 — Dynamic Attributes (20)
+### Day 54 — Dynamic Attributes (23)
+
+**Prerequisites:** Day 15 (classes, `__dict__`), Day 51 (descriptors), Day 17 (properties).
+**Real-world use:** proxies, lazy loaders, and dot-access wrappers — REST client SDKs, config objects, ORM row proxies.
+**Production example (code.py):** a lazy API-client proxy — `__getattr__` builds resource paths on demand (`client.users.list()`), caches resolved attributes in `__dict__`, and raises `AttributeError` correctly.
+**Sources:** [Data Model — Customizing Attribute Access](https://docs.python.org/3/reference/datamodel.html#customizing-attribute-access) · [Built-in Functions — getattr / setattr](https://docs.python.org/3/library/functions.html#getattr)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -130,8 +159,16 @@
 | 18 | Anti-pattern: no `AttributeError` | Break `hasattr` |
 | 19 | Industrial: API proxy | `client.users.list()` |
 | 20 | Industrial: config dot-access | `config.db.host` |
+| 21 | `__dir__` override | Customize `dir(obj)` for dynamic attrs |
+| 22 | `__slots__` interaction | No `__dict__`, `__getattr__` still fires |
+| 23 | Descriptor vs `__getattr__` precedence | Data descriptors resolve first |
 
-### Day 55 — Abstract Syntax Trees (20)
+### Day 55 — Abstract Syntax Trees (24)
+
+**Prerequisites:** Day 11 (modules/imports), Day 03 (functions), Day 10 (errors).
+**Real-world use:** code analysis and generation — custom linters, codemods, safe config evaluation, framework auto-wiring.
+**Production example (code.py):** a custom lint rule — an `ast.NodeVisitor` that flags functions exceeding a nesting/branch threshold and non-PEP 8 names, reporting file/line diagnostics.
+**Sources:** [ast — Abstract Syntax Trees](https://docs.python.org/3/library/ast.html) · [Green Tree Snakes — the AST guide](https://greentreesnakes.readthedocs.io/en/latest/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -155,8 +192,17 @@
 | 18 | Anti-pattern: string manipulation | Use AST for code |
 | 19 | Industrial: code linter | Custom rule enforcement |
 | 20 | Industrial: code generation | Template → AST → source |
+| 21 | `generic_visit()` | Recurse into child nodes in a visitor |
+| 22 | `ast.Constant` node | Unified literals (3.8+, replaces `Num`/`Str`) |
+| 23 | Node positions | `lineno`, `col_offset`, `end_lineno` for diagnostics |
+| 24 | `ast.parse` modes | `mode="exec"`, `"eval"`, `"single"` |
 
-### Day 56 — inspect Module (20)
+### Day 56 — inspect Module (24)
+
+**Prerequisites:** Day 03 (functions/signatures), Day 25 (decorators), Day 55 (introspection mindset).
+**Real-world use:** signature-driven tooling — auto-documentation, DI containers, CLI generators, decorator validation.
+**Production example (code.py):** a signature-driven dispatcher — read a callable's `Signature`, `bind()` and validate incoming kwargs, and auto-generate a usage/help string from parameters and the docstring.
+**Sources:** [inspect — Inspect live objects](https://docs.python.org/3/library/inspect.html) · [PEP 362 — Function Signature Object](https://peps.python.org/pep-0362/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -180,8 +226,17 @@
 | 18 | Industrial: auto-documentation | Signature extraction |
 | 19 | Industrial: decorator introspection | Validate signatures |
 | 20 | Industrial: debug tools | Frame-based logging |
+| 21 | `Signature.bind()` | Map args to parameters, validate calls |
+| 22 | `inspect.unwrap()` | Peel `functools.wraps` layers |
+| 23 | `inspect.get_annotations()` | Safe annotation access (3.10+) |
+| 24 | `Parameter.empty` sentinel | Detect missing default/annotation |
 
-### Day 57 — C Extensions / ctypes / cffi (20)
+### Day 57 — C Extensions / ctypes / cffi (23)
+
+**Prerequisites:** Day 11 (modules), Day 10 (error handling), Day 09 (bytes/binary I/O).
+**Real-world use:** bridging Python to native code — wrapping system libraries and accelerating CPU-bound hot paths.
+**Production example (code.py):** a `ctypes` wrapper for a shared C library — declare `argtypes`/`restype`, marshal a `Structure`, check return codes, and expose a safe, typed Python API.
+**Sources:** [ctypes — Foreign function library](https://docs.python.org/3/library/ctypes.html) · [CFFI — C Foreign Function Interface](https://cffi.readthedocs.io/en/stable/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -205,8 +260,16 @@
 | 18 | Anti-pattern: no error check | Segfault risk |
 | 19 | Industrial: wrap system lib | OpenSSL, zlib |
 | 20 | Industrial: performance hot path | C for inner loop |
+| 21 | `POINTER()` / `.contents` | Pointer types and dereferencing |
+| 22 | Python C API basics | `PyObject`, reference counting |
+| 23 | GIL and native code | Release the GIL for CPU-bound C sections |
 
-### Day 58 — Design Patterns: Creational (20)
+### Day 58 — Design Patterns: Creational (23)
+
+**Prerequisites:** Day 19 (ABCs), Day 21 (classmethods), Day 03 (first-class functions).
+**Real-world use:** decoupling construction from use — connection factories, config builders, and object pools in service code.
+**Production example (code.py):** a config-driven object factory — a registry mapping type strings to constructors with a fluent builder, producing configured service clients (e.g., cache/DB backends).
+**Sources:** [Real Python — Factory Method](https://realpython.com/factory-method-python/) · [Refactoring Guru — Creational Patterns](https://refactoring.guru/design-patterns/creational-patterns)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -230,8 +293,16 @@
 | 18 | Industrial: connection factory | DB connection creation |
 | 19 | Industrial: config builder | Fluent configuration |
 | 20 | When to use which | Decision guide |
+| 21 | Monostate / Borg | Shared state alternative to Singleton |
+| 22 | `functools.partial` factory | Pre-bind constructor arguments |
+| 23 | Abstract product via `abc.ABC` | Enforce a product interface |
 
-### Day 59 — Design Patterns: Structural (20)
+### Day 59 — Design Patterns: Structural (22)
+
+**Prerequisites:** Day 58 (creational patterns), Day 18 (inheritance), Day 54 (dynamic attrs for proxy).
+**Real-world use:** composing and adapting objects — normalizing third-party APIs, caching proxies, and memory-efficient object graphs.
+**Production example (code.py):** a caching adapter/proxy — wrap a third-party client behind a uniform interface, delegate via `__getattr__`, and cache idempotent reads with invalidation.
+**Sources:** [Refactoring Guru — Structural Patterns](https://refactoring.guru/design-patterns/structural-patterns) · [Data Model — Special method names](https://docs.python.org/3/reference/datamodel.html#special-method-names)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -255,8 +326,15 @@
 | 18 | Anti-pattern: deep composition | Hard to debug |
 | 19 | Industrial: API adapter | Normalize third-party APIs |
 | 20 | Industrial: caching proxy | Cache + delegate |
+| 21 | `weakref.proxy` | Lightweight proxy without a strong ref |
+| 22 | `functools.wraps` in decorator | Preserve wrapped metadata |
 
-### Day 60 — Design Patterns: Behavioral (22)
+### Day 60 — Design Patterns: Behavioral (24)
+
+**Prerequisites:** Day 03 (first-class functions), Day 22 (iterators), Day 25 (callables/decorators).
+**Real-world use:** flexible control flow — event systems, rule engines, request pipelines, and undoable commands.
+**Production example (code.py):** an event-driven rule engine — an observer registry dispatches events to pluggable strategy handlers resolved from a registry, with a chain-of-responsibility pipeline.
+**Sources:** [Refactoring Guru — Behavioral Patterns](https://refactoring.guru/design-patterns/behavioral-patterns) · [Python Docs — Iterator Types](https://docs.python.org/3/library/stdtypes.html#iterator-types)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -282,8 +360,15 @@
 | 20 | Industrial: pipeline handler | Chain of responsibility |
 | 21 | Industrial: rule engine | Strategy + registry |
 | 22 | Combining patterns | Strategy + factory |
+| 23 | `functools.singledispatch` | Pythonic visitor / double dispatch |
+| 24 | `enum.Enum` for State | Enumerate states cleanly |
 
-### Day 61 — Dependency Injection (20)
+### Day 61 — Dependency Injection (22)
+
+**Prerequisites:** Day 58 (factories), Day 19 (ABCs/Protocol), Day 15 (composition).
+**Real-world use:** testable, decoupled services — swap real dependencies for fakes, and wire everything in one composition root.
+**Production example (code.py):** a service wired by constructor injection against `Protocol` interfaces, with a small IoC container resolving a repository + logger, and mocks injected in tests.
+**Sources:** [Real Python — Dependency Injection](https://realpython.com/python-dependency-injection/) · [FastAPI — Dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -307,8 +392,15 @@
 | 18 | Industrial: service layer | Inject dependencies |
 | 19 | Industrial: FastAPI DI | `Depends()` |
 | 20 | Composition root | Single wiring point |
+| 21 | Lifetime scopes | Singleton vs transient vs scoped instances |
+| 22 | Anti-pattern: over-injection | Too many constructor deps → SRP smell |
 
-### Day 62 — SOLID Principles (20)
+### Day 62 — SOLID Principles (22)
+
+**Prerequisites:** Day 61 (DI), Day 19 (ABCs/Protocol), Day 18 (inheritance/MRO).
+**Real-world use:** maintainable OO design — the principles behind extensible, testable service layers that survive change.
+**Production example (code.py):** refactor a "god" service class into SRP-compliant collaborators wired via DIP (Protocol + injection), extensible by OCP strategy — a before/after in one module.
+**Sources:** [Real Python — SOLID Principles](https://realpython.com/solid-principles-python/) · [Architecture Patterns with Python (Percival & Gregory)](https://www.cosmicpython.com/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -332,8 +424,15 @@
 | 18 | Anti-pattern: god class | Violates SRP |
 | 19 | Anti-pattern: isinstance chains | Violates OCP |
 | 20 | Industrial: service refactoring | Apply all five |
+| 21 | Law of Demeter | Talk to immediate collaborators only |
+| 22 | Composition over inheritance | Favor for OCP/LSP flexibility |
 
-### Day 63 — Clean Code Practices (20)
+### Day 63 — Clean Code Practices (22)
+
+**Prerequisites:** Day 03 (functions), Day 62 (SOLID), Day 10 (error handling).
+**Real-world use:** readable, reviewable code — the naming, function-size, and comment discipline every code review enforces.
+**Production example (code.py):** a refactoring module — take a smelly function (magic numbers, deep nesting, poor names) and produce a clean version with guard clauses, named constants, and docstrings, side by side.
+**Sources:** [PEP 8 — Style Guide for Python Code](https://peps.python.org/pep-0008/) · [Real Python — Python Code Quality](https://realpython.com/python-code-quality/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -357,8 +456,15 @@
 | 18 | Anti-pattern: magic numbers | Use named constants |
 | 19 | Anti-pattern: dead code | Remove unused |
 | 20 | Industrial: code review checklist | Systematic quality |
+| 21 | Command-Query Separation | Methods either do or return, not both |
+| 22 | Cyclomatic complexity | Measure with `ruff`/`radon`, keep it low |
 
-### Day 64 — Security: Input Validation (20)
+### Day 64 — Security: Input Validation (22)
+
+**Prerequisites:** Day 08 (strings), Day 09 (paths), Day 31 (typing/validation).
+**Real-world use:** the first line of defense — every external input is hostile until validated; injection is the top web risk.
+**Production example (code.py):** an input-sanitization pipeline — validate type/range/length against an allowlist, escape HTML, quote shell args, and reject path traversal, returning structured validation errors.
+**Sources:** [OWASP — Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html) · [Bandit — Security linter](https://bandit.readthedocs.io/en/latest/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -382,8 +488,15 @@
 | 18 | Anti-pattern: format string injection | `f"...{user_input}"` in SQL |
 | 19 | Industrial: input sanitizer | Clean + validate pipeline |
 | 20 | Industrial: API request validation | Schema-based |
+| 21 | Unsafe deserialization | Never `pickle.loads` untrusted data |
+| 22 | XML attacks | Billion laughs / XXE — use `defusedxml` |
 
-### Day 65 — Security: Crypto & Hashing (20)
+### Day 65 — Security: Crypto & Hashing (22)
+
+**Prerequisites:** Day 64 (security mindset), Day 08 (bytes/encoding), Day 10 (errors).
+**Real-world use:** protecting secrets and data — password storage, token generation, integrity checks, and encryption at rest.
+**Production example (code.py):** a credential + token toolkit — hash passwords with `argon2`/`bcrypt` + per-user salt, generate API keys with `secrets`, verify with `compare_digest`, and encrypt a blob with Fernet.
+**Sources:** [hashlib — Secure hashes and message digests](https://docs.python.org/3/library/hashlib.html) · [secrets — Generate secure tokens](https://docs.python.org/3/library/secrets.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -407,8 +520,15 @@
 | 18 | Anti-pattern: `random` for security | Use `secrets` |
 | 19 | Industrial: API key generation | `secrets.token_urlsafe` |
 | 20 | Industrial: file integrity | SHA-256 checksums |
+| 21 | AEAD / authenticated encryption | AES-GCM — don't use raw modes |
+| 22 | Nonce/IV uniqueness | Never reuse an IV with the same key |
 
-### Day 66 — Security: Auth Patterns (20)
+### Day 66 — Security: Auth Patterns (22)
+
+**Prerequisites:** Day 65 (hashing/tokens), Day 06 (dicts for claims), Day 61 (DI for middleware).
+**Real-world use:** controlling who can do what — JWT sessions, API keys, and RBAC across services.
+**Production example (code.py):** an auth middleware — issue and verify JWTs with expiry, hash-and-store API keys, and enforce RBAC permissions via a decorator that injects the current user.
+**Sources:** [PyJWT — Documentation](https://pyjwt.readthedocs.io/en/stable/) · [OWASP — Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -432,8 +552,15 @@
 | 18 | Anti-pattern: symmetric JWT in distributed | Use asymmetric |
 | 19 | Industrial: auth middleware | Check + decode + inject user |
 | 20 | Industrial: RBAC system | Permission hierarchy |
+| 21 | Token revocation | `jti` + blocklist for logout |
+| 22 | Secure cookie flags | `HttpOnly`, `Secure`, `SameSite` |
 
-### Day 67 — Database: SQLite + SQLAlchemy (22)
+### Day 67 — Database: SQLite + SQLAlchemy (24)
+
+**Prerequisites:** Day 09 (files/I/O), Day 05 (row DTOs), Day 10 (errors/transactions).
+**Real-world use:** durable state — parameterized SQL and ORM models back nearly every backend service.
+**Production example (code.py):** a repository over SQLite — parameterized `sqlite3` CRUD plus an equivalent SQLAlchemy 2.0 typed model (`Mapped`, `mapped_column`) with sessions, filtering, and transaction handling.
+**Sources:** [sqlite3 — DB-API 2.0 interface](https://docs.python.org/3/library/sqlite3.html) · [SQLAlchemy — ORM Documentation](https://docs.sqlalchemy.org/en/20/orm/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -459,8 +586,15 @@
 | 20 | Anti-pattern: no index | Slow queries |
 | 21 | Industrial: repository pattern | Abstract DB access |
 | 22 | Industrial: connection pooling | SQLAlchemy pool |
+| 23 | `executemany()` | Batch parameterized inserts |
+| 24 | `sessionmaker` | Session factory bound to engine |
 
-### Day 68 — Database: Migrations & Patterns (20)
+### Day 68 — Database: Migrations & Patterns (22)
+
+**Prerequisites:** Day 67 (SQLAlchemy/SQLite), Day 61 (repository via DI), Day 47 (testing).
+**Real-world use:** evolving schemas safely and keeping data access clean — migrations, repositories, and N+1 avoidance in production.
+**Production example (code.py):** an Alembic migration flow plus a repository layer — autogenerate an upgrade/downgrade, seed data, and expose a repository that avoids N+1 with eager loading; tested on in-memory SQLite.
+**Sources:** [Alembic — Tutorial](https://alembic.sqlalchemy.org/en/latest/tutorial.html) · [Architecture Patterns with Python — Repository](https://www.cosmicpython.com/book/chapter_02_repository.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -484,8 +618,15 @@
 | 18 | Anti-pattern: business in SQL | Keep logic in Python |
 | 19 | Industrial: migration pipeline | CI migration checks |
 | 20 | Industrial: multi-tenant | Schema per tenant |
+| 21 | Data migrations | Move/backfill data, not just schema |
+| 22 | Optimistic locking | Version column detects concurrent writes |
 
-### Day 69 — Networking: Sockets (20)
+### Day 69 — Networking: Sockets (23)
+
+**Prerequisites:** Day 09 (bytes/I/O), Day 10 (errors/timeouts), Day 38 (concurrency for multi-client).
+**Real-world use:** the foundation under every network protocol — building servers/clients, framing messages, and handling partial reads.
+**Production example (code.py):** a length-prefixed TCP protocol server — `struct`-framed messages, `sendall` writes, buffered `recv` until complete, `SO_REUSEADDR`, timeouts, and a multi-client loop via `selectors`.
+**Sources:** [socket — Low-level networking interface](https://docs.python.org/3/library/socket.html) · [Socket Programming HOWTO](https://docs.python.org/3/howto/sockets.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -509,8 +650,16 @@
 | 18 | Industrial: TCP echo server | Multi-client |
 | 19 | Industrial: protocol parser | Header + body pattern |
 | 20 | Testing sockets | `socket.socketpair()` |
+| 21 | `sendall()` vs `send()` | `sendall` writes the full buffer |
+| 22 | `SO_REUSEADDR` | `setsockopt` to rebind quickly |
+| 23 | `getaddrinfo()` | Resolve host/port, IPv4/IPv6 agnostic |
 
-### Day 70 — Advanced Project (20)
+### Day 70 — Advanced Project (22)
+
+**Prerequisites:** Day 53 (plugin registry), Day 61 (dependency injection), Day 66 (auth), Day 67–68 (database).
+**Real-world use:** assembling everything into a production-shaped application — layered, tested, secure, and extensible.
+**Production example (code.py):** a plugin-driven CLI service — `__init_subclass__` plugin registry, SQLAlchemy repository, JWT auth, validated inputs, DI wiring, structured logging, and a pytest suite, in a `src/` layout.
+**Sources:** Build on your own earlier modules — Day 53 (plugin registry) · Day 61 (DI) · Day 66 (auth) · Days 67–68 (database).
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -534,6 +683,8 @@
 | 18 | Anti-pattern: no tests | Add coverage |
 | 19 | Industrial: production structure | src/ layout |
 | 20 | Code review checklist | Final quality pass |
+| 21 | Plugin entry points | `importlib.metadata.entry_points` discovery |
+| 22 | Graceful shutdown | Handle SIGINT/SIGTERM, close resources |
 
 ---
 

@@ -31,9 +31,20 @@
 
 ## Concept Checklists
 
-> Gate G8: every concept must appear in CODE.md table + at least one of: visual/diagram, code.py function, or exercise stub. Cap: 15–20 per week.
+> Gate G8: every concept must appear in CODE.md table + at least one of: visual/diagram, code.py function, or exercise stub. Concept counts are sized to each pattern's scope — expanded past the earlier 15–20 guide where a topic genuinely needs it; no trivia.
+>
+> **How to read this file:** each week has a knowledge-base block
+> (Prerequisites · Real-world use · Production example · Sources) followed by its
+> **Concept Checklist**. The checklist is the Gate G8 contract — every concept
+> must appear in `CODE.md` + at least one of visual / `code.py` function /
+> exercise stub. The **Production example** is what `code.py` must implement.
 
-### Week 01 — Big-O, Arrays, Hashing (18)
+### Week 01 — Big-O, Arrays, Hashing (21)
+
+**Prerequisites:** none — this is the entry point for the DSA track.
+**Real-world use:** complexity budgeting and O(1) lookups underpin every hot path — deduping records, counting events, and joining data by key.
+**Production example (code.py):** an order-log analyzer — detect duplicate order IDs with a `set`, count events per user with `Counter`, and solve a Two-Sum-style complement lookup in a single O(n) pass.
+**Sources:** [NeetCode — Arrays & Hashing](https://neetcode.io/roadmap) · [LeetCode: Two Sum](https://leetcode.com/problems/two-sum/) · [LeetCode: Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -55,8 +66,16 @@
 | 16 | Time/space labeling | O() on every function |
 | 17 | Visual: hash map flow | Insert/lookup diagram |
 | 18 | Array vs hash map choice | Memory vs speed tradeoff |
+| 19 | Best/average/worst case | Not all inputs cost the same |
+| 20 | Big-O simplification rules | Drop constants, keep dominant term |
+| 21 | Hashable key requirements | Immutable keys, tuple composite keys |
 
-### Week 02 — Arrays, Hashing, Kadane (18)
+### Week 02 — Arrays, Hashing, Kadane (21)
+
+**Prerequisites:** Week 01 (Big-O, arrays, hash maps).
+**Real-world use:** range aggregates, streaming maxima, and O(n) reshaping power analytics dashboards, billing rollups, and ETL transforms.
+**Production example (code.py):** a revenue-window analyzer — build product-except-self for contribution scoring and run a Kadane scan that returns the best contiguous revenue window with its start/end indices.
+**Sources:** [NeetCode — Arrays & Hashing](https://neetcode.io/roadmap) · [LeetCode: Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) · [LeetCode: Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -78,8 +97,16 @@
 | 16 | Visual: prefix sum | Accumulation diagram |
 | 17 | Visual: Kadane trace | Step-by-step max tracking |
 | 18 | Complexity table | O(n) vs O(n²) per variant |
+| 19 | Subarray sum equals K | Prefix sum + hash map of counts |
+| 20 | Maximum product subarray | Track running min & max (sign flips) |
+| 21 | 2D prefix sum | Range sum on a matrix in O(1) |
 
-### Week 03 — Two Pointers (17)
+### Week 03 — Two Pointers (20)
+
+**Prerequisites:** Week 01 (arrays), Week 02 (in-place scans).
+**Real-world use:** pair/triple matching, in-place compaction of buffers, palindrome/validation checks on sorted or scannable data.
+**Production example (code.py):** 3Sum with full duplicate suppression — sort, fix one index, converge two pointers, and skip duplicate values to return only unique triplets.
+**Sources:** [NeetCode — Two Pointers](https://neetcode.io/roadmap) · [LeetCode: 3Sum](https://leetcode.com/problems/3sum/) · [LeetCode: Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -100,8 +127,16 @@
 | 15 | Visual: convergence | Step-by-step pointers |
 | 16 | Visual: 3Sum dedup | Skip logic diagram |
 | 17 | Complexity analysis | O(n²) 3Sum, O(n) pair |
+| 18 | Two Sum II (sorted input) | Opposite-end pointers on sorted array |
+| 19 | kSum generalization | Recurse fixing outer + two-pointer base |
+| 20 | Merge sorted arrays in-place | Fill from the back |
 
-### Week 04 — Sliding Window, Monotonic Deque (18)
+### Week 04 — Sliding Window, Monotonic Deque (21)
+
+**Prerequisites:** Week 03 (two pointers), Week 01 (hash maps for frequency).
+**Real-world use:** rate limiting, streaming metrics over a moving window, and finding the longest/shortest qualifying span in a stream.
+**Production example (code.py):** minimum window substring — expand right to cover all required characters, then shrink left to the smallest valid window using a frequency-satisfaction counter.
+**Sources:** [NeetCode — Sliding Window](https://neetcode.io/roadmap) · [LeetCode: Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) · [LeetCode: Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -123,8 +158,16 @@
 | 16 | Visual: window slide | Expansion/contraction |
 | 17 | Visual: deque state | Contents at each step |
 | 18 | Complexity: O(n) amortized | Each elem enters/leaves once |
+| 19 | At-most-K → exactly-K trick | `atMost(k) - atMost(k-1)` |
+| 20 | Best time to buy/sell stock | Min-so-far window over prices |
+| 21 | Window-validity via counter | Track satisfied counts to shrink |
 
-### Week 05 — Stack, Monotonic Structures (17)
+### Week 05 — Stack, Monotonic Structures (20)
+
+**Prerequisites:** Week 01 (arrays/lists), Week 04 (monotonic deque intuition).
+**Real-world use:** expression parsers, bracket/undo stacks, and next-greater queries over stock prices or temperature series.
+**Production example (code.py):** largest rectangle in histogram — maintain a monotonic increasing stack of bar indices and compute the maximal area by popping when a shorter bar arrives.
+**Sources:** [NeetCode — Stack](https://neetcode.io/roadmap) · [LeetCode: Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) · [LeetCode: Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -145,8 +188,16 @@
 | 15 | Visual: mono stack build | State at each step |
 | 16 | Visual: histogram | Boundary detection |
 | 17 | Complexity: O(n) | Each elem pushed/popped once |
+| 18 | Trapping rain water (stack) | Pop and fill by left/right boundaries |
+| 19 | Asteroid collision | Resolve survivors via stack pops |
+| 20 | Car fleet | Sort by position + monotonic stack of times |
 
-### Week 06 — Binary Search (17)
+### Week 06 — Binary Search (20)
+
+**Prerequisites:** Week 01 (Big-O, arrays), Week 02 (sorted-array reasoning).
+**Real-world use:** log/index lookup, capacity planning by feasibility search, and versioned or time-based queries.
+**Production example (code.py):** search in a rotated sorted array — locate the sorted half at each step and recurse/narrow to find a target in O(log n) with no full scan.
+**Sources:** [NeetCode — Binary Search](https://neetcode.io/roadmap) · [LeetCode: Binary Search](https://leetcode.com/problems/binary-search/) · [LeetCode: Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -167,8 +218,16 @@
 | 15 | Visual: narrowing | left/mid/right movement |
 | 16 | Visual: rotated search | Pivot + half selection |
 | 17 | Complexity: O(log n) | Halving each step |
+| 18 | Capacity/ship-within-days | Feasibility predicate + search on answer |
+| 19 | Median of two sorted arrays | Partition-based binary search |
+| 20 | Monotonic-predicate boundary | Find first True in a T/F space |
 
-### Week 07 — Linked List (17)
+### Week 07 — Linked List (20)
+
+**Prerequisites:** Week 01 (references/objects), Week 03 (fast/slow two-pointer).
+**Real-world use:** LRU caches, streaming buffers, and pointer manipulation in allocators, queues, and adjacency structures.
+**Production example (code.py):** reverse a singly linked list both iteratively (prev/curr/next) and recursively, plus Floyd's cycle detection returning the cycle start.
+**Sources:** [NeetCode — Linked List](https://neetcode.io/roadmap) · [LeetCode: Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) · [LeetCode: Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -189,8 +248,16 @@
 | 15 | Visual: reversal | Pointer reassignment |
 | 16 | Visual: fast/slow | Positions each step |
 | 17 | Complexity: O(n), O(1) space | In-place manipulation |
+| 18 | Reorder list | Find mid + reverse half + merge |
+| 19 | Swap nodes in pairs | Pointer surgery or recursion |
+| 20 | Copy list with random pointer | Interleave clones or hash map |
 
-### Week 08 — Binary Trees I (20)
+### Week 08 — Binary Trees I (26)
+
+**Prerequisites:** Week 07 (nodes/pointers), Week 11 preview (recursion).
+**Real-world use:** file systems, DOM/AST trees, and traversing any hierarchical data (org charts, category trees).
+**Production example (code.py):** serialize/deserialize a binary tree via preorder encoding, plus LCA and diameter computed in a single recursive pass.
+**Sources:** [NeetCode — Trees](https://neetcode.io/roadmap) · [LeetCode: Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) · [LeetCode: Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -214,8 +281,19 @@
 | 18 | Serialize/deserialize | Preorder encoding |
 | 19 | Visual: DFS order | Numbered visit order |
 | 20 | Visual: BFS levels | Queue state per level |
+| 21 | Balanced tree check | Height + early exit on imbalance |
+| 22 | Symmetric tree | Mirror comparison of subtrees |
+| 23 | Construct from preorder+inorder | Root split via index map |
+| 24 | Right side view | Last node per BFS level |
+| 25 | Binary tree max path sum | Gain from children, track global max |
+| 26 | Complexity: O(n), O(h) space | Visit each node once, recursion stack O(h) |
 
-### Week 09 — BST (16)
+### Week 09 — BST (19)
+
+**Prerequisites:** Week 08 (binary trees, traversals, recursion).
+**Real-world use:** ordered indexes, range queries, and the self-balancing maps behind database indexes and ordered sets.
+**Production example (code.py):** validate a BST with min/max range recursion and find the kth smallest element via a controlled (stack-based) inorder walk.
+**Sources:** [NeetCode — Trees](https://neetcode.io/roadmap) · [LeetCode: Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/) · [LeetCode: Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -235,8 +313,16 @@
 | 14 | Visual: insert sequence | Tree growth |
 | 15 | Visual: delete cases | Three cases |
 | 16 | Complexity: O(h) | log n balanced, n worst |
+| 17 | Range sum of BST | Prune subtrees outside range bounds |
+| 18 | Trim BST to range | Recursive prune of out-of-range nodes |
+| 19 | Two-Sum in BST | Inorder + two-pointer or seen-set |
 
-### Week 10 — Heap (16)
+### Week 10 — Heap (19)
+
+**Prerequisites:** Week 08 (tree/array indexing), Week 01 (Big-O).
+**Real-world use:** task schedulers, top-K dashboards, streaming medians, and k-way merges in log/DB systems.
+**Production example (code.py):** merge K sorted lists using a min-heap of `(value, list_index, node)` tuples, always popping the global minimum next.
+**Sources:** [NeetCode — Heap / Priority Queue](https://neetcode.io/roadmap) · [LeetCode: Kth Largest Element in a Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/) · [LeetCode: Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -256,8 +342,16 @@
 | 14 | Visual: array layout | Parent/children indices |
 | 15 | Visual: heapify | Sift-down trace |
 | 16 | Complexity | O(log n) push/pop |
+| 17 | K closest points to origin | Max-heap of size k by distance |
+| 18 | Task scheduler | Greedy heap of counts + cooldown |
+| 19 | Reorganize string | Heap of counts, avoid adjacency |
 
-### Week 11 — Recursion and Backtracking (20)
+### Week 11 — Recursion and Backtracking (26)
+
+**Prerequisites:** Week 03 (choice/decision framing), Week 08 (recursion on trees).
+**Real-world use:** config permutations, constraint solvers (schedulers, puzzles), and search over combinatorial spaces.
+**Production example (code.py):** subsets and combination sum via the choose → explore → unchoose template, with duplicate-skipping and sum-bound pruning.
+**Sources:** [NeetCode — Backtracking](https://neetcode.io/roadmap) · [LeetCode: Subsets](https://leetcode.com/problems/subsets/) · [LeetCode: Combination Sum](https://leetcode.com/problems/combination-sum/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -281,8 +375,19 @@
 | 18 | Memoization preview | Cache → DP connection |
 | 19 | Visual: recursion tree | Include/exclude branches |
 | 20 | Visual: pruning | Pruned vs explored |
+| 21 | Combinations (n choose k) | Start-index pruning |
+| 22 | Permutations with duplicates | Sort + skip used duplicates |
+| 23 | Palindrome partitioning | Cut + recurse on valid suffix |
+| 24 | Letter combinations of phone | Digit → letters cartesian build |
+| 25 | Generate parentheses | Open/close count constraints |
+| 26 | Complexity: exponential | Branching^depth; pruning cuts the tree |
 
-### Week 12 — Graphs I (18)
+### Week 12 — Graphs I (22)
+
+**Prerequisites:** Week 07 (traversal), Week 11 (DFS recursion), Week 10 preview (BFS queue).
+**Real-world use:** social graphs, dependency maps, grid/maze pathfinding, and network reachability.
+**Production example (code.py):** number of islands — flood each unvisited land cell with DFS/BFS over 4-directional neighbors, marking visited to count connected components.
+**Sources:** [NeetCode — Graphs](https://neetcode.io/roadmap) · [LeetCode: Number of Islands](https://leetcode.com/problems/number-of-islands/) · [LeetCode: Rotting Oranges](https://leetcode.com/problems/rotting-oranges/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -304,8 +409,17 @@
 | 16 | Directed vs undirected | Edge semantics |
 | 17 | Visual: BFS wave | Level-by-level fill |
 | 18 | Visual: DFS stack | Stack + visited |
+| 19 | Max area of island | DFS returning region area |
+| 20 | Walls and gates / 01 matrix | Multi-source BFS distance |
+| 21 | Word ladder | BFS over word transformations |
+| 22 | Complexity: O(V+E) | Each node and edge visited once |
 
-### Week 13 — Graphs II, Topo Sort (16)
+### Week 13 — Graphs II, Topo Sort (19)
+
+**Prerequisites:** Week 12 (graph representations, BFS/DFS).
+**Real-world use:** build systems, task/job scheduling, course and dependency ordering, and deadlock (cycle) detection.
+**Production example (code.py):** course schedule II — build an indegree map and run Kahn's algorithm to return a valid topological order, or detect a cycle when not all nodes are processed.
+**Sources:** [NeetCode — Graphs](https://neetcode.io/roadmap) · [LeetCode: Course Schedule](https://leetcode.com/problems/course-schedule/) · [LeetCode: Course Schedule II](https://leetcode.com/problems/course-schedule-ii/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -325,8 +439,16 @@
 | 14 | Bipartite check | 2-coloring |
 | 15 | Visual: Kahn's | Indegree + queue |
 | 16 | Visual: DFS coloring | State transitions |
+| 17 | Longest path in DAG | Topo order + DP relaxation |
+| 18 | Reconstruct itinerary | Hierholzer / Eulerian path |
+| 19 | Complexity: O(V+E) | Topo sort linear in graph size |
 
-### Week 14 — Union-Find (15)
+### Week 14 — Union-Find (18)
+
+**Prerequisites:** Week 12 (graphs, components).
+**Real-world use:** dynamic connectivity queries, network partitioning, account/dedup merging, and Kruskal's MST.
+**Production example (code.py):** a DSU class with path compression and union by rank used to detect the redundant connection (the edge that creates a cycle) in a graph.
+**Sources:** [NeetCode — Graphs](https://neetcode.io/roadmap) · [LeetCode: Redundant Connection](https://leetcode.com/problems/redundant-connection/) · [LeetCode: Number of Provinces](https://leetcode.com/problems/number-of-provinces/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -345,8 +467,16 @@
 | 13 | Graph valid tree | n-1 edges + connected |
 | 14 | Visual: union ops | Parent array changes |
 | 15 | Complexity: ~O(1) | Inverse Ackermann |
+| 16 | Number of connected components | Union all edges, count roots |
+| 17 | Most stones removed | Union by shared row/col |
+| 18 | Number of islands II | Dynamic union as cells are added |
 
-### Week 15 — Intervals and Greedy (17)
+### Week 15 — Intervals and Greedy (21)
+
+**Prerequisites:** Week 04 (sorting/scanning), Week 01 (Big-O).
+**Real-world use:** calendar/booking overlap, resource allocation, scheduling, and greedy optimization of ordering problems.
+**Production example (code.py):** merge overlapping intervals (sort by start, coalesce) and compute the minimum removals to make the rest non-overlapping (sort by end, greedy keep).
+**Sources:** [NeetCode — Greedy](https://neetcode.io/roadmap) · [LeetCode: Merge Intervals](https://leetcode.com/problems/merge-intervals/) · [LeetCode: Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -367,8 +497,17 @@
 | 15 | Greedy vs DP | No backtrack vs all subproblems |
 | 16 | Visual: interval merge | Timeline diagram |
 | 17 | Visual: jump game | Max-reach trace |
+| 18 | Minimum arrows to burst balloons | Sort by end, count groups |
+| 19 | Partition labels | Last-occurrence greedy cuts |
+| 20 | Hand of straights / groups | Greedy consecutive grouping |
+| 21 | Complexity: O(n log n) | Dominated by the initial sort |
 
-### Week 16 — 1D DP (18)
+### Week 16 — 1D DP (22)
+
+**Prerequisites:** Week 11 (recursion, memoization preview).
+**Real-world use:** resource optimization, planning with reused subresults, and sequence problems (pricing, scheduling, counting).
+**Production example (code.py):** coin change (minimum coins for an amount) solved both top-down with memoization and bottom-up with a 1D table, returning -1 when unreachable.
+**Sources:** [NeetCode — Dynamic Programming](https://neetcode.io/roadmap) · [LeetCode: Coin Change](https://leetcode.com/problems/coin-change/) · [LeetCode: House Robber](https://leetcode.com/problems/house-robber/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -390,8 +529,17 @@
 | 16 | Decode ways | Single/double digit |
 | 17 | Visual: DP table | Cell-by-cell fill |
 | 18 | Visual: memo tree | Eliminated repeats |
+| 19 | Min cost climbing stairs | dp = cost + min of two prev |
+| 20 | Word break | dp over dictionary segments |
+| 21 | Coin change II (count ways) | Unbounded combinations, order-free |
+| 22 | Complexity: O(states × transition) | States × per-state work |
 
-### Week 17 — 2D DP (16)
+### Week 17 — 2D DP (20)
+
+**Prerequisites:** Week 16 (1D DP states, recurrences).
+**Real-world use:** diffing, spell correction (edit distance), grid routing, and image/matrix transforms.
+**Production example (code.py):** longest common subsequence and edit distance on a 2D `dp[i][j]` table, with a backtrack that reconstructs the aligning sequence.
+**Sources:** [NeetCode — Dynamic Programming](https://neetcode.io/roadmap) · [LeetCode: Unique Paths](https://leetcode.com/problems/unique-paths/) · [LeetCode: Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -411,8 +559,17 @@
 | 14 | Palindrome partition DP | `dp[i][j]` palindrome? |
 | 15 | Visual: 2D table | Dependencies + fill |
 | 16 | Visual: LCS backtrack | Trace through table |
+| 17 | Maximal square | dp = min of 3 neighbors + 1 |
+| 18 | Interleaving string | 2D boolean reachability |
+| 19 | Interval DP (burst balloons) | dp over subrange endpoints |
+| 20 | Complexity: O(m×n) | Fill each table cell once |
 
-### Week 18 — Shortest Paths (16)
+### Week 18 — Shortest Paths (19)
+
+**Prerequisites:** Week 12 (graphs), Week 10 (heap for Dijkstra).
+**Real-world use:** routing and navigation, network latency, logistics/least-cost paths, and negative-cycle (arbitrage) detection.
+**Production example (code.py):** network delay time via Dijkstra with a `heapq` of `(dist, node)` tuples, returning the max shortest-distance (or -1 if unreachable).
+**Sources:** [NeetCode — Graphs](https://neetcode.io/roadmap) · [LeetCode: Network Delay Time](https://leetcode.com/problems/network-delay-time/) · [LeetCode: Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -432,8 +589,16 @@
 | 14 | Multi-source shortest | All sources in initial heap |
 | 15 | Visual: Dijkstra | Heap + distance updates |
 | 16 | Visual: Bellman-Ford | Rounds of relaxation |
+| 17 | Minimum spanning tree | Prim (heap) / Kruskal (DSU) |
+| 18 | Swim in rising water / min-max path | Dijkstra on max edge weight |
+| 19 | Complexity comparison | Dijkstra O(E log V) · Bellman-Ford O(V·E) |
 
-### Week 19 — Tries, Strings, Bits (20)
+### Week 19 — Tries, Strings, Bits (25)
+
+**Prerequisites:** Week 08 (tree structure), Week 01 (hash maps, Big-O).
+**Real-world use:** autocomplete/prefix search, plagiarism and substring search, DNA/log scanning, and permission bitmasks or low-level flags.
+**Production example (code.py):** implement a Trie (`insert`, `search`, `startsWith`) backed by per-node child dicts and an `is_end` flag, ready for autocomplete lookups.
+**Sources:** [NeetCode — Trie / Strings / Bit Manipulation](https://neetcode.io/roadmap) · [LeetCode: Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/) · [LeetCode: Single Number](https://leetcode.com/problems/single-number/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -457,8 +622,18 @@
 | 18 | Reverse bits | Bit-by-bit |
 | 19 | Visual: trie tree | Word insertions |
 | 20 | Visual: KMP LPS | Prefix function build |
+| 21 | Word search II | Trie + grid DFS pruning |
+| 22 | Add & search word (wildcard) | Trie DFS branching on `.` |
+| 23 | Sum of two integers (no `+`) | XOR sum + carry shift |
+| 24 | Missing number | XOR trick or Gauss sum |
+| 25 | Complexity: trie O(L) | Per-op linear in word length |
 
-### Week 20 — Mixed Review, Sorting, Math (20)
+### Week 20 — Mixed Review, Sorting, Math (24)
+
+**Prerequisites:** all prior weeks (01–19).
+**Real-world use:** interview-day breadth — choosing the right sort, applying number theory, and consolidating every pattern under time pressure.
+**Production example (code.py):** implement merge sort and quickselect (kth element in O(n) average), plus a Sieve of Eratosthenes prime counter, each with complexity labels.
+**Sources:** [NeetCode — Practice](https://neetcode.io/practice) · [LeetCode: Sort an Array](https://leetcode.com/problems/sort-an-array/) · [LeetCode: Count Primes](https://leetcode.com/problems/count-primes/)
 
 | # | Concept | Key Pattern / API |
 |---|---------|------------------|
@@ -482,6 +657,10 @@
 | 18 | Timed practice | Interview simulation |
 | 19 | Verbal explanation | Explain before code |
 | 20 | Weak-area diagnosis | Log personal gaps |
+| 21 | Quickselect | Partition to find kth in O(n) avg |
+| 22 | Next permutation | In-place lexicographic step |
+| 23 | Visual: partition trace | Merge/quick partition step-by-step |
+| 24 | Complexity: sort/math cheat | O(n log n) sorts · O(√n) primality |
 
 ---
 

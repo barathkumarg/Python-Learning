@@ -31,7 +31,12 @@
 
 ## Concept Checklists
 
-### Day 15 — OOP: Classes, `__init__`, Attributes (22)
+### Day 15 — OOP: Classes, `__init__`, Attributes (25)
+
+**Prerequisites:** Day 03 (functions), Day 05 (tuple/NamedTuple records this replaces).
+**Real-world use:** domain models — the objects that carry state and enforce their own invariants across a service.
+**Production example (code.py):** a `BankAccount` domain model — encapsulated balance behind `@property` guards, `deposit`/`withdraw` methods that validate and raise on overdraft, and a `__repr__` safe for logs.
+**Sources:** [Real Python — OOP](https://realpython.com/python3-object-oriented-programming/) · [Python Tutorial — Classes](https://docs.python.org/3/tutorial/classes.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -57,8 +62,16 @@
 | 20 | Anti-pattern: mutable class attr | Shared state surprise |
 | 21 | Industrial: bank account | Encapsulated state + validation |
 | 22 | Industrial: inventory item | Property + computed fields |
+| 23 | Property deleter | `@x.deleter` releases resources |
+| 24 | `setattr()` / `delattr()` | Dynamic set/delete by name |
+| 25 | Attribute lookup order | Instance `__dict__` shadows class attrs |
 
-### Day 16 — Inheritance, `super()` (20)
+### Day 16 — Inheritance, `super()` (22)
+
+**Prerequisites:** Day 15 (classes, attributes, methods).
+**Real-world use:** modeling is-a hierarchies and sharing behavior — framework base classes, permission roles, and plugin bases.
+**Production example (code.py):** a shape + permission hierarchy — a base `Shape` with an abstract `area()` and concrete subclasses, plus a role model where `Admin(User)` extends permissions through cooperative `super()`.
+**Sources:** [Real Python — OOP](https://realpython.com/python3-object-oriented-programming/) · [Python Tutorial — Inheritance](https://docs.python.org/3/tutorial/classes.html#inheritance)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -82,8 +95,15 @@
 | 18 | Anti-pattern: override without super | Breaks parent logic |
 | 19 | Industrial: shape hierarchy | Area/perimeter polymorphism |
 | 20 | Industrial: permission model | Role inheritance |
+| 21 | Cooperative multiple inheritance | `super()` walks the full MRO |
+| 22 | `object` root class | Implicit base of every class |
 
-### Day 17 — Dunder Methods (22)
+### Day 17 — Dunder Methods (25)
+
+**Prerequisites:** Day 15 (classes, `__repr__`), Day 16 (inheritance).
+**Real-world use:** making custom types feel native — value objects, containers, and domain types that support `==`, ordering, `+`, `len()`, and iteration.
+**Production example (code.py):** a `Money` value object — `__add__`/`__sub__` with currency checks, `__eq__`/`__hash__`, `@total_ordering`, and `__repr__`/`__format__`; plus a custom container implementing `__len__`/`__getitem__`/`__iter__`.
+**Sources:** [Python Data Model](https://docs.python.org/3/reference/datamodel.html) · [Real Python — OOP](https://realpython.com/python3-object-oriented-programming/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -109,8 +129,16 @@
 | 20 | Anti-pattern: magic without `__repr__` | Always add repr |
 | 21 | Industrial: money arithmetic | `__add__`, `__eq__`, `__repr__` |
 | 22 | Industrial: custom container | `__len__`, `__getitem__`, `__iter__` |
+| 23 | `__delitem__` | `del obj[key]` |
+| 24 | In-place operators | `__iadd__`, `__imul__` |
+| 25 | `__getattr__` / `__setattr__` | Attribute access interception |
 
-### Day 18 — Class/Static Methods (20)
+### Day 18 — Class/Static Methods (22)
+
+**Prerequisites:** Day 15 (classes, attributes), Day 16 (inheritance, `cls`).
+**Real-world use:** alternative constructors, registries, and grouped pure helpers — the machinery behind factories and plugin registration.
+**Production example (code.py):** a `Config` with `from_env()`/`from_file()` alternative constructors, a subclass auto-registry via `__init_subclass__`, and a class-level ID counter shared across instances.
+**Sources:** [Real Python — Class & Static Methods](https://realpython.com/instance-class-and-static-methods-demystified/) · [docs — classmethod](https://docs.python.org/3/library/functions.html#classmethod)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -134,8 +162,15 @@
 | 18 | Inheritance + classmethod | `cls` is the subclass |
 | 19 | Static utility grouping | Namespace for pure functions |
 | 20 | Decorator stacking order | `@classmethod` + `@cache` |
+| 21 | Access via instance or class | Both dispatch to the class-level function |
+| 22 | `staticmethod` vs module function | Nest in class only for cohesion |
 
-### Day 19 — Dataclasses (22)
+### Day 19 — Dataclasses (25)
+
+**Prerequisites:** Day 15 (classes), Day 17 (dunders it generates), Day 05 (NamedTuple contrast).
+**Real-world use:** boilerplate-free typed records — DTOs, config objects, and value objects with generated `__init__`/`__repr__`/`__eq__`.
+**Production example (code.py):** an order record + frozen config DTO — `@dataclass(slots=True)` with `field(default_factory=...)`, `__post_init__` validation, a computed total via `@property`, and `asdict()` JSON serialization.
+**Sources:** [Real Python — Data Classes](https://realpython.com/python-data-classes/) · [docs — dataclasses](https://docs.python.org/3/library/dataclasses.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -161,8 +196,16 @@
 | 20 | Anti-pattern: mutable default | `list` → `field(default_factory=list)` |
 | 21 | Industrial: config DTO | `@dataclass(frozen=True)` |
 | 22 | Industrial: order record | Computed total, validation |
+| 23 | `dataclasses.replace()` | Copy with field overrides |
+| 24 | `fields()` introspection | Iterate declared fields + metadata |
+| 25 | Per-field control | `field(compare=, repr=, metadata=)` |
 
-### Day 20 — Protocols and ABCs (20)
+### Day 20 — Protocols and ABCs (23)
+
+**Prerequisites:** Day 15 (classes), Day 16 (inheritance, abstract methods).
+**Real-world use:** defining interfaces — pluggable backends and dependency boundaries via structural (Protocol) or nominal (ABC) typing.
+**Production example (code.py):** a storage backend interface — a `Protocol` with `save()`/`load()` implemented by file and in-memory backends, plus an `ABC` plugin base with `@abstractmethod` that refuses instantiation until fully implemented.
+**Sources:** [docs — abc](https://docs.python.org/3/library/abc.html) · [docs — typing.Protocol](https://docs.python.org/3/library/typing.html#typing.Protocol)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -186,8 +229,16 @@
 | 18 | Industrial: storage backend | `Protocol` with `save()`/`load()` |
 | 19 | Industrial: plugin interface | Discoverable implementations |
 | 20 | Testing with protocols | Mock satisfies protocol |
+| 21 | `collections.abc` bases | Inherit `Sequence`, `Mapping`, `Iterator` |
+| 22 | Abstract classmethod/staticmethod | Stack with `@abstractmethod` |
+| 23 | Protocol with attributes | Declare instance vars / properties |
 
-### Day 21 — Decorators (22)
+### Day 21 — Decorators (25)
+
+**Prerequisites:** Day 03 (first-class functions, closures), Day 18 (built-in decorators).
+**Real-world use:** cross-cutting concerns without touching business logic — timing, retries, auth, caching, and route registration.
+**Production example (code.py):** a decorator toolkit — a `@retry(times=3)` parametric decorator with backoff, a `@timed` logger, a `@requires_role` auth guard (all using `functools.wraps`), plus a route-style registration decorator.
+**Sources:** [Real Python — Decorators](https://realpython.com/primer-on-python-decorators/) · [PEP 318 — Decorators](https://peps.python.org/pep-0318/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -213,8 +264,16 @@
 | 20 | Anti-pattern: no `wraps` | Lost metadata |
 | 21 | Anti-pattern: decorator side effects | Keep pure |
 | 22 | Industrial: framework decorators | Flask `@app.route` style |
+| 23 | Registration decorator | Populate a handler registry |
+| 24 | Optional-argument decorator | Works with or without `()` |
+| 25 | Decorating async functions | `async def wrapper` + `await` |
 
-### Day 22 — Context Managers (20)
+### Day 22 — Context Managers (22)
+
+**Prerequisites:** Day 17 (`__enter__`/`__exit__` dunders), Day 10 (exceptions, cleanup), Day 21 (decorators for `@contextmanager`).
+**Real-world use:** guaranteed setup/teardown — connections, transactions, locks, temp resources, and timers that clean up even on error.
+**Production example (code.py):** a transaction context manager — commit on success, rollback in `__exit__` on exception; plus a `@contextmanager` timer and an `ExitStack` opening a dynamic number of resources.
+**Sources:** [Real Python — with Statement](https://realpython.com/python-with-statement/) · [docs — contextlib](https://docs.python.org/3/library/contextlib.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -238,8 +297,15 @@
 | 18 | Anti-pattern: manual close | Use `with` instead |
 | 19 | Anti-pattern: no cleanup on error | `finally` or CM |
 | 20 | Industrial: transaction manager | Commit on success, rollback on fail |
+| 21 | `ContextDecorator` | Use a CM as a `@decorator` |
+| 22 | `__enter__` return value | Bound to the `as` target |
 
-### Day 23 — itertools (22)
+### Day 23 — itertools (23)
+
+**Prerequisites:** Day 13 (comprehensions, generators), Day 12 (built-in iterables).
+**Real-world use:** memory-efficient stream processing — batching, windowing, grouping, and combinatorics over large or infinite sequences.
+**Production example (code.py):** a streaming ETL helper set — `batched()` chunking for bulk inserts, `groupby()` aggregation over sorted records, `islice()` pagination, and `pairwise()` sliding-window deltas.
+**Sources:** [Real Python — itertools](https://realpython.com/python-itertools/) · [docs — itertools](https://docs.python.org/3/library/itertools.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -265,8 +331,14 @@
 | 20 | Anti-pattern: `list()` everything | Stay lazy |
 | 21 | Industrial: batch processing | `batched()` / `islice()` |
 | 22 | Industrial: sliding window | `pairwise()` / custom |
+| 23 | itertools recipes | `grouper`, `flatten`, `unique_everseen` |
 
-### Day 24 — Advanced Typing (22)
+### Day 24 — Advanced Typing (26)
+
+**Prerequisites:** Day 01 (type hints), Day 15/19 (classes, dataclasses), Day 20 (Protocol).
+**Real-world use:** type-safe generic APIs — reusable containers, decorator typing, and precise contracts mypy can verify in CI.
+**Production example (code.py):** a generic `Repository[T]` with a bound `TypeVar`, a `ParamSpec` decorator that preserves signatures, a `TypedDict` config, `Literal` modes, and `@overload`ed accessors.
+**Sources:** [Real Python — Type Checking](https://realpython.com/python-type-checking/) · [docs — typing](https://docs.python.org/3/library/typing.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -292,8 +364,17 @@
 | 20 | Anti-pattern: `Any` everywhere | Defeats purpose |
 | 21 | Anti-pattern: no return type | Always annotate |
 | 22 | Industrial: generic repository | `Repository[T]` pattern |
+| 23 | `NewType` | Distinct type wrapper |
+| 24 | `Self` type (3.11+) | Return-`self` annotations |
+| 25 | `NoReturn` / `Never` | Functions that never return |
+| 26 | `TypeGuard` | Custom type-narrowing helpers |
 
-### Day 25 — Enum and Constants (20)
+### Day 25 — Enum and Constants (23)
+
+**Prerequisites:** Day 15 (classes), Day 02 (`match`/`case` over enums).
+**Real-world use:** replacing magic strings/ints with a fixed, type-safe, self-documenting set — statuses, roles, and bitwise feature flags.
+**Production example (code.py):** an order `Status(StrEnum)` state machine with allowed transitions, an `IntFlag` permission set combined with `|`/`&`, and JSON serialization via `.value`.
+**Sources:** [docs — enum](https://docs.python.org/3/library/enum.html) · [Real Python — Enums](https://realpython.com/python-enum/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -317,8 +398,16 @@
 | 18 | Anti-pattern: plain strings | Use Enum for fixed sets |
 | 19 | Industrial: status machine | State transitions with Enum |
 | 20 | Industrial: feature flags | Flag combinations |
+| 21 | `__members__` mapping | All members incl. aliases |
+| 22 | Enum aliases | Duplicate value becomes an alias |
+| 23 | Identity comparison | Members compared with `is` |
 
-### Day 26 — Regex (22)
+### Day 26 — Regex (27)
+
+**Prerequisites:** Day 08 (strings, raw strings), Day 09 (file/log lines).
+**Real-world use:** extracting and validating structured text — log parsing, input validation, tokenizing, and search/replace at scale.
+**Production example (code.py):** a log-line parser + validators — a compiled pattern with named groups extracting timestamp/level/message via `finditer`, plus email/phone validators using anchors and `fullmatch`.
+**Sources:** [docs — re](https://docs.python.org/3/library/re.html) · [Real Python — Regex](https://realpython.com/regex-python/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -344,8 +433,18 @@
 | 20 | Anti-pattern: regex for HTML | Use parser instead |
 | 21 | Industrial: log parser | Extract fields from lines |
 | 22 | Industrial: input validation | Email, phone, ID formats |
+| 23 | Non-capturing group | `(?:...)` |
+| 24 | Match object methods | `.group()`, `.groups()`, `.groupdict()`, `.span()` |
+| 25 | `re.escape()` | Escape literal text in patterns |
+| 26 | Verbose mode | `re.VERBOSE` for readable patterns |
+| 27 | `re.subn()` | Replace and return a count |
 
-### Day 27 — Dates and Times (22)
+### Day 27 — Dates and Times (26)
+
+**Prerequisites:** Day 01 (types), Day 08 (string formatting), Day 26 (parsing patterns).
+**Real-world use:** correct time handling — scheduling, timezone conversion, durations, and timestamps that survive DST and regional differences.
+**Production example (code.py):** a timezone-aware scheduler + converter — parse ISO strings with `fromisoformat`, convert between zones via `zoneinfo`, compute next-run with `timedelta`, and always store aware UTC.
+**Sources:** [docs — datetime](https://docs.python.org/3/library/datetime.html) · [Real Python — datetime](https://realpython.com/python-datetime/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -371,8 +470,17 @@
 | 20 | Anti-pattern: naive UTC | Always use aware |
 | 21 | Anti-pattern: custom parsing | Use `fromisoformat()` |
 | 22 | Industrial: scheduler, converter | Timezone-aware scheduling |
+| 23 | `datetime.combine()` | Merge `date` + `time` |
+| 24 | `timedelta.total_seconds()` | Duration as seconds |
+| 25 | Aware `now()` | `datetime.now(ZoneInfo(...))` over `utcnow()` |
+| 26 | `isocalendar()` | ISO year / week / weekday |
 
-### Day 28 — Collections Deep-dive (20)
+### Day 28 — Collections Deep-dive (24)
+
+**Prerequisites:** Day 06 (dicts), Day 05 (namedtuple), Day 04 (lists).
+**Real-world use:** the right specialized container for the job — frequency counts, O(1) queues, layered config, and grouping.
+**Production example (code.py):** a log analytics module — `Counter.most_common()` for top endpoints, a `deque(maxlen=)` bounded event buffer, `defaultdict(list)` grouping, and `ChainMap` layered config resolution.
+**Sources:** [docs — collections](https://docs.python.org/3/library/collections.html) · [Real Python — collections](https://realpython.com/python-collections-module/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -396,8 +504,17 @@
 | 18 | Anti-pattern: manual grouping | Use `defaultdict(list)` |
 | 19 | Industrial: frequency analysis | `Counter` for text |
 | 20 | Industrial: LRU with deque | Bounded history |
+| 21 | `Counter.elements()` | Expand counts back to an iterator |
+| 22 | `Counter.total()` (3.10+) | Sum of all counts |
+| 23 | `Counter.update()` / `subtract()` | Combine / remove counts |
+| 24 | `deque.extendleft()` | Bulk left-append (reverses order) |
 
-### Day 29 — functools (20)
+### Day 29 — functools (23)
+
+**Prerequisites:** Day 21 (decorators), Day 03 (functions), Day 17 (`total_ordering`).
+**Real-world use:** higher-order utilities — memoization for expensive calls, partial application for callbacks, and type-based dispatch.
+**Production example (code.py):** a memoized data-access layer — `@lru_cache` wrapping an expensive lookup with `cache_info()` monitoring, `@cached_property` for lazy fields, `partial` pre-configured callbacks, and `@singledispatch` serialization.
+**Sources:** [Real Python — functools](https://realpython.com/python-functools/) · [docs — functools](https://docs.python.org/3/library/functools.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -421,8 +538,16 @@
 | 18 | Anti-pattern: reduce for sum | Use `sum()` |
 | 19 | Industrial: memoized API calls | `lru_cache` wrapper |
 | 20 | Industrial: partial callbacks | Pre-configured handlers |
+| 21 | `singledispatchmethod` | Type dispatch on methods |
+| 22 | `partialmethod` | `partial` applied to methods |
+| 23 | `update_wrapper()` | Manual metadata copy |
 
-### Day 30 — Testing: pytest Basics (22)
+### Day 30 — Testing: pytest Basics (26)
+
+**Prerequisites:** Day 03 (functions), Day 10 (exceptions), Day 11 (imports).
+**Real-world use:** the professional testing baseline — fast, isolated, table-driven tests that gate every merge in CI.
+**Production example (code.py):** a test suite for a domain module — AAA-structured tests, `parametrize` tables, `pytest.raises` for error paths, fixtures with `yield` teardown, `tmp_path`, and `--cov` in CI.
+**Sources:** [Real Python — pytest](https://realpython.com/pytest-python-testing/) · [docs — pytest](https://docs.pytest.org/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -448,8 +573,17 @@
 | 20 | Anti-pattern: test depends on order | Isolate state |
 | 21 | Anti-pattern: too many asserts | One concern per test |
 | 22 | Industrial: CI test suite | `pytest` in pipeline |
+| 23 | Yield fixtures | Setup/teardown around `yield` |
+| 24 | `autouse=True` fixtures | Applied without being requested |
+| 25 | Parametrized fixtures | `@fixture(params=[...])` |
+| 26 | `caplog` | Capture emitted log records |
 
-### Day 31 — Testing: Mocking (20)
+### Day 31 — Testing: Mocking (24)
+
+**Prerequisites:** Day 30 (pytest), Day 21 (patching wraps functions), Day 11 (import paths).
+**Real-world use:** isolating the unit under test from slow or external dependencies — APIs, clocks, filesystems, and databases.
+**Production example (code.py):** tests for an API client — `@patch` the HTTP call where it is imported, configure `return_value`/`side_effect` for retries, assert with `assert_called_once_with`, and `mock_open` the file layer.
+**Sources:** [docs — unittest.mock](https://docs.python.org/3/library/unittest.mock.html) · [Real Python — pytest](https://realpython.com/pytest-python-testing/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -473,8 +607,17 @@
 | 18 | Anti-pattern: implementation test | Test behavior, not internals |
 | 19 | Industrial: mock API client | External service isolation |
 | 20 | Industrial: mock file system | `tmp_path` + mock |
+| 21 | `mock_open()` | Mock the builtin `open()` |
+| 22 | `create_autospec()` | Spec'd mock factory |
+| 23 | Call assertions | `call_count`, `assert_not_called()` |
+| 24 | `reset_mock()` | Clear recorded calls |
 
-### Day 32 — Logging (20)
+### Day 32 — Logging (23)
+
+**Prerequisites:** Day 10 (exceptions), Day 11 (modules, `__name__`), Day 30 (asserting on logs).
+**Real-world use:** observability — structured, leveled, routed logs that make production systems debuggable.
+**Production example (code.py):** a logging setup module — named loggers per module, `dictConfig` wiring a JSON formatter, a `RotatingFileHandler` plus console handler, `logger.exception()` on failures, and `extra=` context.
+**Sources:** [Real Python — Logging](https://realpython.com/python-logging/) · [docs — logging](https://docs.python.org/3/library/logging.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -498,8 +641,16 @@
 | 18 | Anti-pattern: `print()` in prod | Use logging |
 | 19 | Anti-pattern: root logger | Use named loggers |
 | 20 | Industrial: structured JSON logs | Machine-parseable |
+| 21 | Logger vs handler levels | `setLevel()` on both |
+| 22 | Propagation | Records bubble up; `propagate=False` |
+| 23 | `QueueHandler` / `QueueListener` | Non-blocking, concurrency-safe logging |
 
-### Day 33 — CLI: argparse / click (20)
+### Day 33 — CLI: argparse / click (24)
+
+**Prerequisites:** Day 03 (functions), Day 11 (packages, `__main__`), Day 19 (config DTOs).
+**Real-world use:** operable tools — every service ships CLIs for admin, migration, and batch jobs with clear args and help.
+**Production example (code.py):** a multi-command CLI — `argparse` subcommands (or `click.group`) with typed options, `choices`, defaults merged from a config file, a `--verbose` count, and proper exit codes.
+**Sources:** [docs — argparse](https://docs.python.org/3/library/argparse.html) · [Click docs](https://click.palletsprojects.com/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -523,8 +674,17 @@
 | 18 | Anti-pattern: no help text | Always add help |
 | 19 | Industrial: multi-command CLI | `click.group` + subcommands |
 | 20 | Industrial: config + CLI merge | Defaults from file, override CLI |
+| 21 | Argument metadata | `help=`, `metavar=`, `dest=` |
+| 22 | click types & validation | `type=click.Path`, `IntRange` |
+| 23 | click context | `@click.pass_context`, `ctx.obj` |
+| 24 | Exit codes | `sys.exit()` / `ctx.exit()` |
 
-### Day 34 — Packaging and Distribution (20)
+### Day 34 — Packaging and Distribution (24)
+
+**Prerequisites:** Day 11 (packages), Day 14 (tooling, `pyproject.toml`), Day 33 (console entry points).
+**Real-world use:** shipping code others can install — internal libraries and CLIs published to PyPI or a private index with reproducible builds.
+**Production example (code.py):** a publishable package — `pyproject.toml` with metadata, `dependencies`, and a `[project.scripts]` entry point; `src/` layout; `python -m build` producing wheel + sdist; and a TestPyPI `twine`/`uv publish` dry run.
+**Sources:** [packaging.python.org — Packaging Projects](https://packaging.python.org/en/latest/tutorials/packaging-projects/) · [pyproject.toml spec](https://packaging.python.org/en/latest/specifications/pyproject-toml/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -548,6 +708,10 @@
 | 18 | Namespace packages | Multiple packages, one namespace |
 | 19 | Anti-pattern: setup.py only | Use pyproject.toml |
 | 20 | Industrial: publish workflow | Build → test → publish |
+| 21 | `dependencies` / `requires-python` | Declare runtime deps + version floor |
+| 22 | `src/` layout | Recommended package structure |
+| 23 | `importlib.metadata.version()` | Read installed version at runtime |
+| 24 | `[project.entry-points]` | Plugin discovery |
 
 ---
 

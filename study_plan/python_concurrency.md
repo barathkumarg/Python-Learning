@@ -27,7 +27,12 @@
 
 ## Concept Checklists
 
-### Day 35 — Generators Deep-dive (22)
+### Day 35 — Generators Deep-dive (24)
+
+**Prerequisites:** Day 23 (generators, `yield`), Day 24 (generator expressions), Day 22 (iterator protocol)
+**Real-world use:** streaming large datasets and lazy ETL without loading everything into memory.
+**Production example (code.py):** a lazy ETL reader that streams a multi-GB CSV line-by-line, yields transformed records, and reports running totals through `send()` — never materializing the full file.
+**Sources:** [Real Python — Generators](https://realpython.com/introduction-to-python-generators/) · [Functional Programming HOWTO](https://docs.python.org/3/howto/functional.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -53,8 +58,15 @@
 | 20 | Anti-pattern: generator reuse | Exhausted after one pass |
 | 21 | Industrial: lazy ETL | Read→transform→write |
 | 22 | Industrial: streaming log parser | Line-by-line processing |
+| 23 | Generator `return` value | `return x` → `StopIteration.value` |
+| 24 | Priming a coroutine generator | `next(gen)` before first `send()` |
 
-### Day 36 — Generator Pipelines (20)
+### Day 36 — Generator Pipelines (22)
+
+**Prerequisites:** Day 35 (generators, `yield from`, `send`), Day 30 (itertools)
+**Real-world use:** composable stream-processing stages — parse → filter → enrich → sink — that stay memory-flat.
+**Production example (code.py):** a log-stream processor built from chained generators — a source that tails lines, transform stages that parse and filter, and a batching sink that emits alerts, wired as one lazy pipeline.
+**Sources:** [Real Python — Generators](https://realpython.com/introduction-to-python-generators/) · [itertools — Standard Library](https://docs.python.org/3/library/itertools.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -78,8 +90,15 @@
 | 18 | Anti-pattern: no error handling | Generators just stop |
 | 19 | Industrial: log stream processor | Parse→filter→alert |
 | 20 | Industrial: data transform chain | CSV→clean→enrich→JSONL |
+| 21 | `itertools.groupby` in pipeline | Group consecutive runs in a stream |
+| 22 | `heapq.merge` fan-in | Lazily merge sorted streams |
 
-### Day 37 — asyncio Basics (22)
+### Day 37 — asyncio Basics (24)
+
+**Prerequisites:** Day 23 (generators as coroutine ancestors), Day 10 (exceptions), Day 03 (functions)
+**Real-world use:** high-concurrency I/O — thousands of network calls on one thread without blocking.
+**Production example (code.py):** a concurrent fetcher that runs N HTTP-style calls with `create_task`/`gather`, bounds concurrency with a `Semaphore`, applies per-call `wait_for` timeouts, and collects results with `return_exceptions=True`.
+**Sources:** [Real Python — Async IO](https://realpython.com/async-io-python/) · [asyncio — Standard Library](https://docs.python.org/3/library/asyncio.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -105,8 +124,15 @@
 | 20 | Anti-pattern: blocking in async | Use `run_in_executor` |
 | 21 | Anti-pattern: forget `await` | Coroutine never runs |
 | 22 | Industrial: concurrent fetchers | Parallel HTTP calls |
+| 23 | `asyncio.get_running_loop()` | Access the active event loop |
+| 24 | `asyncio.Condition` | Async wait/notify coordination |
 
-### Day 38 — asyncio Tasks & Gather (20)
+### Day 38 — asyncio Tasks & Gather (22)
+
+**Prerequisites:** Day 37 (coroutines, tasks, gather), Day 10 (exceptions)
+**Real-world use:** structured concurrency — fan-out work, collect as it completes, cancel cleanly on failure.
+**Production example (code.py):** a parallel downloader using `asyncio.TaskGroup` for structured concurrency, `as_completed` for streaming progress, a `Semaphore` rate limit, and `asyncio.timeout()` for graceful cancellation.
+**Sources:** [asyncio — Coroutines and Tasks](https://docs.python.org/3/library/asyncio-task.html) · [Real Python — Async IO](https://realpython.com/async-io-python/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -130,8 +156,15 @@
 | 18 | Anti-pattern: unbounded tasks | Memory leak |
 | 19 | Industrial: parallel downloads | Fan-out + semaphore |
 | 20 | Industrial: worker pool | Queue + N consumers |
+| 21 | `task.result()` / `task.exception()` | Retrieve outcome after completion |
+| 22 | `asyncio.wait` return_when | `FIRST_COMPLETED` / `ALL_COMPLETED` |
 
-### Day 39 — Async I/O Patterns (20)
+### Day 39 — Async I/O Patterns (22)
+
+**Prerequisites:** Day 37 (asyncio basics), Day 38 (tasks/gather), Day 27 (context managers)
+**Real-world use:** production async clients/servers — pooled sessions, retries, timeouts, streaming.
+**Production example (code.py):** an async HTTP client wrapper over `aiohttp` with a reused `ClientSession`, retry-with-backoff, per-request timeouts, and streaming chunked reads into an `aiofiles` sink.
+**Sources:** [Real Python — Async IO](https://realpython.com/async-io-python/) · [asyncio — Standard Library](https://docs.python.org/3/library/asyncio.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -155,8 +188,15 @@
 | 18 | Industrial: async file pipeline | aiofiles for ETL |
 | 19 | `asyncio.open_connection()` | Low-level TCP |
 | 20 | `asyncio.start_server()` | TCP server |
+| 21 | `asyncio.timeout()` block | `async with asyncio.timeout(5):` (3.11+) |
+| 22 | Bounded concurrency | Semaphore-gated request fan-out |
 
-### Day 40 — Async Generators & Advanced (20)
+### Day 40 — Async Generators & Advanced (22)
+
+**Prerequisites:** Day 39 (async I/O), Day 35 (generators), Day 28 (@contextmanager)
+**Real-world use:** real-time streaming pipelines and async resource lifecycles.
+**Production example (code.py):** a real-time processor using an async generator source, `async for` consumers behind an `asyncio.Queue`, an `@asynccontextmanager` for connection setup/teardown, and sentinel-based graceful shutdown.
+**Sources:** [asyncio — Standard Library](https://docs.python.org/3/library/asyncio.html) · [Functional Programming HOWTO](https://docs.python.org/3/howto/functional.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -180,8 +220,15 @@
 | 18 | Industrial: streaming pipeline | Async gen chain |
 | 19 | Industrial: real-time processor | Queue + async consumers |
 | 20 | Testing async code | `pytest-asyncio` |
+| 21 | `contextlib.aclosing()` | Guaranteed `aclose()` on async gen |
+| 22 | `agen.athrow()` | Inject exception into async generator |
 
-### Day 41 — Threading (22)
+### Day 41 — Threading (25)
+
+**Prerequisites:** Day 03 (functions), Day 10 (exceptions), Day 06 (shared dict state)
+**Real-world use:** concurrent blocking I/O — parallel file/network operations where the GIL is released.
+**Production example (code.py):** a producer-consumer file crawler — worker threads pull paths off a `queue.Queue`, hash file contents, and write results under a `Lock`, with clean `join()`-based shutdown.
+**Sources:** [Real Python — Threading](https://realpython.com/intro-to-python-threading/) · [threading — Standard Library](https://docs.python.org/3/library/threading.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -207,8 +254,16 @@
 | 20 | Anti-pattern: no join | Orphaned threads |
 | 21 | Industrial: concurrent I/O | Parallel file/network ops |
 | 22 | Industrial: producer-consumer | Queue + worker threads |
+| 23 | Subclassing `Thread` | Override `run()` for custom threads |
+| 24 | `is_alive()` / `current_thread()` | Thread state introspection |
+| 25 | Free-threaded CPython (3.13+) | Optional no-GIL build tradeoffs |
 
-### Day 42 — Thread Safety (20)
+### Day 42 — Thread Safety (22)
+
+**Prerequisites:** Day 41 (threads, locks, queues)
+**Real-world use:** correct shared-state concurrency — avoiding races and deadlocks under load.
+**Production example (code.py):** a bounded thread-pool job runner — a `ThreadPoolExecutor` fed from a `queue.Queue`, a `BoundedSemaphore` capping concurrent resource use, and consistent lock ordering to prevent deadlock.
+**Sources:** [threading — Standard Library](https://docs.python.org/3/library/threading.html) · [Real Python — Threading](https://realpython.com/intro-to-python-threading/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -232,8 +287,15 @@
 | 18 | Anti-pattern: lock everything | Over-synchronization |
 | 19 | Anti-pattern: global state | Harder to reason about |
 | 20 | Industrial: thread pool + queue | Bounded workers |
+| 21 | `lock.acquire(timeout=)` | Non-blocking / timed acquisition |
+| 22 | `queue.join()` / `task_done()` | Wait until all work is processed |
 
-### Day 43 — Multiprocessing (22)
+### Day 43 — Multiprocessing (24)
+
+**Prerequisites:** Day 41 (threading contrast), Day 11 (`__main__` guard), Day 09 (pickling/serialization)
+**Real-world use:** CPU-bound parallelism that sidesteps the GIL across cores.
+**Production example (code.py):** a CPU-bound batch hasher — a `Pool` distributes files across cores with `imap_unordered`, aggregates results in the parent, and uses a `spawn`-safe `__main__` guard.
+**Sources:** [Real Python — Multiprocessing](https://realpython.com/python-multiprocessing/) · [multiprocessing — Standard Library](https://docs.python.org/3/library/multiprocessing.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -259,8 +321,15 @@
 | 20 | Anti-pattern: large data in queue | Use shared memory |
 | 21 | Industrial: CPU-bound parallel | Image processing, hashing |
 | 22 | Industrial: worker pool | Process pool + queue |
+| 23 | `imap()` / `imap_unordered()` | Lazy results, order tradeoffs |
+| 24 | `chunksize` tuning | Amortize IPC dispatch overhead |
 
-### Day 44 — concurrent.futures (20)
+### Day 44 — concurrent.futures (22)
+
+**Prerequisites:** Day 41 (threads), Day 43 (processes), Day 10 (exceptions)
+**Real-world use:** one uniform API for thread and process pools — submit work, collect results/exceptions.
+**Production example (code.py):** a batch API caller on `ThreadPoolExecutor` with a per-worker `initializer` for session setup, `as_completed` result draining, and `shutdown(cancel_futures=True)` on error.
+**Sources:** [concurrent.futures — Standard Library](https://docs.python.org/3/library/concurrent.futures.html) · [Real Python — Threading](https://realpython.com/intro-to-python-threading/)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -284,8 +353,15 @@
 | 18 | Anti-pattern: wrong executor | Thread for I/O, Process for CPU |
 | 19 | Industrial: batch API calls | ThreadPool + rate limit |
 | 20 | Industrial: parallel computation | ProcessPool for heavy math |
+| 21 | `initializer` / `initargs` | Per-worker one-time setup |
+| 22 | `shutdown(cancel_futures=)` | Drain vs cancel on exit (3.9+) |
 
-### Day 45 — subprocess (20)
+### Day 45 — subprocess (22)
+
+**Prerequisites:** Day 10 (exceptions), Day 09 (I/O), Day 08 (strings/encoding)
+**Real-world use:** automating external tools safely — git, build steps, CLIs — from Python.
+**Production example (code.py):** a shell-automation helper that runs a git/build command from an argument list (no `shell=True`), captures decoded output, enforces a `timeout`, and raises typed errors on `CalledProcessError`/`TimeoutExpired`.
+**Sources:** [Real Python — subprocess](https://realpython.com/python-subprocess/) · [subprocess — Standard Library](https://docs.python.org/3/library/subprocess.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -309,8 +385,15 @@
 | 18 | Anti-pattern: `shell=True` | Injection risk |
 | 19 | Anti-pattern: no timeout | Hanging process |
 | 20 | Industrial: shell automation | Build scripts, git ops |
+| 21 | `CalledProcessError` / `TimeoutExpired` | Typed failure handling |
+| 22 | `subprocess.DEVNULL` | Discard stdout/stderr |
 
-### Day 46 — Memory Management (20)
+### Day 46 — Memory Management (23)
+
+**Prerequisites:** Day 15 (objects), Day 20 (dataclasses/slots), Day 35 (generators)
+**Real-world use:** keeping long-running services memory-flat — bounded caches, no leaks.
+**Production example (code.py):** a memory-audited cache — a `WeakValueDictionary` object cache plus `__slots__` records, instrumented with `tracemalloc` snapshot diffs to prove no unbounded growth.
+**Sources:** [gc — Standard Library](https://docs.python.org/3/library/gc.html) · [weakref — Standard Library](https://docs.python.org/3/library/weakref.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -334,8 +417,16 @@
 | 18 | Anti-pattern: cache without bound | Memory grows forever |
 | 19 | Anti-pattern: circular refs with `__del__` | GC can't collect |
 | 20 | Industrial: memory profiling | `tracemalloc` snapshots |
+| 21 | `WeakKeyDictionary` / `WeakSet` | Other weak-reference containers |
+| 22 | `gc.disable()` / `gc.freeze()` | Tuning the cyclic collector |
+| 23 | `tracemalloc` snapshot diff | `Snapshot.compare_to()` for leaks |
 
-### Day 47 — Profiling (20)
+### Day 47 — Profiling (22)
+
+**Prerequisites:** Day 46 (memory), Day 12 (pipelines), Day 34 (measurement mindset)
+**Real-world use:** finding real bottlenecks before optimizing — measure, don't guess.
+**Production example (code.py):** a profiling harness that times a workload with `perf_counter`, profiles it under `cProfile`, ranks hotspots via `pstats.sort_stats`, and prints an I/O-vs-CPU verdict.
+**Sources:** [profile / cProfile — Standard Library](https://docs.python.org/3/library/profile.html) · [timeit — Standard Library](https://docs.python.org/3/library/timeit.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -359,8 +450,15 @@
 | 18 | Anti-pattern: micro-benchmarks | Measure real workload |
 | 19 | Industrial: CI perf regression | Benchmark in pipeline |
 | 20 | Industrial: production profiling | Sampling profiler |
+| 21 | `pstats.sort_stats()` | Rank hotspots by cumulative/total time |
+| 22 | `py-spy` sampling profiler | Low-overhead production profiling |
 
-### Day 48 — Performance Patterns (20)
+### Day 48 — Performance Patterns (22)
+
+**Prerequisites:** Day 47 (profiling), Day 29 (functools/lru_cache), Day 30 (itertools)
+**Real-world use:** applying proven speedups — caching, batching, right data structures — after profiling.
+**Production example (code.py):** a query layer that memoizes with `functools.cache`, batches I/O, swaps list scans for set/dict lookups, and uses `deque` for O(1) queue ops — benchmarked against the naive version.
+**Sources:** [functools — Standard Library](https://docs.python.org/3/library/functools.html) · [profile / cProfile — Standard Library](https://docs.python.org/3/library/profile.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -384,8 +482,15 @@
 | 18 | Anti-pattern: repeated computation | Cache results |
 | 19 | Industrial: query caching | LRU + TTL |
 | 20 | Industrial: bulk processing | Batch I/O operations |
+| 21 | `functools.cache` | Unbounded memoization (3.9+) |
+| 22 | Bind method to local | Hoist `obj.method` lookups out of loops |
 
-### Day 49 — struct / array / memoryview (20)
+### Day 49 — struct / array / memoryview (23)
+
+**Prerequisites:** Day 08 (bytes/encoding), Day 09 (binary I/O), Day 48 (performance)
+**Real-world use:** binary protocols and high-performance buffers — packets, file formats, zero-copy I/O.
+**Production example (code.py):** a binary message codec — a reusable `struct.Struct` packs/unpacks fixed-header records, `iter_unpack` streams them, and `readinto()` with a `memoryview` reads without copying.
+**Sources:** [struct — Standard Library](https://docs.python.org/3/library/struct.html) · [array — Standard Library](https://docs.python.org/3/library/array.html)
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -409,8 +514,16 @@
 | 18 | Anti-pattern: string for binary | Use bytes/struct |
 | 19 | Industrial: binary protocol | Pack/unpack messages |
 | 20 | Industrial: high-perf buffer | memoryview pipeline |
+| 21 | `struct.Struct` compiled | Reuse a format object for speed |
+| 22 | `struct.iter_unpack()` | Stream fixed-size records |
+| 23 | `readinto()` + `memoryview` | Zero-copy buffered read |
 
-### Day 50 — Concurrency Project (20)
+### Day 50 — Concurrency Project (22)
+
+**Prerequisites:** Days 35–49 (all Phase 3 modules)
+**Real-world use:** a capstone combining async I/O, pipelines, caching, and profiling into one production tool.
+**Production example (code.py):** a production async scraper — bounded-concurrency `aiohttp` fetching with retry/backoff, a generator transform pipeline, `asyncio.Queue` backpressure, structured logging, graceful signal shutdown, and a `perf_counter` run report.
+**Sources:** review of Days 35–49 modules
 
 | # | Concept | Key syntax |
 |---|---------|-----------|
@@ -434,6 +547,8 @@
 | 18 | Anti-pattern: no timeout | Hanging requests |
 | 19 | Industrial: production scraper | All patterns combined |
 | 20 | Industrial: monitoring | Metrics + logging |
+| 21 | Bounded concurrency | Semaphore caps in-flight requests |
+| 22 | Backpressure | Bounded `asyncio.Queue` between stages |
 
 ---
 

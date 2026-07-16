@@ -31,20 +31,12 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Start with [study_plan/python_basic.md](study_plan/python_basic.md) → open the day's `CODE.md` → try the exercises.
+## Start Here
 
-## Structure Per Day
-
-Each day generates 6 files:
-
-| File | Purpose |
-|------|---------|
-| `CODE.md` | Concept table + 8+ snippets + anti-patterns + industrial practices |
-| `code.py` | Runnable reference with type hints, docstrings, asserts |
-| `EXERCISE.md` | Objectives, concept coverage map, scoring guide |
-| `ex01_basic.py` | 4–6 basic stubs |
-| `ex02_intermediate.py` | 4–6 intermediate stubs |
-| `ex03_advanced.py` | 3–4 advanced stubs |
+**[DAILY_STUDY_PLAN.md](DAILY_STUDY_PLAN.md)** is the single entry point — the
+4-step daily loop (Generate → Study → Practise → Evaluate/Record) and a map of
+where everything lives. Read it first; each day generates 6 files (`CODE.md`,
+`code.py`, `EXERCISE.md`, `ex01/02/03`) — the loop explains what to do with them.
 
 ## Key Files
 
