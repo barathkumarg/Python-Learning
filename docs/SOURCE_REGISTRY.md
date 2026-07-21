@@ -34,7 +34,7 @@ When using any external source:
 - Prefer official docs and production-oriented repos for `code.py`.
 - Prefer challenge banks and practice repos for `EXERCISE.md` inspiration, not for answer-copying.
 - If a source is beginner-friendly but not production-grade, use it for ordering and exercise shape, then raise the code quality to this repo's standard.
-- **Always consult the per-day source table below** before generating. It maps each day to its best primary + secondary source URL so you can open the right reference immediately.
+- **Always consult the day's inline `Sources:` line in `study_plan/<track>.md`** before generating — it names the primary + secondary source URL for that day. This file is the curated catalog to draw from for anything extra.
 
 ---
 
@@ -246,164 +246,12 @@ When using any external source:
 
 ---
 
-## Per-day source mapping (quick lookup for generation)
+## Per-day source mapping
 
-Use this table to immediately find the right source URL for each day. Open the primary source before generating.
-
-### Phase 1 — Python Basics
-
-| Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
-|-----|-------|--------------------|----------------------|-------------------|
-| 01 | Syntax, types, variables | <https://docs.python.org/3/tutorial/introduction.html> | <https://realpython.com/python-variables/> | <https://github.com/zhiwehu/Python-programming-exercises/blob/master/100%2B%20Python%20challenging%20programming%20exercises.txt> |
-| 02 | Control flow | <https://docs.python.org/3/tutorial/controlflow.html> | <https://peps.python.org/pep-0636/> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 03 | Functions | <https://realpython.com/defining-your-own-python-function/> | <https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 04 | Lists and sorting | <https://realpython.com/python-lists-tuples/> | <https://docs.python.org/3/tutorial/datastructures.html> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 05 | Tuples and NamedTuple | <https://realpython.com/python-lists-tuples/> | <https://docs.python.org/3/library/collections.html#collections.namedtuple> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 06 | Dictionaries | <https://realpython.com/python-dicts/> | <https://docs.python.org/3/tutorial/datastructures.html#dictionaries> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 07 | Sets and frozenset | <https://realpython.com/python-sets/> | <https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset> | <https://github.com/Asabeneh/30-Days-Of-Python/blob/master/07_Day_Sets/07_sets.md> |
-| 08 | Strings and encoding | <https://realpython.com/python-strings/> | <https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 09 | File I/O and structured files | <https://realpython.com/read-write-files-python/> | <https://docs.python.org/3/library/pathlib.html> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 10 | Exceptions and custom errors | <https://realpython.com/python-exceptions/> | <https://docs.python.org/3/tutorial/errors.html> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 11 | Modules and packages | <https://realpython.com/python-modules-packages/> | <https://docs.python.org/3/tutorial/modules.html> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 12 | Built-ins in data pipelines | <https://docs.python.org/3/library/functions.html> | <https://realpython.com/python-map-filter-reduce/> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 13 | Comprehensions and generator preview | <https://realpython.com/list-comprehension-python/> | <https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions> | <https://github.com/zhiwehu/Python-programming-exercises> |
-| 14 | Tooling and environments | <https://docs.astral.sh/uv/> | <https://packaging.python.org/en/latest/specifications/pyproject-toml/> | — |
-
-### Phase 2 — Python Intermediate
-
-| Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
-|-----|-------|--------------------|----------------------|-------------------|
-| 15 | OOP: Classes, `__init__`, Attributes | <https://realpython.com/python3-object-oriented-programming/> | <https://docs.python.org/3/tutorial/classes.html> | <https://exercism.org/tracks/python> |
-| 16 | Inheritance, `super()` | <https://realpython.com/python3-object-oriented-programming/> | <https://docs.python.org/3/tutorial/classes.html#inheritance> | <https://exercism.org/tracks/python> |
-| 17 | Dunder Methods | <https://docs.python.org/3/reference/datamodel.html> | <https://realpython.com/python3-object-oriented-programming/> | <https://exercism.org/tracks/python> |
-| 18 | Class/Static Methods | <https://realpython.com/instance-class-and-static-methods-demystified/> | <https://docs.python.org/3/library/functions.html#classmethod> | <https://exercism.org/tracks/python> |
-| 19 | Dataclasses | <https://realpython.com/python-data-classes/> | <https://docs.python.org/3/library/dataclasses.html> | <https://exercism.org/tracks/python> |
-| 20 | Protocols and ABCs | <https://docs.python.org/3/library/abc.html> | <https://docs.python.org/3/library/typing.html#typing.Protocol> | <https://exercism.org/tracks/python> |
-| 21 | Decorators | <https://realpython.com/primer-on-python-decorators/> | <https://peps.python.org/pep-0318/> | <https://exercism.org/tracks/python> |
-| 22 | Context Managers | <https://realpython.com/python-with-statement/> | <https://docs.python.org/3/library/contextlib.html> | <https://exercism.org/tracks/python> |
-| 23 | itertools | <https://realpython.com/python-itertools/> | <https://docs.python.org/3/library/itertools.html> | <https://exercism.org/tracks/python> |
-| 24 | Advanced Typing | <https://realpython.com/python-type-checking/> | <https://docs.python.org/3/library/typing.html> | <https://exercism.org/tracks/python> |
-| 25 | Enum and Constants | <https://docs.python.org/3/library/enum.html> | <https://realpython.com/python-enum/> | <https://exercism.org/tracks/python> |
-| 26 | Regex | <https://docs.python.org/3/library/re.html> | <https://realpython.com/regex-python/> | <https://exercism.org/tracks/python> |
-| 27 | Dates and Times | <https://docs.python.org/3/library/datetime.html> | <https://realpython.com/python-datetime/> | <https://exercism.org/tracks/python> |
-| 28 | Collections Deep-dive | <https://docs.python.org/3/library/collections.html> | <https://realpython.com/python-collections-module/> | <https://exercism.org/tracks/python> |
-| 29 | functools | <https://realpython.com/python-functools/> | <https://docs.python.org/3/library/functools.html> | <https://exercism.org/tracks/python> |
-| 30 | Testing: pytest Basics | <https://realpython.com/pytest-python-testing/> | <https://docs.pytest.org/> | <https://exercism.org/tracks/python> |
-| 31 | Testing: Mocking | <https://docs.python.org/3/library/unittest.mock.html> | <https://realpython.com/pytest-python-testing/> | <https://exercism.org/tracks/python> |
-| 32 | Logging | <https://realpython.com/python-logging/> | <https://docs.python.org/3/library/logging.html> | <https://exercism.org/tracks/python> |
-| 33 | CLI: argparse / click | <https://docs.python.org/3/library/argparse.html> | <https://click.palletsprojects.com/> | <https://exercism.org/tracks/python> |
-| 34 | Packaging and Distribution | <https://packaging.python.org/en/latest/tutorials/packaging-projects/> | <https://packaging.python.org/en/latest/specifications/pyproject-toml/> | <https://exercism.org/tracks/python> |
-
-### Phase 3 — Python Concurrency
-
-| Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
-|-----|-------|--------------------|----------------------|-------------------|
-| 35 | Generators Deep-dive | <https://realpython.com/introduction-to-python-generators/> | <https://docs.python.org/3/howto/functional.html> | — |
-| 36 | Generator Pipelines | <https://realpython.com/introduction-to-python-generators/> | <https://docs.python.org/3/library/itertools.html> | — |
-| 37 | asyncio Basics | <https://realpython.com/async-io-python/> | <https://docs.python.org/3/library/asyncio.html> | — |
-| 38 | asyncio Tasks & Gather | <https://docs.python.org/3/library/asyncio-task.html> | <https://realpython.com/async-io-python/> | — |
-| 39 | Async I/O Patterns | <https://realpython.com/async-io-python/> | <https://docs.python.org/3/library/asyncio.html> | — |
-| 40 | Async Generators & Advanced | <https://docs.python.org/3/library/asyncio.html> | <https://docs.python.org/3/howto/functional.html> | — |
-| 41 | Threading | <https://realpython.com/intro-to-python-threading/> | <https://docs.python.org/3/library/threading.html> | — |
-| 42 | Thread Safety | <https://docs.python.org/3/library/threading.html> | <https://realpython.com/intro-to-python-threading/> | — |
-| 43 | Multiprocessing | <https://realpython.com/python-multiprocessing/> | <https://docs.python.org/3/library/multiprocessing.html> | — |
-| 44 | concurrent.futures | <https://docs.python.org/3/library/concurrent.futures.html> | <https://realpython.com/intro-to-python-threading/> | — |
-| 45 | subprocess | <https://realpython.com/python-subprocess/> | <https://docs.python.org/3/library/subprocess.html> | — |
-| 46 | Memory Management | <https://docs.python.org/3/library/gc.html> | <https://docs.python.org/3/library/weakref.html> | — |
-| 47 | Profiling | <https://docs.python.org/3/library/profile.html> | <https://docs.python.org/3/library/timeit.html> | — |
-| 48 | Performance Patterns | <https://docs.python.org/3/library/functools.html> | <https://docs.python.org/3/library/profile.html> | — |
-| 49 | struct / array / memoryview | <https://docs.python.org/3/library/struct.html> | <https://docs.python.org/3/library/array.html> | — |
-| 50 | Concurrency Project | (own Day 35-49 modules) | — | — |
-
-### Phase 4 — Python Advanced
-
-| Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
-|-----|-------|--------------------|----------------------|-------------------|
-| 51 | Descriptors | <https://realpython.com/python-descriptors/> | <https://docs.python.org/3/reference/datamodel.html#descriptors> | — |
-| 52 | Metaclasses | <https://realpython.com/python-metaclasses/> | <https://docs.python.org/3/reference/datamodel.html#metaclasses> | — |
-| 53 | `__init_subclass__` & Class Hooks | <https://docs.python.org/3/reference/datamodel.html#object.__init_subclass__> | <https://peps.python.org/pep-0487/> | — |
-| 54 | Dynamic Attributes | <https://docs.python.org/3/reference/datamodel.html#customizing-attribute-access> | <https://docs.python.org/3/library/functions.html#getattr> | — |
-| 55 | Abstract Syntax Trees | <https://docs.python.org/3/library/ast.html> | <https://greentreesnakes.readthedocs.io/en/latest/> | — |
-| 56 | inspect Module | <https://docs.python.org/3/library/inspect.html> | <https://peps.python.org/pep-0362/> | — |
-| 57 | C Extensions / ctypes / cffi | <https://docs.python.org/3/library/ctypes.html> | <https://cffi.readthedocs.io/en/stable/> | — |
-| 58 | Design Patterns: Creational | <https://realpython.com/factory-method-python/> | <https://refactoring.guru/design-patterns/creational-patterns> | — |
-| 59 | Design Patterns: Structural | <https://refactoring.guru/design-patterns/structural-patterns> | <https://docs.python.org/3/reference/datamodel.html#special-method-names> | — |
-| 60 | Design Patterns: Behavioral | <https://refactoring.guru/design-patterns/behavioral-patterns> | <https://docs.python.org/3/library/stdtypes.html#iterator-types> | — |
-| 61 | Dependency Injection | <https://realpython.com/python-dependency-injection/> | <https://fastapi.tiangolo.com/tutorial/dependencies/> | — |
-| 62 | SOLID Principles | <https://realpython.com/solid-principles-python/> | <https://www.cosmicpython.com/> | — |
-| 63 | Clean Code Practices | <https://peps.python.org/pep-0008/> | <https://realpython.com/python-code-quality/> | — |
-| 64 | Security: Input Validation | <https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html> | <https://bandit.readthedocs.io/en/latest/> | — |
-| 65 | Security: Crypto & Hashing | <https://docs.python.org/3/library/hashlib.html> | <https://docs.python.org/3/library/secrets.html> | — |
-| 66 | Security: Auth Patterns | <https://pyjwt.readthedocs.io/en/stable/> | <https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html> | — |
-| 67 | Database: SQLite + SQLAlchemy | <https://docs.python.org/3/library/sqlite3.html> | <https://docs.sqlalchemy.org/en/20/orm/> | — |
-| 68 | Database: Migrations & Patterns | <https://alembic.sqlalchemy.org/en/latest/tutorial.html> | <https://www.cosmicpython.com/book/chapter_02_repository.html> | — |
-| 69 | Networking: Sockets | <https://docs.python.org/3/library/socket.html> | <https://docs.python.org/3/howto/sockets.html> | — |
-| 70 | Advanced Project | (own Day 51-69 modules) | — | — |
-
-### Phase 5 — FastAPI Track
-
-| Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
-|-----|-------|--------------------|----------------------|-------------------|
-| 71 | FastAPI Basics | <https://fastapi.tiangolo.com/tutorial/first-steps/> | <https://fastapi.tiangolo.com/tutorial/path-params/> | — |
-| 72 | Request & Response Models | <https://docs.pydantic.dev/latest/concepts/models/> | <https://fastapi.tiangolo.com/tutorial/body/> | — |
-| 73 | Path, Query, Body Params | <https://fastapi.tiangolo.com/tutorial/path-params/> | <https://fastapi.tiangolo.com/tutorial/body/> | — |
-| 74 | Dependency Injection | <https://fastapi.tiangolo.com/tutorial/dependencies/> | <https://fastapi.tiangolo.com/tutorial/dependency-injection-in-fastapi/> | — |
-| 75 | Database Integration | <https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html> | <https://alembic.sqlalchemy.org/en/latest/tutorial.html> | — |
-| 76 | Authentication & JWT | <https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/> | <https://fastapi.tiangolo.com/tutorial/security/> | — |
-| 77 | Middleware & CORS | <https://fastapi.tiangolo.com/tutorial/cors/> | <https://fastapi.tiangolo.com/advanced/middleware/> | — |
-| 78 | Error Handling | <https://fastapi.tiangolo.com/tutorial/handling-errors/> | <https://docs.pydantic.dev/latest/concepts/models/#model-validation> | — |
-| 79 | Background Tasks | <https://fastapi.tiangolo.com/tutorial/background-tasks/> | <https://docs.python.org/3/library/asyncio-task.html> | — |
-| 80 | File Upload & Streaming | <https://fastapi.tiangolo.com/tutorial/request-files/> | <https://www.starlette.io/> | — |
-| 81 | WebSockets | <https://fastapi.tiangolo.com/advanced/websockets/> | <https://www.starlette.io/websockets/> | — |
-| 82 | Testing FastAPI | <https://fastapi.tiangolo.com/tutorial/testing/> | <https://docs.pytest.org/> | — |
-| 83 | OpenAPI & Docs | <https://fastapi.tiangolo.com/> | <https://docs.pydantic.dev/latest/concepts/models/> | — |
-| 84 | Performance & Caching | <https://fastapi.tiangolo.com/> | <https://www.uvicorn.org/> | — |
-| 85 | Docker & Deployment | <https://fastapi.tiangolo.com/deployment/docker/> | <https://docs.docker.com/> | — |
-| 86 | FastAPI Project | (own Day 71-85 modules) | <https://fastapi.tiangolo.com/tutorial/> | — |
-
-### Phase 6 — DevOps and Capstone
-
-| Day | Topic | Primary source URL | Secondary source URL | Exercise bank URL |
-|-----|-------|--------------------|----------------------|-------------------|
-| 87 | Docker Fundamentals | <https://docs.docker.com/> | <https://fastapi.tiangolo.com/deployment/docker/> | — |
-| 88 | Docker Compose | <https://docs.docker.com/compose/> | <https://docs.docker.com/> | — |
-| 89 | CI/CD: GitHub Actions | <https://docs.github.com/actions> | <https://docs.github.com/actions/quickstart> | — |
-| 90 | CI/CD: Advanced Pipelines | <https://docs.github.com/actions> | <https://docs.docker.com/> | — |
-| 91 | Environment Management | <https://docs.pydantic.dev/latest/concepts/pydantic_settings/> | <https://fastapi.tiangolo.com/advanced/settings/> | — |
-| 92 | Monitoring: Logging & Metrics | <https://prometheus.io/docs/guides/python/> | <https://www.structlog.org/> | — |
-| 93 | Monitoring: Alerting & Dashboards | <https://opentelemetry.io/docs/languages/python/> | <https://opentelemetry.io/docs/concepts/signals/traces/> | — |
-| 94 | Infrastructure as Code | <https://boto3.amazonaws.com/v1/documentation/api/latest/index.html> | <https://docs.docker.com/engine/api/> | — |
-| 95 | Cloud Basics | <https://boto3.amazonaws.com/v1/documentation/api/latest/index.html> | <https://docs.docker.com/> | — |
-| 96 | Capstone: Design | <https://fastapi.tiangolo.com/tutorial/> | (own earlier modules) | — |
-| 97 | Capstone: Core Logic | <https://realpython.com/python3-object-oriented-programming/> | (own earlier modules) | — |
-| 98 | Capstone: API Layer | <https://fastapi.tiangolo.com/> | <https://fastapi.tiangolo.com/tutorial/testing/> | — |
-| 99 | Capstone: Deployment | <https://fastapi.tiangolo.com/deployment/docker/> | <https://docs.github.com/actions> | — |
-| 100 | Capstone: Polish & Review | <https://neetcode.io/roadmap> | (own earlier modules) | — |
-
-### Parallel DSA — LeetCode problem URLs per week
-
-| Week | Topic | LeetCode practice problems | NeetCode section |
-|------|-------|---------------------------|-------------------|
-| 01 | Big-O, arrays, hashing | [Two Sum](https://leetcode.com/problems/two-sum/) · [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | <https://neetcode.io/roadmap> Arrays & Hashing |
-| 02 | Arrays, hashing, Kadane basics | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) · [Top K Frequent](https://leetcode.com/problems/top-k-frequent-elements/) · [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | <https://neetcode.io/roadmap> Arrays & Hashing |
-| 03 | Two pointers and 3Sum dedupe | [3Sum](https://leetcode.com/problems/3sum/) · [Container With Most Water](https://leetcode.com/problems/container-with-most-water/) · [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | <https://neetcode.io/roadmap> Two Pointers |
-| 04 | Sliding window and monotonic deque | [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) · [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) · [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | <https://neetcode.io/roadmap> Sliding Window |
-| 05 | Stack and monotonic structures | [Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) · [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) · [Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | <https://neetcode.io/roadmap> Stack |
-| 06 | Binary search | [Binary Search](https://leetcode.com/problems/binary-search/) · [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) · [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/) | <https://neetcode.io/roadmap> Binary Search |
-| 07 | Linked list | [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) · [Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | <https://neetcode.io/roadmap> Linked List |
-| 08 | Binary trees I | [Maximum Depth](https://leetcode.com/problems/maximum-depth-of-binary-tree/) · [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) · [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) · [Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/) | <https://neetcode.io/roadmap> Trees |
-| 09 | BST | [Validate BST](https://leetcode.com/problems/validate-binary-search-tree/) · [Kth Smallest in BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) · [Lowest Common Ancestor of a BST](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) | <https://neetcode.io/roadmap> Trees |
-| 10 | Heap and priority queue | [Kth Largest Element](https://leetcode.com/problems/kth-largest-element-in-a-stream/) · [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) | <https://neetcode.io/roadmap> Heap / Priority Queue |
-| 11 | Recursion and backtracking foundations | [Subsets](https://leetcode.com/problems/subsets/) · [Subsets II](https://leetcode.com/problems/subsets-ii/) · [Combination Sum](https://leetcode.com/problems/combination-sum/) | <https://neetcode.io/roadmap> Backtracking |
-| 12 | Graphs I | [Number of Islands](https://leetcode.com/problems/number-of-islands/) · [Clone Graph](https://leetcode.com/problems/clone-graph/) · [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | <https://neetcode.io/roadmap> Graphs |
-| 13 | Graphs II and topo sort | [Course Schedule](https://leetcode.com/problems/course-schedule/) · [Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) | <https://neetcode.io/roadmap> Graphs |
-| 14 | Union-Find | [Redundant Connection](https://leetcode.com/problems/redundant-connection/) · [Number of Provinces](https://leetcode.com/problems/number-of-provinces/) | <https://neetcode.io/roadmap> Graphs |
-| 15 | Intervals and greedy | [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) · [Merge Intervals](https://leetcode.com/problems/merge-intervals/) · [Jump Game](https://leetcode.com/problems/jump-game/) | <https://neetcode.io/roadmap> Greedy |
-| 16 | 1D DP | [Coin Change](https://leetcode.com/problems/coin-change/) · [House Robber](https://leetcode.com/problems/house-robber/) · [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | <https://neetcode.io/roadmap> Dynamic Programming |
-| 17 | 2D DP | [Unique Paths](https://leetcode.com/problems/unique-paths/) · [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/) · [Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/) | <https://neetcode.io/roadmap> Dynamic Programming |
-| 18 | Shortest paths | [Network Delay Time](https://leetcode.com/problems/network-delay-time/) · [Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) | <https://neetcode.io/roadmap> Graphs |
-| 19 | Tries, string algorithms, and bit tricks | [Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/) · [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) · [Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/) · [Repeated DNA Sequences](https://leetcode.com/problems/repeated-dna-sequences/) · [Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/) · [Single Number](https://leetcode.com/problems/single-number/) | <https://neetcode.io/roadmap> Trie / String / Bit Manipulation |
-| 20 | Mixed review, sorting, and math basics | <https://neetcode.io/practice> (weak-area revisit) · [Sort an Array](https://leetcode.com/problems/sort-an-array/) · [Pow(x, n)](https://leetcode.com/problems/powx-n/) · [Count Primes](https://leetcode.com/problems/count-primes/) | <https://neetcode.io/roadmap> |
+Per-day sources now live **inline** in each day/week block of
+`study_plan/<track>.md` (the **Sources:** line) — that is the single source of
+truth for which URL to open for a given day. The sections above are the curated
+catalog (tiers, official docs, PEPs, books, platforms) to draw from for anything extra.
 
 ---
 
@@ -421,7 +269,7 @@ Use:
 
 Recommended pattern:
 
-1. Open the primary source URL from the per-day mapping table above.
+1. Open the primary source URL from the day's `Sources:` line in `study_plan/<track>.md`.
 2. Mirror the topic progression in your own words.
 3. Add one small anti-pattern -> corrected pattern snippet.
 4. Add one input-validation or explicit-error snippet.
@@ -491,7 +339,7 @@ Required repo style:
 
 These tips make each generation session faster and higher quality.
 
-1. **Open the primary source first.** The per-day table tells you exactly which URL to open. Read its section headings and concept order before writing CODE.md.
+1. **Open the primary source first.** The day's `Sources:` line in `study_plan/<track>.md` tells you exactly which URL to open. Read its section headings and concept order before writing CODE.md.
 2. **Mirror then elevate.** Follow the source's concept progression (the "what order to teach" part), but write your own examples in production style with type hints, validation, and docstrings.
 3. **Use Further reading links from this registry.** Don't hunt for reference URLs — they are already listed here with one-line descriptions. Copy them into CODE.md.
 4. **For EXERCISE.md Suggested Practice, use the LeetCode/NeetCode URLs from the DSA table.** They are pre-mapped to each week.
@@ -507,7 +355,7 @@ Before generating a new day or week, confirm:
 
 - The source is recorded here or intentionally chosen.
 - The source role is clear: progression, production style, or exercise bank.
-- You opened the primary source URL from the per-day table before writing.
+- You opened the primary source URL from the day's `Sources:` line in `study_plan/<track>.md` before writing.
 - `CODE.md` follows the source order without copying.
 - `code.py` meets gates G1–G8 in `.agent.md §2`.
 - `EXERCISE.md` and `ex01` to `ex03` are original repo-shaped tasks, not copied challenge text.

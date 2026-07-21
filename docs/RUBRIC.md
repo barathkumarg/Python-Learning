@@ -1,7 +1,7 @@
 # Rubric — Gates, Scoring, Skills & Evaluation Protocol
 
 > Single source of truth for grading **and** the gate definitions. Referenced by
-> `.agent.md`, `docs/PROMPT_TEMPLATES.md`, and `docs/SCORE_TRACKER.md`.
+> `.agent.md` and `docs/SCORE_TRACKER.md`.
 
 ---
 
@@ -154,15 +154,10 @@ Every generated module and every graded solution must pass all 8 gates.
 2. Each runs cleanly: `python exNN.py` — no errors.
 3. `ruff check exercise/<track>/day_NN_*/` — no errors.
 
-### Evaluation prompt (copy-paste into any AI agent)
+> The copy-paste evaluate prompt lives in `.agent.md §8`. This section defines
+> the protocol it follows and the report format it writes.
 
-```
-@.agent.md @docs/RUBRIC.md
-
-Grade my solution for Day [NN] — [topic] at exercise/<track>/day_XX_<slug>/.
-Read EXERCISE.md for specs and scoring.
-
-Deliver exactly:
+The evaluation must deliver exactly:
 1. Gate table G1–G8 — pass/fail + one-line evidence.
 2. Dimension scores D1–D7 (1–5) + weighted total.
 3. Per-file scores ex01/ex02/ex03 (0–100) with criterion breakdown.
@@ -171,8 +166,8 @@ Deliver exactly:
 6. One rewritten snippet for the worst issue.
 7. Verdict: PASS (≥75 all) or REWORK (file + criterion).
 
-Append the report to EXERCISE.md under ## Evaluation report.
-```
+**Save the report to `exercise/<track>/<unit>/EVALUATION.md`** (format below), then
+update `docs/SCORE_TRACKER.md` per its §6 Agent Update Protocol.
 
 ### Feedback loop
 
@@ -184,10 +179,10 @@ Append the report to EXERCISE.md under ## Evaluation report.
 
 **3-cycle cap:** if still failing after 3 rework cycles, log the gap and move on.
 
-### Report format (append to EXERCISE.md)
+### Report format (write to `exercise/<track>/<unit>/EVALUATION.md`)
 
 ```markdown
-## Evaluation report — YYYY-MM-DD
+# Evaluation — [NN] [topic] — YYYY-MM-DD
 
 ### Gate checklist
 | Gate | Result | Evidence |

@@ -1,7 +1,7 @@
 # Score Tracker — Unified Evaluation Dashboard
 
 > **Purpose:** Single source of truth for all evaluation scores, skill progression, gate compliance, and rework history across every Python day and DSA week.  
-> **Companions:** [RUBRIC.md](./RUBRIC.md) · [PROMPT_TEMPLATES.md](./PROMPT_TEMPLATES.md)
+> **Companions:** [RUBRIC.md](./RUBRIC.md) · [.agent.md](../.agent.md)
 
 ---
 
@@ -11,7 +11,7 @@
 2. **After every evaluation**, update the Skills Heatmap (§2) with tested skill IDs.
 3. **On rework cycles**, log the attempt in the Rework Log (§3).
 4. **Weekly**, review the Gate Compliance Summary (§4) for systemic gaps.
-5. **Agents**: After generating an evaluation report in `EXERCISE.md`, copy the summary row here.
+5. **Agents**: After writing an `EVALUATION.md` for a day/week, copy the summary row here.
 
 ---
 
@@ -54,62 +54,66 @@ Track which skills have been tested and passed across all evaluated modules.
 
 ### Python Core Skills (PY-01 to PY-23)
 
+> Skill IDs and names are the canonical taxonomy from [RUBRIC.md §1](./RUBRIC.md).
+
 | Skill ID | Skill Name | Phase | Tested | Pass | Days/Weeks |
 |----------|-----------|-------|--------|------|------------|
-| PY-01 | Variables, types, literals | 1 | ✅ | ✅ | Day 01 |
-| PY-02 | f-strings, formatting | 1 | ✅ | ✅ | Day 01 |
-| PY-03 | Input parsing, validation | 1 | ✅ | ✅ | Day 01 |
+| PY-01 | Variables, types, naming | 1 | ✅ | ✅ | Day 01 |
+| PY-02 | String operations & formatting | 1 | ✅ | 🔁 | Days 01, 08 |
+| PY-03 | Input validation & error handling | 1–2 | ✅ | 🔁 | Days 01, 10 |
 | PY-04 | Control flow (if/match/loops) | 1 | ✅ | 🔁 | Day 02 |
-| PY-05 | Functions, args, kwargs | 1 | ⏳ | — | Day 03 |
-| PY-06 | Lists and sorting | 1 | — | — | — |
-| PY-07 | Tuples and NamedTuple | 1 | — | — | — |
-| PY-08 | Dictionaries | 1 | — | — | — |
-| PY-09 | Sets and frozenset | 1 | — | — | — |
-| PY-10 | Strings and encoding | 1 | ✅ | 🔁 | Day 08 |
-| PY-11 | File I/O | 1 | ✅ | ✅ | Day 09 |
-| PY-12 | Exceptions and custom errors | 1 | ✅ | 🔁 | Day 10 |
-| PY-13 | Modules and packages | 1 | ✅ | ✅ | Day 11 |
-| PY-14 | Built-ins (map, filter, zip) | 1 | — | — | — |
-| PY-15 | Comprehensions | 1 | — | — | — |
-| PY-16 | OOP (classes, inheritance) | 2 | — | — | — |
-| PY-17 | Iterators and generators | 2 | — | — | — |
-| PY-18 | Decorators | 2 | — | — | — |
-| PY-19 | Context managers | 2 | — | — | — |
-| PY-20 | Typing and generics | 2 | — | — | — |
-| PY-21 | Concurrency (threads/async) | 3 | — | — | — |
-| PY-22 | Testing and coverage | 4 | — | — | — |
-| PY-23 | Packaging and tooling | 4 | — | — | — |
+| PY-05 | Functions, args, kwargs, lambda | 1 | ⏳ | — | Day 03 |
+| PY-06 | Data structures (list, dict, set, tuple) | 1 | ✅ | 🔁 | Days 06, 07 |
+| PY-07 | File I/O, pathlib, CSV, JSON | 1 | ✅ | ✅ | Day 09 |
+| PY-08 | Modules & packages | 1 | ✅ | ✅ | Day 11 |
+| PY-09 | Comprehensions & generators | 1–2 | — | — | — |
+| PY-10 | OOP — classes, dunder, inheritance | 2 | — | — | — |
+| PY-11 | Abstract classes & protocols | 2 | — | — | — |
+| PY-12 | Dataclasses | 2 | — | — | — |
+| PY-13 | Decorators & closures | 2 | — | — | — |
+| PY-14 | Context managers | 2 | — | — | — |
+| PY-15 | functools & itertools | 2 | — | — | — |
+| PY-16 | Type hints & mypy | 2 | — | — | — |
+| PY-17 | Threading & multiprocessing | 3 | — | — | — |
+| PY-18 | Asyncio & aiohttp | 3 | — | — | — |
+| PY-19 | Descriptors, metaclasses, slots | 4 | — | — | — |
+| PY-20 | Profiling & optimization | 4 | — | — | — |
+| PY-21 | Testing (pytest, fixtures, mocking) | 3–4 | — | — | — |
+| PY-22 | Design patterns | 4 | — | — | — |
+| PY-23 | Packaging & tooling (uv, pyproject) | 1, 4 | — | — | — |
 
 ### DSA Skills (DSA-01 to DSA-26)
 
 | Skill ID | Skill Name | Week | Tested | Pass | Weeks |
 |----------|-----------|------|--------|------|-------|
-| DSA-01 | Big-O analysis | 01 | ⏳ | — | Week 01 |
-| DSA-02 | Array scan patterns | 01 | ⏳ | — | Week 01 |
-| DSA-03 | Hash map/set usage | 01 | ⏳ | — | Week 01 |
-| DSA-04 | Prefix sums, Kadane | 02 | — | — | — |
-| DSA-05 | Two pointers | 03 | — | — | — |
-| DSA-06 | Sliding window | 04 | — | — | — |
-| DSA-07 | Stack / monotonic stack | 05 | — | — | — |
-| DSA-08 | Binary search | 06 | — | — | — |
-| DSA-09 | Linked list | 07 | — | — | — |
-| DSA-10 | Binary tree traversals | 08 | — | — | — |
-| DSA-11 | BST operations | 09 | — | — | — |
-| DSA-12 | Heap / priority queue | 10 | — | — | — |
-| DSA-13 | Recursion fundamentals | 11 | — | — | — |
-| DSA-14 | Backtracking | 11 | — | — | — |
-| DSA-15 | Graph BFS/DFS | 12 | — | — | — |
-| DSA-16 | Topological sort | 13 | — | — | — |
-| DSA-17 | Union-Find | 14 | — | — | — |
-| DSA-18 | Greedy / intervals | 15 | — | — | — |
-| DSA-19 | 1D DP | 16 | — | — | — |
-| DSA-20 | 2D DP | 17 | — | — | — |
-| DSA-21 | Shortest paths | 18 | — | — | — |
-| DSA-22 | Tries | 19 | — | — | — |
-| DSA-23 | String algorithms (KMP, Rabin-Karp) | 19 | — | — | — |
-| DSA-24 | Bit manipulation | 19 | — | — | — |
-| DSA-25 | Sorting algorithms | 20 | — | — | — |
-| DSA-26 | Math / number theory | 20 | — | — | — |
+> Skill IDs and names are the canonical taxonomy from [RUBRIC.md §1](./RUBRIC.md).
+
+| DSA-01 | Big-O analysis | 1–20 | ✅ | ✅ | Week 01 |
+| DSA-02 | Arrays & hashing | 1–2 | ✅ | ✅ | Week 01 |
+| DSA-03 | Two pointers | 3 | — | — | — |
+| DSA-04 | Sliding window | 4 | — | — | — |
+| DSA-05 | Stack | 5 | — | — | — |
+| DSA-06 | Binary search | 6 | — | — | — |
+| DSA-07 | Linked lists | 7 | — | — | — |
+| DSA-08 | Trees (BT, BST) | 8–9 | — | — | — |
+| DSA-09 | Heaps | 10 | — | — | — |
+| DSA-10 | Backtracking | 11 | — | — | — |
+| DSA-11 | Graphs (BFS, DFS, topo) | 12–13 | — | — | — |
+| DSA-12 | Union-Find | 14 | — | — | — |
+| DSA-13 | Greedy | 15 | — | — | — |
+| DSA-14 | DP (1D, 2D) | 16–17 | — | — | — |
+| DSA-15 | Shortest paths | 18 | — | — | — |
+| DSA-16 | Tries & bit manipulation | 19 | — | — | — |
+| DSA-17 | Recursion fundamentals | 11 | — | — | — |
+| DSA-18 | Monotonic deque patterns | 4–5 | — | — | — |
+| DSA-19 | Intervals | 15 | — | — | — |
+| DSA-20 | String algorithms (KMP, Rabin-Karp) | 4, 19 | — | — | — |
+| DSA-21 | Matrix traversal (grid BFS/DFS) | 12, 17 | — | — | — |
+| DSA-22 | Math & number theory | 20 | — | — | — |
+| DSA-23 | Kadane / max-subarray | 2, 16 | — | — | — |
+| DSA-24 | Subsequence & subset-sum | 11, 16 | — | — | — |
+| DSA-25 | Pattern printing | Prep, 11 | — | — | — |
+| DSA-26 | Sorting algorithms | 20 | — | — | — |
 
 ### Legend
 
@@ -185,8 +189,8 @@ Aggregate gate pass/fail across all evaluated modules for systemic pattern detec
 
 Any AI agent performing evaluation must follow this protocol:
 
-1. **Run** the evaluation using the prompt from [RUBRIC.md §4](./RUBRIC.md).
-2. **Append** the detailed evaluation report to the relevant `EXERCISE.md` file.
+1. **Run** the evaluation using the evaluate prompt in [.agent.md §8](../.agent.md), following the [RUBRIC.md §4](./RUBRIC.md) protocol.
+2. **Write** the detailed evaluation report to `exercise/<track>/<unit>/EVALUATION.md`.
 3. **Add a row** to the Master Progress Table (§1) with scores, verdict, and date.
 4. **Update** the Skills Heatmap (§2) for each skill ID tested.
 5. **Update** the Gate Compliance Summary (§4) for each gate checked.
